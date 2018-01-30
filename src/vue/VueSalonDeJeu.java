@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.text.html.ImageView;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text; 
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.TextField;
 
 public class VueSalonDeJeu extends Application {
     public static void main(String[] args) {
@@ -93,14 +93,29 @@ public class VueSalonDeJeu extends Application {
         //StackPane milieu
         
         StackPane panelMilieu = new StackPane();
-
+        
+        Text nomDeLaPage = new Text("Salon de jeu");
+        panelMilieu.getChildren().add(nomDeLaPage);
+        
+        TextField chatDeJeu = new TextField("chat de jeu");
+        panelMilieu.getChildren().add(chatDeJeu);
         
         // StackPane de droite
         StackPane panelDroite = new StackPane();
 
+       panelDroite.getChildren().add(boutonReglesDuJeu);
+       Text nombreDeJoueurs = new Text("Joueurs : 10");
+       Text nombreDeLoupGarouVivant = new Text("2 loup(s)-garoup(s) restant(s)");
+       Text nomListeJoueurVivant = new Text("Vivants");
+       Text listeJoueurVivant = new Text("Vincent\n Eliott \n Thomas \n");
+    
+       
         
-        
+        // Fenetre Generale
         BorderPane fenetreGenerale = new BorderPane();
+        
+//        fenetreGeneral.getChildren().add
+        
 
         //ajouter les 3 gridpane
      //   primaryStage.setScene(new Scene(root, 300, 250));
