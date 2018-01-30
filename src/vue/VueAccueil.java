@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
@@ -62,19 +63,22 @@ public class VueAccueil extends Application {
         
         
         
-        
+        BorderPane miseEnPage = new BorderPane();
+        miseEnPage.setTop(titre);
+        miseEnPage.setAlignment(titre, Pos.CENTER);
         
         GridPane grille = new GridPane();
         grille.setAlignment(Pos.CENTER);
         grille.setHgap(10);
         grille.setVgap(50);
         grille.setPadding(new Insets(25,25,25,25));
-        grille.add(titre, 0, 0, 2, 1);
         grille.add(pseudo, 1, 3);
         grille.add(creationPseudo, 1, 4);
         grille.add(bouttonDeConnexion, 1, 5);
         grille.add(bouttonQuitter, 1, 6);
-        primaryStage.setScene(new Scene(grille, 1500, 750));
+        miseEnPage.setCenter(grille);
+        
+        primaryStage.setScene(new Scene(miseEnPage, 1500, 750));
         primaryStage.show();
         
         
