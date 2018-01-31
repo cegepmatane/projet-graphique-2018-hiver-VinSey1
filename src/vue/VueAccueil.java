@@ -33,6 +33,7 @@ public class VueAccueil extends Application {
         launch(args);
     }
     
+	
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Accueil");
@@ -123,6 +124,8 @@ public class VueAccueil extends Application {
 
         elementCentral.getChildren().addAll(pseudo, creationPseudo, boutonDeConnexion, boutonQuitter, boutonRegles, boxImage);
         elementCentral.setStyle("-fx-border-color: black; -fx-border-width: 2px 2px 2px 2px");
+        
+       
         
         primaryStage.setScene(new Scene(miseEnPage, 1500, 750));
         primaryStage.show();
