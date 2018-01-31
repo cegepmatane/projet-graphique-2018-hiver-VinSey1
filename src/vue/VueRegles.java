@@ -22,12 +22,18 @@ public class VueRegles extends Application {
     	titre.setFont(Font.font("Lucida Handwriting", 80));
     	BorderPane.setAlignment(titre, Pos.CENTER);
     	
+    	Text sousTitre = new Text("Règles");
+    	sousTitre.setFont(Font.font("Lucida Handwriting", 80));
+    	
     	Button principe = new Button("Principe");
     	Button deroulementJour = new Button("Déroulement Jour");
     	Button deroulementNuit = new Button("Déroulement Nuit");
     	Button cartes = new Button("Cartes");
     	Button savoirVivre = new Button("Savoir-vivre");
     	Button triche = new Button("Triche");
+    	Button retour = new Button("Retour");
+    	retour.setMaxWidth(200.0);
+    	retour.setMinWidth(200.0);
     	
     	VBox categories = new VBox();
     	categories.getChildren().add(principe);
@@ -44,10 +50,15 @@ public class VueRegles extends Application {
     	
     	AnchorPane grille = new AnchorPane();
     	
-    	AnchorPane.setTopAnchor(menu, 100.0);
+    	AnchorPane.setTopAnchor(menu, 120.0);
     	AnchorPane.setLeftAnchor(menu, 100.0);
     	AnchorPane.setRightAnchor(menu, 100.0);
-    	grille.getChildren().add(menu);
+    	AnchorPane.setTopAnchor(sousTitre, 0.0);
+    	AnchorPane.setLeftAnchor(sousTitre, 450.0);
+    	AnchorPane.setRightAnchor(sousTitre, 50.0);
+    	AnchorPane.setBottomAnchor(retour, 20.0);
+    	AnchorPane.setLeftAnchor(retour, 500.0);
+    	grille.getChildren().addAll(menu, sousTitre, retour);
     	BorderPane miseEnPage = new BorderPane();
     	grille.setMaxSize(1200, 600);
         grille.setMinSize(100, 50);
