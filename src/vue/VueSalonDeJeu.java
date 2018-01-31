@@ -1,10 +1,11 @@
 package vue;
 
+import javafx.scene.text.Font;
 import java.awt.Image;
+import javafx.geometry.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text; 
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
+import javafx.geometry.Pos;
 
 public class VueSalonDeJeu extends Application {
     public static void main(String[] args) {
@@ -31,7 +33,8 @@ public class VueSalonDeJeu extends Application {
         
         // Bouton d'acces aux relges du jeu
         Button boutonReglesDuJeu = new Button();
-        boutonReglesDuJeu.setText("Say 'Hello World'");
+        boutonReglesDuJeu.setText("Règles du jeu");
+        boutonReglesDuJeu.setStyle("-fx-background-color:#fff224; -fx-font-size:20px");
         boutonReglesDuJeu.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -42,7 +45,7 @@ public class VueSalonDeJeu extends Application {
         
         // Bouton Voter
         Button boutonQuitter = new Button();
-        boutonQuitter.setText("Say 'Hello World'");
+        boutonQuitter.setText("Quitter");
         boutonQuitter.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -54,7 +57,7 @@ public class VueSalonDeJeu extends Application {
         
         // Bouton Quitter
         Button boutonVoter = new Button();
-        boutonVoter.setText("Say 'Hello World'");
+        boutonVoter.setText("Voter");
         boutonVoter.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -66,17 +69,21 @@ public class VueSalonDeJeu extends Application {
              
         // Description du role
         
-        String descriptionRoleLoupGaroup = "Le loup-garoup tue chaque nuit une personne, il doit remporter la partie en tuant tous les innocents";
+        String descriptionRoleLoupGaroup = "Le loup-garoup tue chaque nuit une personne,\n il doit remporter la partie en tuant tous les innocents";
         
         
         // StackPane de gauche
-        StackPane panelGauche = new StackPane();
-        Text texteRole = new Text("Rôle");
-        panelGauche.getChildren().add(texteRole);
+        GridPane panelGauche = new GridPane();
         
+        panelGauche.setAlignment(Pos.CENTER);
+        
+        Text texteRole = new Text("Rôle");
+        texteRole.setFont(Font.font("Lucida Handwriting", 30));
+        
+        panelGauche.setAlignment(Pos.CENTER);
         
         try {
-			Image imageCarteLoupGarou = ImageIO.read(new File("CarteLoupGarou.png"));
+			Image imageCarteLoupGarou = ImageIO.read(new File("CarteLoupGarou.jpg"));
 //			ImageView imageViewCarteLoupGaroup = new ImageView(imageCarteLoupGarou);
 //	        panelGauche.getChildren().add(imageViewCarteLoupGaroup);
 
@@ -86,39 +93,79 @@ public class VueSalonDeJeu extends Application {
 		}
         
         Text texteDescriptionRole = new Text(descriptionRoleLoupGaroup);
+      
+        panelGauche.setConstraints(texteRole, 0, 0); 
+        panelGauche.setConstraints(texteDescriptionRole, 0, 1);
+        panelGauche.setConstraints(boutonVoter, 0, 2);
+        panelGauche.setConstraints(boutonQuitter, 0, 3);
+        
+        panelGauche.getChildren().add(texteRole);
         panelGauche.getChildren().add(texteDescriptionRole);  
         panelGauche.getChildren().add(boutonVoter);
         panelGauche.getChildren().add(boutonQuitter);
         
         //StackPane milieu
         
-        StackPane panelMilieu = new StackPane();
+        GridPane panelMilieu = new GridPane();
         
         Text nomDeLaPage = new Text("Salon de jeu");
-        panelMilieu.getChildren().add(nomDeLaPage);
-        
+        nomDeLaPage.setFont(Font.font("Lucida Handwriting", 50));
         TextField chatDeJeu = new TextField("chat de jeu");
+        
+        panelMilieu.setConstraints(nomDeLaPage, 0, 0);
+        panelMilieu.setConstraints(chatDeJeu, 0, 1);
+        
+        panelMilieu.getChildren().add(nomDeLaPage);
         panelMilieu.getChildren().add(chatDeJeu);
         
         // StackPane de droite
-        StackPane panelDroite = new StackPane();
+        GridPane panelDroite = new GridPane();
 
-       panelDroite.getChildren().add(boutonReglesDuJeu);
        Text nombreDeJoueurs = new Text("Joueurs : 10");
        Text nombreDeLoupGarouVivant = new Text("2 loup(s)-garoup(s) restant(s)");
-       Text nomListeJoueurVivant = new Text("Vivants");
-       Text listeJoueurVivant = new Text("Vincent\n Eliott \n Thomas \n");
-    
+       Text nomListeJoueursVivant = new Text("Vivants");
+       Text listeJoueursVivant = new Text("Vincent\n Eliott \n Thomas \n");
+       Text nomListeJoueursMort = new Text("Morts");
+       Text listeJoueursMort = new Text("Denis\nDamien\nThéo");       
+        
+       panelDroite.setConstraints(boutonReglesDuJeu, 0,0);
+       panelDroite.setConstraints(nombreDeJoueurs, 0,1);
+       panelDroite.setConstraints(nombreDeLoupGarouVivant, 0,2);
+       panelDroite.setConstraints(nomListeJoueursVivant, 0,3);
+       panelDroite.setConstraints(listeJoueursVivant, 0,4);
+       panelDroite.setConstraints(nomListeJoueursMort, 0,5);
+       panelDroite.setConstraints(listeJoueursMort, 0,6);
        
-        
+       
+       panelDroite.getChildren().add(boutonReglesDuJeu);
+       panelDroite.getChildren().add(nombreDeJoueurs);
+       panelDroite.getChildren().add(nombreDeLoupGarouVivant);
+       panelDroite.getChildren().add(nomListeJoueursVivant);
+       panelDroite.getChildren().add(listeJoueursVivant);
+       panelDroite.getChildren().add(nomListeJoueursMort);
+       panelDroite.getChildren().add(listeJoueursMort);
+
+       
         // Fenetre Generale
-        BorderPane fenetreGenerale = new BorderPane();
+        GridPane fenetreGenerale = new GridPane();
         
-//        fenetreGeneral.getChildren().add
+        fenetreGenerale.setHgap(50);
+        fenetreGenerale.setVgap(50);
         
+        fenetreGenerale.setPadding(new Insets(20,20,20,20));
+
+        
+        fenetreGenerale.setConstraints(panelGauche, 0,0);
+        fenetreGenerale.setConstraints(panelMilieu, 1,0);
+        fenetreGenerale.setConstraints(panelDroite, 2,0);
+        
+        fenetreGenerale.getChildren().add(panelGauche);
+        fenetreGenerale.getChildren().add(panelMilieu);
+        fenetreGenerale.getChildren().add(panelDroite);
+
 
         //ajouter les 3 gridpane
-     //   primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.setScene(new Scene(fenetreGenerale, 1600, 900));
         primaryStage.show();
     }
 }
