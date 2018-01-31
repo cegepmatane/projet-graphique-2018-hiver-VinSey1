@@ -110,26 +110,14 @@ public class VueSalonDeJeu extends Application {
         panelGauche.getChildren().add(boutonVoter);
         panelGauche.getChildren().add(boutonQuitter);
         
-        
-        // AnchorPane du haut
-        // NON UTILISE
-//        AnchorPane anchorPaneHaut = new AnchorPane();
-//        
-//        Text nomDeLaPage = new Text("Salon de jeu");
-//        nomDeLaPage.setFont(Font.font("Lucida Handwriting", 50));
-//        TextField chatDeJeu = new TextField("chat de jeu");
-//        
-//        anchorPaneHaut.setPadding(new Insets(10,10,10,10));
-//
-//        anchorPaneHaut.getChildren().add(nomDeLaPage);
-//        anchorPaneHaut.getChildren().add(boutonReglesDuJeu);
-//        
-//        anchorPaneHaut.setTopAnchor(nomDeLaPage, 10.0);
-//        anchorPaneHaut.setRightAnchor(boutonReglesDuJeu, 10.0);
-        
-        
+          
         // HBox du haut
         
+        Text nomDeLaPage = new Text("Salon de jeu");
+        nomDeLaPage.setFont(Font.font("Lucida Handwriting", 50));
+
+        
+     
         HBox hboxHaut = new HBox();
         
         hboxHaut.setAlignment(Pos.CENTER);
@@ -153,6 +141,8 @@ public class VueSalonDeJeu extends Application {
         //StackPane milieu
         
         GridPane panelMilieu = new GridPane();
+        TextField chatDeJeu = new TextField("chat de jeu");
+        
         panelMilieu.setPadding(new Insets(20,20,20,20));
         panelMilieu.setHgap(10);
         panelMilieu.setVgap(10);
@@ -168,23 +158,39 @@ public class VueSalonDeJeu extends Application {
         panelDroite.setAlignment(Pos.CENTER);
 
         Text nombreDeJoueurs = new Text("Joueurs : 10");
+        nombreDeJoueurs.setFont(Font.font("Lucida Handwriting", 20));
+        
         Text nombreDeLoupGarouVivant = new Text("2 loup(s)-garoup(s) restant(s)");
+        nombreDeLoupGarouVivant.setFont(Font.font("Lucida Handwriting", 20));
+        
+        Text nombreDInnocentVivant = new Text("3 innocent(s) restant(s)");
+        nombreDInnocentVivant.setFont(Font.font("Lucida Handwriting", 20));
+        
         Text nomListeJoueursVivant = new Text("Vivants");
+        nomListeJoueursVivant.setFont(Font.font("Lucida Handwriting", 30));
+        
         Text listeJoueursVivant = new Text("Vincent\n Eliott \n Thomas \n");
+        listeJoueursVivant.setFont(Font.font("Lucida Handwriting", 20));
+        
         Text nomListeJoueursMort = new Text("Morts");
+        nomListeJoueursMort.setFont(Font.font("Lucida Handwriting", 30));
+        
         Text listeJoueursMort = new Text("Denis\nDamien\nThéo");       
+        listeJoueursMort.setFont(Font.font("Lucida Handwriting", 20));
         
         panelDroite.setConstraints(nombreDeJoueurs, 0,1);
         panelDroite.setConstraints(nombreDeLoupGarouVivant, 0,2);
-        panelDroite.setConstraints(nomListeJoueursVivant, 0,3);
-        panelDroite.setConstraints(listeJoueursVivant, 0,4);
-        panelDroite.setConstraints(nomListeJoueursMort, 0,5);
-        panelDroite.setConstraints(listeJoueursMort, 0,6);
+        panelDroite.setConstraints(nombreDInnocentVivant, 0,3);
+        panelDroite.setConstraints(nomListeJoueursVivant, 0,4);
+        panelDroite.setConstraints(listeJoueursVivant, 0,5);
+        panelDroite.setConstraints(nomListeJoueursMort, 0,6);
+        panelDroite.setConstraints(listeJoueursMort, 0,7);
        
        
 
         panelDroite.getChildren().add(nombreDeJoueurs);
         panelDroite.getChildren().add(nombreDeLoupGarouVivant);
+        panelDroite.getChildren().add(nombreDInnocentVivant);
         panelDroite.getChildren().add(nomListeJoueursVivant);
         panelDroite.getChildren().add(listeJoueursVivant);
         panelDroite.getChildren().add(nomListeJoueursMort);
@@ -194,20 +200,7 @@ public class VueSalonDeJeu extends Application {
         // Fenetre Generale
         BorderPane fenetreGenerale = new BorderPane();
         
-//        fenetreGenerale.setHgap(50);
-//        fenetreGenerale.setVgap(50);
-        
         fenetreGenerale.setPadding(new Insets(20,20,20,20));
-
-        
-//        fenetreGenerale.setConstraints(panelGauche, 0,0);
-//        fenetreGenerale.setConstraints(panelMilieu, 1,0);
-//        fenetreGenerale.setConstraints(panelDroite, 2,0);
-        
-//        fenetreGenerale.getChildren().add(panelGauche);
-//        fenetreGenerale.getChildren().add(panelMilieu);
-//        fenetreGenerale.getChildren().add(panelDroite);
-        
 
         fenetreGenerale.setRight(panelDroite);
         fenetreGenerale.setLeft(panelGauche);
