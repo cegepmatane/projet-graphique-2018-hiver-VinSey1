@@ -88,6 +88,7 @@ public class VueRegles extends Application {
     	miseEnPage.setCenter(fenetre);
     	
         Scene scene = new Scene(miseEnPage, 1500, 750);
+        scene.getStylesheets().add(VueRegles.class.getResource("../decoration/lg.css").toExternalForm());
 
         primaryStage.setTitle("Loup-garou");
         primaryStage.setScene(scene);
