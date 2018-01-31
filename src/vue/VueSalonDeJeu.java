@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text; 
@@ -21,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.TextField;
 import javafx.geometry.Pos;
+import javafx.scene.layout.Region;
 
 public class VueSalonDeJeu extends Application {
     public static void main(String[] args) {
@@ -110,20 +112,43 @@ public class VueSalonDeJeu extends Application {
         
         
         // AnchorPane du haut
-      
-        AnchorPane anchorPaneHaut = new AnchorPane();
+        // NON UTILISE
+//        AnchorPane anchorPaneHaut = new AnchorPane();
+//        
+//        Text nomDeLaPage = new Text("Salon de jeu");
+//        nomDeLaPage.setFont(Font.font("Lucida Handwriting", 50));
+//        TextField chatDeJeu = new TextField("chat de jeu");
+//        
+//        anchorPaneHaut.setPadding(new Insets(10,10,10,10));
+//
+//        anchorPaneHaut.getChildren().add(nomDeLaPage);
+//        anchorPaneHaut.getChildren().add(boutonReglesDuJeu);
+//        
+//        anchorPaneHaut.setTopAnchor(nomDeLaPage, 10.0);
+//        anchorPaneHaut.setRightAnchor(boutonReglesDuJeu, 10.0);
         
-        Text nomDeLaPage = new Text("Salon de jeu");
-        nomDeLaPage.setFont(Font.font("Lucida Handwriting", 50));
-        TextField chatDeJeu = new TextField("chat de jeu");
         
-        anchorPaneHaut.setPadding(new Insets(10,10,10,10));
+        // HBox du haut
+        
+        HBox hboxHaut = new HBox();
+        
+        hboxHaut.setAlignment(Pos.CENTER);
+//        nomDeLaPage.setPadding(new java.awt.Insets(0, 0, 0, 400));
+        
+        Region blanc1 = new Region();
+        Region blanc2 = new Region();
+        
+        hboxHaut.setHgrow(blanc1, Priority.ALWAYS);
+        hboxHaut.setHgrow(blanc2, Priority.ALWAYS);
 
-        anchorPaneHaut.getChildren().add(nomDeLaPage);
-        anchorPaneHaut.getChildren().add(boutonReglesDuJeu);
         
-        anchorPaneHaut.setTopAnchor(nomDeLaPage, 10.0);
-        anchorPaneHaut.setRightAnchor(boutonReglesDuJeu, 10.0);
+        hboxHaut.getChildren().add(blanc1);
+        hboxHaut.getChildren().add(nomDeLaPage);
+        hboxHaut.getChildren().add(blanc2);
+        hboxHaut.getChildren().add(boutonReglesDuJeu);
+
+        
+        
         
         //StackPane milieu
         
@@ -186,7 +211,7 @@ public class VueSalonDeJeu extends Application {
 
         fenetreGenerale.setRight(panelDroite);
         fenetreGenerale.setLeft(panelGauche);
-        fenetreGenerale.setTop(anchorPaneHaut);
+        fenetreGenerale.setTop(hboxHaut);
         fenetreGenerale.setCenter(panelMilieu);
 
         //ajouter les 3 gridpane
