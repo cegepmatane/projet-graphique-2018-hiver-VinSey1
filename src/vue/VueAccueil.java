@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -30,36 +31,38 @@ public class VueAccueil extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Accueil");
-        Button bouttonDeConnexion = new Button();
-        bouttonDeConnexion.setText("Se connecter");
-        bouttonDeConnexion.setOnAction(new EventHandler<ActionEvent>() {
+        Button boutonDeConnexion = new Button();
+        boutonDeConnexion.setText("Se connecter");
+        boutonDeConnexion.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Connexion ...");
             }
         });
-        Button bouttonQuitter = new Button();
-        bouttonQuitter.setText("Quitter");
-        bouttonQuitter.setOnAction(new EventHandler<ActionEvent>() {
+        Button boutonQuitter = new Button();
+        boutonQuitter.setText("Quitter");
+        boutonQuitter.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent event) {
         		System.out.println("Au revoir AHOOUUUUUU");
         	}
         });
         
-        Button bouttonRegles = new Button();
-        bouttonRegles.setText("Règles du jeu");
-        bouttonRegles.setOnAction(new EventHandler<ActionEvent>() {
+        Button boutonRegles = new Button();
+        boutonRegles.setText("Règles du jeu");
+        boutonRegles.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent event) {
         		System.out.println("Affichage des règles du jeu");
         	}
         });
         
         Text titre = new Text("Les loups-garous");
-        titre.setFont(Font.font("Arial", FontWeight.BOLD, 80));
+        titre.setFont(Font.font("Lucida Handwriting", FontWeight.BOLD, 80));
         Text pseudo = new Text("Entrez votre pseudonyme :");
-        pseudo.setFont(Font.font("Arial", FontWeight.NORMAL, 60));
+        pseudo.setFont(Font.font("Lucida Handwriting", FontWeight.NORMAL, 40));
         TextField creationPseudo = new TextField();
+        
+        
         
         
         
@@ -67,16 +70,32 @@ public class VueAccueil extends Application {
         miseEnPage.setTop(titre);
         miseEnPage.setAlignment(titre, Pos.CENTER);
         
-        GridPane grille = new GridPane();
-        grille.setAlignment(Pos.CENTER);
-        grille.setHgap(10);
-        grille.setVgap(50);
-        grille.setPadding(new Insets(25,25,25,25));
-        grille.add(pseudo, 1, 3);
-        grille.add(creationPseudo, 1, 4);
-        grille.add(bouttonDeConnexion, 1, 5);
-        grille.add(bouttonQuitter, 1, 6);
+        AnchorPane grille = new AnchorPane();
         miseEnPage.setCenter(grille);
+        grille.setMaxSize(1200, 600);
+        grille.setMinSize(100, 50);
+        grille.setTopAnchor(pseudo, (double) 300);
+        grille.setRightAnchor(pseudo, (double) 300);
+        grille.setLeftAnchor(pseudo, (double) 300);
+        grille.setBottomAnchor(pseudo, (double) 50);
+        grille.setTopAnchor(creationPseudo, (double) 375);
+        grille.setRightAnchor(creationPseudo, (double) 300);
+        grille.setLeftAnchor(creationPseudo, (double) 300);
+        grille.setBottomAnchor(creationPseudo, (double) 150);
+        grille.setTopAnchor(boutonDeConnexion, (double) 455);
+        grille.setRightAnchor(boutonDeConnexion, (double) 300);
+        grille.setLeftAnchor(boutonDeConnexion, (double) 300);
+        grille.setBottomAnchor(boutonDeConnexion, (double) 100);
+        grille.setTopAnchor(boutonQuitter, (double) 505);
+        grille.setRightAnchor(boutonQuitter, (double) 300);
+        grille.setLeftAnchor(boutonQuitter, (double) 300);
+        grille.setBottomAnchor(boutonQuitter, (double) 50);
+        grille.setTopAnchor(boutonRegles, (double) 0);
+        grille.setRightAnchor(boutonRegles, (double) 0);
+        grille.setLeftAnchor(boutonRegles, (double) 1000);
+        grille.setBottomAnchor(boutonRegles, (double) 550);
+        grille.getChildren().addAll(pseudo, creationPseudo, boutonDeConnexion, boutonQuitter, boutonRegles);
+        grille.setStyle("-fx-border-color: black; -fx-border-width: 2px 2px 2px 2px");
         
         primaryStage.setScene(new Scene(miseEnPage, 1500, 750));
         primaryStage.show();
