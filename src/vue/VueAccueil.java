@@ -130,6 +130,7 @@ public class VueAccueil extends Application {
         scene.getStylesheets().add(VueAccueil.class.getResource("../decoration/lg.css").toExternalForm());
        
         
+        
         primaryStage.setScene(scene);
         primaryStage.show();
         
