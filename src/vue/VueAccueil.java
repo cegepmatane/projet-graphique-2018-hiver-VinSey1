@@ -125,9 +125,12 @@ public class VueAccueil extends Application {
         elementCentral.getChildren().addAll(pseudo, creationPseudo, boutonDeConnexion, boutonQuitter, boutonRegles, boxImage);
         elementCentral.setStyle("-fx-border-color: black; -fx-border-width: 2px 2px 2px 2px");
         
+        
+        Scene scene = new Scene(miseEnPage, 1500, 750);
+        scene.getStylesheets().add(VueAccueil.class.getResource("../decoration/lg.css").toExternalForm());
        
         
-        primaryStage.setScene(new Scene(miseEnPage, 1500, 750));
+        primaryStage.setScene(scene);
         primaryStage.show();
         
         
