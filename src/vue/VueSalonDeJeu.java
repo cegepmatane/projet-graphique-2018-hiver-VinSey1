@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text; 
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.TextField;
 import javafx.geometry.Pos;
 
@@ -108,19 +109,21 @@ public class VueSalonDeJeu extends Application {
         panelGauche.getChildren().add(boutonQuitter);
         
         
-        // HBox du haut
+        // AnchorPane du haut
       
-        HBox hboxHaut = new HBox();
+        AnchorPane anchorPaneHaut = new AnchorPane();
         
         Text nomDeLaPage = new Text("Salon de jeu");
         nomDeLaPage.setFont(Font.font("Lucida Handwriting", 50));
         TextField chatDeJeu = new TextField("chat de jeu");
         
-        hboxHaut.setPadding(new Insets(10,10,10,10));
-//        hbox.setSpacing(50);
+        anchorPaneHaut.setPadding(new Insets(10,10,10,10));
+
+        anchorPaneHaut.getChildren().add(nomDeLaPage);
+        anchorPaneHaut.getChildren().add(boutonReglesDuJeu);
         
-        
-        
+        anchorPaneHaut.setTopAnchor(nomDeLaPage, 10.0);
+        anchorPaneHaut.setRightAnchor(boutonReglesDuJeu, 10.0);
         
         //StackPane milieu
         
@@ -130,7 +133,6 @@ public class VueSalonDeJeu extends Application {
         panelMilieu.setVgap(10);
         panelMilieu.setAlignment(Pos.CENTER);
         
-        panelMilieu.getChildren().add(nomDeLaPage);
         panelMilieu.getChildren().add(chatDeJeu);
         
         // StackPane de droite
@@ -155,7 +157,7 @@ public class VueSalonDeJeu extends Application {
         panelDroite.setConstraints(listeJoueursMort, 0,6);
        
        
-        panelDroite.getChildren().add(boutonReglesDuJeu);
+
         panelDroite.getChildren().add(nombreDeJoueurs);
         panelDroite.getChildren().add(nombreDeLoupGarouVivant);
         panelDroite.getChildren().add(nomListeJoueursVivant);
@@ -181,10 +183,11 @@ public class VueSalonDeJeu extends Application {
 //        fenetreGenerale.getChildren().add(panelMilieu);
 //        fenetreGenerale.getChildren().add(panelDroite);
         
-        fenetreGenerale.setCenter(panelMilieu);
+
         fenetreGenerale.setRight(panelDroite);
         fenetreGenerale.setLeft(panelGauche);
-
+        fenetreGenerale.setTop(anchorPaneHaut);
+        fenetreGenerale.setCenter(panelMilieu);
 
         //ajouter les 3 gridpane
         primaryStage.setScene(new Scene(fenetreGenerale, 1600, 900));
