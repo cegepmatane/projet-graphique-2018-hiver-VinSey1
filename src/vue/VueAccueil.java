@@ -33,11 +33,6 @@ public class VueAccueil extends Application {
         launch(args);
     }
 	
-   
-    
-	
-    
-	
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Accueil");
@@ -93,7 +88,7 @@ public class VueAccueil extends Application {
         elementCentral.setMinSize(100, 50);
         
         HBox boxImage = new HBox();
-        boxImage.setId("imageAccueil");
+        boxImage.setId("image-accueil");
         
         elementCentral.setTopAnchor(entreePseudo, (double) 300);
         elementCentral.setRightAnchor(entreePseudo, (double) 300);
@@ -127,7 +122,7 @@ public class VueAccueil extends Application {
         
   
         elementCentral.getChildren().addAll(entreePseudo, creationPseudo, boutonDeConnexion, boutonQuitter, boutonRegles, boxImage);
-        elementCentral.setId("cadreAccueil");
+        elementCentral.setId("cadre-accueil");
         
         
         Scene scene = new Scene(miseEnPage, 1500, 750);
