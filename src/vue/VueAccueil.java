@@ -32,20 +32,16 @@ public class VueAccueil extends Application {
 	public static void main(String[] args) {
         launch(args);
     }
+	
+   
+    
+	
     
 	
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Accueil");
-        Button boutonDeConnexion = new Button();
-        boutonDeConnexion.setText("Se connecter");
-        boutonDeConnexion.setOnAction(new EventHandler<ActionEvent>() {
- 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Connexion ...");
-            }
-        });
+      
         
         Button boutonQuitter = new Button();
         boutonQuitter.setText("Quitter");
@@ -57,7 +53,6 @@ public class VueAccueil extends Application {
         
         Button boutonRegles = new Button();
         boutonRegles.setText("Règles du jeu");
-        boutonRegles.setStyle("fx-background-color : yellow");
         boutonRegles.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent event) {
         		System.out.println("Affichage des règles du jeu");
@@ -67,11 +62,27 @@ public class VueAccueil extends Application {
         Text titre = new Text("Les loups-garous");
         titre.setId("titrePrincipal");
         
-        Text pseudo = new Text("Entrez votre pseudonyme :");
-        pseudo.setId("pseudo");
+        Text entreePseudo = new Text("Entrez votre pseudonyme :");
+        entreePseudo.setId("pseudo");
         
         TextField creationPseudo = new TextField();
         
+        Button boutonDeConnexion = new Button();
+        boutonDeConnexion.setText("Se connecter");
+        boutonDeConnexion.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+            	String pseudo = new String();
+            	if ((creationPseudo.getText() != null && !creationPseudo.getText().isEmpty())) {
+            		pseudo = creationPseudo.getText();
+            		System.out.println(pseudo);
+            	}
+            	else {
+            		System.out.println("Veuillez entrer un pseudo");
+            	}
+            }
+        });
         
         BorderPane miseEnPage = new BorderPane();
         miseEnPage.setTop(titre);
@@ -84,10 +95,10 @@ public class VueAccueil extends Application {
         HBox boxImage = new HBox();
         boxImage.setId("imageAccueil");
         
-        elementCentral.setTopAnchor(pseudo, (double) 300);
-        elementCentral.setRightAnchor(pseudo, (double) 300);
-        elementCentral.setLeftAnchor(pseudo, (double) 300);
-        elementCentral.setBottomAnchor(pseudo, (double) 50);
+        elementCentral.setTopAnchor(entreePseudo, (double) 300);
+        elementCentral.setRightAnchor(entreePseudo, (double) 300);
+        elementCentral.setLeftAnchor(entreePseudo, (double) 300);
+        elementCentral.setBottomAnchor(entreePseudo, (double) 50);
         
         elementCentral.setTopAnchor(creationPseudo, (double) 375);
         elementCentral.setRightAnchor(creationPseudo, (double) 300);
@@ -115,7 +126,7 @@ public class VueAccueil extends Application {
         elementCentral.setBottomAnchor(boxImage, (double) 320);
         
   
-        elementCentral.getChildren().addAll(pseudo, creationPseudo, boutonDeConnexion, boutonQuitter, boutonRegles, boxImage);
+        elementCentral.getChildren().addAll(entreePseudo, creationPseudo, boutonDeConnexion, boutonQuitter, boutonRegles, boxImage);
         elementCentral.setId("cadreAccueil");
         
         
@@ -129,6 +140,8 @@ public class VueAccueil extends Application {
         
         
     }
+    
+    
 }
 	
 
