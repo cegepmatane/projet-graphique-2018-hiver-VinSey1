@@ -34,11 +34,16 @@ public class VueRegles extends Application {
     	Button cartes = new Button("Cartes");
     	Button savoirVivre = new Button("Savoir-vivre");
     	Button triche = new Button("Triche");
+    	
     	Button retour = new Button("Retour");
     	retour.setMaxWidth(200.0);
     	retour.setMinWidth(200.0);
     	
-    	Label contenu = new Label("Test, consectetur adipiscing elit. Praesent ipsum erat, imperdiet non tellus consectetur, lobortis suscipit orci. Duis volutpat quam in interdum vestibulum. Maecenas at nibh aliquam, vulputate nisi quis, pharetra orci. Aliquam quis purus semper tellus pulvinar posuere. Donec in massa porttitor, sodales tortor non, pharetra risus. Praesent sit amet varius erat. Mauris sodales ultrices ullamcorper. Aliquam erat volutpat. Maecenas mollis efficitur purus at euismod. Sed convallis leo vitae ligula blandit vehicula.");
+    	Label contenu = new Label("Test, consectetur adipiscing elit. Praesent ipsum erat, imperdiet non tellus consectetur, "
+    			+ "lobortis suscipit orci. Duis volutpat quam in interdum vestibulum. Maecenas at nibh aliquam, vulputate nisi quis, "
+    			+ "pharetra orci. Aliquam quis purus semper tellus pulvinar posuere. Donec in massa porttitor, sodales tortor non, "
+    			+ "pharetra risus. Praesent sit amet varius erat. Mauris sodales ultrices ullamcorper. Aliquam erat volutpat. Maecenas "
+    			+ "mollis efficitur purus at euismod. Sed convallis leo vitae ligula blandit vehicula.");
     	contenu.setWrapText(true);
     	//contenu.setMaxWidth(950);
 
@@ -50,24 +55,31 @@ public class VueRegles extends Application {
     	categories.getChildren().add(savoirVivre);
     	categories.getChildren().add(triche);
         
-        TitledPane menu = new TitledPane("Catégories", categories);
+    	TitledPane menu = new TitledPane("Catégories", categories);
         menu.setExpanded(false);
-    	menu.setMaxSize(170, 250);
-    	menu.setMinSize(170, 250);
+        
+    	/*
     	BorderPane.setAlignment(menu, Pos.BASELINE_LEFT);
-    	menu.setStyle("-fx-z-index: 1");
+    	menu.setStyle("-fx-z-index: 1; -fx-width:170px");*/
+    	
+    	Group groupe = new Group();
+    	
     	AnchorPane fenetre = new AnchorPane();
     	AnchorPane zoneTexte = new AnchorPane();
-    	zoneTexte.setMaxSize(600,300);
-    	zoneTexte.setMinSize(50,25);
-    	zoneTexte.setStyle("-fx-border-color: grey; -fx-border-width: 1px 1px 1px 1px; -fx-z-index: 10");
-    	AnchorPane.setTopAnchor(zoneTexte, 150.0);
-    	AnchorPane.setLeftAnchor(zoneTexte, 100.0);
-    	AnchorPane.setRightAnchor(zoneTexte, 100.0);
-    	AnchorPane.setBottomAnchor(zoneTexte, 100.0);
-    	AnchorPane.setTopAnchor(menu, 120.0);
-    	AnchorPane.setLeftAnchor(menu, 100.0);
-    	AnchorPane.setRightAnchor(menu, 100.0);
+    	zoneTexte.setMaxSize(1000,400);
+    	zoneTexte.setMinSize(1000,400);
+    	zoneTexte.setStyle("-fx-border-color: grey; -fx-border-width: 1px 1px 1px 1px; -fx-z-index: 10;");
+    	zoneTexte.setId("zoneTexteRegles");
+    	zoneTexte.toBack();
+    	
+    	
+    	
+    	groupe.getChildren().addAll(zoneTexte, menu);
+    	menu.toFront();
+    	menu.setMinSize(1000, 250);
+
+    	AnchorPane.setTopAnchor(groupe, 120.0);
+    	AnchorPane.setLeftAnchor(groupe, 100.0);
     	AnchorPane.setTopAnchor(sousTitre, 10.0);
     	AnchorPane.setLeftAnchor(sousTitre, 500.0);
     	AnchorPane.setRightAnchor(sousTitre, 50.0);
@@ -80,10 +92,11 @@ public class VueRegles extends Application {
     	fenetre.setMinSize(100, 50);
         
         zoneTexte.getChildren().add(contenu);
-        fenetre.getChildren().addAll(menu, retour, zoneTexte, sousTitre);
+        fenetre.getChildren().addAll(groupe, retour, sousTitre);
     	BorderPane miseEnPage = new BorderPane();
     	
-    	fenetre.setStyle("-fx-border-color: black; -fx-border-width: 2px 2px 2px 2px");
+    	fenetre.setStyle("-fx-border-color: black; -fx-border-width: 2px 2px 2px 2px; -fx-background-color: #F5F5F5;");
+    	fenetre.setId("fenetreRegles");
     	miseEnPage.setTop(titre);
     	miseEnPage.setCenter(fenetre);
     	
