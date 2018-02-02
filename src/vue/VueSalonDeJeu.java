@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
@@ -139,20 +140,25 @@ public class VueSalonDeJeu extends Application {
         
         
         
-        //StackPane milieu
+        //VBox milieu
         
-        AnchorPane panelMilieu = new AnchorPane();
+        VBox panelMilieu = new VBox();
         TextField chatDeJeu = new TextField("chat de jeu");
-//        chatDeJeu.setMinSize();
+        Region blanc3 = new Region();
         chatDeJeu.setEditable(false);
+        
+        chatDeJeu.setMinHeight(400);
         
         TextField zoneDeSaisieMessage = new TextField();
         
-        panelMilieu.setPadding(new Insets(20,20,20,20));
+        panelMilieu.setPadding(new Insets(20,20,100,20));
+
         
-//        panelMilieu.setTopAnchor(chatDeJeu, 10.0);
-        panelMilieu.setBottomAnchor(chatDeJeu, 10.0);
-//        panelMilieu.setBottomAnchor(zoneDeSaisieMessage, 10.0);
+        panelMilieu.getChildren().add(blanc3);
+        panelMilieu.getChildren().add(chatDeJeu);
+        panelMilieu.getChildren().add(zoneDeSaisieMessage);
+
+        panelMilieu.setVgrow(blanc3, Priority.ALWAYS);
         
         // StackPane de droite
         GridPane panelDroite = new GridPane();
