@@ -9,5 +9,7 @@
 
 #imageAccueil {
 	-fx-background-image: url("werewolf.png");
-	-fx-height:50px;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 300 300;
+	-fx-background-position:center;
 }

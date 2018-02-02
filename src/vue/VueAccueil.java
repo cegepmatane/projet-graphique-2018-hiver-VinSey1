@@ -92,7 +92,7 @@ public class VueAccueil extends Application {
         elementCentral.setTopAnchor(creationPseudo, (double) 375);
         elementCentral.setRightAnchor(creationPseudo, (double) 300);
         elementCentral.setLeftAnchor(creationPseudo, (double) 300);
-        elementCentral.setBottomAnchor(creationPseudo, (double) 150);
+        elementCentral.setBottomAnchor(creationPseudo, (double) 170);
         
         elementCentral.setTopAnchor(boutonDeConnexion, (double) 455);
         elementCentral.setRightAnchor(boutonDeConnexion, (double) 300);
@@ -104,8 +104,8 @@ public class VueAccueil extends Application {
         elementCentral.setLeftAnchor(boutonQuitter, (double) 300);
         elementCentral.setBottomAnchor(boutonQuitter, (double) 50);
         
-        elementCentral.setTopAnchor(boutonRegles, (double) 0);
-        elementCentral.setRightAnchor(boutonRegles, (double) 0);
+        elementCentral.setTopAnchor(boutonRegles, (double) 5);
+        elementCentral.setRightAnchor(boutonRegles, (double) 5);
         elementCentral.setLeftAnchor(boutonRegles, (double) 1000);
         elementCentral.setBottomAnchor(boutonRegles, (double) 550);
         
@@ -114,12 +114,7 @@ public class VueAccueil extends Application {
         elementCentral.setLeftAnchor(boxImage, (double) 200);
         elementCentral.setBottomAnchor(boxImage, (double) 320);
         
-        
-        boxImage.setStyle("-fx-border-color: red; -fx-border-width: 2px 2px 2px 2px");
-        
-        
-       
-
+  
         elementCentral.getChildren().addAll(pseudo, creationPseudo, boutonDeConnexion, boutonQuitter, boutonRegles, boxImage);
         elementCentral.setStyle("-fx-border-color: black; -fx-border-width: 2px 2px 2px 2px");
         
