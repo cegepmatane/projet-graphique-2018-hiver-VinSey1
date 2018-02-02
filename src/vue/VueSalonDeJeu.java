@@ -99,7 +99,8 @@ public class VueSalonDeJeu extends Application {
 		}
         
         Text texteDescriptionRole = new Text(descriptionRoleLoupGaroup);
-      
+        texteDescriptionRole.setFont(Font.font("Lucida Handwriting", 20));
+        
         panelGauche.setConstraints(texteRole, 0, 0); 
         panelGauche.setConstraints(texteDescriptionRole, 0, 1);
         panelGauche.setConstraints(boutonVoter, 0, 2);
@@ -142,6 +143,7 @@ public class VueSalonDeJeu extends Application {
         
         GridPane panelMilieu = new GridPane();
         TextField chatDeJeu = new TextField("chat de jeu");
+        chatDeJeu.setMinSize(500.0, 500.0);
         
         panelMilieu.setPadding(new Insets(20,20,20,20));
         panelMilieu.setHgap(10);
@@ -186,8 +188,6 @@ public class VueSalonDeJeu extends Application {
         panelDroite.setConstraints(nomListeJoueursMort, 0,6);
         panelDroite.setConstraints(listeJoueursMort, 0,7);
        
-       
-
         panelDroite.getChildren().add(nombreDeJoueurs);
         panelDroite.getChildren().add(nombreDeLoupGarouVivant);
         panelDroite.getChildren().add(nombreDInnocentVivant);
@@ -202,11 +202,13 @@ public class VueSalonDeJeu extends Application {
         
         fenetreGenerale.setPadding(new Insets(20,20,20,20));
 
+        
         fenetreGenerale.setRight(panelDroite);
         fenetreGenerale.setLeft(panelGauche);
         fenetreGenerale.setTop(hboxHaut);
         fenetreGenerale.setCenter(panelMilieu);
 
+        
         //ajouter les 3 gridpane
         primaryStage.setScene(new Scene(fenetreGenerale, 1600, 900));
         primaryStage.show();
