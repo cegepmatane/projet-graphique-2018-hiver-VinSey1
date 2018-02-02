@@ -72,9 +72,6 @@ public class VueAccueil extends Application {
         
         TextField creationPseudo = new TextField();
         
-        Image imageAccueil = new Image("File:img/werefolf.png");
-        ImageView imageAccueilView = new ImageView(imageAccueil);
-        
         
         BorderPane miseEnPage = new BorderPane();
         miseEnPage.setTop(titre);
@@ -85,6 +82,7 @@ public class VueAccueil extends Application {
         elementCentral.setMinSize(100, 50);
         
         HBox boxImage = new HBox();
+        boxImage.setId("imageAccueil");
         
         elementCentral.setTopAnchor(pseudo, (double) 300);
         elementCentral.setRightAnchor(pseudo, (double) 300);
@@ -118,7 +116,7 @@ public class VueAccueil extends Application {
         
         
         boxImage.setStyle("-fx-border-color: red; -fx-border-width: 2px 2px 2px 2px");
-        boxImage.getChildren().add(imageAccueilView);
+        
         
        
 
