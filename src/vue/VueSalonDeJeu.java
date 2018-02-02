@@ -90,7 +90,7 @@ public class VueSalonDeJeu extends Application {
         texteRole.setFont(Font.font("Lucida Handwriting", 30));
         
         HBox boxCarte = new HBox();
-        boxCarte.setId("imageCarteLoupGaroup");
+        boxCarte.setId("image-carte-loupGaroup");
         
         panelGauche.setAlignment(Pos.CENTER);
 
@@ -98,13 +98,13 @@ public class VueSalonDeJeu extends Application {
         texteDescriptionRole.setFont(Font.font("Lucida Handwriting", 17));
         
         panelGauche.setConstraints(texteRole, 0, 0); 
-        panelGauche.setConstraints(boxCarte, 0,1);
+        panelGauche.setConstraints(texteRole, 0,1);
         panelGauche.setConstraints(texteDescriptionRole, 0, 2);
         panelGauche.setConstraints(boutonVoter, 0, 3);
         panelGauche.setConstraints(boutonQuitter, 0, 4);
         
         panelGauche.getChildren().add(texteRole);
-        panelGauche.getChildren().add(boxCarte);
+        panelGauche.getChildren().add(texteRole);
         panelGauche.getChildren().add(texteDescriptionRole);  
         panelGauche.getChildren().add(boutonVoter);
         panelGauche.getChildren().add(boutonQuitter);

@@ -7,14 +7,14 @@
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
-#imageAccueil {
+#image-accueil {
 	-fx-background-image: url("/illustration/werewolf.png");
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: 300 300;
 	-fx-background-position:center;
 }
 
-#imageCarteLoupGaroup {
+#image-loup-garoup {
 	-fx-background-image: url("../illustration/carteLoupGarou.png");
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: 300 300;
@@ -22,7 +22,7 @@
 
 }
 
-#titrePrincipal {
+#titre-principal {
 	-fx-font-family: "Lucida Handwriting";
 	-fx-font-weight:BOLD;
 	-fx-font-size:80;
@@ -35,7 +35,7 @@
 	-fx-font-size:40;
 }
 
-#cadreAccueil {
+#cadre-accueil {
 	-fx-border-color: black;
 	-fx-border-width: 2px 2px 2px 2px
 }
