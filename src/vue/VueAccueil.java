@@ -65,10 +65,10 @@ public class VueAccueil extends Application {
         });
         
         Text titre = new Text("Les loups-garous");
-        titre.setFont(Font.font("Lucida Handwriting", FontWeight.BOLD, 80));
+        titre.setId("titrePrincipal");
         
         Text pseudo = new Text("Entrez votre pseudonyme :");
-        pseudo.setFont(Font.font("Lucida Handwriting", FontWeight.NORMAL, 40));
+        pseudo.setId("pseudo");
         
         TextField creationPseudo = new TextField();
         
@@ -116,7 +116,7 @@ public class VueAccueil extends Application {
         
   
         elementCentral.getChildren().addAll(pseudo, creationPseudo, boutonDeConnexion, boutonQuitter, boutonRegles, boxImage);
-        elementCentral.setStyle("-fx-border-color: black; -fx-border-width: 2px 2px 2px 2px");
+        elementCentral.setId("cadreAccueil");
         
         
         Scene scene = new Scene(miseEnPage, 1500, 750);
