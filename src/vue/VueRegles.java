@@ -129,7 +129,7 @@ public class VueRegles extends Application {
     	//Création de la scène contenant la mise en page et définition de sa taille
         Scene scene = new Scene(miseEnPage, 1500, 750);
         //Importation du fichier CSS pour la gestion de styles
-        scene.getStylesheets().add(VueRegles.class.getResource("../decoration/lg.css").toExternalForm());
+        scene.getStylesheets().add(VueRegles.class.getResource("decoration/lg.css").toExternalForm());
         //Gestion du titre de la scene
         primaryStage.setTitle("Loup-garou");
         //Définit la scene
