@@ -35,10 +35,10 @@ public class VueSalonDeJeu extends Application {
         primaryStage.setTitle("Salon de Jeu");
         
         
-        // Bouton d'acces aux relges du jeu
+        // Bouton d'acces aux relges du jeu	
         Button boutonReglesDuJeu = new Button();
         boutonReglesDuJeu.setText("Règles du jeu");
-        boutonReglesDuJeu.setStyle("-fx-background-color:#fff224; -fx-font-size:20px");
+        boutonReglesDuJeu.setStyle("-fx-background-color:#fff224; -fx-font-size:20px; -fx-padding: 10 50 10 50; -fx-font-family:\"Lucida Handwriting\";");
         boutonReglesDuJeu.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -50,6 +50,7 @@ public class VueSalonDeJeu extends Application {
         // Bouton Voter
         Button boutonQuitter = new Button();
         boutonQuitter.setText("Quitter");
+        boutonQuitter.setStyle("-fx-background-color:#4d0000; -fx-font-size:20px; -fx-padding: 10 50 10 50;-fx-font-family:\"Lucida Handwriting\"; -fx-text-fill:white;");
         boutonQuitter.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -62,6 +63,7 @@ public class VueSalonDeJeu extends Application {
         // Bouton Quitter
         Button boutonVoter = new Button();
         boutonVoter.setText("Voter");
+        boutonVoter.setStyle("-fx-background-color:#00cc00; -fx-font-size:20px; -fx-padding: 10 50 10 50;-fx-font-family:\"Lucida Handwriting\"");
         boutonVoter.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -73,7 +75,7 @@ public class VueSalonDeJeu extends Application {
              
         // Description du role
         
-        String descriptionRoleLoupGaroup = "Le loup-garoup tue chaque nuit une personne,\n il doit remporter la partie en tuant tous les innocents";
+        String descriptionRoleLoupGaroup = "Le loup-garoup tue chaque\nnuit une personne,\nil doit remporter la partie\nen tuant tous les innocents";
         
         
         // StackPane de gauche
@@ -99,7 +101,7 @@ public class VueSalonDeJeu extends Application {
 		}
         
         Text texteDescriptionRole = new Text(descriptionRoleLoupGaroup);
-        texteDescriptionRole.setFont(Font.font("Lucida Handwriting", 20));
+        texteDescriptionRole.setFont(Font.font("Lucida Handwriting", 17));
         
         panelGauche.setConstraints(texteRole, 0, 0); 
         panelGauche.setConstraints(texteDescriptionRole, 0, 1);
@@ -115,14 +117,12 @@ public class VueSalonDeJeu extends Application {
         // HBox du haut
         
         Text nomDeLaPage = new Text("Salon de jeu");
-        nomDeLaPage.setFont(Font.font("Lucida Handwriting", 50));
-
+        nomDeLaPage.setStyle("-fx-font-family:\"Lucida Handwriting\"; -fx-font-size: 50");
         
      
         HBox hboxHaut = new HBox();
         
         hboxHaut.setAlignment(Pos.CENTER);
-//        nomDeLaPage.setPadding(new java.awt.Insets(0, 0, 0, 400));
         
         Region blanc1 = new Region();
         Region blanc2 = new Region();
@@ -141,16 +141,18 @@ public class VueSalonDeJeu extends Application {
         
         //StackPane milieu
         
-        GridPane panelMilieu = new GridPane();
+        AnchorPane panelMilieu = new AnchorPane();
         TextField chatDeJeu = new TextField("chat de jeu");
-        chatDeJeu.setMinSize(500.0, 500.0);
+//        chatDeJeu.setMinSize();
+        chatDeJeu.setEditable(false);
+        
+        TextField zoneDeSaisieMessage = new TextField();
         
         panelMilieu.setPadding(new Insets(20,20,20,20));
-        panelMilieu.setHgap(10);
-        panelMilieu.setVgap(10);
-        panelMilieu.setAlignment(Pos.CENTER);
         
-        panelMilieu.getChildren().add(chatDeJeu);
+//        panelMilieu.setTopAnchor(chatDeJeu, 10.0);
+        panelMilieu.setBottomAnchor(chatDeJeu, 10.0);
+//        panelMilieu.setBottomAnchor(zoneDeSaisieMessage, 10.0);
         
         // StackPane de droite
         GridPane panelDroite = new GridPane();
@@ -177,7 +179,7 @@ public class VueSalonDeJeu extends Application {
         Text nomListeJoueursMort = new Text("Morts");
         nomListeJoueursMort.setFont(Font.font("Lucida Handwriting", 30));
         
-        Text listeJoueursMort = new Text("Denis\nDamien\nThéo");       
+        Text listeJoueursMort = new Text("Patate2f\nDamien\nThéo");       
         listeJoueursMort.setFont(Font.font("Lucida Handwriting", 20));
         
         panelDroite.setConstraints(nombreDeJoueurs, 0,1);
