@@ -38,7 +38,7 @@ public class VueRegles extends Application {
     	retour.setMaxWidth(200.0);
     	retour.setMinWidth(200.0);
     	
-    	Label contenu = new Label("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ipsum erat, imperdiet non tellus consectetur, lobortis suscipit orci. Duis volutpat quam in interdum vestibulum. Maecenas at nibh aliquam, vulputate nisi quis, pharetra orci. Aliquam quis purus semper tellus pulvinar posuere. Donec in massa porttitor, sodales tortor non, pharetra risus. Praesent sit amet varius erat. Mauris sodales ultrices ullamcorper. Aliquam erat volutpat. Maecenas mollis efficitur purus at euismod. Sed convallis leo vitae ligula blandit vehicula.");
+    	Label contenu = new Label("Test, consectetur adipiscing elit. Praesent ipsum erat, imperdiet non tellus consectetur, lobortis suscipit orci. Duis volutpat quam in interdum vestibulum. Maecenas at nibh aliquam, vulputate nisi quis, pharetra orci. Aliquam quis purus semper tellus pulvinar posuere. Donec in massa porttitor, sodales tortor non, pharetra risus. Praesent sit amet varius erat. Mauris sodales ultrices ullamcorper. Aliquam erat volutpat. Maecenas mollis efficitur purus at euismod. Sed convallis leo vitae ligula blandit vehicula.");
     	contenu.setWrapText(true);
     	//contenu.setMaxWidth(950);
 
