@@ -93,17 +93,7 @@ public class VueSalonDeJeu extends Application {
         boxCarte.setId("imageCarteLoupGaroup");
         
         panelGauche.setAlignment(Pos.CENTER);
-        
-        try {
-			Image imageCarteLoupGarou = ImageIO.read(new File("CarteLoupGarou.jpg"));
-//			ImageView imageViewCarteLoupGaroup = new ImageView(imageCarteLoupGarou);
-//	        panelGauche.getChildren().add(imageViewCarteLoupGaroup);
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
         Text texteDescriptionRole = new Text(descriptionRoleLoupGaroup);
         texteDescriptionRole.setFont(Font.font("Lucida Handwriting", 17));
         
@@ -221,11 +211,8 @@ public class VueSalonDeJeu extends Application {
         fenetreGenerale.setTop(hboxHaut);
         fenetreGenerale.setCenter(panelMilieu);
         
-        Scene scene = new Scene(fenetreGenerale, 1500,700);
-        
-        System.out.println(VueSalonDeJeu.class.getResource("lg.css"));
-        
-        scene.getStylesheets().add(VueSalonDeJeu.class.getResource("lg.css").toExternalForm());
+        Scene scene = new Scene(fenetreGenerale, 1500,700);        
+        scene.getStylesheets().add(VueSalonDeJeu.class.getResource("../decoration/lg.css").toExternalForm());
         
         primaryStage.setScene(scene);
         primaryStage.show();

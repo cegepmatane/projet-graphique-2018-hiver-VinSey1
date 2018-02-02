@@ -14,8 +14,8 @@
 	-fx-background-position:center;
 }
 
-#imageCarteLoupGaroup{
-	-fx-background-image: url("/illustration/carteLoupGarou.png");
+#imageCarteLoupGaroup {
+	-fx-background-image: url("../illustration/carteLoupGarou.png");
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: 300 300;
 	-fx-background-position:center;
