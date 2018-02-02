@@ -86,8 +86,11 @@ public class VueSalonDeJeu extends Application {
         panelGauche.setHgap(10);
         panelGauche.setVgap(10);
         
-        Text texteRole = new Text("Rôle");
+        Text texteRole = new Text("Loup-Garou");
         texteRole.setFont(Font.font("Lucida Handwriting", 30));
+        
+        HBox boxCarte = new HBox();
+        boxCarte.setId("imageCarteLoupGaroup");
         
         panelGauche.setAlignment(Pos.CENTER);
         
@@ -105,11 +108,13 @@ public class VueSalonDeJeu extends Application {
         texteDescriptionRole.setFont(Font.font("Lucida Handwriting", 17));
         
         panelGauche.setConstraints(texteRole, 0, 0); 
-        panelGauche.setConstraints(texteDescriptionRole, 0, 1);
-        panelGauche.setConstraints(boutonVoter, 0, 2);
-        panelGauche.setConstraints(boutonQuitter, 0, 3);
+        panelGauche.setConstraints(boxCarte, 0,1);
+        panelGauche.setConstraints(texteDescriptionRole, 0, 2);
+        panelGauche.setConstraints(boutonVoter, 0, 3);
+        panelGauche.setConstraints(boutonQuitter, 0, 4);
         
         panelGauche.getChildren().add(texteRole);
+        panelGauche.getChildren().add(boxCarte);
         panelGauche.getChildren().add(texteDescriptionRole);  
         panelGauche.getChildren().add(boutonVoter);
         panelGauche.getChildren().add(boutonQuitter);
@@ -180,7 +185,7 @@ public class VueSalonDeJeu extends Application {
         nomListeJoueursVivant.setFont(Font.font("Lucida Handwriting", 30));
         
         Text listeJoueursVivant = new Text("Vincent\n Eliott \n Thomas \n");
-        listeJoueursVivant.setFont(Font.font("Lucida Handwriting", 20));
+        listeJoueursVivant.setStyle(" -fx-font-family:\"Lucida Handwriting\"; -fx-font-size:20; -fx-border-style:solid; -fx-border-width: 5px; ");
         
         Text nomListeJoueursMort = new Text("Morts");
         nomListeJoueursMort.setFont(Font.font("Lucida Handwriting", 30));
@@ -215,10 +220,15 @@ public class VueSalonDeJeu extends Application {
         fenetreGenerale.setLeft(panelGauche);
         fenetreGenerale.setTop(hboxHaut);
         fenetreGenerale.setCenter(panelMilieu);
-
         
-        //ajouter les 3 gridpane
-        primaryStage.setScene(new Scene(fenetreGenerale, 1600, 900));
+        Scene scene = new Scene(fenetreGenerale, 1500,700);
+        
+        System.out.println(VueSalonDeJeu.class.getResource("lg.css"));
+        
+        scene.getStylesheets().add(VueSalonDeJeu.class.getResource("lg.css").toExternalForm());
+        
+        primaryStage.setScene(scene);
         primaryStage.show();
+        
     }
 }
