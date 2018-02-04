@@ -214,20 +214,20 @@ public class VueSalonDeJeu extends Application {
         fenetreGenerale.setRightAnchor(panelMilieu, 400.0);
         fenetreGenerale.setLeftAnchor(panelMilieu, 400.0);
 
-        fenetreGenerale.setTopAnchor(panelDroite, 50.0);
+        fenetreGenerale.setTopAnchor(panelDroite, 100.0);
         fenetreGenerale.setRightAnchor(panelDroite, 0.0);
 
         fenetreGenerale.setTopAnchor(texteRole, 50.0);
-        fenetreGenerale.setLeftAnchor(texteRole, 0.0);
+        fenetreGenerale.setLeftAnchor(texteRole, 50.0);
         
-        fenetreGenerale.setTopAnchor(boxCarte, 70.0);
+        fenetreGenerale.setTopAnchor(boxCarte, 0.0);
         fenetreGenerale.setLeftAnchor(boxCarte, 0.0);
-        fenetreGenerale.setRightAnchor(boxCarte, 50.0);
-        fenetreGenerale.setBottomAnchor(boxCarte, 50.0);
+        fenetreGenerale.setRightAnchor(boxCarte, 1100.0);
+        fenetreGenerale.setBottomAnchor(boxCarte, 140.0);
         
-        fenetreGenerale.setTopAnchor(panelGauche, 150.0);
+
         fenetreGenerale.setLeftAnchor(panelGauche, 10.0);
-        fenetreGenerale.setBottomAnchor(panelGauche, 50.0);
+        fenetreGenerale.setBottomAnchor(panelGauche, 5.0);
         
         fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite, texteRole, boxCarte, panelGauche);
         
