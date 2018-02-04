@@ -79,32 +79,33 @@ public class VueSalonDeJeu extends Application {
         String descriptionRoleLoupGaroup = "Le loup-garoup tue chaque\nnuit une personne,\nil doit remporter la partie\nen tuant tous les innocents";
         
         
+        
+        // Image de la carte du joueur        
+        HBox boxCarte = new HBox();
+        boxCarte.setId("image-loup-garoup");
+        
+        
+        // Nom du rôle du joueur      
+        Text texteRole = new Text("Loup-Garou");
+        texteRole.setFont(Font.font("Lucida Handwriting", 30));
+        
+        
         // StackPane de gauche
         GridPane panelGauche = new GridPane();
         panelGauche.setPadding(new Insets(20,20,20,20));
         panelGauche.setAlignment(Pos.CENTER);
         panelGauche.setHgap(10);
         panelGauche.setVgap(10);
-        
-        Text texteRole = new Text("Loup-Garou");
-        texteRole.setFont(Font.font("Lucida Handwriting", 30));
-        
-        HBox boxCarte = new HBox();
-        boxCarte.setId("image-loup-garoup");
-        
+     
         panelGauche.setAlignment(Pos.CENTER);
 
         Text texteDescriptionRole = new Text(descriptionRoleLoupGaroup);
         texteDescriptionRole.setFont(Font.font("Lucida Handwriting", 17));
         
-        panelGauche.setConstraints(texteRole, 0, 0); 
-        panelGauche.setConstraints(boxCarte, 0,1);
-        panelGauche.setConstraints(texteDescriptionRole, 0, 2);
-        panelGauche.setConstraints(boutonVoter, 0, 3);
-        panelGauche.setConstraints(boutonQuitter, 0, 4);
+        panelGauche.setConstraints(texteDescriptionRole, 0, 0);
+        panelGauche.setConstraints(boutonVoter, 0, 1);
+        panelGauche.setConstraints(boutonQuitter, 0, 2);
         
-        panelGauche.getChildren().add(texteRole);
-        panelGauche.getChildren().add(boxCarte);
         panelGauche.getChildren().add(texteDescriptionRole);  
         panelGauche.getChildren().add(boutonVoter);
         panelGauche.getChildren().add(boutonQuitter);
@@ -201,15 +202,25 @@ public class VueSalonDeJeu extends Application {
 
        
         // Fenetre Generale
-        BorderPane fenetreGenerale = new BorderPane();
+        AnchorPane fenetreGenerale = new AnchorPane();
         
         fenetreGenerale.setPadding(new Insets(20,20,20,20));
 
+        fenetreGenerale.setTopAnchor(hboxHaut, 0.0);
+        fenetreGenerale.setRightAnchor(hboxHaut, 50.0);
+        fenetreGenerale.setLeftAnchor(hboxHaut, 50.0);
         
-        fenetreGenerale.setRight(panelDroite);
-        fenetreGenerale.setLeft(panelGauche);
-        fenetreGenerale.setTop(hboxHaut);
-        fenetreGenerale.setCenter(panelMilieu);
+        fenetreGenerale.setTopAnchor(panelMilieu, 50.0);
+        fenetreGenerale.setRightAnchor(panelMilieu, 400.0);
+        fenetreGenerale.setLeftAnchor(panelMilieu, 400.0);
+
+        fenetreGenerale.setTopAnchor(panelDroite, 50.0);
+        fenetreGenerale.setRightAnchor(panelDroite, 0.0);
+
+        
+        fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite);
+
+      //  fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite, panelGauche, boxCarte, texteRole);
         
         Scene scene = new Scene(fenetreGenerale, 1500,700);        
         scene.getStylesheets().add(VueSalonDeJeu.class.getResource("decoration/lg.css").toExternalForm());
