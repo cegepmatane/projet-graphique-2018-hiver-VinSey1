@@ -222,12 +222,14 @@ public class VueSalonDeJeu extends Application {
         
         fenetreGenerale.setTopAnchor(boxCarte, 70.0);
         fenetreGenerale.setLeftAnchor(boxCarte, 0.0);
-        fenetreGenerale.setRightAnchor(hboxHaut, 50.0);
-        fenetreGenerale.setBottomAnchor(hboxHaut, 50.0);
+        fenetreGenerale.setRightAnchor(boxCarte, 50.0);
+        fenetreGenerale.setBottomAnchor(boxCarte, 50.0);
         
-        fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite, texteRole, boxCarte);
-
-      //  fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite, panelGauche, boxCarte, texteRole);
+        fenetreGenerale.setTopAnchor(panelGauche, 150.0);
+        fenetreGenerale.setLeftAnchor(panelGauche, 10.0);
+        fenetreGenerale.setBottomAnchor(panelGauche, 50.0);
+        
+        fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite, texteRole, boxCarte, panelGauche);
         
         Scene scene = new Scene(fenetreGenerale, 1500,700);        
         scene.getStylesheets().add(VueSalonDeJeu.class.getResource("decoration/lg.css").toExternalForm());
