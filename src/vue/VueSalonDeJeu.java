@@ -81,7 +81,7 @@ public class VueSalonDeJeu extends Application {
         
         
         // Image de la carte du joueur        
-        HBox boxCarte = new HBox();
+        StackPane boxCarte = new StackPane();
         boxCarte.setId("image-loup-garoup");
         
         
@@ -217,8 +217,15 @@ public class VueSalonDeJeu extends Application {
         fenetreGenerale.setTopAnchor(panelDroite, 50.0);
         fenetreGenerale.setRightAnchor(panelDroite, 0.0);
 
+        fenetreGenerale.setTopAnchor(texteRole, 50.0);
+        fenetreGenerale.setLeftAnchor(texteRole, 0.0);
         
-        fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite);
+        fenetreGenerale.setTopAnchor(boxCarte, 70.0);
+        fenetreGenerale.setLeftAnchor(boxCarte, 0.0);
+        fenetreGenerale.setRightAnchor(hboxHaut, 50.0);
+        fenetreGenerale.setBottomAnchor(hboxHaut, 50.0);
+        
+        fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite, texteRole, boxCarte);
 
       //  fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite, panelGauche, boxCarte, texteRole);
         
