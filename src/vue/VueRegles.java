@@ -65,8 +65,7 @@ public class VueRegles extends Application {
     	zoneTexte.setMaxSize(1000,400);
     	zoneTexte.setMinSize(1000,400);
     	//Gestion du style de la zone de texte
-    	zoneTexte.setStyle("-fx-border-color: grey; -fx-border-width: 1px 1px 1px 1px; -fx-z-index: 10;");
-    	zoneTexte.setId("zoneTexteRegles");
+    	zoneTexte.setId("zonetexte-regles");
     	//Ajoute le contenu à la zone de texte
     	zoneTexte.getChildren().add(contenu);
     	
@@ -104,8 +103,7 @@ public class VueRegles extends Application {
     	fenetre.setMaxSize(1200, 600);
     	fenetre.setMinSize(100, 50);
     	//Gestion du style de la fenetre
-    	fenetre.setStyle("-fx-border-color: black; -fx-border-width: 2px 2px 2px 2px; -fx-background-color: #F5F5F5;");
-    	fenetre.setId("fenetreRegles");
+    	fenetre.setId("fenetre-regles");
     	//Ajoute le groupe, le bouton retour et le sous titre à la fenetre
         fenetre.getChildren().addAll(groupe, retour, sousTitre);
         
