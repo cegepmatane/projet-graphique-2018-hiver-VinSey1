@@ -25,7 +25,67 @@ import javafx.scene.control.TextField;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Region;
 
+/**
+ * Vue du salon de jeu 
+ * 
+ * @author 1801067
+ *
+ */
 public class VueSalonDeJeu extends Application {
+	
+	/**
+	 * Nom du role du joueur
+	 */
+	private Text texteRole;
+	
+	/**
+	 * Image de la carte du joueur
+	 */
+	private StackPane boxCarte;
+	
+	/**
+	 * Description du role du joueur
+	 */
+	Text texteDescriptionRole;
+	
+	/**
+	 * Indication du nombre de joueur restant
+	 */
+	Text nombreDeJoueurs;
+	
+	/**
+	 * Indication du nombre de loup-garoups vivants
+	 */
+	Text nombreDeLoupGarouVivant;
+	
+	/**
+	 * Indication du nombre d'innocents vivants
+	 */
+	Text nombreDInnocentVivant;
+	
+	/**
+	 * Liste des joueurs vivants
+	 */
+	Text listeJoueursVivant;
+	
+	/**
+	 * Liste des joueurs morts
+	 */
+	Text listeJoueursMort;
+	
+	/**
+	 * Chat du jeu
+	 */
+	TextField chatDeJeu;
+	
+	
+	
+	
+	
+	
+	
+	
+	
     public static void main(String[] args) {
         launch(args);
     }
@@ -76,17 +136,16 @@ public class VueSalonDeJeu extends Application {
              
         // Description du role
         
-        String descriptionRoleLoupGaroup = "Le loup-garoup tue chaque\nnuit une personne,\nil doit remporter la partie\nen tuant tous les innocents";
         
         
         
         // Image de la carte du joueur        
-        StackPane boxCarte = new StackPane();
+        boxCarte = new StackPane();
         boxCarte.setId("image-loup-garoup");
         
         
         // Nom du rôle du joueur      
-        Text texteRole = new Text("Loup-Garou");
+        texteRole = new Text("Loup-Garou");
         texteRole.setFont(Font.font("Lucida Handwriting", 30));
         
         
@@ -99,7 +158,7 @@ public class VueSalonDeJeu extends Application {
      
         panelGauche.setAlignment(Pos.CENTER);
 
-        Text texteDescriptionRole = new Text(descriptionRoleLoupGaroup);
+        texteDescriptionRole = new Text("Description du rôle du joueur");
         texteDescriptionRole.setFont(Font.font("Lucida Handwriting", 17));
         
         panelGauche.setConstraints(texteDescriptionRole, 0, 0);
@@ -139,7 +198,7 @@ public class VueSalonDeJeu extends Application {
         //VBox milieu
         
         VBox panelMilieu = new VBox();
-        TextField chatDeJeu = new TextField("chat de jeu");
+        chatDeJeu = new TextField("chat de jeu");
         Region blanc3 = new Region();
         chatDeJeu.setEditable(false);
         
@@ -163,25 +222,25 @@ public class VueSalonDeJeu extends Application {
         panelDroite.setPadding(new Insets(20,20,20,20));
         panelDroite.setAlignment(Pos.CENTER);
 
-        Text nombreDeJoueurs = new Text("Joueurs : 10");
+        nombreDeJoueurs = new Text("Joueurs : 10");
         nombreDeJoueurs.setFont(Font.font("Lucida Handwriting", 20));
         
-        Text nombreDeLoupGarouVivant = new Text("2 loup(s)-garoup(s) restant(s)");
+        nombreDeLoupGarouVivant = new Text("2 loup(s)-garoup(s) restant(s)");
         nombreDeLoupGarouVivant.setFont(Font.font("Lucida Handwriting", 20));
         
-        Text nombreDInnocentVivant = new Text("3 innocent(s) restant(s)");
+        nombreDInnocentVivant = new Text("3 innocent(s) restant(s)");
         nombreDInnocentVivant.setFont(Font.font("Lucida Handwriting", 20));
         
         Text nomListeJoueursVivant = new Text("Vivants");
         nomListeJoueursVivant.setFont(Font.font("Lucida Handwriting", 30));
         
-        Text listeJoueursVivant = new Text("Vincent\n Eliott \n Thomas \n");
+        listeJoueursVivant = new Text("Vincent\n Eliott \n Thomas \n");
         listeJoueursVivant.setStyle(" -fx-font-family:\"Lucida Handwriting\"; -fx-font-size:20; -fx-border-style:solid; -fx-border-width: 5px; ");
         
         Text nomListeJoueursMort = new Text("Morts");
         nomListeJoueursMort.setFont(Font.font("Lucida Handwriting", 30));
         
-        Text listeJoueursMort = new Text("Patate2f\nDamien\nThéo");       
+        listeJoueursMort = new Text("Patate2f\nDamien\nThéo");       
         listeJoueursMort.setFont(Font.font("Lucida Handwriting", 20));
         
         panelDroite.setConstraints(nombreDeJoueurs, 0,1);

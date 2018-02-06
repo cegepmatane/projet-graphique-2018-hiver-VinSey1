@@ -1,5 +1,4 @@
 .button {
-	
 	-fx-text-fill: white;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
@@ -15,18 +14,16 @@
 }
 
 #image-loup-garoup {
-	-fx-background-image: url("../illustration/carteLoupGarou.png");
+	-fx-background-image: url("carteLoupGarou.png");
 	-fx-background-repeat: no-repeat;
-	-fx-background-size: 300 300;
+	-fx-background-size: 30 30;
 	-fx-background-position:center;
-
 }
 
 #titre-principal {
 	-fx-font-family: "Lucida Handwriting";
 	-fx-font-weight:BOLD;
 	-fx-font-size:80;
-	
 }
 
 #pseudo {
@@ -38,4 +35,16 @@
 #cadre-accueil {
 	-fx-border-color: black;
 	-fx-border-width: 2px 2px 2px 2px
+}
+
+#fenetre-regles {
+	-fx-border-color: black;
+	-fx-border-width: 2px 2px 2px 2px;
+	-fx-background-color: #F5F5F5;
+}
+
+#zonetexte-regles {
+	-fx-border-color: grey;
+	-fx-border-width: 1px 1px 1px 1px;
+	-fx-z-index: 10;
 }
