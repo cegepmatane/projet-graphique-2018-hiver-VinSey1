@@ -24,6 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.TextField;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
 
 /**
  * Vue du salon de jeu 
@@ -51,39 +52,37 @@ public class VueSalonDeJeu extends Application {
 	/**
 	 * Indication du nombre de joueur restant
 	 */
-	Text nombreDeJoueurs;
+	Text IndicationNombreDeJoueurs;
 	
 	/**
 	 * Indication du nombre de loup-garoups vivants
 	 */
-	Text nombreDeLoupGarouVivant;
+	Text IndicationNombreDeLoupGarouVivant;
 	
 	/**
 	 * Indication du nombre d'innocents vivants
 	 */
-	Text nombreDInnocentVivant;
+	Text IndicationNombreDInnocentVivant;
 	
 	/**
 	 * Liste des joueurs vivants
 	 */
-	Text listeJoueursVivant;
+	Label listeJoueursVivant;
 	
 	/**
 	 * Liste des joueurs morts
 	 */
-	Text listeJoueursMort;
+	Label listeJoueursMort;
 	
 	/**
 	 * Chat du jeu
 	 */
-	TextField chatDeJeu;
+	Label chatDeJeu;
 	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Contenu du chat de jeu
+	 */
+	String contenuChatDeJeu;
 	
 	
     public static void main(String[] args) {
@@ -198,9 +197,8 @@ public class VueSalonDeJeu extends Application {
         //VBox milieu
         
         VBox panelMilieu = new VBox();
-        chatDeJeu = new TextField("chat de jeu");
+        chatDeJeu = new Label("chat de jeu");
         Region blanc3 = new Region();
-        chatDeJeu.setEditable(false);
         
         chatDeJeu.setMinHeight(400);
         
@@ -222,38 +220,38 @@ public class VueSalonDeJeu extends Application {
         panelDroite.setPadding(new Insets(20,20,20,20));
         panelDroite.setAlignment(Pos.CENTER);
 
-        nombreDeJoueurs = new Text("Joueurs : 10");
-        nombreDeJoueurs.setFont(Font.font("Lucida Handwriting", 20));
+        IndicationNombreDeJoueurs = new Text("Joueurs : 10");
+        IndicationNombreDeJoueurs.setFont(Font.font("Lucida Handwriting", 20));
         
-        nombreDeLoupGarouVivant = new Text("2 loup(s)-garoup(s) restant(s)");
-        nombreDeLoupGarouVivant.setFont(Font.font("Lucida Handwriting", 20));
+        IndicationNombreDeLoupGarouVivant = new Text("2 loup(s)-garoup(s) restant(s)");
+        IndicationNombreDeLoupGarouVivant.setFont(Font.font("Lucida Handwriting", 20));
         
-        nombreDInnocentVivant = new Text("3 innocent(s) restant(s)");
-        nombreDInnocentVivant.setFont(Font.font("Lucida Handwriting", 20));
+        IndicationNombreDInnocentVivant = new Text("3 innocent(s) restant(s)");
+        IndicationNombreDInnocentVivant.setFont(Font.font("Lucida Handwriting", 20));
         
         Text nomListeJoueursVivant = new Text("Vivants");
         nomListeJoueursVivant.setFont(Font.font("Lucida Handwriting", 30));
         
-        listeJoueursVivant = new Text("Vincent\n Eliott \n Thomas \n");
-        listeJoueursVivant.setStyle(" -fx-font-family:\"Lucida Handwriting\"; -fx-font-size:20; -fx-border-style:solid; -fx-border-width: 5px; ");
+        listeJoueursVivant = new Label("patate2f\nEliott");
+        listeJoueursVivant.setStyle(" -fx-font-family:\"Lucida Handwriting\";");
         
         Text nomListeJoueursMort = new Text("Morts");
         nomListeJoueursMort.setFont(Font.font("Lucida Handwriting", 30));
         
-        listeJoueursMort = new Text("Patate2f\nDamien\nThéo");       
-        listeJoueursMort.setFont(Font.font("Lucida Handwriting", 20));
+        listeJoueursMort = new Label("Patate2f\nDamien\nThéo");       
+        listeJoueursMort.setStyle(" -fx-font-family:\"Lucida Handwriting\";");
         
-        panelDroite.setConstraints(nombreDeJoueurs, 0,1);
-        panelDroite.setConstraints(nombreDeLoupGarouVivant, 0,2);
-        panelDroite.setConstraints(nombreDInnocentVivant, 0,3);
+        panelDroite.setConstraints(IndicationNombreDeJoueurs, 0,1);
+        panelDroite.setConstraints(IndicationNombreDeLoupGarouVivant, 0,2);
+        panelDroite.setConstraints(IndicationNombreDInnocentVivant, 0,3);
         panelDroite.setConstraints(nomListeJoueursVivant, 0,4);
         panelDroite.setConstraints(listeJoueursVivant, 0,5);
         panelDroite.setConstraints(nomListeJoueursMort, 0,6);
         panelDroite.setConstraints(listeJoueursMort, 0,7);
        
-        panelDroite.getChildren().add(nombreDeJoueurs);
-        panelDroite.getChildren().add(nombreDeLoupGarouVivant);
-        panelDroite.getChildren().add(nombreDInnocentVivant);
+        panelDroite.getChildren().add(IndicationNombreDeJoueurs);
+        panelDroite.getChildren().add(IndicationNombreDeLoupGarouVivant);
+        panelDroite.getChildren().add(IndicationNombreDInnocentVivant);
         panelDroite.getChildren().add(nomListeJoueursVivant);
         panelDroite.getChildren().add(listeJoueursVivant);
         panelDroite.getChildren().add(nomListeJoueursMort);
@@ -297,4 +295,55 @@ public class VueSalonDeJeu extends Application {
         primaryStage.show();
         
     }
+    
+    /**
+     * Ajoute une ligne de texte au chat de jeu
+     * @param texte : le texte a ajouter
+     */
+    public void ajouterTexteAuChat(String texte) {
+    	
+
+    }
+    
+    /**
+     * Modifier l'indication du nombre de joueur dans la partie
+     * @param nouveauNombre : le nombre de joueur a afficher
+     */
+    public void modifierNombreDeJoueur(int nouveauNombreDeJoueur) {
+    	
+    	IndicationNombreDeJoueurs.setText("Joueurs: "+nouveauNombreDeJoueur);
+    	
+    }
+    
+    /**
+     * Modifier l'indication du nombre de loup garou vivant dans la partie
+     * @param nouveauNombreDeLoupGarou : le nombre de loups-garous à afficher
+     */
+    public void modifierIndicationNombreDeLoupGarouVivant(int nouveauNombreDeLoupGarou) {
+    
+    	if ( nouveauNombreDeLoupGarou == 1) {
+        	IndicationNombreDeLoupGarouVivant.setText(nouveauNombreDeLoupGarou+" loup-garou restant");
+    	}
+    	else {
+        	IndicationNombreDeLoupGarouVivant.setText(nouveauNombreDeLoupGarou+" loups-garous restants");
+    	}    	
+    }
+    
+    /**
+     * Modifier la liste des joueurs vivants
+     * @param nouvelleListeJoueurVivant : la nouvelle liste à utiliser
+     */
+    public void modifierListeJoueurVivant(String nouvelleListeJoueurVivant) {
+    	listeJoueursVivant.setText(nouvelleListeJoueurVivant);
+    }
+    
+    
+    /**
+     * Modifier la liste des joueurs morts
+     * @param nouvelleListeJoueurMort : la nouvelle liste à utiliser
+     */
+    public void modifierListeJoueurMort(String nouvelleListeJoueurMort) {
+    	listeJoueursMort.setText(nouvelleListeJoueurMort);
+    }
+    
 }
