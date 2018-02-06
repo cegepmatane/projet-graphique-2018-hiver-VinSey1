@@ -29,16 +29,31 @@ import javafx.scene.layout.StackPane;
 
 public class VueAccueil extends Application {
 
+
+	private Button boutonQuitter;
+	private Button boutonRegles;
+	private Text titre;
+	private Text entreePseudo;
+	private TextField creationPseudo;
+	private Button boutonDeConnexion;
+	private BorderPane miseEnPage;
+	private AnchorPane elementCentral;
+	private HBox boxImage;
+	private Scene scene;
+	
+	
 	public static void main(String[] args) {
         launch(args);
     }
+	
+	
 	
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Accueil");
       
         
-        Button boutonQuitter = new Button();
+        boutonQuitter = new Button();
         boutonQuitter.setText("Quitter");
         boutonQuitter.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent event) {
@@ -46,7 +61,7 @@ public class VueAccueil extends Application {
         	}
         });
         
-        Button boutonRegles = new Button();
+        boutonRegles = new Button();
         boutonRegles.setText("Règles du jeu");
         boutonRegles.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent event) {
@@ -54,15 +69,15 @@ public class VueAccueil extends Application {
         	}
         });
         
-        Text titre = new Text("Les loups-garous");
+        titre = new Text("Les loups-garous");
         titre.setId("titrePrincipal");
         
-        Text entreePseudo = new Text("Entrez votre pseudonyme :");
+        entreePseudo = new Text("Entrez votre pseudonyme :");
         entreePseudo.setId("pseudo");
         
-        TextField creationPseudo = new TextField();
+        creationPseudo = new TextField();
         
-        Button boutonDeConnexion = new Button();
+        boutonDeConnexion = new Button();
         boutonDeConnexion.setText("Se connecter");
         boutonDeConnexion.setOnAction(new EventHandler<ActionEvent>() {
  
@@ -79,15 +94,16 @@ public class VueAccueil extends Application {
             }
         });
         
-        BorderPane miseEnPage = new BorderPane();
+        miseEnPage = new BorderPane();
         miseEnPage.setTop(titre);
         miseEnPage.setAlignment(titre, Pos.CENTER);
-        AnchorPane elementCentral = new AnchorPane();
+        
+        elementCentral = new AnchorPane();
         miseEnPage.setCenter(elementCentral);
         elementCentral.setMaxSize(1200, 600);
         elementCentral.setMinSize(100, 50);
         
-        HBox boxImage = new HBox();
+        boxImage = new HBox();
         boxImage.setId("image-accueil");
         
         elementCentral.setTopAnchor(entreePseudo, (double) 300);
@@ -125,7 +141,7 @@ public class VueAccueil extends Application {
         elementCentral.setId("cadre-accueil");
         
         
-        Scene scene = new Scene(miseEnPage, 1500, 750);
+        scene = new Scene(miseEnPage, 1500, 750);
         scene.getStylesheets().add(VueAccueil.class.getResource("decoration/lg.css").toExternalForm()); 
         
         primaryStage.setScene(scene);
