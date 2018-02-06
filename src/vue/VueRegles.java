@@ -17,36 +17,46 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.*;
  
 public class VueRegles extends Application {
-    
+	
+	private Text titre, sousTitre;
+	private Button principe, deroulementJour, deroulementNuit, cartes, savoirVivre, triche, retour;
+	private Label contenu;
+	private AnchorPane zoneTexte, fenetre;
+	private VBox categories;
+	private TitledPane menu;
+	private Group groupe;
+	private BorderPane miseEnPage;
+	private Scene scene;
+	
     @Override
     public void start(Stage primaryStage) {
 
     	//Création du titre avec sa police
-    	Text titre = new Text("Les Loups-Garous");
+    	titre = new Text("Les Loups-Garous");
     	titre.setFont(Font.font("Lucida Handwriting", 80));
     	//Centre le Titre
     	BorderPane.setAlignment(titre, Pos.CENTER);
     	
     	//Création du sous-titre avec sa police
-    	Text sousTitre = new Text("Règles");
+    	sousTitre = new Text("Règles");
     	sousTitre.setFont(Font.font("Lucida Handwriting", 50));
 
     	//Création des boutons du menu déroulant
-    	Button principe = new Button("Principe");
-    	Button deroulementJour = new Button("Déroulement Jour");
-    	Button deroulementNuit = new Button("Déroulement Nuit");
-    	Button cartes = new Button("Cartes");
-    	Button savoirVivre = new Button("Savoir-vivre");
-    	Button triche = new Button("Triche");
+    	principe = new Button("Principe");
+    	deroulementJour = new Button("Déroulement Jour");
+    	deroulementNuit = new Button("Déroulement Nuit");
+    	cartes = new Button("Cartes");
+    	savoirVivre = new Button("Savoir-vivre");
+    	triche = new Button("Triche");
     	
     	//Création du bouton "Retour"
-    	Button retour = new Button("Retour");
+    	retour = new Button("Retour");
     	//Paramètres de taille du bouton "Retour"
     	retour.setMaxWidth(200.0);
     	retour.setMinWidth(200.0);
     	
     	//Création de l'explication des règles
-    	Label contenu = new Label("Test, consectetur adipiscing elit. Praesent ipsum erat, imperdiet non tellus consectetur, "
+    	contenu = new Label("Test, consectetur adipiscing elit. Praesent ipsum erat, imperdiet non tellus consectetur, "
     			+ "lobortis suscipit orci. Duis volutpat quam in interdum vestibulum. Maecenas at nibh aliquam, vulputate nisi quis, "
     			+ "pharetra orci. Aliquam quis purus semper tellus pulvinar posuere. Donec in massa porttitor, sodales tortor non, "
     			+ "pharetra risus. Praesent sit amet varius erat. Mauris sodales ultrices ullamcorper. Aliquam erat volutpat. Maecenas "
@@ -60,7 +70,7 @@ public class VueRegles extends Application {
     	contenu.setAlignment(Pos.TOP_CENTER);
     	contenu.setTranslateY(35.0);
     	//Création de la zone de texte contenant le texte
-    	AnchorPane zoneTexte = new AnchorPane();
+    	zoneTexte = new AnchorPane();
     	//Gestion de la taille de la zone de texte
     	zoneTexte.setMaxSize(1000,400);
     	zoneTexte.setMinSize(1000,400);
@@ -70,7 +80,7 @@ public class VueRegles extends Application {
     	zoneTexte.getChildren().add(contenu);
     	
     	//Création des catégories du menu
-    	VBox categories = new VBox();
+    	categories = new VBox();
     	categories.getChildren().add(principe);
     	categories.getChildren().add(deroulementJour);
     	categories.getChildren().add(deroulementNuit);
@@ -79,7 +89,7 @@ public class VueRegles extends Application {
     	categories.getChildren().add(triche);
         
     	//Création du menu déroulant
-    	TitledPane menu = new TitledPane("Catégories", categories);
+    	menu = new TitledPane("Catégories", categories);
     	//Définit le menu comme étant fermé au lancement de l'application
         menu.setExpanded(false);
         //Gestion de la taille du menu
@@ -89,7 +99,7 @@ public class VueRegles extends Application {
     	menu.setStyle("-fx-z-index: 1; -fx-width:170px");*/
     	
         //Création du groupe contenant le menu et la zone de texte
-    	Group groupe = new Group();
+    	groupe = new Group();
     	//Ajoute la zone de texte et le menu au groupe
     	groupe.getChildren().addAll(zoneTexte, menu);
     	//Définit la zone de texte à l'arrière dans le groupe
@@ -98,7 +108,7 @@ public class VueRegles extends Application {
     	menu.toFront();
     	
     	//Création de la fenêtre contenant le sous texte et le groupe
-    	AnchorPane fenetre = new AnchorPane();
+    	fenetre = new AnchorPane();
     	//Gestion de la taille de la fenetre
     	fenetre.setMaxSize(1200, 600);
     	fenetre.setMinSize(100, 50);
@@ -118,14 +128,14 @@ public class VueRegles extends Application {
     	AnchorPane.setRightAnchor(contenu, 10.0);
 
         //Création de la mise en page
-    	BorderPane miseEnPage = new BorderPane();
+    	miseEnPage = new BorderPane();
     	//Ajoute le titre en haut de la mise en page
     	miseEnPage.setTop(titre);
     	//Ajoute la fenetre au centre de la mise en page
     	miseEnPage.setCenter(fenetre);
     	
     	//Création de la scène contenant la mise en page et définition de sa taille
-        Scene scene = new Scene(miseEnPage, 1500, 750);
+        scene = new Scene(miseEnPage, 1500, 750);
         //Importation du fichier CSS pour la gestion de styles
         scene.getStylesheets().add(VueRegles.class.getResource("decoration/lg.css").toExternalForm());
         //Gestion du titre de la scene
