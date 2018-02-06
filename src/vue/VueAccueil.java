@@ -41,6 +41,10 @@ public class VueAccueil extends Application {
 	private HBox boxImage;
 	private Scene scene;
 	
+	public String recupererPseudo() {
+		return(creationPseudo.getText());
+	}
+	
 	
 	public static void main(String[] args) {
         launch(args);
