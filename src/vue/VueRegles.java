@@ -150,4 +150,8 @@ public class VueRegles extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
+    public void ecrireContenu(String texte) {
+    	contenu.setText(texte);
+    }
 }
