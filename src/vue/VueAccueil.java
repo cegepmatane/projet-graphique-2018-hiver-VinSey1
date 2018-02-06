@@ -27,6 +27,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
+/**
+ * Classe VueAccueil représentant la vue de l'accueil de notre jeu
+ * 
+ * Version : 1.0
+ * 
+ * @author BALTZ Eliott
+ */
 public class VueAccueil extends Application {
 
 
@@ -41,6 +48,9 @@ public class VueAccueil extends Application {
 	private HBox boxImage;
 	private Scene scene;
 	
+	/**
+	 * @return un string qui est le pseudo qu'a entrée le joueur pour se connecter à la partie
+	 */
 	public String recupererPseudo() {
 		return(creationPseudo.getText());
 	}
