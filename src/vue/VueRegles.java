@@ -16,6 +16,11 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.*;
  
+/**
+ * Classe Vue des Regles pour le patron MVC de l'application Loups-Garous, Projet Graphique Hiver 2018
+ * 
+ * @author vseyl
+ */
 public class VueRegles extends Application {
 	
 	private Text titre, sousTitre;
@@ -151,6 +156,10 @@ public class VueRegles extends Application {
         launch(args);
     }
     
+    /**
+     * Methode pour modifier et ecrire les regles a afficher
+     * @param texte
+     */
     public void ecrireContenu(String texte) {
     	contenu.setText(texte);
     }
