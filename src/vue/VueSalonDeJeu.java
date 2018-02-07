@@ -298,7 +298,8 @@ public class VueSalonDeJeu extends Application {
      */
     public void ajouterTexteAuChat(String texte) {
     	
-
+    	contenuChatDeJeu += texte+"\n";
+    	chatDeJeu.setText(contenuChatDeJeu);
     }
     
     /**
