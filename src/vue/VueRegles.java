@@ -23,15 +23,15 @@ import javafx.stage.*;
  */
 public class VueRegles extends Application {
 	
-	private Text titre, sousTitre;
-	private Button principe, deroulementJour, deroulementNuit, cartes, savoirVivre, triche, retour;
-	private Label contenu;
-	private AnchorPane zoneTexte, fenetre;
-	private VBox categories;
-	private TitledPane menu;
-	private Group groupe;
-	private BorderPane miseEnPage;
-	private Scene scene;
+	protected Text titre, sousTitre;
+	protected Button principe, deroulementJour, deroulementNuit, cartes, savoirVivre, triche, retour;
+	protected Label contenu;
+	protected AnchorPane zoneTexte, fenetre;
+	protected VBox categories;
+	protected TitledPane menu;
+	protected Group groupe;
+	protected BorderPane miseEnPage;
+	protected Scene scene;
 	
     @Override
     public void start(Stage primaryStage) {
@@ -160,7 +160,7 @@ public class VueRegles extends Application {
      * Methode pour modifier et ecrire les regles a afficher
      * @param texte
      */
-    public void ecrireContenu(String texte) {
+    public void ecrireRegles(String texte) {
     	contenu.setText(texte);
     }
 }
