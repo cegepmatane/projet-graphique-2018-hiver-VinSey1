@@ -112,7 +112,7 @@ public class VueRegles extends Application {
     	//Définit le menu à l'avant dans le groupe
     	menu.toFront();
     	
-    	//Création de la fenêtre contenant le sous texte et le groupe
+    	//Création de la fenêtre contenant le sous titre, le groupe et le bouton retour
     	fenetre = new AnchorPane();
     	//Gestion de la taille de la fenetre
     	fenetre.setMaxSize(1200, 600);
