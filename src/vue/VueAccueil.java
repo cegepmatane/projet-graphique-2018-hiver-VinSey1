@@ -37,12 +37,12 @@ import javafx.scene.layout.StackPane;
 public class VueAccueil extends Application {
 
 
-	private Button boutonQuitter;
-	private Button boutonRegles;
+	private Button actionQuitter;
+	private Button actionRegles;
 	private Text titre;
 	private Text entreePseudo;
 	private TextField creationPseudo;
-	private Button boutonDeConnexion;
+	private Button actionDeConnexion;
 	private BorderPane miseEnPage;
 	private AnchorPane elementCentral;
 	private HBox boxImage;
@@ -67,44 +67,44 @@ public class VueAccueil extends Application {
         primaryStage.setTitle("Accueil");
       
         
-        boutonQuitter = new Button();
-        boutonQuitter.setText("Quitter");
-        boutonQuitter.setOnAction(new EventHandler<ActionEvent>() {
+        actionQuitter = new Button();
+        actionQuitter.setText("Quitter");
+        actionQuitter.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent event) {
-        		System.out.println("Au revoir AHOOUUUUUU");
+        		//System.out.println("Au revoir AHOOUUUUUU");
         	}
         });
         
-        boutonRegles = new Button();
-        boutonRegles.setText("Règles du jeu");
-        boutonRegles.setOnAction(new EventHandler<ActionEvent>() {
+        actionRegles = new Button();
+        actionRegles.setText("Règles du jeu");
+        actionRegles.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent event) {
-        		System.out.println("Affichage des règles du jeu");
+        		//System.out.println("Affichage des règles du jeu");
         	}
         });
         
         titre = new Text("Les loups-garous");
-        titre.setId("titrePrincipal");
+        titre.setId("titre-principal");
         
         entreePseudo = new Text("Entrez votre pseudonyme :");
         entreePseudo.setId("pseudo");
         
         creationPseudo = new TextField();
         
-        boutonDeConnexion = new Button();
-        boutonDeConnexion.setText("Se connecter");
-        boutonDeConnexion.setOnAction(new EventHandler<ActionEvent>() {
+        actionDeConnexion = new Button();
+        actionDeConnexion.setText("Se connecter");
+        actionDeConnexion.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
             public void handle(ActionEvent event) {
-            	String pseudo = new String();
-            	if ((creationPseudo.getText() != null && !creationPseudo.getText().isEmpty())) {
-            		pseudo = creationPseudo.getText();
-            		System.out.println(pseudo);
-            	}
-            	else {
-            		System.out.println("Veuillez entrer un pseudo");
-            	}
+            	//String pseudo = new String();
+            	//if ((creationPseudo.getText() != null && !creationPseudo.getText().isEmpty())) {
+            		//pseudo = creationPseudo.getText();
+            		//System.out.println(pseudo);
+            	//}
+            	//else {
+            		//System.out.println("Veuillez entrer un pseudo");
+            	//}
             }
         });
         
@@ -130,20 +130,20 @@ public class VueAccueil extends Application {
         elementCentral.setLeftAnchor(creationPseudo, (double) 300);
         elementCentral.setBottomAnchor(creationPseudo, (double) 170);
         
-        elementCentral.setTopAnchor(boutonDeConnexion, (double) 455);
-        elementCentral.setRightAnchor(boutonDeConnexion, (double) 300);
-        elementCentral.setLeftAnchor(boutonDeConnexion, (double) 300);
-        elementCentral.setBottomAnchor(boutonDeConnexion, (double) 100);
+        elementCentral.setTopAnchor(actionDeConnexion, (double) 455);
+        elementCentral.setRightAnchor(actionDeConnexion, (double) 300);
+        elementCentral.setLeftAnchor(actionDeConnexion, (double) 300);
+        elementCentral.setBottomAnchor(actionDeConnexion, (double) 100);
         
-        elementCentral.setTopAnchor(boutonQuitter, (double) 505);
-        elementCentral.setRightAnchor(boutonQuitter, (double) 300);
-        elementCentral.setLeftAnchor(boutonQuitter, (double) 300);
-        elementCentral.setBottomAnchor(boutonQuitter, (double) 50);
+        elementCentral.setTopAnchor(actionQuitter, (double) 505);
+        elementCentral.setRightAnchor(actionQuitter, (double) 300);
+        elementCentral.setLeftAnchor(actionQuitter, (double) 300);
+        elementCentral.setBottomAnchor(actionQuitter, (double) 50);
         
-        elementCentral.setTopAnchor(boutonRegles, (double) 5);
-        elementCentral.setRightAnchor(boutonRegles, (double) 5);
-        elementCentral.setLeftAnchor(boutonRegles, (double) 1000);
-        elementCentral.setBottomAnchor(boutonRegles, (double) 550);
+        elementCentral.setTopAnchor(actionRegles, (double) 5);
+        elementCentral.setRightAnchor(actionRegles, (double) 5);
+        elementCentral.setLeftAnchor(actionRegles, (double) 1000);
+        elementCentral.setBottomAnchor(actionRegles, (double) 550);
         
         elementCentral.setTopAnchor(boxImage, (double) 10);
         elementCentral.setRightAnchor(boxImage, (double) 200);
@@ -151,7 +151,7 @@ public class VueAccueil extends Application {
         elementCentral.setBottomAnchor(boxImage, (double) 320);
         
   
-        elementCentral.getChildren().addAll(entreePseudo, creationPseudo, boutonDeConnexion, boutonQuitter, boutonRegles, boxImage);
+        elementCentral.getChildren().addAll(entreePseudo, creationPseudo, actionDeConnexion, actionQuitter, actionRegles, boxImage);
         elementCentral.setId("cadre-accueil");
         
         
