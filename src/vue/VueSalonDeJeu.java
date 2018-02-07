@@ -6,6 +6,8 @@ import javafx.geometry.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 import javax.imageio.ImageIO;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -37,32 +39,32 @@ public class VueSalonDeJeu extends Application {
 	/**
 	 * Nom du role du joueur
 	 */
-	private Text texteRole;
+	private Text nomRole;
 	
 	/**
 	 * Image de la carte du joueur
 	 */
-	private StackPane boxCarte;
+	private StackPane imageCarte;
 	
 	/**
 	 * Description du role du joueur
 	 */
-	Text texteDescriptionRole;
+	Text descriptionRole;
 	
 	/**
 	 * Indication du nombre de joueur restant
 	 */
-	Text IndicationNombreDeJoueurs;
+	Text indicationNombreDeJoueurs;
 	
 	/**
 	 * Indication du nombre de loup-garoups vivants
 	 */
-	Text IndicationNombreDeLoupGarouVivant;
+	Text indicationNombreDeLoupGarouVivant;
 	
 	/**
 	 * Indication du nombre d'innocents vivants
 	 */
-	Text IndicationNombreDInnocentVivant;
+	Text indicationNombreDInnocentVivant;
 	
 	/**
 	 * Liste des joueurs vivants
@@ -103,7 +105,7 @@ public class VueSalonDeJeu extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	System.out.println("clic bouton relges du jeu");
+            	// appel a la fenêtre des règles du jeu
             }
         });
         
@@ -115,7 +117,7 @@ public class VueSalonDeJeu extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	System.out.println("clic bouton quitter");
+            	// valide le vote
             }
         });
      
@@ -128,24 +130,18 @@ public class VueSalonDeJeu extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	System.out.println("clic bouton voter");
+            	// quitte l'application
             }
-        });        
-
-             
-        // Description du role
-        
-        
-        
+        });             
         
         // Image de la carte du joueur        
-        boxCarte = new StackPane();
-        boxCarte.setId("image-loup-garoup");
+        imageCarte = new StackPane();
+        imageCarte.setId("image-loup-garoup");
         
         
         // Nom du rôle du joueur      
-        texteRole = new Text("Loup-Garou");
-        texteRole.setFont(Font.font("Lucida Handwriting", 30));
+        nomRole = new Text("Loup-Garou");
+        nomRole.setFont(Font.font("Lucida Handwriting", 30));
         
         
         // StackPane de gauche
@@ -157,14 +153,14 @@ public class VueSalonDeJeu extends Application {
      
         panelGauche.setAlignment(Pos.CENTER);
 
-        texteDescriptionRole = new Text("Description du rôle du joueur");
-        texteDescriptionRole.setFont(Font.font("Lucida Handwriting", 17));
+        descriptionRole = new Text("Description du rôle du joueur");
+        descriptionRole.setFont(Font.font("Lucida Handwriting", 17));
         
-        panelGauche.setConstraints(texteDescriptionRole, 0, 0);
+        panelGauche.setConstraints(descriptionRole, 0, 0);
         panelGauche.setConstraints(boutonVoter, 0, 1);
         panelGauche.setConstraints(boutonQuitter, 0, 2);
         
-        panelGauche.getChildren().add(texteDescriptionRole);  
+        panelGauche.getChildren().add(descriptionRole);  
         panelGauche.getChildren().add(boutonVoter);
         panelGauche.getChildren().add(boutonQuitter);
         
@@ -220,14 +216,14 @@ public class VueSalonDeJeu extends Application {
         panelDroite.setPadding(new Insets(20,20,20,20));
         panelDroite.setAlignment(Pos.CENTER);
 
-        IndicationNombreDeJoueurs = new Text("Joueurs : 10");
-        IndicationNombreDeJoueurs.setFont(Font.font("Lucida Handwriting", 20));
+        indicationNombreDeJoueurs = new Text("Joueurs : 10");
+        indicationNombreDeJoueurs.setFont(Font.font("Lucida Handwriting", 20));
         
-        IndicationNombreDeLoupGarouVivant = new Text("2 loup(s)-garoup(s) restant(s)");
-        IndicationNombreDeLoupGarouVivant.setFont(Font.font("Lucida Handwriting", 20));
+        indicationNombreDeLoupGarouVivant = new Text("2 loup(s)-garoup(s) restant(s)");
+        indicationNombreDeLoupGarouVivant.setFont(Font.font("Lucida Handwriting", 20));
         
-        IndicationNombreDInnocentVivant = new Text("3 innocent(s) restant(s)");
-        IndicationNombreDInnocentVivant.setFont(Font.font("Lucida Handwriting", 20));
+        indicationNombreDInnocentVivant = new Text("3 innocent(s) restant(s)");
+        indicationNombreDInnocentVivant.setFont(Font.font("Lucida Handwriting", 20));
         
         Text nomListeJoueursVivant = new Text("Vivants");
         nomListeJoueursVivant.setFont(Font.font("Lucida Handwriting", 30));
@@ -241,17 +237,17 @@ public class VueSalonDeJeu extends Application {
         listeJoueursMort = new Label("Patate2f\nDamien\nThéo");       
         listeJoueursMort.setStyle(" -fx-font-family:\"Lucida Handwriting\";");
         
-        panelDroite.setConstraints(IndicationNombreDeJoueurs, 0,1);
-        panelDroite.setConstraints(IndicationNombreDeLoupGarouVivant, 0,2);
-        panelDroite.setConstraints(IndicationNombreDInnocentVivant, 0,3);
+        panelDroite.setConstraints(indicationNombreDeJoueurs, 0,1);
+        panelDroite.setConstraints(indicationNombreDeLoupGarouVivant, 0,2);
+        panelDroite.setConstraints(indicationNombreDInnocentVivant, 0,3);
         panelDroite.setConstraints(nomListeJoueursVivant, 0,4);
         panelDroite.setConstraints(listeJoueursVivant, 0,5);
         panelDroite.setConstraints(nomListeJoueursMort, 0,6);
         panelDroite.setConstraints(listeJoueursMort, 0,7);
        
-        panelDroite.getChildren().add(IndicationNombreDeJoueurs);
-        panelDroite.getChildren().add(IndicationNombreDeLoupGarouVivant);
-        panelDroite.getChildren().add(IndicationNombreDInnocentVivant);
+        panelDroite.getChildren().add(indicationNombreDeJoueurs);
+        panelDroite.getChildren().add(indicationNombreDeLoupGarouVivant);
+        panelDroite.getChildren().add(indicationNombreDInnocentVivant);
         panelDroite.getChildren().add(nomListeJoueursVivant);
         panelDroite.getChildren().add(listeJoueursVivant);
         panelDroite.getChildren().add(nomListeJoueursMort);
@@ -274,19 +270,19 @@ public class VueSalonDeJeu extends Application {
         fenetreGenerale.setTopAnchor(panelDroite, 100.0);
         fenetreGenerale.setRightAnchor(panelDroite, 0.0);
 
-        fenetreGenerale.setTopAnchor(texteRole, 50.0);
-        fenetreGenerale.setLeftAnchor(texteRole, 50.0);
+        fenetreGenerale.setTopAnchor(nomRole, 50.0);
+        fenetreGenerale.setLeftAnchor(nomRole, 50.0);
         
-        fenetreGenerale.setTopAnchor(boxCarte, 0.0);
-        fenetreGenerale.setLeftAnchor(boxCarte, 0.0);
-        fenetreGenerale.setRightAnchor(boxCarte, 1100.0);
-        fenetreGenerale.setBottomAnchor(boxCarte, 140.0);
+        fenetreGenerale.setTopAnchor(imageCarte, 0.0);
+        fenetreGenerale.setLeftAnchor(imageCarte, 0.0);
+        fenetreGenerale.setRightAnchor(imageCarte, 1100.0);
+        fenetreGenerale.setBottomAnchor(imageCarte, 140.0);
         
 
         fenetreGenerale.setLeftAnchor(panelGauche, 10.0);
         fenetreGenerale.setBottomAnchor(panelGauche, 5.0);
         
-        fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite, texteRole, boxCarte, panelGauche);
+        fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite, nomRole, imageCarte, panelGauche);
         
         Scene scene = new Scene(fenetreGenerale, 1500,700);        
         scene.getStylesheets().add(VueSalonDeJeu.class.getResource("decoration/lg.css").toExternalForm());
@@ -311,7 +307,7 @@ public class VueSalonDeJeu extends Application {
      */
     public void modifierNombreDeJoueur(int nouveauNombreDeJoueur) {
     	
-    	IndicationNombreDeJoueurs.setText("Joueurs: "+nouveauNombreDeJoueur);
+    	indicationNombreDeJoueurs.setText("Joueurs: "+nouveauNombreDeJoueur);
     	
     }
     
@@ -322,10 +318,10 @@ public class VueSalonDeJeu extends Application {
     public void modifierIndicationNombreDeLoupGarouVivant(int nouveauNombreDeLoupGarou) {
     
     	if ( nouveauNombreDeLoupGarou == 1) {
-        	IndicationNombreDeLoupGarouVivant.setText(nouveauNombreDeLoupGarou+" loup-garou restant");
+        	indicationNombreDeLoupGarouVivant.setText(nouveauNombreDeLoupGarou+" loup-garou restant");
     	}
     	else {
-        	IndicationNombreDeLoupGarouVivant.setText(nouveauNombreDeLoupGarou+" loups-garous restants");
+        	indicationNombreDeLoupGarouVivant.setText(nouveauNombreDeLoupGarou+" loups-garous restants");
     	}    	
     }
     
@@ -333,8 +329,15 @@ public class VueSalonDeJeu extends Application {
      * Modifier la liste des joueurs vivants
      * @param nouvelleListeJoueurVivant : la nouvelle liste à utiliser
      */
-    public void modifierListeJoueurVivant(String nouvelleListeJoueurVivant) {
-    	listeJoueursVivant.setText(nouvelleListeJoueurVivant);
+    public void modifierListeJoueurVivant(List<String> nouvelleListeJoueurVivant) {
+    	
+    	String nouvelleListe = "";
+    	
+    	for ( int iterateurListe = 0 ; iterateurListe < nouvelleListeJoueurVivant.size(); iterateurListe++) {
+    		nouvelleListe = nouvelleListe + nouvelleListeJoueurVivant.get(iterateurListe) + "\n";
+    	}
+    	
+    	listeJoueursVivant.setText(nouvelleListe);
     }
     
     
@@ -342,8 +345,14 @@ public class VueSalonDeJeu extends Application {
      * Modifier la liste des joueurs morts
      * @param nouvelleListeJoueurMort : la nouvelle liste à utiliser
      */
-    public void modifierListeJoueurMort(String nouvelleListeJoueurMort) {
-    	listeJoueursMort.setText(nouvelleListeJoueurMort);
-    }
+    public void modifierListeJoueurMort(List<String> nouvelleListeJoueurMort) {
     
+    	String nouvelleListe = "";
+    
+    	for ( int iterateurListe = 0 ; iterateurListe < nouvelleListeJoueurMort.size(); iterateurListe++) {
+    		nouvelleListe = nouvelleListe + nouvelleListeJoueurMort.get(iterateurListe) + "\n";
+    	}
+    	
+    	listeJoueursMort.setText(nouvelleListe);
+    }  
 }

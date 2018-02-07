@@ -16,7 +16,7 @@
 #image-loup-garoup {
 	-fx-background-image: url("carteLoupGarou.png");
 	-fx-background-repeat: no-repeat;
-	-fx-background-size: 30 30;
+	-fx-background-size: 100 100;
 	-fx-background-position:center;
 }
 
