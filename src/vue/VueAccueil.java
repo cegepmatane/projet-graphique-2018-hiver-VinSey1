@@ -45,7 +45,7 @@ public class VueAccueil extends Application {
 	private Button actionDeConnexion;
 	private BorderPane miseEnPage;
 	private AnchorPane elementCentral;
-	private HBox boxImage;
+	private HBox image;
 	private Scene scene;
 	
 	/**
@@ -117,8 +117,8 @@ public class VueAccueil extends Application {
         elementCentral.setMaxSize(1200, 600);
         elementCentral.setMinSize(100, 50);
         
-        boxImage = new HBox();
-        boxImage.setId("image-accueil");
+        image = new HBox();
+        image.setId("image-accueil");
         
         elementCentral.setTopAnchor(entreePseudo, (double) 300);
         elementCentral.setRightAnchor(entreePseudo, (double) 300);
@@ -145,13 +145,13 @@ public class VueAccueil extends Application {
         elementCentral.setLeftAnchor(actionRegles, (double) 1000);
         elementCentral.setBottomAnchor(actionRegles, (double) 550);
         
-        elementCentral.setTopAnchor(boxImage, (double) 10);
-        elementCentral.setRightAnchor(boxImage, (double) 200);
-        elementCentral.setLeftAnchor(boxImage, (double) 200);
-        elementCentral.setBottomAnchor(boxImage, (double) 320);
+        elementCentral.setTopAnchor(image, (double) 10);
+        elementCentral.setRightAnchor(image, (double) 200);
+        elementCentral.setLeftAnchor(image, (double) 200);
+        elementCentral.setBottomAnchor(image, (double) 320);
         
   
-        elementCentral.getChildren().addAll(entreePseudo, creationPseudo, actionDeConnexion, actionQuitter, actionRegles, boxImage);
+        elementCentral.getChildren().addAll(entreePseudo, creationPseudo, actionDeConnexion, actionQuitter, actionRegles, image);
         elementCentral.setId("cadre-accueil");
         
         
