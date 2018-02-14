@@ -1,6 +1,18 @@
+Message : authentification
+
 <message>
-	<authenfication>
+	<authentification>
 		<joueur> ace578 </joueur>
 		<code> fireball </code>
-	</authenfication>
+	</authentification>
 </message>
+
+Message : Liste des joueurs
+<message>
+	<joueurs>
+		<joueur>ace578</joueur>
+		<joueur>VincentAlsacien</joueur>
+		<joueur>ValBreton</joueur>
+	</joueurs>
+</message>
+
