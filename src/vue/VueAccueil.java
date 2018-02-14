@@ -105,6 +105,7 @@ public class VueAccueil extends Application {
             	//else {
             		//System.out.println("Veuillez entrer un pseudo");
             	//}
+            	
             }
         });
         
