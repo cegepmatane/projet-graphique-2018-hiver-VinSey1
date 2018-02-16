@@ -3,7 +3,7 @@ Message : authentification
 <message>
 	<authentification>
 		<joueur> ace578 </joueur>
-		<code> fireball </code>
+		<code> lgaha </code>
 	</authentification>
 </message>
 
@@ -15,4 +15,114 @@ Message : Liste des joueurs
 		<joueur>ValBreton</joueur>
 	</joueurs>
 </message>
+
+
+Message : Attribution des rôles
+
+<message>
+	<joueurs>
+		<membreDuVillage>
+			<joueur>ace578</joueur>
+			<rôle> loup-garou </rôle>
+			<etat> vivant</vivant>
+		</membreDuVillage>
+		<membreDuVillage>
+			<joueur>VincentAlsacien</joueur>
+			<rôle> Villageois </rôle>
+			<etat>vivant</etat>
+		</membreDuVillage>
+		<membreDuVillage>
+			<joueur>ValBreton</joueur>
+			<rôle> Villageois </rôle>
+			<etat>vivant</etat>
+		</membreDuVillage>
+	</joueurs>
+</message>
+
+Message : Nuit
+
+<message>
+	<joueurs>
+		<action>
+			passage nuit
+		</action>
+	</joueurs>
+</message>
+
+
+Message : Demande vote loup-garou
+<message>
+	<loup-garou>
+		<action>
+			demande de vote
+		</action>
+	</loup-garou>
+</message>
+
+
+Message : Vote loup-garou
+
+<message>
+	<loup-garou>
+		<vote>
+			<joueur>VincentAlsacien</joueur>
+		</vote>
+	</loup-garou>
+</message>
+
+Message : Jour
+
+<message>
+	<joueurs>
+		<action>
+			passage jour
+		</action>
+	</joueurs>
+</message>
+
+
+Message : Demande vote village
+
+<message>
+	<village>
+		<action>
+			demande de vote
+		</action>
+	</village>
+</message>
+
+Message : Vote village
+
+<message>
+	<joueurs>
+		<vote>
+			<joueur>ValBreton</joueur>
+		</vote>
+	</joueurs>
+</message>
+
+Message : résultat vote village
+
+<message>
+	<joueurs>
+		<résultat>
+			joueur tué
+		</résultat>
+	</joueurs>
+</message>
+
+
+Message : fin de partie
+
+<message>
+	<finPartie>
+		<cause>
+			tous les villageois sont morts
+		</cause>
+	</finPartie>
+</message>
+
+
+
+
 
