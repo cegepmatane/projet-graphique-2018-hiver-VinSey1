@@ -8,7 +8,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class contactServeur {
+public class ContactServeur {
 	
 	Socket connexion;
 	PrintWriter sortie;
@@ -22,7 +22,6 @@ public class contactServeur {
 			sortie = new PrintWriter(connexion.getOutputStream(), true);
 			lecture = new BufferedReader(new InputStreamReader(connexion.getInputStream()));
 			attendreMessage();
-			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -31,7 +30,6 @@ public class contactServeur {
 	}
 	
 	private void attendreMessage() {
-		
 	Thread thread = new Thread(new Runnable() {			
 		@Override
 		public void run() {
