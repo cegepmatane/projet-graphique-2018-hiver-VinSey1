@@ -20,7 +20,7 @@ public class ControleurClient {
 		
 		if (message.equals("Loup-garou tué")) {
 			vueSalonDeJeu.ajouterTexteAuChat("Un loup-garou a été tué");
-			//ueSalonDeJeu.modifierIndicationNombreDeLoupGarouVivant(nouveauNombreDeLoupGarou);
+			vueSalonDeJeu.modifierIndicationNombreDeLoupGarouVivant(2);
 		}
 	}
 	
