@@ -10,7 +10,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import Client.ControleurClient;
+
+import Client.ControleurSalonDeJeu;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -38,7 +39,7 @@ import javafx.scene.control.Label;
  */
 public class VueSalonDeJeu extends Application {
 	
-
+	private ControleurSalonDeJeu controleur;
 	
 	/**
 	 * Nom du role du joueur
@@ -90,10 +91,12 @@ public class VueSalonDeJeu extends Application {
 	 */
 	String contenuChatDeJeu;
 	
-	ControleurClient controleurClient;
     
     @Override
     public void start(Stage primaryStage) {
+    	
+    	controleur = new ControleurSalonDeJeu(this);
+    	
     	
         primaryStage.setTitle("Salon de Jeu");
         
@@ -118,7 +121,7 @@ public class VueSalonDeJeu extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	controleurClient.validerVote();
+            	controleur.validerVote();
             }
         });
      
@@ -291,6 +294,7 @@ public class VueSalonDeJeu extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
+        controleur.validerVote();
     }
     
     /**
@@ -358,7 +362,4 @@ public class VueSalonDeJeu extends Application {
     	listeJoueursMort.setText(nouvelleListe);
     } 
     
-    public void setControleurClient(ControleurClient controleurClient) {
-    	this.controleurClient = controleurClient;
-    }   
 }

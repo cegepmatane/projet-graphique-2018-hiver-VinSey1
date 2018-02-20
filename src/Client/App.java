@@ -1,7 +1,6 @@
 package Client;
 
 
-
 import vue.VueSalonDeJeu;
 
 public class App {

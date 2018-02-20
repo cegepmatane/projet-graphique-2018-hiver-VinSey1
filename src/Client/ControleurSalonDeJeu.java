@@ -2,11 +2,11 @@ package Client;
 
 import vue.VueSalonDeJeu;
 
-public class ControleurClient {
+public class ControleurSalonDeJeu {
 
 	VueSalonDeJeu vueSalonDeJeu;
 	
-	public ControleurClient (VueSalonDeJeu vueSalonDeJeu) {
+	public ControleurSalonDeJeu (VueSalonDeJeu vueSalonDeJeu) {
 		this.vueSalonDeJeu = vueSalonDeJeu;
 		
 	}
@@ -22,7 +22,12 @@ public class ControleurClient {
 		}
 	}
 	
+	
+
+	
+	
 	public void validerVote() {
-		//contactServeur.envoyerMessage("Un joueur a cliqué sur voter");
+		vueSalonDeJeu.ajouterTexteAuChat("vote effectué");
+
 	}
 }
