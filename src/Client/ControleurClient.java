@@ -7,7 +7,7 @@ public class ControleurClient {
 	VueSalonDeJeu vueSalonDeJeu;
 	ContactServeur contactServeur;
 	
-	public ControleurClient (VueSalonDeJeu vueSalonDeJeu) {
+	public ControleurClient (VueSalonDeJeu vueSalonDeJeu, ContactServeur contactServeur) {
 		this.vueSalonDeJeu = vueSalonDeJeu;
 		this.contactServeur = contactServeur;
 		
