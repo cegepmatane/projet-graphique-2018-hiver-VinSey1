@@ -10,8 +10,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-
-import Client.ControleurSalonDeJeu;
+import controleur.ControleurSalonDeJeu;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -121,7 +120,7 @@ public class VueSalonDeJeu extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	controleur.validerVote();
+            	
             }
         });
      
@@ -134,7 +133,7 @@ public class VueSalonDeJeu extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	// quitte l'application
+            	controleur.validerVote();
             }
         });             
         
@@ -294,7 +293,7 @@ public class VueSalonDeJeu extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        controleur.validerVote();
+        
     }
     
     /**

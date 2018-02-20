@@ -1,4 +1,4 @@
-package Client;
+package application;
 
 
 import vue.VueSalonDeJeu;

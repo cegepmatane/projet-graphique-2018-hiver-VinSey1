@@ -1,4 +1,4 @@
-package Client;
+package controleur;
 
 import vue.VueSalonDeJeu;
 
