@@ -5,11 +5,9 @@ import vue.VueSalonDeJeu;
 public class ControleurClient {
 
 	VueSalonDeJeu vueSalonDeJeu;
-	ContactServeur contactServeur;
 	
-	public ControleurClient (VueSalonDeJeu vueSalonDeJeu, ContactServeur contactServeur) {
+	public ControleurClient (VueSalonDeJeu vueSalonDeJeu) {
 		this.vueSalonDeJeu = vueSalonDeJeu;
-		this.contactServeur = contactServeur;
 		
 	}
 	
@@ -25,6 +23,6 @@ public class ControleurClient {
 	}
 	
 	public void validerVote() {
-		contactServeur.envoyerMessage("Un joueur a cliqué sur voter");
+		//contactServeur.envoyerMessage("Un joueur a cliqué sur voter");
 	}
 }

@@ -38,6 +38,8 @@ import javafx.scene.control.Label;
  */
 public class VueSalonDeJeu extends Application {
 	
+
+	
 	/**
 	 * Nom du role du joueur
 	 */
@@ -285,7 +287,7 @@ public class VueSalonDeJeu extends Application {
         
         Scene scene = new Scene(fenetreGenerale, 1500,700);        
         scene.getStylesheets().add(VueSalonDeJeu.class.getResource("decoration/lg.css").toExternalForm());
-        
+                
         primaryStage.setScene(scene);
         primaryStage.show();
         
