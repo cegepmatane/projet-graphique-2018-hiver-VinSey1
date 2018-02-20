@@ -54,8 +54,9 @@ public class contactServeur {
 		this.controleur = controleur;
 	}
 	
-	public void envoyerMessage(String message) {
-		
+	public boolean envoyerMessage(String message) {
+		sortie.println(message);
+		return true;
 	}
 
 }
