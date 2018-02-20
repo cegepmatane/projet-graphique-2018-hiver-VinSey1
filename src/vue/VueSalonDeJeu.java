@@ -89,10 +89,6 @@ public class VueSalonDeJeu extends Application {
 	String contenuChatDeJeu;
 	
 	ControleurClient controleurClient;
-	
-    public static void main(String[] args) {
-        launch(args);
-    }
     
     @Override
     public void start(Stage primaryStage) {
@@ -120,7 +116,7 @@ public class VueSalonDeJeu extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	// valide le vote
+            	controleurClient.validerVote();
             }
         });
      
