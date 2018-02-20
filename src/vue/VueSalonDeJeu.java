@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+
+import Client.ControleurClient;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -86,6 +88,7 @@ public class VueSalonDeJeu extends Application {
 	 */
 	String contenuChatDeJeu;
 	
+	ControleurClient controleurClient;
 	
     public static void main(String[] args) {
         launch(args);
@@ -355,5 +358,9 @@ public class VueSalonDeJeu extends Application {
     	}
     	
     	listeJoueursMort.setText(nouvelleListe);
-    }  
+    } 
+    
+    public void setControleurClient(ControleurClient controleurClient) {
+    	this.controleurClient = controleurClient;
+    }   
 }

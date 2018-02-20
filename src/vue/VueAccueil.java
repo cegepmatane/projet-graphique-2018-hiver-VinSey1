@@ -71,7 +71,6 @@ public class VueAccueil extends Application {
         actionQuitter.setText("Quitter");
         actionQuitter.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent event) {
-        		//System.out.println("Au revoir AHOOUUUUUU");
         	}
         });
         
