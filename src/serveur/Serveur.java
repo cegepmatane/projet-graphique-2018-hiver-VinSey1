@@ -17,16 +17,12 @@ public class Serveur{
 			String message = "";
 			serveur = new ServerSocket(11);
 			while((socket = serveur.accept()) != null) {
-				
-				
-				
+			
 				tableauContactJoueur[nombreDeJoueur] = new ContactJoueur(socket, Serveur.this);
 				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueur]);
 				nombreDeJoueur++;
 				thread.start();
-				
-				
-				
+								
 			}
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -35,13 +31,9 @@ public class Serveur{
 	
 	
 	public void traiter(String message) {
-
-
 		
-		for ( int iterateurBoucle = 0 ; iterateurBoucle < nombreDeJoueur ; iterateurBoucle++) {
-			
+		for ( int iterateurBoucle = 0 ; iterateurBoucle < nombreDeJoueur ; iterateurBoucle++) {		
 
-			
 			tableauContactJoueur[iterateurBoucle].envoiMessage(message);			
 
 		}
