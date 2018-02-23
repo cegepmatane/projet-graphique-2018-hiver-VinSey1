@@ -100,10 +100,7 @@ public class VueSalonDeJeu extends Application {
     @Override
     public void start(Stage primaryStage) {
     	
-    	instanceVueSalonDeJeu = primaryStage;
-    	
-    	controleur = new ControleurSalonDeJeu(this);
-    	
+    	instanceVueSalonDeJeu = primaryStage;   	
     	
         primaryStage.setTitle("Salon de Jeu");
         
@@ -368,5 +365,11 @@ public class VueSalonDeJeu extends Application {
     	
     	listeJoueursMort.setText(nouvelleListe);
     } 
+    
+    
+    
+    public void setControleurSalonDeJeu(ControleurSalonDeJeu controleurSalonDeJeu) {
+    	this.controleur = controleurSalonDeJeu;
+    }
     
 }

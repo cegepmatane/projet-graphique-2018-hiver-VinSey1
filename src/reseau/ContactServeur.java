@@ -15,12 +15,9 @@ public class ContactServeur {
 	Socket connexion;
 	PrintWriter sortie;
 	BufferedReader lecture;
+	
 	ControleurSalonDeJeu controleur;
 	
-	public ContactServeur(ControleurSalonDeJeu controleur) {
-		this.controleur = controleur;
-		connection();
-	}
 	
 	@SuppressWarnings("resource")
 	public void connection() {
