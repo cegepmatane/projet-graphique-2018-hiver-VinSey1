@@ -17,6 +17,10 @@ public class ContactServeur {
 	BufferedReader lecture;
 	ControleurSalonDeJeu controleur;
 	
+	public ContactServeur(ControleurSalonDeJeu controleur) {
+		this.controleur = controleur;
+	}
+	
 	@SuppressWarnings("resource")
 	public void connection() {
 		try {
