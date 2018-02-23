@@ -19,6 +19,7 @@ public class ContactServeur {
 	
 	public ContactServeur(ControleurSalonDeJeu controleur) {
 		this.controleur = controleur;
+		connection();
 	}
 	
 	@SuppressWarnings("resource")
