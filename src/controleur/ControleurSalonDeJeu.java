@@ -22,10 +22,12 @@ public class ControleurSalonDeJeu {
 		if (message.equals("Loup-garou tué")) {
 			vueSalonDeJeu.ajouterTexteAuChat("Un loup-garou a été tué");
 			vueSalonDeJeu.modifierIndicationNombreDeLoupGarouVivant(2);
+			vueSalonDeJeu.modifierNombreDeJoueur(4);
 		}
 		
 		if (message.equals("Villageois tué")) {
-			vueSalonDeJeu.ajouterTexteAuChat(texte);
+			vueSalonDeJeu.ajouterTexteAuChat("Un villageois a été tué");
+			vueSalonDeJeu.modifierNombreDeJoueur(2);
 		}
 	}
 	
