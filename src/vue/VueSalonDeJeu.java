@@ -38,6 +38,12 @@ import javafx.scene.control.Label;
  */
 public class VueSalonDeJeu extends Application {
 	
+	
+	public static Stage instanceVueSalonDeJeu = new Stage();
+	
+	/**
+	 * controleur de la vue
+	 */
 	private ControleurSalonDeJeu controleur;
 	
 	/**
@@ -93,6 +99,8 @@ public class VueSalonDeJeu extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+    	
+    	instanceVueSalonDeJeu = primaryStage;
     	
     	controleur = new ControleurSalonDeJeu(this);
     	
