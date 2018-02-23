@@ -1,5 +1,6 @@
 package controleur;
 
+import javafx.application.Platform;
 import reseau.ContactServeur;
 import vue.VueSalonDeJeu;
 
@@ -15,6 +16,21 @@ public class ControleurSalonDeJeu {
 	}
 	
 	public void traiter(String message) {
+		
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				vueSalonDeJeu.ajouterTexteAuChat("Un joueur a voté");
+				
+			}
+		});
+		
+		
+		
+
+		
 		if (message.equals("Demande vote du village")) {
 			vueSalonDeJeu.ajouterTexteAuChat("A vous de voter villageois");
 		}
@@ -31,12 +47,8 @@ public class ControleurSalonDeJeu {
 		}
 	}
 	
-	
 
-	
-	
 	public void validerVote() {
-		vueSalonDeJeu.ajouterTexteAuChat("vote effectué");
 		contactServeur.envoyerMessage("Un joueur a cliqué sur valider");
 
 	}

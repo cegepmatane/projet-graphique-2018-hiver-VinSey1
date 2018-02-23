@@ -40,6 +40,7 @@ public class ContactServeur {
 			String message = "";
 			try {
 				while ((message = lecture.readLine()) != null) {
+					
 					controleur.traiter(message);
 				}
 			} catch(Exception e) {}

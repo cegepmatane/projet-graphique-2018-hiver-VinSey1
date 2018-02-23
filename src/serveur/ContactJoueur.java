@@ -47,6 +47,7 @@ public class ContactJoueur implements Runnable  {
 		
 	public boolean envoiMessage(String message)
 	{
+		
 		imprimante.println(message);
 		return true;
 	}		

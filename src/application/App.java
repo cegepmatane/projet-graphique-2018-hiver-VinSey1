@@ -26,6 +26,7 @@ public class App {
 				ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonJeu, contactServeur);
 				
 				contactServeur.setControleur(controleurSalonDeJeu);
+				contactServeur.connection();
 				vueSalonJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
 				
 			}
