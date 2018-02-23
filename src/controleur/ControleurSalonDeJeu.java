@@ -1,9 +1,11 @@
 package controleur;
 
+import reseau.ContactServeur;
 import vue.VueSalonDeJeu;
 
 public class ControleurSalonDeJeu {
 
+	ContactServeur contactServeur;
 	VueSalonDeJeu vueSalonDeJeu;
 	
 	public ControleurSalonDeJeu (VueSalonDeJeu vueSalonDeJeu) {
@@ -28,6 +30,7 @@ public class ControleurSalonDeJeu {
 	
 	public void validerVote() {
 		vueSalonDeJeu.ajouterTexteAuChat("vote effectué");
+		contactServeur.envoyerMessage("Un joueur a cliqué sur valider");
 
 	}
 }
