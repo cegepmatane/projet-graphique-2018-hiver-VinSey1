@@ -94,7 +94,7 @@ public class VueSalonDeJeu extends Application {
 	/**
 	 * Contenu du chat de jeu
 	 */
-	String contenuChatDeJeu;
+	String contenuChatDeJeu = "";
 	
     
     @Override

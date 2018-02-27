@@ -21,6 +21,9 @@ public class Serveur{
 				tableauContactJoueur[nombreDeJoueur] = new ContactJoueur(socket, Serveur.this);
 				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueur]);
 				nombreDeJoueur++;
+				if(nombreDeJoueur == tableauContactJoueur.length) {
+					traiter("Start");
+				}
 				thread.start();
 								
 			}

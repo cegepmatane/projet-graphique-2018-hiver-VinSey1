@@ -22,6 +22,10 @@ public class ControleurSalonDeJeu {
 			@Override
 			public void run() {
 				
+				if (message.equals("Start")) {
+					vueSalonDeJeu.ajouterTexteAuChat("Nombre maximum de joueurs atteint, la partie commence !");
+				}
+				if (message.equals("VoteJoueur"))
 				vueSalonDeJeu.ajouterTexteAuChat("Un joueur a voté");
 				
 			}
@@ -45,11 +49,12 @@ public class ControleurSalonDeJeu {
 			vueSalonDeJeu.ajouterTexteAuChat("Un villageois a été tué");
 			vueSalonDeJeu.modifierNombreDeJoueur(2);
 		}
+		
+		
 	}
 	
 
 	public void validerVote() {
-		contactServeur.envoyerMessage("Un joueur a cliqué sur valider");
-
+		contactServeur.envoyerMessage("VoteJoueur");
 	}
 }
