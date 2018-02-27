@@ -7,5 +7,10 @@ public class Partie {
 	
 	public Partie(Serveur serveur) {
 		this.serveur=serveur;
+		lancerPartie();
+	}
+	
+	private void lancerPartie() {
+		serveur.traiter("Start");
 	}
 }
