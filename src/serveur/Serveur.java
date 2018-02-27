@@ -22,6 +22,7 @@ public class Serveur{
 				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueur]);
 				nombreDeJoueur++;
 				if(nombreDeJoueur == tableauContactJoueur.length) {
+					Partie partie = new partie(Serveur.this);
 					traiter("Start");
 				}
 				thread.start();
