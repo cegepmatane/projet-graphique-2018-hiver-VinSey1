@@ -2,6 +2,8 @@ package serveur;
 import java.io.*;
 import java.net.*;
 
+import modele.Partie;
+
 
 public class Serveur{
 	
@@ -22,7 +24,7 @@ public class Serveur{
 				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueur]);
 				nombreDeJoueur++;
 				if(nombreDeJoueur == tableauContactJoueur.length) {
-					Partie partie = new partie(Serveur.this);
+					Partie partie = new Partie(Serveur.this);
 					traiter("Start");
 				}
 				thread.start();
