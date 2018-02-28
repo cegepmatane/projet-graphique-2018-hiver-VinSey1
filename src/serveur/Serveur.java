@@ -34,7 +34,6 @@ public class Serveur{
 					Partie partie = new Partie(Serveur.this);
 				}
 				thread.start();
-								
 			}
 		} catch(IOException e) {
 			e.printStackTrace();

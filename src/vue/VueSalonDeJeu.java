@@ -106,10 +106,10 @@ public class VueSalonDeJeu extends Application {
         
         
         // Bouton d'acces aux relges du jeu	
-        Button boutonReglesDuJeu = new Button();
-        boutonReglesDuJeu.setText("Règles du jeu");
-        boutonReglesDuJeu.setStyle("-fx-background-color:#fff224; -fx-font-size:20px; -fx-padding: 10 50 10 50; -fx-font-family:\"Lucida Handwriting\";");
-        boutonReglesDuJeu.setOnAction(new EventHandler<ActionEvent>() {
+        Button reglesDuJeu = new Button();
+        reglesDuJeu.setText("Règles du jeu");
+        reglesDuJeu.setStyle("-fx-background-color:#fff224; -fx-font-size:20px; -fx-padding: 10 50 10 50; -fx-font-family:\"Lucida Handwriting\";");
+        reglesDuJeu.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
             public void handle(ActionEvent event) {
@@ -118,10 +118,10 @@ public class VueSalonDeJeu extends Application {
         });
         
         // Bouton Voter
-        Button boutonQuitter = new Button();
-        boutonQuitter.setText("Quitter");
-        boutonQuitter.setStyle("-fx-background-color:#4d0000; -fx-font-size:20px; -fx-padding: 10 50 10 50;-fx-font-family:\"Lucida Handwriting\"; -fx-text-fill:white;");
-        boutonQuitter.setOnAction(new EventHandler<ActionEvent>() {
+        Button quitter = new Button();
+        quitter.setText("Quitter");
+        quitter.setStyle("-fx-background-color:#4d0000; -fx-font-size:20px; -fx-padding: 10 50 10 50;-fx-font-family:\"Lucida Handwriting\"; -fx-text-fill:white;");
+        quitter.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
             public void handle(ActionEvent event) {
@@ -166,11 +166,11 @@ public class VueSalonDeJeu extends Application {
         
         panelGauche.setConstraints(descriptionRole, 0, 0);
         panelGauche.setConstraints(boutonVoter, 0, 1);
-        panelGauche.setConstraints(boutonQuitter, 0, 2);
+        panelGauche.setConstraints(quitter, 0, 2);
         
         panelGauche.getChildren().add(descriptionRole);  
         panelGauche.getChildren().add(boutonVoter);
-        panelGauche.getChildren().add(boutonQuitter);
+        panelGauche.getChildren().add(quitter);
         
           
         // HBox du haut
@@ -193,7 +193,7 @@ public class VueSalonDeJeu extends Application {
         hboxHaut.getChildren().add(blanc1);
         hboxHaut.getChildren().add(nomDeLaPage);
         hboxHaut.getChildren().add(blanc2);
-        hboxHaut.getChildren().add(boutonReglesDuJeu);
+        hboxHaut.getChildren().add(reglesDuJeu);
 
         
         
