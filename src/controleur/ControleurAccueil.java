@@ -40,7 +40,7 @@ public class ControleurAccueil {
 					ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonDeJeu, contactServeur);
 					
 					contactServeur.setControleur(controleurSalonDeJeu);
-					
+					vueSalonDeJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
 					vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
 					
 					// Est-ce acceptable que le contrôleur de l'acceuil modifie une autre vue que celle dont il a la charge ?

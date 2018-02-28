@@ -16,7 +16,8 @@ public class ContactServeur {
 	PrintWriter sortie;
 	BufferedReader lecture;
 	
-	ControleurSalonDeJeu controleur;
+	ControleurSalonDeJeu controleurSalonDeJeu;
+	ControleurVueVillageois controleurVueVillageois;
 	
 	
 	@SuppressWarnings("resource")
@@ -41,7 +42,7 @@ public class ContactServeur {
 			try {
 				while ((message = lecture.readLine()) != null) {
 					
-					controleur.traiter(message);
+					controleurSalonDeJeu.traiter(message);
 				}
 			} catch(Exception e) {}
 		}
@@ -50,11 +51,11 @@ public class ContactServeur {
 	}
 
 	public ControleurSalonDeJeu getControleur() {
-		return controleur;
+		return controleurSalonDeJeu;
 	}
 
 	public void setControleur(ControleurSalonDeJeu controleur) {
-		this.controleur = controleur;
+		this.controleurSalonDeJeu = controleur;
 	}
 	
 	public boolean envoyerMessage(String message) {
