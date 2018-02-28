@@ -3,6 +3,7 @@ package controleur;
 import javafx.application.Platform;
 import reseau.ContactServeur;
 import vue.VueSalonDeJeu;
+import vue.VueVillageois;
 
 public class ControleurSalonDeJeu {
 
@@ -52,5 +53,25 @@ public class ControleurSalonDeJeu {
 
 	public void validerVote() {
 		contactServeur.envoyerMessage("VoteJoueur");
+	}
+	
+	public void afficherVoteVillageois() {
+		Platform.runLater(new Runnable() {
+		
+			@Override
+				public void run() {
+				
+					VueVillageois vueVillageois = new VueVillageois();
+					
+					ControleurVueVillageois controleurVueVillageois = new ControleurVueVillageois(vueVillageois, contactServeur);
+				
+					try {
+						vueVillageois.start(VueVillageois.instanceVueVillageois);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
+		});
 	}
 }
