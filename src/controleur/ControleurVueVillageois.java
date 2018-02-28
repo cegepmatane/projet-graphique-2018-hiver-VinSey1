@@ -15,9 +15,15 @@ public class ControleurVueVillageois {
 	
 	public void validerVote() {
 		
+		String joueur = "";
 		
+		for ( int iterateurChoixJoueur = 0 ; iterateurChoixJoueur < vueVillageois.getChoixJoueur().size() ; iterateurChoixJoueur++) {
+			
+			if ( vueVillageois.getChoixJoueur().get(iterateurChoixJoueur).isSelected()) joueur = vueVillageois.getChoixJoueur().get(iterateurChoixJoueur).getText();
+			
+		}
 		
-		
+		contactServeur.envoyerMessage(joueur);	
 	}
 	
 	
