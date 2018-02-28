@@ -34,6 +34,8 @@ public class ControleurAccueil {
 					pseudo=vueAccueil.recupererPseudo();
 					VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();
 					vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
+					
+					// Est-ce acceptable que le contrôleur de l'acceuil modifie une autre vue que celle dont il a la charge ?
 					if (pseudo.equals("")) {
 						vueSalonDeJeu.ajouterTexteAuChat("Bonjour Anonyme");
 					}
