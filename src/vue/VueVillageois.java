@@ -1,6 +1,12 @@
 package vue;
 
+import java.util.ArrayList;
+import java.util.List;
+import controleur.ControleurVueVillageois;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -12,11 +18,15 @@ public class VueVillageois extends Application{
 
 	public static Stage instanceVueVillageois= new Stage();
 	
+	private ControleurVueVillageois controleur;
+	
 	private Button valider = new Button("Valider");
 	
-	private RadioButton choixJoueur = new RadioButton();
-	
+	private List<RadioButton> choixJoueur = new ArrayList<RadioButton>();
+
 	private ToggleGroup joueurs = new ToggleGroup();
+	
+	private StackPane fenetreChoixVote;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -31,21 +41,39 @@ public class VueVillageois extends Application{
 		
 		fenetrePrincipale.getChildren().add(indication);
 		
-		StackPane fenetreChoixVote = new StackPane();
+		fenetreChoixVote = new StackPane();
 		
+		Scene scene = new Scene(fenetrePrincipale, 800,600);
 		
+		valider.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				VueVillageois.this.controleur.validerVote();
+				
+			}
+		});
 		
-		
+		primaryStage.setScene(scene);
+        primaryStage.show();
 	}
 	
 	
-	public void setChoixJoueur() {
+	public void setChoixJoueur(List<String> listeJoueur) {
 		
+		for ( int iterateurJoueur = 0 ; iterateurJoueur < listeJoueur.size(); iterateurJoueur++) {
+			
+			choixJoueur.add(new RadioButton(listeJoueur.get(iterateurJoueur)));
+			fenetreChoixVote.getChildren().add(choixJoueur.get(choixJoueur.size()-1));
+			
+		}
 		
-		
-		
+		fenetreChoixVote.getChildren().add(fenetreChoixVote);
+		fenetreChoixVote.getChildren().add(valider);
 	}
 	
-	
+	public List<RadioButton> getChoixJoueur() {
+		return choixJoueur;
+	}
 
 }
