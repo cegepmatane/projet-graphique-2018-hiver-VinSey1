@@ -24,15 +24,9 @@ public class App {
 				vueAccueil.start(VueAccueil.instanceVueAccueil);
 				ControleurAccueil controle = new ControleurAccueil(vueAccueil);
 				vueAccueil.setControleurAccueil(controle);
-				ContactServeur contactServeur = new ContactServeur();
-
-				/**
-				ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonJeu, contactServeur);
 				
-				contactServeur.setControleur(controleurSalonDeJeu);
-				contactServeur.connection();
-				vueSalonJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
-				*/
+
+				
 				
 			}
 		});

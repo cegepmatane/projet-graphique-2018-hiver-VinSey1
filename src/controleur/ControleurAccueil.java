@@ -1,12 +1,14 @@
 package controleur;
 
 import javafx.application.Platform;
+import reseau.ContactServeur;
 import vue.VueAccueil;
 import vue.VueRegles;
 import vue.VueSalonDeJeu;
 
 public class ControleurAccueil {
 
+	ContactServeur contactServeur;
 	VueAccueil vueAccueil;
 	String pseudo ="";
 	
@@ -41,6 +43,11 @@ public class ControleurAccueil {
 						VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();
 						vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
 						vueSalonDeJeu.ajouterTexteAuChat("Bonjour "+pseudo);
+						ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonDeJeu, contactServeur);
+						ContactServeur contactServeur = new ContactServeur();
+						contactServeur.setControleur(controleurSalonDeJeu);
+						contactServeur.connection();
+						vueSalonDeJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
 					}
 					
 					
