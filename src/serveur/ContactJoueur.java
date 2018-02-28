@@ -38,7 +38,7 @@ public class ContactJoueur implements Runnable  {
 			
 			while((message = lecteur.readLine()) != null)
 			{
-				serveur.traiter(message);
+				serveur.envoyerATous(message);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -23,15 +23,6 @@ public class ControleurSalonDeJeu {
 			public void run() {
 				
 				vueSalonDeJeu.ajouterTexteAuChat(message);
-				/*
-				if (message.equals("Start")) {
-					vueSalonDeJeu.ajouterTexteAuChat("Nombre maximum de joueurs atteint, la partie commence !");
-				}
-				if (message.equals("VoteJoueur"))
-				vueSalonDeJeu.ajouterTexteAuChat("Un joueur a voté");
-				if (message.equals("")) {
-					vueSalonDeJeu.ajouterTexteAuChat(");
-				}*/
 				
 			}
 		});
