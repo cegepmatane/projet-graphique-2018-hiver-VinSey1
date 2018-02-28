@@ -21,6 +21,7 @@ public class ControleurAccueil {
 				@Override
 					public void run() {
 					
+						vueAccueil.close();
 						VueRegles vueRegles = new VueRegles();
 						vueRegles.start(VueRegles.instanceVueRegles);
 				}
@@ -37,19 +38,19 @@ public class ControleurAccueil {
 						vueAccueil.setErreur();
 					}
 					else {
-					VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();
-					
-					ContactServeur contactServeur = new ContactServeur();
-										
-					ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonDeJeu, contactServeur);
-					
-					contactServeur.setControleur(controleurSalonDeJeu);
-					vueSalonDeJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
-					vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
-					
-					
-					// Est-ce acceptable que le contrôleur de l'acceuil modifie une autre vue que celle dont il a la charge ?
-					vueSalonDeJeu.ajouterTexteAuChat("Bonjour "+pseudo);
+						vueAccueil.close();
+						VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();
+						
+						ContactServeur contactServeur = new ContactServeur();
+											
+						ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonDeJeu, contactServeur);
+						
+						contactServeur.setControleur(controleurSalonDeJeu);
+						vueSalonDeJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
+						vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
+						
+						// Est-ce acceptable que le contrôleur de l'acceuil modifie une autre vue que celle dont il a la charge ?
+						vueSalonDeJeu.ajouterTexteAuChat("Bonjour "+pseudo);
 					}
 					
 					
