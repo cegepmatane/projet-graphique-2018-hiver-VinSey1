@@ -32,10 +32,11 @@ public class VueRegles extends Application {
 	protected Group groupe;
 	protected BorderPane miseEnPage;
 	protected Scene scene;
+	public static Stage instanceVueRegles = new Stage();
 	
     @Override
     public void start(Stage primaryStage) {
-
+    	instanceVueRegles = primaryStage;
     	//Création du titre avec sa police
     	titre = new Text("Les Loups-Garous");
     	titre.setFont(Font.font("Lucida Handwriting", 80));
