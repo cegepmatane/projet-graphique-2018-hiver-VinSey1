@@ -22,8 +22,8 @@ public class App {
 				
 				VueAccueil vueAccueil = new VueAccueil();
 				vueAccueil.start(VueAccueil.instanceVueAccueil);
-				ControleurAccueil controleRegles = new ControleurAccueil(vueAccueil);
-				vueAccueil.setControleurAccueil(controleRegles);
+				ControleurAccueil controle = new ControleurAccueil(vueAccueil);
+				vueAccueil.setControleurAccueil(controle);
 				ContactServeur contactServeur = new ContactServeur();
 
 				/**
