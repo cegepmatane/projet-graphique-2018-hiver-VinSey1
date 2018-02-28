@@ -33,7 +33,7 @@
 }
 
 #erreur {
-	-fx-text-fill : red;
+	-fx-fill : red;
 }
 #cadre-accueil {
 	-fx-border-color: black;
