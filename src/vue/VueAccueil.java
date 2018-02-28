@@ -47,6 +47,7 @@ public class VueAccueil extends Application {
 	private AnchorPane elementCentral;
 	private HBox image;
 	private Scene scene;
+	public static Stage instanceVueAccueil = new Stage();
 	
 	/**
 	 * @return un string qui est le pseudo qu'a entrée le joueur pour se connecter à la partie
@@ -64,6 +65,8 @@ public class VueAccueil extends Application {
 	
     @Override
     public void start(Stage primaryStage) {
+    	
+    	instanceVueAccueil = primaryStage; 
         primaryStage.setTitle("Accueil");
       
         
