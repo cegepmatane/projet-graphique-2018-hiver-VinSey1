@@ -32,6 +32,9 @@
 	-fx-font-size:40;
 }
 
+#erreur {
+	-fx-text-fill : red;
+}
 #cadre-accueil {
 	-fx-border-color: black;
 	-fx-border-width: 2px 2px 2px 2px

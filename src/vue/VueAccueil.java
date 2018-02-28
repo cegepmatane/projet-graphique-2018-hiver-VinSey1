@@ -43,6 +43,7 @@ public class VueAccueil extends Application {
 	private Button actionRegles;
 	private Text titre;
 	private Text entreePseudo;
+	private Text erreur;
 	private TextField creationPseudo;
 	private Button actionDeConnexion;
 	private BorderPane miseEnPage;
@@ -62,6 +63,11 @@ public class VueAccueil extends Application {
 	public void setControleurAccueil(ControleurAccueil controleAccueil) {
     	this.controle = controleAccueil;
     }
+	
+	public void setErreur() {
+		erreur.setText("Veuillez entrer un pseudonyme");
+		
+	}
 	
 	
 
@@ -96,6 +102,9 @@ public class VueAccueil extends Application {
         
         entreePseudo = new Text("Entrez votre pseudonyme :");
         entreePseudo.setId("pseudo");
+        
+        erreur = new Text("");
+        erreur.setId("erreur");
         
         creationPseudo = new TextField();
         
@@ -140,6 +149,11 @@ public class VueAccueil extends Application {
         elementCentral.setLeftAnchor(creationPseudo, (double) 300);
         elementCentral.setBottomAnchor(creationPseudo, (double) 170);
         
+        elementCentral.setTopAnchor(erreur, (double) 430);
+        elementCentral.setRightAnchor(erreur, (double) 300);
+        elementCentral.setLeftAnchor(erreur, (double) 300);
+        elementCentral.setBottomAnchor(erreur, (double) 110);
+        
         elementCentral.setTopAnchor(actionDeConnexion, (double) 455);
         elementCentral.setRightAnchor(actionDeConnexion, (double) 300);
         elementCentral.setLeftAnchor(actionDeConnexion, (double) 300);
@@ -161,7 +175,7 @@ public class VueAccueil extends Application {
         elementCentral.setBottomAnchor(image, (double) 320);
         
   
-        elementCentral.getChildren().addAll(entreePseudo, creationPseudo, actionDeConnexion, actionQuitter, actionRegles, image);
+        elementCentral.getChildren().addAll(entreePseudo, creationPseudo, erreur, actionDeConnexion, actionQuitter, actionRegles, image);
         elementCentral.setId("cadre-accueil");
         
         
