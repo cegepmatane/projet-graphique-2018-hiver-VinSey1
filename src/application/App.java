@@ -3,6 +3,7 @@ package application;
 
 import controleur.ControleurSalonDeJeu;
 import javafx.application.Platform;
+import vue.VueAccueil;
 import vue.VueSalonDeJeu;
 import javafx.embed.swing.JFXPanel;
 import reseau.*;
@@ -18,16 +19,18 @@ public class App {
 			@Override
 			public void run() {
 				
-				VueSalonDeJeu vueSalonJeu = new VueSalonDeJeu();
-				vueSalonJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
+				VueAccueil vueAccueil = new VueAccueil();
+				vueAccueil.start(VueAccueil.instanceVueAccueil);
 				
 				ContactServeur contactServeur = new ContactServeur();
 
+				/**
 				ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonJeu, contactServeur);
 				
 				contactServeur.setControleur(controleurSalonDeJeu);
 				contactServeur.connection();
 				vueSalonJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
+				*/
 				
 			}
 		});
