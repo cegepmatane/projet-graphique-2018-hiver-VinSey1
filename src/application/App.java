@@ -1,6 +1,7 @@
 package application;
 
 
+import controleur.ControleurAccueil;
 import controleur.ControleurSalonDeJeu;
 import javafx.application.Platform;
 import vue.VueAccueil;
@@ -21,7 +22,8 @@ public class App {
 				
 				VueAccueil vueAccueil = new VueAccueil();
 				vueAccueil.start(VueAccueil.instanceVueAccueil);
-				
+				ControleurAccueil controleRegles = new ControleurAccueil(vueAccueil);
+				vueAccueil.setControleurAccueil(controleRegles);
 				ContactServeur contactServeur = new ContactServeur();
 
 				/**

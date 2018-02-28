@@ -5,6 +5,8 @@ import javax.print.DocFlavor.URL;
 
 import com.sun.xml.internal.ws.org.objectweb.asm.Label;
 
+import controleur.ControleurAccueil;
+import controleur.ControleurSalonDeJeu;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -48,6 +50,7 @@ public class VueAccueil extends Application {
 	private HBox image;
 	private Scene scene;
 	public static Stage instanceVueAccueil = new Stage();
+	private ControleurAccueil controle;
 	
 	/**
 	 * @return un string qui est le pseudo qu'a entrée le joueur pour se connecter à la partie
@@ -56,10 +59,13 @@ public class VueAccueil extends Application {
 		return(creationPseudo.getText());
 	}
 	
-	
-	public static void main(String[] args) {
-        launch(args);
+	public void setControleurAccueil(ControleurAccueil controleAccueil) {
+    	this.controle = controleAccueil;
     }
+	
+	
+
+
 	
 	
 	
@@ -81,7 +87,7 @@ public class VueAccueil extends Application {
         actionRegles.setText("Règles du jeu");
         actionRegles.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent event) {
-        		//System.out.println("Affichage des règles du jeu");
+        		controle.afficherRegles();
         	}
         });
         
