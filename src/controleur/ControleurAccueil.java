@@ -34,7 +34,13 @@ public class ControleurAccueil {
 					pseudo=vueAccueil.recupererPseudo();
 					VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();
 					vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
-					vueSalonDeJeu.ajouterTexteAuChat("Bonjour " + pseudo);
+					if (pseudo.equals("")) {
+						vueSalonDeJeu.ajouterTexteAuChat("Bonjour Anonyme");
+					}
+					else {
+						vueSalonDeJeu.ajouterTexteAuChat("Bonjour " + pseudo);
+					}
+					
 			}
 		});
 }
