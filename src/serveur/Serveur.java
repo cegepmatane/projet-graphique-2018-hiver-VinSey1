@@ -8,8 +8,9 @@ import modele.Partie;
 public class Serveur{
 	
 	BufferedReader lecture = null;
-	private int nombreDeJoueur = 0;
-	ContactJoueur[] tableauContactJoueur = new ContactJoueur[8];
+	private int nombreDeJoueurs = 0;
+	private final int NB_JOUEURS_MAX = 3;
+	ContactJoueur[] tableauContactJoueur = new ContactJoueur[NB_JOUEURS_MAX];
 	Socket socket = null;
 	ServerSocket serveur;
 	
@@ -20,12 +21,12 @@ public class Serveur{
 			serveur = new ServerSocket(11);
 			while((socket = serveur.accept()) != null) {
 			
-				tableauContactJoueur[nombreDeJoueur] = new ContactJoueur(socket, Serveur.this);
-				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueur]);
-				nombreDeJoueur++;
-				if(nombreDeJoueur == tableauContactJoueur.length) {
+				tableauContactJoueur[nombreDeJoueurs] = new ContactJoueur(socket, Serveur.this);
+				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueurs]);
+				nombreDeJoueurs++;
+				traiter("MessageNBJoueurs : "+nombreDeJoueurs+"/"+NB_JOUEURS_MAX);
+				if(nombreDeJoueurs == tableauContactJoueur.length) {
 					Partie partie = new Partie(Serveur.this);
-					traiter("Start");
 				}
 				thread.start();
 								
@@ -38,7 +39,7 @@ public class Serveur{
 	
 	public void traiter(String message) {
 		
-		for ( int iterateurBoucle = 0 ; iterateurBoucle < nombreDeJoueur ; iterateurBoucle++) {		
+		for ( int iterateurBoucle = 0 ; iterateurBoucle < nombreDeJoueurs ; iterateurBoucle++) {		
 
 			tableauContactJoueur[iterateurBoucle].envoiMessage(message);			
 
