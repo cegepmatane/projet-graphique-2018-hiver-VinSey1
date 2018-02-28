@@ -3,10 +3,12 @@ package controleur;
 import javafx.application.Platform;
 import vue.VueAccueil;
 import vue.VueRegles;
+import vue.VueSalonDeJeu;
 
 public class ControleurAccueil {
 
 	VueAccueil vueAccueil;
+	String pseudo ="";
 	
 	public ControleurAccueil(VueAccueil vueAccueil) {
 		this.vueAccueil = vueAccueil;
@@ -23,4 +25,17 @@ public class ControleurAccueil {
 				}
 			});
 	}
+	
+	public void afficherSalonDeJeu() {
+		Platform.runLater(new Runnable() {
+		
+			@Override
+				public void run() {
+					pseudo=vueAccueil.recupererPseudo();
+					VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();
+					vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
+					vueSalonDeJeu.ajouterTexteAuChat("Bonjour " + pseudo);
+			}
+		});
+}
 }
