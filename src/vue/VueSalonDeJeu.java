@@ -146,7 +146,6 @@ public class VueSalonDeJeu extends Application {
         imageCarte = new StackPane();
         imageCarte.setId("image-loup-garoup");
         
-        
         // Nom du rôle du joueur      
         nomRole = new Text("Loup-Garou");
         nomRole.setFont(Font.font("Lucida Handwriting", 30));
