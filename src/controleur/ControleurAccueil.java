@@ -33,6 +33,10 @@ public class ControleurAccueil {
 			@Override
 				public void run() {
 					pseudo=vueAccueil.recupererPseudo();
+					if (pseudo.equals("")) {
+						vueAccueil.setErreur();
+					}
+					else {
 					VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();
 					
 					ContactServeur contactServeur = new ContactServeur();
@@ -43,13 +47,11 @@ public class ControleurAccueil {
 					vueSalonDeJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
 					vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
 					
+					
 					// Est-ce acceptable que le contrôleur de l'acceuil modifie une autre vue que celle dont il a la charge ?
-					if (pseudo.equals("")) {
-						vueSalonDeJeu.ajouterTexteAuChat("Bonjour Anonyme");
+					vueSalonDeJeu.ajouterTexteAuChat("Bonjour "+pseudo);
 					}
-					else {
-						vueSalonDeJeu.ajouterTexteAuChat("Bonjour " + pseudo);
-					}
+					
 					
 			}
 		});
