@@ -8,13 +8,15 @@ import vue.VueSalonDeJeu;
 
 public class ControleurAccueil {
 
+	VueRegles vueRegles;
 	VueAccueil vueAccueil;
 	String pseudo ="";
 	ContactServeur contactServeur;
 	
-	public ControleurAccueil(VueAccueil vueAccueil, ContactServeur contactServeur) {
+	public ControleurAccueil(VueAccueil vueAccueil, ContactServeur contactServeur, VueRegles vueRegles) {
 		this.vueAccueil = vueAccueil;
 		this.contactServeur = contactServeur;
+		this.vueRegles = vueRegles;
 	}
 	
 	public void afficherRegles() {
@@ -23,11 +25,8 @@ public class ControleurAccueil {
 				@Override
 					public void run() {
 					
-						vueAccueil.close();
-						VueRegles vueRegles = new VueRegles();
-						vueRegles.start(VueRegles.instanceVueRegles);
-						ControleurRegles controleRegles = new ControleurRegles(vueRegles,vueAccueil);
-						vueRegles.setControleurRegles(controleRegles);
+						vueAccueil.hide();
+						vueRegles.show();
 				}
 			});
 	}

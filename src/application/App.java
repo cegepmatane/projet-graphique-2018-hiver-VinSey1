@@ -30,7 +30,7 @@ public class App {
 				ControleurRegles controleRegles = new ControleurRegles(vueRegles, vueAccueil);
 				vueRegles.setControleurRegles(controleRegles);
 				vueRegles.hide();
-				ControleurAccueil controle = new ControleurAccueil(vueAccueil, contactServeur);
+				ControleurAccueil controle = new ControleurAccueil(vueAccueil, contactServeur, vueRegles);
 				vueAccueil.setControleurAccueil(controle);
 				
 

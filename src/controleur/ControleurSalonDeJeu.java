@@ -27,6 +27,20 @@ public class ControleurSalonDeJeu {
 				
 			}
 		});
+		/*
+		public void afficherRegles() {
+			
+			Platform.runLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					
+					vueSalonDeJeu.ajouterTexteAuChat(message);
+					
+				}
+			});
+			
+			*/
 		
 		
 		
