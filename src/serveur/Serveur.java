@@ -1,6 +1,8 @@
 package serveur;
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import modele.Partie;
 
@@ -13,7 +15,11 @@ public class Serveur{
 	private ContactJoueur[] tableauContactJoueur = new ContactJoueur[NB_JOUEURS_MAX];
 	private Socket socket = null;
 	private ServerSocket serveur;
-	private Partie partie;
+	private volatile Partie partie;
+	private List<String> listeJoueurs = new ArrayList<String>();
+	
+	public int test=0;
+	
 	
 	public int getNB_JOUEURS_MAX() {
 		return NB_JOUEURS_MAX;
@@ -26,6 +32,10 @@ public class Serveur{
 	public Partie getPartie() {
 		return partie;
 	}
+	
+	public String getListeJoueurs() {
+		return listeJoueurs.toString();
+	}
 
 
 	@SuppressWarnings("resource")
@@ -35,16 +45,20 @@ public class Serveur{
 			serveur = new ServerSocket(11);
 			while((socket = serveur.accept()) != null) {
 			
-				tableauContactJoueur[nombreDeJoueurs] = new ContactJoueur(socket, Serveur.this);
+				tableauContactJoueur[nombreDeJoueurs] = new ContactJoueur(socket, this);
 				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueurs]);
 				nombreDeJoueurs++;
-				
+				listeJoueurs.add("Joueur "+nombreDeJoueurs);
 				envoyerATous("Un Joueur vient de rejoindre la partie");
 				envoyerATous("Nombre de joueurs : "+nombreDeJoueurs+"/"+NB_JOUEURS_MAX);
-				if(nombreDeJoueurs == tableauContactJoueur.length) {
-					partie = new Partie(Serveur.this);
-				}
 				thread.start();
+				
+				if(nombreDeJoueurs == NB_JOUEURS_MAX) {
+					
+					this.partie = new Partie(this);
+					partie.lancerPartie();
+				}
+
 			}
 		} catch(IOException e) {
 			e.printStackTrace();

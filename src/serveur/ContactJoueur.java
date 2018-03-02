@@ -14,7 +14,7 @@ public class ContactJoueur implements Runnable  {
 	PrintWriter imprimante = null;
 
 
-	Serveur serveur = null;
+	private Serveur serveur = null;
 	
 	public ContactJoueur(Socket connexion, Serveur serveur)
 	{
@@ -38,6 +38,7 @@ public class ContactJoueur implements Runnable  {
 			
 			while((message = lecteur.readLine()) != null)
 			{
+				System.out.println(serveur.test);
 				if(serveur.getNombreDeJoueurs() == serveur.getNB_JOUEURS_MAX()) {
 					serveur.getPartie().traiter(message);
 				} else {

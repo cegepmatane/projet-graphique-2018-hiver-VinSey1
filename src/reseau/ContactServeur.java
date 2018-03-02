@@ -43,6 +43,15 @@ public class ContactServeur {
 			try {
 				while ((message = lecture.readLine()) != null) {
 					
+					System.out.println(message);
+					
+					if ( message.equals("test liste joueur")) {
+						
+
+						
+						controleurVueVillageois.traiter("rcgr");
+					}
+					
 					if ( message.equals("vote villageois")) {
 						
 						controleurVueVillageois.traiter(message);

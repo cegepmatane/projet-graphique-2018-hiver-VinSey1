@@ -18,10 +18,10 @@ public class Partie {
 	
 	public Partie(Serveur serveur) {
 		this.serveur=serveur;
-		lancerPartie();
+
 	}
 	
-	private void lancerPartie() {
+	public void lancerPartie() {
 		serveur.envoyerATous("Il y a assez de joueurs ! La partie va commencer.\nLes cartes vont être distribuées");
 		tableauJoueurs = new int[serveur.getNB_JOUEURS_MAX()];
 		nbMaxLoupGarou = 1;
@@ -29,6 +29,12 @@ public class Partie {
 		distribuerCartes();
 		while(!finDePartie()) {
 			deroulementNuit();
+			try {
+				TimeUnit.SECONDS.sleep(2);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			deroulementJour();
 		}
 		partieFinie();
@@ -101,6 +107,8 @@ public class Partie {
 	}
 	
 	public void traiter(String message) {
-		//traitement du message
+		if(message.equals("requete liste joueur pour vote villageois")) {
+			serveur.envoyerIndividuel("test liste joueur", 2);
+		}
 	}
 }
