@@ -8,10 +8,12 @@ public class ControleurRegles {
 
 	
 	VueRegles vueRegles;
+	VueAccueil vueAccueil;
 	
 	
-	public ControleurRegles (VueRegles vueRegles) {
+	public ControleurRegles (VueRegles vueRegles, VueAccueil vueAccueil) {
 		this.vueRegles = vueRegles;
+		this.vueAccueil = vueAccueil;
 	}
 	
 	public void retourAccueil() {
@@ -20,11 +22,8 @@ public class ControleurRegles {
 			@Override
 				public void run() {
 				
-					vueRegles.close();
-					VueAccueil vueAccueil = new VueAccueil();
-					vueAccueil.start(VueAccueil.instanceVueAccueil);
-					ControleurAccueil controleAccueil = new ControleurAccueil(vueAccueil);
-					vueAccueil.setControleurAccueil(controleAccueil);
+					vueRegles.hide();
+					vueAccueil.show();
 					
 			}
 		});

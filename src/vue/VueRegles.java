@@ -176,6 +176,14 @@ public class VueRegles extends Application {
 		instanceVueRegles.close();
 	}
     
+    public void hide() {
+    	instanceVueRegles.hide();
+    }
+    
+    public void show() {
+    	instanceVueRegles.show();
+    }
+    
     public void setControleurRegles(ControleurRegles controleRegles) {
     	this.controle = controleRegles;
     }
