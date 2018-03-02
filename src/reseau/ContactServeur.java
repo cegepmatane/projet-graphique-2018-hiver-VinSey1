@@ -19,6 +19,7 @@ public class ContactServeur {
 	
 	ControleurSalonDeJeu controleurSalonDeJeu;
 	ControleurVueVillageois controleurVueVillageois;
+	ControleurVueLoupGarou controleurVueLoupGarou;
 	
 	@SuppressWarnings("resource")
 	public void connection() {
