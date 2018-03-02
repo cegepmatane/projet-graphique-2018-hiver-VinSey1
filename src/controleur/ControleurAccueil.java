@@ -41,6 +41,7 @@ public class ControleurAccueil {
 						vueAccueil.setErreur();
 					}
 					else {
+						
 						vueAccueil.close();
 						VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();											
 						ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonDeJeu, contactServeur);
@@ -48,11 +49,9 @@ public class ControleurAccueil {
 						contactServeur.setControleur(controleurSalonDeJeu);
 						vueSalonDeJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
 						vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
-						
+						contactServeur.connection();
 						
 					}
-					
-					
 			}
 		});
 	}

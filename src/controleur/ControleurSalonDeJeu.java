@@ -42,10 +42,6 @@ public class ControleurSalonDeJeu {
 			
 			*/
 		
-		
-		
-
-		
 		if (message.equals("Demande vote du village")) {
 			vueSalonDeJeu.ajouterTexteAuChat("A vous de voter villageois");
 		}
