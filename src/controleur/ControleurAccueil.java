@@ -42,7 +42,7 @@ public class ControleurAccueil {
 					}
 					else {
 						
-						vueAccueil.hide();
+						vueAccueil.close();
 						VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();											
 						ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonDeJeu, contactServeur, vueRegles);
 						

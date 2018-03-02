@@ -16,6 +16,7 @@ public class ControleurRegles {
 	public ControleurRegles (VueRegles vueRegles, VueAccueil vueAccueil) {
 		this.vueRegles = vueRegles;
 		this.vueAccueil = vueAccueil;
+		this.vueSalonDeJeu = vueSalonDeJeu;
 	}
 	
 	public void retour() {
@@ -24,13 +25,14 @@ public class ControleurRegles {
 			@Override
 				public void run() {
 					
-					if (vueAccueil.hide()==true) {
+					if (vueAccueil==null) {
 						vueRegles.hide();
-						vueAccueil.show();
+						vueSalonDeJeu.show();
+						
 					}
 					else {
 						vueRegles.hide();
-						vueSalonDeJeu.show();
+						vueAccueil.show();
 					}
 					
 					
