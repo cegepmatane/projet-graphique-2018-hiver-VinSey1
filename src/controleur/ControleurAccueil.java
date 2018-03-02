@@ -43,7 +43,6 @@ public class ControleurAccueil {
 					}
 					else {
 						vueAccueil.close();
-						contactServeur.envoyerMessage("<pseudo>"+pseudo+"</pseudo>");
 						VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();											
 						ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonDeJeu, contactServeur);
 						
