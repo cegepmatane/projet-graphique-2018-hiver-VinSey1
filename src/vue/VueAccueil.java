@@ -73,6 +73,14 @@ public class VueAccueil extends Application {
 		instanceVueAccueil.close();
 	}
 	
+	public void hide() {
+		instanceVueAccueil.hide();
+	}
+	
+	public void show() {
+		instanceVueAccueil.show();
+	}
+	
 	private Scene getScene() {
 		return scene;
 	}

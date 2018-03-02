@@ -26,7 +26,7 @@ public class ControleurAccueil {
 						vueAccueil.close();
 						VueRegles vueRegles = new VueRegles();
 						vueRegles.start(VueRegles.instanceVueRegles);
-						ControleurRegles controleRegles = new ControleurRegles(vueRegles);
+						ControleurRegles controleRegles = new ControleurRegles(vueRegles,vueAccueil);
 						vueRegles.setControleurRegles(controleRegles);
 				}
 			});
