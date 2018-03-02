@@ -41,7 +41,6 @@ public class ContactJoueur implements Runnable  {
 				if(serveur.getNombreDeJoueurs() == serveur.getNB_JOUEURS_MAX()) {
 					serveur.getPartie().traiter(message);
 				} else {
-					System.out.println("Test");
 					serveur.envoyerATous(message);
 				}
 			}
@@ -52,7 +51,6 @@ public class ContactJoueur implements Runnable  {
 		
 	public boolean envoiMessage(String message)
 	{
-		
 		imprimante.println(message);
 		return true;
 	}		

@@ -56,6 +56,8 @@ public class Serveur{
 		
 		for ( int iterateurBoucle = 0 ; iterateurBoucle < nombreDeJoueurs ; iterateurBoucle++) {		
 
+			System.out.println("Test");
+
 			tableauContactJoueur[iterateurBoucle].envoiMessage(message);			
 
 		}
