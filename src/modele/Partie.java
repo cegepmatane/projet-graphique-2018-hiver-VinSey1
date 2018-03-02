@@ -1,5 +1,6 @@
 package modele;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import serveur.Serveur;
 
@@ -46,6 +47,13 @@ public class Partie {
 	private void deroulementNuit() {
 		serveur.envoyerATous("La nuit tombe sur le village de thiercelieux, vous fermez les yeux en espérant passer la nuit");
 		tourLoupGarou();
+		try {
+			TimeUnit.SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		serveur.envoyerATous("Les loups-garous ont fait leur choix");
 	}
 	
@@ -87,7 +95,12 @@ public class Partie {
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
 			if(tableauJoueurs[iterateur] == 0) {
 				serveur.envoyerIndividuel("C'est à ton tour de jouer. En tant que Loup-Garou, tu dois choisir une cible à manger cette nuit.", iterateur);
+				
 			}
 		}
+	}
+	
+	public void traiter(String message) {
+		//traitement du message
 	}
 }

@@ -7,15 +7,24 @@ import modele.Partie;
 
 public class Serveur{
 	
-	BufferedReader lecture = null;
+	private BufferedReader lecture = null;
 	private int nombreDeJoueurs = 0;
 	private final int NB_JOUEURS_MAX = 3;
-	ContactJoueur[] tableauContactJoueur = new ContactJoueur[NB_JOUEURS_MAX];
-	Socket socket = null;
-	ServerSocket serveur;
+	private ContactJoueur[] tableauContactJoueur = new ContactJoueur[NB_JOUEURS_MAX];
+	private Socket socket = null;
+	private ServerSocket serveur;
+	private Partie partie;
 	
 	public int getNB_JOUEURS_MAX() {
 		return NB_JOUEURS_MAX;
+	}
+	
+	public int getNombreDeJoueurs() {
+		return nombreDeJoueurs;
+	}
+	
+	public Partie getPartie() {
+		return partie;
 	}
 
 
@@ -29,9 +38,11 @@ public class Serveur{
 				tableauContactJoueur[nombreDeJoueurs] = new ContactJoueur(socket, Serveur.this);
 				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueurs]);
 				nombreDeJoueurs++;
-				envoyerATous("MessageNBJoueurs : "+nombreDeJoueurs+"/"+NB_JOUEURS_MAX);
+				
+				envoyerATous("Un Joueur vient de rejoindre la partie");
+				envoyerATous("Nombre de joueurs : "+nombreDeJoueurs+"/"+NB_JOUEURS_MAX);
 				if(nombreDeJoueurs == tableauContactJoueur.length) {
-					Partie partie = new Partie(Serveur.this);
+					partie = new Partie(Serveur.this);
 				}
 				thread.start();
 			}

@@ -76,13 +76,7 @@ public class VueAccueil extends Application {
 	private Scene getScene() {
 		return scene;
 	}
-	
-	
 
-
-	
-	
-	
     @Override
     public void start(Stage primaryStage) {
     	
@@ -123,14 +117,7 @@ public class VueAccueil extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	//String pseudo = new String();
-            	//if ((creationPseudo.getText() != null && !creationPseudo.getText().isEmpty())) {
-            		//pseudo = creationPseudo.getText();
-            		//System.out.println(pseudo);
-            	//}
-            	//else {
-            		//System.out.println("Veuillez entrer un pseudo");
-            	//}
+
             	controle.afficherSalonDeJeu();
             	
             }

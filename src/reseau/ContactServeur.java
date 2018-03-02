@@ -15,6 +15,7 @@ public class ContactServeur {
 	Socket connexion;
 	PrintWriter sortie;
 	BufferedReader lecture;
+	String pseudo;
 	
 	ControleurSalonDeJeu controleurSalonDeJeu;
 	ControleurVueVillageois controleurVueVillageois;
