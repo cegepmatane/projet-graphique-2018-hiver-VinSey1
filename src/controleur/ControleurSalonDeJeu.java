@@ -46,7 +46,7 @@ public class ControleurSalonDeJeu {
 			vueSalonDeJeu.ajouterTexteAuChat("Un villageois a été tué");
 			vueSalonDeJeu.modifierNombreDeJoueur(2);
 		}
-		
+
 		
 	}
 	
@@ -67,6 +67,10 @@ public class ControleurSalonDeJeu {
 				
 					try {
 						vueVillageois.start(VueVillageois.instanceVueVillageois);
+						
+						contactServeur.envoyerMessage("requete liste joueur pour vote villageois");
+						
+						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

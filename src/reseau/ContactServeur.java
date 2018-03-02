@@ -19,7 +19,6 @@ public class ContactServeur {
 	ControleurSalonDeJeu controleurSalonDeJeu;
 	ControleurVueVillageois controleurVueVillageois;
 	
-	
 	@SuppressWarnings("resource")
 	public void connection() {
 		try {
@@ -42,7 +41,16 @@ public class ContactServeur {
 			try {
 				while ((message = lecture.readLine()) != null) {
 					
-					controleurSalonDeJeu.traiter(message);
+					if ( message.equals("vote villageois")) {
+						
+						controleurVueVillageois.traiter(message);
+					}
+					else {
+							
+						controleurSalonDeJeu.traiter(message);
+						
+					}
+					
 				}
 			} catch(Exception e) {}
 		}

@@ -1,6 +1,10 @@
 package controleur;
 
 import vue.VueVillageois;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import reseau.ContactServeur;
 public class ControleurVueVillageois {
 
@@ -26,5 +30,15 @@ public class ControleurVueVillageois {
 		contactServeur.envoyerMessage(joueur);	
 	}
 	
+	
+	public void traiter(String message) {
+					
+			List<String> listeJoueurs = new ArrayList<String>();
+			
+			listeJoueurs.add(message);
+			
+			vueVillageois.setChoixJoueur(listeJoueurs);
+		
+	}
 	
 }
