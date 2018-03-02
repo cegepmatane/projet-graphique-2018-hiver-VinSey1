@@ -7,7 +7,7 @@ import vue.VueRegles;
 public class ControleurRegles {
 
 	
-	VueRegles vueRegles = new VueRegles();
+	VueRegles vueRegles;
 	
 	
 	public ControleurRegles (VueRegles vueRegles) {
@@ -23,6 +23,9 @@ public class ControleurRegles {
 					vueRegles.close();
 					VueAccueil vueAccueil = new VueAccueil();
 					vueAccueil.start(VueAccueil.instanceVueAccueil);
+					ControleurAccueil controleAccueil = new ControleurAccueil(vueAccueil);
+					vueAccueil.setControleurAccueil(controleAccueil);
+					
 			}
 		});
 	}

@@ -2,6 +2,7 @@ package vue;
 
 import com.sun.prism.paint.Color;
 
+import controleur.ControleurAccueil;
 import controleur.ControleurRegles;
 import javafx.application.*;
 import javafx.event.*;
@@ -174,4 +175,8 @@ public class VueRegles extends Application {
     public void close() {
 		instanceVueRegles.close();
 	}
+    
+    public void setControleurRegles(ControleurRegles controleRegles) {
+    	this.controle = controleRegles;
+    }
 }
