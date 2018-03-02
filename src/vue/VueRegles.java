@@ -65,7 +65,7 @@ public class VueRegles extends Application {
     	retour.setMinWidth(200.0);
     	retour.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent event) {
-        		controle.retourAccueil();
+        		controle.retour();
         	}
         });
     	//Création de l'explication des règles

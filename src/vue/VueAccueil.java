@@ -73,8 +73,9 @@ public class VueAccueil extends Application {
 		instanceVueAccueil.close();
 	}
 	
-	public void hide() {
+	public boolean hide() {
 		instanceVueAccueil.hide();
+		return true;
 	}
 	
 	public void show() {
