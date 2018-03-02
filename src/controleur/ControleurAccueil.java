@@ -44,7 +44,7 @@ public class ControleurAccueil {
 						
 						vueAccueil.close();
 						VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();											
-						ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonDeJeu, contactServeur);
+						ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonDeJeu, contactServeur, vueRegles);
 						
 						contactServeur.setControleur(controleurSalonDeJeu);
 						vueSalonDeJeu.setControleurSalonDeJeu(controleurSalonDeJeu);

@@ -2,6 +2,7 @@ package controleur;
 
 import javafx.application.Platform;
 import reseau.ContactServeur;
+import vue.VueRegles;
 import vue.VueSalonDeJeu;
 import vue.VueVillageois;
 
@@ -9,10 +10,12 @@ public class ControleurSalonDeJeu {
 
 	ContactServeur contactServeur;
 	VueSalonDeJeu vueSalonDeJeu;
+	VueRegles vueRegles;
 	
-	public ControleurSalonDeJeu (VueSalonDeJeu vueSalonDeJeu, ContactServeur contactServeur) {
+	public ControleurSalonDeJeu (VueSalonDeJeu vueSalonDeJeu, ContactServeur contactServeur, VueRegles vueRegles) {
 		this.vueSalonDeJeu = vueSalonDeJeu;
 		this.contactServeur = contactServeur;
+		this.vueRegles = vueRegles;
 		
 	}
 	
@@ -27,20 +30,7 @@ public class ControleurSalonDeJeu {
 				
 			}
 		});
-		/*
-		public void afficherRegles() {
-			
-			Platform.runLater(new Runnable() {
-				
-				@Override
-				public void run() {
-					
-					vueSalonDeJeu.ajouterTexteAuChat(message);
-					
-				}
-			});
-			
-			*/
+	
 		
 		if (message.equals("Demande vote du village")) {
 			vueSalonDeJeu.ajouterTexteAuChat("A vous de voter villageois");
@@ -85,6 +75,20 @@ public class ControleurSalonDeJeu {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+			}
+		});
+	}
+	
+	public void afficherRegles() {
+		
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				vueSalonDeJeu.hide();
+				vueRegles.show();
+				
 			}
 		});
 	}

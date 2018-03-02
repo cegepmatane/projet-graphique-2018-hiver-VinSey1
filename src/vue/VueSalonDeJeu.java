@@ -105,7 +105,7 @@ public class VueSalonDeJeu extends Application {
         primaryStage.setTitle("Salon de Jeu");
         
         
-        // Bouton d'acces aux relges du jeu	
+        // Bouton d'acces aux regles du jeu	
         Button reglesDuJeu = new Button();
         reglesDuJeu.setText("Règles du jeu");
         reglesDuJeu.setStyle("-fx-background-color:#fff224; -fx-font-size:20px; -fx-padding: 10 50 10 50; -fx-font-family:\"Lucida Handwriting\";");
@@ -113,7 +113,7 @@ public class VueSalonDeJeu extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	// appel a la fenêtre des règles du jeu
+            	controleur.afficherRegles();
             }
         });
         
@@ -371,4 +371,11 @@ public class VueSalonDeJeu extends Application {
     	this.controleur = controleurSalonDeJeu;
     }
     
+    public void hide() {
+    	instanceVueSalonDeJeu.hide();
+    }
+    
+    public void show() {
+    	instanceVueSalonDeJeu.show();
+    }
 }
