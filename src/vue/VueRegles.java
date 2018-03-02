@@ -2,6 +2,7 @@ package vue;
 
 import com.sun.prism.paint.Color;
 
+import controleur.ControleurRegles;
 import javafx.application.*;
 import javafx.event.*;
 import javafx.geometry.*;
@@ -32,6 +33,7 @@ public class VueRegles extends Application {
 	protected Group groupe;
 	protected BorderPane miseEnPage;
 	protected Scene scene;
+	protected ControleurRegles controle;
 	public static Stage instanceVueRegles = new Stage();
 	
     @Override
@@ -60,7 +62,11 @@ public class VueRegles extends Application {
     	//Paramètres de taille du bouton "Retour"
     	retour.setMaxWidth(200.0);
     	retour.setMinWidth(200.0);
-    	
+    	retour.setOnAction(new EventHandler<ActionEvent>() {
+        	public void handle(ActionEvent event) {
+        		controle.retourAccueil();
+        	}
+        });
     	//Création de l'explication des règles
     	contenu = new Label("Test, consectetur adipiscing elit. Praesent ipsum erat, imperdiet non tellus consectetur, "
     			+ "lobortis suscipit orci. Duis volutpat quam in interdum vestibulum. Maecenas at nibh aliquam, vulputate nisi quis, "
@@ -164,4 +170,8 @@ public class VueRegles extends Application {
     public void ecrireRegles(String texte) {
     	contenu.setText(texte);
     }
+    
+    public void close() {
+		instanceVueRegles.close();
+	}
 }
