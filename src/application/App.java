@@ -20,9 +20,10 @@ public class App {
 			@Override
 			public void run() {
 				
+				ContactServeur contactServeur = new ContactServeur();
 				VueAccueil vueAccueil = new VueAccueil();
 				vueAccueil.start(VueAccueil.instanceVueAccueil);
-				ControleurAccueil controle = new ControleurAccueil(vueAccueil);
+				ControleurAccueil controle = new ControleurAccueil(vueAccueil, contactServeur);
 				vueAccueil.setControleurAccueil(controle);
 				
 
