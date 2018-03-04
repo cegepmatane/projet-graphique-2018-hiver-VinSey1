@@ -42,9 +42,7 @@ public class ContactServeur {
 			String message = "";
 			try {
 				while ((message = lecture.readLine()) != null) {
-					
-					System.out.println(message);
-					
+										
 					if ( message.equals("test liste joueur")) {
 						
 
