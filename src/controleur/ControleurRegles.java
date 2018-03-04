@@ -14,9 +14,10 @@ public class ControleurRegles {
 	
 	
 	
-	public ControleurRegles (VueRegles vueRegles, VueAccueil vueAccueil) {
+	public ControleurRegles (VueRegles vueRegles, VueAccueil vueAccueil, VueSalonDeJeu vueSalonDeJeu) {
 		this.vueRegles = vueRegles;
 		this.vueAccueil = vueAccueil;
+		this.vueSalonDeJeu = vueSalonDeJeu;
 		
 	}
 	

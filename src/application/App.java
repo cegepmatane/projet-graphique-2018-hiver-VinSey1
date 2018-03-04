@@ -27,7 +27,7 @@ public class App {
 				vueAccueil.start(VueAccueil.instanceVueAccueil);
 				VueRegles vueRegles = new VueRegles();
 				vueRegles.start(VueRegles.instanceVueRegles);
-				ControleurRegles controleRegles = new ControleurRegles(vueRegles, vueAccueil);
+				ControleurRegles controleRegles = new ControleurRegles(vueRegles, vueAccueil,vueSalonDeJeu);
 				vueRegles.setControleurRegles(controleRegles);
 				vueRegles.hide();
 				ControleurAccueil controle = new ControleurAccueil(vueAccueil, contactServeur, vueRegles);
