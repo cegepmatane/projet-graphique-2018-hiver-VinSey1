@@ -36,6 +36,7 @@ public class VueRegles extends Application {
 	protected Scene scene;
 	protected ControleurRegles controle;
 	public static Stage instanceVueRegles = new Stage();
+	public static int ouRetourner;
 	
     @Override
     public void start(Stage primaryStage) {
@@ -186,5 +187,13 @@ public class VueRegles extends Application {
     
     public void setControleurRegles(ControleurRegles controleRegles) {
     	this.controle = controleRegles;
+    }
+    
+    public void setRetour(int retour) {
+    	this.ouRetourner=retour;
+    }
+    
+    public static int getRetour() {
+    	return ouRetourner;
     }
 }

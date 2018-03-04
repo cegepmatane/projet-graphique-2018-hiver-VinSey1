@@ -13,6 +13,8 @@ public class ControleurAccueil {
 	String pseudo ="";
 	ContactServeur contactServeur;
 	
+	
+	
 	public ControleurAccueil(VueAccueil vueAccueil, ContactServeur contactServeur, VueRegles vueRegles) {
 		this.vueAccueil = vueAccueil;
 		this.contactServeur = contactServeur;
@@ -25,8 +27,11 @@ public class ControleurAccueil {
 				@Override
 					public void run() {
 					
+						
 						vueAccueil.hide();
 						vueRegles.show();
+						vueRegles.setRetour(0);
+						
 				}
 			});
 	}

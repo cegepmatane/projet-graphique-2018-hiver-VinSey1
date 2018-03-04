@@ -12,6 +12,7 @@ public class ControleurSalonDeJeu {
 	VueSalonDeJeu vueSalonDeJeu;
 	VueRegles vueRegles;
 	
+	
 	public ControleurSalonDeJeu (VueSalonDeJeu vueSalonDeJeu, ContactServeur contactServeur, VueRegles vueRegles) {
 		this.vueSalonDeJeu = vueSalonDeJeu;
 		this.contactServeur = contactServeur;
@@ -86,8 +87,10 @@ public class ControleurSalonDeJeu {
 			@Override
 			public void run() {
 				
+				vueRegles.setRetour(1);
 				vueSalonDeJeu.hide();
 				vueRegles.show();
+				
 				
 			}
 		});
