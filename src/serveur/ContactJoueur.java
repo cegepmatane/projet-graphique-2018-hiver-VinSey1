@@ -38,7 +38,6 @@ public class ContactJoueur implements Runnable  {
 			
 			while((message = lecteur.readLine()) != null)
 			{
-				System.out.println(serveur.test);
 				if(serveur.getNombreDeJoueurs() == serveur.getNB_JOUEURS_MAX()) {
 					serveur.getPartie().traiter(message);
 				} else {

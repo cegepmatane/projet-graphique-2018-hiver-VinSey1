@@ -68,7 +68,7 @@ public class ControleurSalonDeJeu {
 				
 					try {
 						vueVillageois.start(VueVillageois.instanceVueVillageois);
-						
+						contactServeur.setControleurVueVillageois(controleurVueVillageois);
 						contactServeur.envoyerMessage("requete liste joueur pour vote villageois");
 						
 						

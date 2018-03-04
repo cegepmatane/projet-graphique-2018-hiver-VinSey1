@@ -60,7 +60,7 @@ public class VueVillageois extends Application{
 	
 	
 	public void setChoixJoueur(List<String> listeJoueur) {
-		
+		//System.out.println(listeJoueur.get(0));
 		for ( int iterateurJoueur = 0 ; iterateurJoueur < listeJoueur.size(); iterateurJoueur++) {
 			
 			choixJoueur.add(new RadioButton(listeJoueur.get(iterateurJoueur)));

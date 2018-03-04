@@ -42,11 +42,9 @@ public class ContactServeur {
 			String message = "";
 			try {
 				while ((message = lecture.readLine()) != null) {
-										
+									
 					if ( message.equals("test liste joueur")) {
-						
-
-						
+						System.out.println(controleurVueVillageois);
 						controleurVueVillageois.traiter("rcgr");
 					}
 					
@@ -71,8 +69,12 @@ public class ContactServeur {
 		return controleurSalonDeJeu;
 	}
 
-	public void setControleur(ControleurSalonDeJeu controleur) {
+	public void setControleurSalonDeJeu(ControleurSalonDeJeu controleur) {
 		this.controleurSalonDeJeu = controleur;
+	}
+	
+	public void setControleurVueVillageois(ControleurVueVillageois controleur) {
+		this.controleurVueVillageois = controleur;
 	}
 	
 	public boolean envoyerMessage(String message) {

@@ -17,9 +17,7 @@ public class Serveur{
 	private ServerSocket serveur;
 	private volatile Partie partie;
 	private List<String> listeJoueurs = new ArrayList<String>();
-	
-	public int test=0;
-	
+		
 	
 	public int getNB_JOUEURS_MAX() {
 		return NB_JOUEURS_MAX;
