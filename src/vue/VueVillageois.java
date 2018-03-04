@@ -28,6 +28,8 @@ public class VueVillageois extends Application{
 	
 	private StackPane fenetreChoixVote;
 	
+	private Text indication;
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
@@ -35,7 +37,7 @@ public class VueVillageois extends Application{
 		
 		valider.setStyle("-fx-background-color:#fff224; -fx-font-size:20px; -fx-padding: 10 50 10 50; -fx-font-family:\"Lucida Handwriting\";");
 		
-		Text indication = new Text("Votez pour le joueur à éliminer aujourd'hui");
+		indication = new Text("Votez pour le joueur à éliminer aujourd'hui");
 		
 		StackPane fenetrePrincipale = new StackPane();
 		
@@ -60,11 +62,15 @@ public class VueVillageois extends Application{
 	
 	
 	public void setChoixJoueur(List<String> listeJoueur) {
-		//System.out.println(listeJoueur.get(0));
+		
 		for ( int iterateurJoueur = 0 ; iterateurJoueur < listeJoueur.size(); iterateurJoueur++) {
 			
-			choixJoueur.add(new RadioButton(listeJoueur.get(iterateurJoueur)));
-			fenetreChoixVote.getChildren().add(choixJoueur.get(choixJoueur.size()-1));
+			System.out.println(iterateurJoueur);
+			
+			setIndication(listeJoueur.get(iterateurJoueur));
+			
+//			choixJoueur.add(new RadioButton(listeJoueur.get(iterateurJoueur)));
+//			fenetreChoixVote.getChildren().add(choixJoueur.get(choixJoueur.size()-1));
 			
 		}
 		
@@ -74,6 +80,12 @@ public class VueVillageois extends Application{
 	
 	public List<RadioButton> getChoixJoueur() {
 		return choixJoueur;
+	}
+	
+	public void setIndication(String message) {
+		
+		indication.setText(message);
+		
 	}
 
 }

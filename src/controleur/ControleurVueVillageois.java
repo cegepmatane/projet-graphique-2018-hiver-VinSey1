@@ -32,7 +32,6 @@ public class ControleurVueVillageois {
 	
 	
 	public void traiter(String message) {
-		System.out.println(message);
 		List<String> listeJoueurs = new ArrayList<String>();
 		
 		listeJoueurs.add(message);
