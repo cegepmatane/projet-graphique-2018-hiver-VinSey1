@@ -12,13 +12,15 @@ public class ControleurAccueil {
 	VueAccueil vueAccueil;
 	String pseudo ="";
 	ContactServeur contactServeur;
+	VueSalonDeJeu vueSalonDeJeu;
 	
 	
 	
-	public ControleurAccueil(VueAccueil vueAccueil, ContactServeur contactServeur, VueRegles vueRegles) {
+	public ControleurAccueil(VueAccueil vueAccueil, ContactServeur contactServeur, VueRegles vueRegles, VueSalonDeJeu vueSalonDeJeu) {
 		this.vueAccueil = vueAccueil;
 		this.contactServeur = contactServeur;
 		this.vueRegles = vueRegles;
+		this.vueSalonDeJeu = vueSalonDeJeu;
 	}
 	
 	public void afficherRegles() {
@@ -48,13 +50,7 @@ public class ControleurAccueil {
 					else {
 						
 						vueAccueil.close();
-						VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();											
-						ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonDeJeu, contactServeur, vueRegles);
-						
-						contactServeur.setControleurSalonDeJeu(controleurSalonDeJeu);
-						vueSalonDeJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
-						vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
-						contactServeur.connection();
+						vueSalonDeJeu.show();
 						
 					}
 			}
