@@ -30,6 +30,8 @@ public class VueVillageois extends Application{
 	
 	private Text indication;
 	
+	RadioButton a, b;
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
@@ -41,9 +43,14 @@ public class VueVillageois extends Application{
 		
 		StackPane fenetrePrincipale = new StackPane();
 		
-		fenetrePrincipale.getChildren().add(indication);
-		
+		a = new RadioButton("a");
+		b = new RadioButton("b");
+				
 		fenetreChoixVote = new StackPane();
+		
+		fenetreChoixVote.getChildren().addAll(a,b);
+		
+		fenetrePrincipale.getChildren().addAll(indication, fenetreChoixVote);
 		
 		Scene scene = new Scene(fenetrePrincipale, 800,600);
 		
@@ -64,16 +71,13 @@ public class VueVillageois extends Application{
 	public void setChoixJoueur(List<String> listeJoueur) {
 		
 		for ( int iterateurJoueur = 0 ; iterateurJoueur < listeJoueur.size(); iterateurJoueur++) {
-			
-			System.out.println(iterateurJoueur);
-			
-			setIndication(listeJoueur.get(iterateurJoueur));
-			
-//			choixJoueur.add(new RadioButton(listeJoueur.get(iterateurJoueur)));
-//			fenetreChoixVote.getChildren().add(choixJoueur.get(choixJoueur.size()-1));
+									
+			choixJoueur.add(new RadioButton(listeJoueur.get(iterateurJoueur)));
+			fenetreChoixVote.getChildren().add(choixJoueur.get(choixJoueur.size()-1));
 			
 		}
 		
+		a.setText(listeJoueur.get(0));
 		fenetreChoixVote.getChildren().add(fenetreChoixVote);
 		fenetreChoixVote.getChildren().add(valider);
 	}
@@ -81,11 +85,4 @@ public class VueVillageois extends Application{
 	public List<RadioButton> getChoixJoueur() {
 		return choixJoueur;
 	}
-	
-	public void setIndication(String message) {
-		
-		indication.setText(message);
-		
-	}
-
 }
