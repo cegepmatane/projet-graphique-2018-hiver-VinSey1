@@ -43,7 +43,7 @@ public class VueVillageois extends Application{
 		BorderPane fenetrePrincipale = new BorderPane();
 
 		fenetreChoixVote = new BorderPane();
-
+		
 		fenetrePrincipale.setTop(indication);
 		
 		fenetrePrincipale.setBottom(valider);
@@ -51,6 +51,12 @@ public class VueVillageois extends Application{
 		fenetrePrincipale.setCenter(fenetreChoixVote);
 		
 		Scene scene = new Scene(fenetrePrincipale, 800,600);
+		
+		RadioButton test = new RadioButton("testtesttesttesttesttesttesttesttesttesttest");
+		test.setToggleGroup(joueurs);
+		
+		choixJoueur.add(test);
+		fenetreChoixVote.getChildren().add(test);
 		
 		valider.setOnAction(new EventHandler<ActionEvent>() {
 			
@@ -67,7 +73,7 @@ public class VueVillageois extends Application{
 	
 	
 	public void setChoixJoueur(List<String> listeJoueur) {
-		
+		/*
 		for ( int iterateurJoueur = 0 ; iterateurJoueur < listeJoueur.size(); iterateurJoueur++) {
 									
 			choixJoueur.add(new RadioButton(listeJoueur.get(iterateurJoueur)));
@@ -75,7 +81,8 @@ public class VueVillageois extends Application{
 			
 		}
 		
-
+		choixJoueur.add(new RadioButton(listeJoueur.get(0)));
+		fenetreChoixVote.getChildren().add(choixJoueur.get(0));*/
 		
 	}
 	

@@ -39,16 +39,8 @@ public class App {
 				vueRegles.hide();
 				ControleurAccueil controle = new ControleurAccueil(vueAccueil, contactServeur, vueRegles, vueSalonDeJeu);
 				vueAccueil.setControleurAccueil(controle);
-				
-
-				
-				
+								
 			}
 		});
-				
-		
-		
-		
 	}
-
 }
