@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -26,7 +27,7 @@ public class VueVillageois extends Application{
 
 	private ToggleGroup joueurs = new ToggleGroup();
 	
-	private StackPane fenetreChoixVote;
+	private BorderPane fenetreChoixVote;
 	
 	private Text indication;
 	
@@ -46,9 +47,12 @@ public class VueVillageois extends Application{
 		a = new RadioButton("a");
 		b = new RadioButton("b");
 				
-		fenetreChoixVote = new StackPane();
+		fenetreChoixVote = new BorderPane();
 		
-		fenetreChoixVote.getChildren().addAll(a,b);
+		fenetreChoixVote.setTop(a);
+		fenetreChoixVote.setBottom(b);
+		
+		//fenetreChoixVote.getChildren().addAll(a,b);
 		
 		fenetrePrincipale.getChildren().addAll(indication, fenetreChoixVote);
 		
