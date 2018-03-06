@@ -31,8 +31,6 @@ public class VueVillageois extends Application{
 	
 	private Text indication;
 	
-	RadioButton a, b;
-	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
@@ -42,19 +40,15 @@ public class VueVillageois extends Application{
 		
 		indication = new Text("Votez pour le joueur à éliminer aujourd'hui");
 		
-		StackPane fenetrePrincipale = new StackPane();
-		
-		a = new RadioButton("a");
-		b = new RadioButton("b");
-				
+		BorderPane fenetrePrincipale = new BorderPane();
+
 		fenetreChoixVote = new BorderPane();
+
+		fenetrePrincipale.setTop(indication);
 		
-		fenetreChoixVote.setTop(a);
-		fenetreChoixVote.setBottom(b);
-		
-		//fenetreChoixVote.getChildren().addAll(a,b);
-		
-		fenetrePrincipale.getChildren().addAll(indication, fenetreChoixVote);
+		fenetrePrincipale.setBottom(valider);
+
+		fenetrePrincipale.setCenter(fenetreChoixVote);
 		
 		Scene scene = new Scene(fenetrePrincipale, 800,600);
 		
@@ -81,9 +75,8 @@ public class VueVillageois extends Application{
 			
 		}
 		
-		a.setText(listeJoueur.get(0));
-		fenetreChoixVote.getChildren().add(fenetreChoixVote);
-		fenetreChoixVote.getChildren().add(valider);
+
+		
 	}
 	
 	public List<RadioButton> getChoixJoueur() {
