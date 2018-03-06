@@ -5,6 +5,7 @@ import vue.VueVillageois;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Platform;
 import reseau.ContactServeur;
 public class ControleurVueVillageois {
 
@@ -36,7 +37,17 @@ public class ControleurVueVillageois {
 		
 		listeJoueurs.add(message);
 		
-		vueVillageois.setChoixJoueur(listeJoueurs);
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				vueVillageois.setChoixJoueur(listeJoueurs);
+				
+			}
+		});
+		
+		
 		
 	}
 	

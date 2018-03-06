@@ -27,7 +27,7 @@ public class VueVillageois extends Application{
 
 	private ToggleGroup joueurs = new ToggleGroup();
 	
-	private BorderPane fenetreChoixVote;
+	private StackPane fenetreChoixVote;
 	
 	private Text indication;
 	
@@ -42,7 +42,9 @@ public class VueVillageois extends Application{
 		
 		BorderPane fenetrePrincipale = new BorderPane();
 
-		fenetreChoixVote = new BorderPane();
+		fenetreChoixVote = new StackPane();
+		fenetreChoixVote.setMinSize(500, 300);
+		
 		
 		fenetrePrincipale.setTop(indication);
 		
@@ -50,13 +52,14 @@ public class VueVillageois extends Application{
 
 		fenetrePrincipale.setCenter(fenetreChoixVote);
 		
+		
 		Scene scene = new Scene(fenetrePrincipale, 800,600);
 		
 		RadioButton test = new RadioButton("testtesttesttesttesttesttesttesttesttesttest");
 		test.setToggleGroup(joueurs);
 		
 		choixJoueur.add(test);
-		fenetreChoixVote.getChildren().add(test);
+		fenetreChoixVote.getChildren().add(choixJoueur.get(0));
 		
 		valider.setOnAction(new EventHandler<ActionEvent>() {
 			
@@ -81,9 +84,13 @@ public class VueVillageois extends Application{
 			
 		}
 		
-		choixJoueur.add(new RadioButton(listeJoueur.get(0)));
+		choixJoueur.add(new RadioButton("sale chien"));
 		fenetreChoixVote.getChildren().add(choixJoueur.get(0));*/
 		
+		System.out.println("choix joueur après valider");
+		
+		choixJoueur.get(0).setText("changement");
+			
 	}
 	
 	public List<RadioButton> getChoixJoueur() {

@@ -44,7 +44,10 @@ public class ContactServeur {
 				while ((message = lecture.readLine()) != null) {
 									
 					if ( message.equals("test liste joueur")) {
-						System.out.println(controleurVueVillageois);
+						
+//						System.out.println("de contactServeur: réponse reçu à voter");
+//						System.out.println(controleurVueVillageois);
+						
 						controleurVueVillageois.traiter("rcgr");
 					}
 					

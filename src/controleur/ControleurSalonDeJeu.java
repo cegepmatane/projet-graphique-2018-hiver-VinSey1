@@ -66,6 +66,10 @@ public class ControleurSalonDeJeu {
 					
 					ControleurVueVillageois controleurVueVillageois = new ControleurVueVillageois(vueVillageois, contactServeur);
 				
+					System.out.println(controleurVueVillageois);
+					
+					contactServeur.setControleurVueVillageois(controleurVueVillageois);
+					
 					try {
 						vueVillageois.start(VueVillageois.instanceVueVillageois);
 						contactServeur.setControleurVueVillageois(controleurVueVillageois);
@@ -90,8 +94,7 @@ public class ControleurSalonDeJeu {
 				vueRegles.setRetour(1);
 				vueSalonDeJeu.hide();
 				vueRegles.show();
-				
-				
+						
 			}
 		});
 	}
