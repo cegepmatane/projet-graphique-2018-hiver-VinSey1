@@ -18,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -91,6 +93,7 @@ public class VueAccueil extends Application {
     	instanceVueAccueil = primaryStage; 
         primaryStage.setTitle("Accueil");
       
+  
         
         actionQuitter = new Button();
         actionQuitter.setText("Quitter");
@@ -99,6 +102,8 @@ public class VueAccueil extends Application {
         		close();
         	}
         });
+        
+       
         
         actionRegles = new Button();
         actionRegles.setText("Règles du jeu");
@@ -130,7 +135,16 @@ public class VueAccueil extends Application {
             	
             }
         });
-        
+       /** actionDeConnexion.requestFocus();
+        actionDeConnexion.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER)  {
+                	controle.afficherSalonDeJeu();
+                }
+            }
+        });
+        */
         miseEnPage = new BorderPane();
         miseEnPage.setTop(titre);
         miseEnPage.setAlignment(titre, Pos.CENTER);
@@ -185,6 +199,14 @@ public class VueAccueil extends Application {
         
         scene = new Scene(miseEnPage, 1500, 750);
         scene.getStylesheets().add(VueAccueil.class.getResource("decoration/lg.css").toExternalForm()); 
+        
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent ke) {
+            	if (ke.getCode() == KeyCode.ENTER)  {
+                	controle.afficherSalonDeJeu();
+                }
+            }
+        });
         
         primaryStage.setScene(scene);
         primaryStage.show();
