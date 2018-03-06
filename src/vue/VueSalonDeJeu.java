@@ -117,7 +117,7 @@ public class VueSalonDeJeu extends Application {
             }
         });
         
-        // Bouton Voter
+        // Bouton quitter
         Button quitter = new Button();
         quitter.setText("Quitter");
         quitter.setStyle("-fx-background-color:#4d0000; -fx-font-size:20px; -fx-padding: 10 50 10 50;-fx-font-family:\"Lucida Handwriting\"; -fx-text-fill:white;");
@@ -130,7 +130,7 @@ public class VueSalonDeJeu extends Application {
         });
      
         
-        // Bouton Quitter
+        // Bouton voter
         Button boutonVoter = new Button();
         boutonVoter.setText("Voter");
         boutonVoter.setStyle("-fx-background-color:#00cc00; -fx-font-size:20px; -fx-padding: 10 50 10 50;-fx-font-family:\"Lucida Handwriting\"");

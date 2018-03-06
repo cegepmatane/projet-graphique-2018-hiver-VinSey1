@@ -42,7 +42,7 @@ public class Serveur{
 			String message = "";
 			serveur = new ServerSocket(11);
 			while((socket = serveur.accept()) != null) {
-			
+				
 				tableauContactJoueur[nombreDeJoueurs] = new ContactJoueur(socket, this);
 				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueurs]);
 				nombreDeJoueurs++;
