@@ -135,16 +135,7 @@ public class VueAccueil extends Application {
             	
             }
         });
-       /** actionDeConnexion.requestFocus();
-        actionDeConnexion.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER)  {
-                	controle.afficherSalonDeJeu();
-                }
-            }
-        });
-        */
+     
         miseEnPage = new BorderPane();
         miseEnPage.setTop(titre);
         miseEnPage.setAlignment(titre, Pos.CENTER);
@@ -205,6 +196,10 @@ public class VueAccueil extends Application {
             	if (ke.getCode() == KeyCode.ENTER)  {
                 	controle.afficherSalonDeJeu();
                 }
+            	if (ke.getCode() == KeyCode.ESCAPE)  {
+                	close();
+                }
+            	
             }
         });
         
