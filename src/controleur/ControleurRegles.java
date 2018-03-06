@@ -21,9 +21,7 @@ public class ControleurRegles {
 		
 	}
 	
-	public ControleurRegles() {
-		
-	}
+
 	
 
 	
