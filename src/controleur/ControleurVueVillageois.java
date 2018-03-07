@@ -24,7 +24,7 @@ public class ControleurVueVillageois {
 										+ "<joueurs>"
 											+ "<vote>"
 												+ "<joueur>"
-													+ vueVillageois.getChoixJoueur();
+													+ vueVillageois.getChoixJoueur()
 												+ "</joueur>"
 											+ "</vote>"
 										+ "</joueurs>"
