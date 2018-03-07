@@ -75,6 +75,7 @@ public class Serveur{
 	}
 	
 	public void envoyerIndividuel(String message, int numJoueur) {
+		System.out.println("envoie a joueur numero "+numJoueur);
 		tableauContactJoueur[numJoueur].envoiMessage(message);
 	}
 	

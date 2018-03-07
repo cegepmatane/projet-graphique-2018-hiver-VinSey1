@@ -51,7 +51,7 @@ public class Partie {
 	}
 	private void deroulementNuit() {
 		serveur.envoyerATous("La nuit tombe sur le village de thiercelieux, vous fermez les yeux en espérant passer la nuit");
-		tourLoupGarou();
+		//tourLoupGarou();
 		try {
 			TimeUnit.SECONDS.sleep(2);
 		} catch (InterruptedException e) {

@@ -6,12 +6,14 @@ import controleur.ControleurVueVillageois;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -27,7 +29,7 @@ public class VueVillageois extends Application{
 
 	private ToggleGroup joueurs = new ToggleGroup();
 	
-	private StackPane fenetreChoixVote;
+	private VBox fenetreChoixVote;
 	
 	private Text indication;
 	
@@ -42,8 +44,10 @@ public class VueVillageois extends Application{
 		
 		BorderPane fenetrePrincipale = new BorderPane();
 
-		fenetreChoixVote = new StackPane();
-		fenetreChoixVote.setMinSize(500, 300);
+		fenetreChoixVote = new VBox();
+		fenetreChoixVote.setMinSize(800, 300);
+		fenetreChoixVote.setPadding(new Insets(10));
+		fenetreChoixVote.setSpacing(8);
 		
 		
 		fenetrePrincipale.setTop(indication);
@@ -53,7 +57,7 @@ public class VueVillageois extends Application{
 		fenetrePrincipale.setCenter(fenetreChoixVote);
 		
 		
-		Scene scene = new Scene(fenetrePrincipale, 800,600);
+		Scene scene = new Scene(fenetrePrincipale, 1000,500);
 				
 		valider.setOnAction(new EventHandler<ActionEvent>() {
 			
@@ -72,7 +76,7 @@ public class VueVillageois extends Application{
 	public void setChoixJoueur(List<String> listeJoueur) {
 		
 		for ( int iterateurJoueur = 0 ; iterateurJoueur < listeJoueur.size(); iterateurJoueur++) {
-								
+						
 			RadioButton joueur = new RadioButton(listeJoueur.get(iterateurJoueur));
 			joueur.setToggleGroup(joueurs);
 			
