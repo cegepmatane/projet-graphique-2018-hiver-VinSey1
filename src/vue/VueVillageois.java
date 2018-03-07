@@ -88,7 +88,13 @@ public class VueVillageois extends Application{
 					
 	}
 	
-	public List<RadioButton> getChoixJoueur() {
-		return choixJoueur;
+	public String getChoixJoueur() {
+		for (int i=0;i<choixJoueur.size();i++) {
+			if (choixJoueur.get(i).isSelected() ) {
+				return choixJoueur.get(i).getText();
+			}
+		}
+		return "Pas de choix";
+		
 	}
 }
