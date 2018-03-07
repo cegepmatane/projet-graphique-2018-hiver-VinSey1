@@ -124,7 +124,20 @@ public class Partie {
 			inputSource.setCharacterStream(new StringReader(message));
 			
 			Document doc = lecteurXML.parse(inputSource);
-			NodeList contenuMessage = doc.getElementsByTagName("message");		
+			NodeList contenuMessage = doc.getElementsByTagName("*");	
+			
+			switch( contenuMessage.item(1).getNodeName() ) {
+				
+				case "demandeListe":
+					
+					break;
+			
+			
+			}
+			
+			
+			
+			
 			
 		}catch(org.xml.sax.SAXException e){
 			e.printStackTrace();
@@ -134,14 +147,8 @@ public class Partie {
 			e.printStackTrace();
 		}
 		catch(IOException e) {
-			e.printStackTrace();
-			
-			
+			e.printStackTrace();				
 		}
-		
-		
-
-		
 		
 		/*
 		if(message.equals("requete liste joueur pour vote villageois")) {

@@ -42,7 +42,6 @@ public class ControleurSalonDeJeu {
 				
 			}
 		});
-	
 		
 		if (message.equals("Demande vote du village")) {
 			vueSalonDeJeu.ajouterTexteAuChat("A vous de voter villageois");
@@ -114,7 +113,12 @@ public class ControleurSalonDeJeu {
 					try {
 						vueVillageois.start(VueVillageois.instanceVueVillageois);
 						contactServeur.setControleurVueVillageois(controleurVueVillageois);
-						contactServeur.envoyerMessage("requete liste joueur pour vote villageois");
+						
+						contactServeur.envoyerMessage("<message>"
+								+ "<demandeListe>"
+								+ "villageois"
+								+ "</demandeListe>"
+								+ "</message>");
 						
 						
 					} catch (Exception e) {
