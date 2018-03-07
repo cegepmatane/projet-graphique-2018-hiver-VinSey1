@@ -30,12 +30,15 @@ public class ControleurVueVillageois {
 		
 		contactServeur.envoyerMessage(joueur);	
 	}
-	
-	
+		
 	public void traiter(String message) {
+				
 		List<String> listeJoueurs = new ArrayList<String>();
 		
-		listeJoueurs.add(message);
+		listeJoueurs.add("Eliott");
+		listeJoueurs.add("Vincente");
+		listeJoueurs.add("Valentin");
+
 		
 		Platform.runLater(new Runnable() {
 			
@@ -45,10 +48,6 @@ public class ControleurVueVillageois {
 				vueVillageois.setChoixJoueur(listeJoueurs);
 				
 			}
-		});
-		
-		
-		
+		});		
 	}
-	
 }

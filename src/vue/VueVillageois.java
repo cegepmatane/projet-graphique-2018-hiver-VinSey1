@@ -54,13 +54,7 @@ public class VueVillageois extends Application{
 		
 		
 		Scene scene = new Scene(fenetrePrincipale, 800,600);
-		
-		RadioButton test = new RadioButton("testtesttesttesttesttesttesttesttesttesttest");
-		test.setToggleGroup(joueurs);
-		
-		choixJoueur.add(test);
-		fenetreChoixVote.getChildren().add(choixJoueur.get(0));
-		
+				
 		valider.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -76,21 +70,18 @@ public class VueVillageois extends Application{
 	
 	
 	public void setChoixJoueur(List<String> listeJoueur) {
-		/*
+		
 		for ( int iterateurJoueur = 0 ; iterateurJoueur < listeJoueur.size(); iterateurJoueur++) {
-									
-			choixJoueur.add(new RadioButton(listeJoueur.get(iterateurJoueur)));
+								
+			RadioButton joueur = new RadioButton(listeJoueur.get(iterateurJoueur));
+			joueur.setToggleGroup(joueurs);
+			
+			choixJoueur.add(joueur);
+			
 			fenetreChoixVote.getChildren().add(choixJoueur.get(choixJoueur.size()-1));
 			
 		}
-		
-		choixJoueur.add(new RadioButton("sale chien"));
-		fenetreChoixVote.getChildren().add(choixJoueur.get(0));*/
-		
-		System.out.println("choix joueur après valider");
-		
-		choixJoueur.get(0).setText("changement");
-			
+					
 	}
 	
 	public List<RadioButton> getChoixJoueur() {

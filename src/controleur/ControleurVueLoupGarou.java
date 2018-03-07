@@ -28,8 +28,7 @@ public class ControleurVueLoupGarou {
 			
 			if ( vueLoupGarou.getChoixJoueur().get(iterateurChoixJoueur).isSelected()) joueur = vueLoupGarou.getChoixJoueur().get(iterateurChoixJoueur).getText();
 			
-		}
-		
+		}		
 		contactServeur.envoyerMessage(joueur);	
 	}
 	
@@ -42,7 +41,5 @@ public class ControleurVueLoupGarou {
 		
 		vueLoupGarou.setChoixJoueur(listeJoueurs);
 	
-	}
-	
-	
+	}	
 }

@@ -57,17 +57,16 @@ public class ControleurSalonDeJeu {
 	}
 	
 	public void afficherVoteVillageois() {
+		
 		Platform.runLater(new Runnable() {
 		
+			VueVillageois vueVillageois = new VueVillageois();
+			
+			ControleurVueVillageois controleurVueVillageois = new ControleurVueVillageois(vueVillageois, contactServeur);
+			
 			@Override
 				public void run() {
-				
-					VueVillageois vueVillageois = new VueVillageois();
-					
-					ControleurVueVillageois controleurVueVillageois = new ControleurVueVillageois(vueVillageois, contactServeur);
-				
-					System.out.println(controleurVueVillageois);
-					
+													
 					contactServeur.setControleurVueVillageois(controleurVueVillageois);
 					
 					try {
@@ -77,7 +76,6 @@ public class ControleurSalonDeJeu {
 						
 						
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 			}
