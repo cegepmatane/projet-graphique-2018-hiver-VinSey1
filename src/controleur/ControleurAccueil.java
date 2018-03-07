@@ -27,9 +27,7 @@ public class ControleurAccueil {
 			Platform.runLater(new Runnable() {
 			
 				@Override
-					public void run() {
-					
-						
+					public void run() {					
 						vueAccueil.hide();
 						vueRegles.show();
 						vueRegles.setRetour(0);
@@ -48,7 +46,13 @@ public class ControleurAccueil {
 						vueAccueil.setErreur();
 					}
 					else {
-						
+						contactServeur.envoyerMessage("<message>"
+														+ "<authentification>"
+															+ "<joueur>"
+																+vueAccueil.recupererPseudo()
+															+"</joueur>"
+														+ "</authentification>"
+													+ "</message>");
 						vueAccueil.close();
 						vueSalonDeJeu.show();
 						

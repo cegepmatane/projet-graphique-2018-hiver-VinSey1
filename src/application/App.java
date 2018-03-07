@@ -26,16 +26,20 @@ public class App {
 				vueAccueil.start(VueAccueil.instanceVueAccueil);
 				VueRegles vueRegles = new VueRegles();
 				vueRegles.start(VueRegles.instanceVueRegles);
-				VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();											
+				
+				VueSalonDeJeu vueSalonDeJeu = new VueSalonDeJeu();
+				
 				ControleurSalonDeJeu controleurSalonDeJeu = new ControleurSalonDeJeu(vueSalonDeJeu, contactServeur, vueRegles);
 				contactServeur.setControleurSalonDeJeu(controleurSalonDeJeu);
 				vueSalonDeJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
 				vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
 				contactServeur.connection();
 				vueSalonDeJeu.hide();
+				
 				ControleurRegles controleRegles = new ControleurRegles(vueRegles, vueAccueil,vueSalonDeJeu);
 				vueRegles.setControleurRegles(controleRegles);
 				vueRegles.hide();
+				
 				ControleurAccueil controle = new ControleurAccueil(vueAccueil, contactServeur, vueRegles, vueSalonDeJeu);
 				vueAccueil.setControleurAccueil(controle);
 								

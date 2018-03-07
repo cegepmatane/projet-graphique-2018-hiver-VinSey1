@@ -1,7 +1,18 @@
 package modele;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import jdk.internal.org.xml.sax.SAXException;
 import serveur.Serveur;
 
 public class Partie {
@@ -105,8 +116,37 @@ public class Partie {
 	}
 	
 	public void traiter(String message) {
+		
+		try {
+			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			
+			InputSource inputSource = new InputSource();
+			inputSource.setCharacterStream(new StringReader(message));
+			
+			Document doc = lecteurXML.parse(inputSource);
+			NodeList contenuMessage = doc.getElementsByTagName("message");		
+			
+		}catch(org.xml.sax.SAXException e){
+			e.printStackTrace();
+			
+		}
+		catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+			
+			
+		}
+		
+		
+
+		
+		
+		/*
 		if(message.equals("requete liste joueur pour vote villageois")) {
 			serveur.envoyerIndividuel("test liste joueur", 2);
 		}
+		*/
 	}
 }
