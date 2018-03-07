@@ -20,17 +20,15 @@ public class ControleurVueVillageois {
 	
 	public void validerVote() {
 		
-		System.out.println("vue villageois reçoit liste joueur");
-		
-		String joueur = "";
-		
-		for ( int iterateurChoixJoueur = 0 ; iterateurChoixJoueur < vueVillageois.getChoixJoueur().size() ; iterateurChoixJoueur++) {
-			
-			if ( vueVillageois.getChoixJoueur().get(iterateurChoixJoueur).isSelected()) joueur = vueVillageois.getChoixJoueur().get(iterateurChoixJoueur).getText();
-			
-		}
-		
-		contactServeur.envoyerMessage(joueur);	
+		contactServeur.envoyerMessage("<message>"
+										+ "<joueurs>"
+											+ "<vote>"
+												+ "<joueur>"
+													+ vueVillageois.getChoixJoueur();
+												+ "</joueur>"
+											+ "</vote>"
+										+ "</joueurs>"
+									+ "</message>");
 	}
 		
 	public void traiter(String message) {
