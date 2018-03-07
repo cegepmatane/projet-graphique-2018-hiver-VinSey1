@@ -87,7 +87,15 @@ public class ControleurSalonDeJeu {
 	
 
 	public void validerVote() {
-		contactServeur.envoyerMessage("VoteJoueur");
+		contactServeur.envoyerMessage("<message>"
+										+ "<joueurs>"
+											+ "<vote>"
+												+ "<joueur>"
+													+"ValBreton"
+												+ "</joueur>"
+											+ "</vote>"
+										+ "</joueurs>"
+									+ "</message>");
 	}
 	
 	public void afficherVoteVillageois() {
