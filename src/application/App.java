@@ -21,7 +21,6 @@ public class App {
 			
 			@Override
 			public void run() {
-				htre
 				ContactServeur contactServeur = new ContactServeur();
 				VueAccueil vueAccueil = new VueAccueil();
 				vueAccueil.start(VueAccueil.instanceVueAccueil);
