@@ -220,6 +220,7 @@ public class VueSalonDeJeu extends Application {
         
         panelMilieu.getChildren().add(blanc3);
         panelMilieu.getChildren().add(chatDeJeu);
+        panelMilieu.getChildren().add(envoyer);
         panelMilieu.getChildren().add(zoneDeSaisieMessage);
 
         panelMilieu.setVgrow(blanc3, Priority.ALWAYS);
