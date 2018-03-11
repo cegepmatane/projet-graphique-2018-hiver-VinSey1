@@ -160,7 +160,7 @@ public class VueRegles extends Application {
         primaryStage.show();
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
-                System.out.println("ferme");
+                we.consume();
             }
         });  
 
