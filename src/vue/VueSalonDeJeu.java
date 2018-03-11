@@ -129,7 +129,15 @@ public class VueSalonDeJeu extends Application {
             }
         });
      
-        
+        Button envoyer = new Button();
+        envoyer.setText("Envoyer");
+        envoyer.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+            	
+            }
+        });   
         // Bouton voter
         Button boutonVoter = new Button();
         boutonVoter.setText("Voter");
