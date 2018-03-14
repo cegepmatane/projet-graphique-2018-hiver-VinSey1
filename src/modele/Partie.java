@@ -79,11 +79,13 @@ public class Partie {
 
 	private void deroulementNuit() {
 		
-		envoyerMessage("La nuit tombe sur le village de thiercelieux, vous fermez les yeux en espérant passer la nuit");
+		envoyerMessage("<message>La nuit tombe sur le village de thiercelieux, vous fermez les yeux en espérant passer la nuit</message>");
+		
+		envoyerMessage("<rafraichissement></rafraichissement>");
 		
 		tourLoupGarou();
 		
-		serveur.envoyerATous("Les loups-garous ont fait leur choix");
+		serveur.envoyerATous("<message>Les loups-garous ont fait leur choix</message>");
 	}
 	
 	private void deroulementJour() {
@@ -99,21 +101,21 @@ public class Partie {
 			if (role == 0) {
 				if (nbLoupGarou+1 <= nbMaxLoupGarou) {
 					tableauJoueurs[iterateur] = new Joueur("Paul", 1);
-					serveur.envoyerIndividuel("Tu es un Loup-Garou", iterateur);
+					serveur.envoyerIndividuel("<message>Tu es un Loup-Garou</message>", iterateur);
 					nbLoupGarou+=1;
 				} else {
 					tableauJoueurs[iterateur] = new Joueur("Paul", 0);
-					serveur.envoyerIndividuel("Tu es un Villageois", iterateur);
+					serveur.envoyerIndividuel("<message>Tu es un Villageois</message>", iterateur);
 					nbVillageois+=1;
 				}
 			} else {
 				if (nbVillageois+1 <= nbMaxVillageois) {
 					tableauJoueurs[iterateur] = new Joueur("Paul", 0);
-					serveur.envoyerIndividuel("Tu es un Villageois", iterateur);
+					serveur.envoyerIndividuel("<message>Tu es un Villageois</message>", iterateur);
 					nbVillageois+=1;
 				} else {
 					tableauJoueurs[iterateur] = new Joueur("Paul", 1);
-					serveur.envoyerIndividuel("Tu es un Loup-Garou", iterateur);
+					serveur.envoyerIndividuel("<message>Tu es un Loup-Garou</message>", iterateur);
 					nbLoupGarou+=1;
 				}
 			}
@@ -149,15 +151,19 @@ public class Partie {
 			inputSource.setCharacterStream(new StringReader(message));
 			
 			Document doc = lecteurXML.parse(inputSource);
-			NodeList contenuMessage = doc.getElementsByTagName("*");	
 			
-			switch( contenuMessage.item(1).getNodeName() ) {
+			switch( doc.getDocumentElement().getNodeName() ) {
 				
-				case "demandeListe":
+				case "demande":
 					
 					break;
-			
-			
+					
+				default:
+					
+					System.out.println("message non interprété: Partie.traiter");
+					
+					break;
+					
 			}
 						
 		}catch(org.xml.sax.SAXException e){
@@ -190,7 +196,7 @@ public class Partie {
 					
 					String messageAEnvoyer = "<liste>";
 					
-					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length =; iterateurTableauJoueur++) {
+					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {
 						
 						if ( tableauJoueurs[iterateurTableauJoueur].getRole() == 0 ) {
 							messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
