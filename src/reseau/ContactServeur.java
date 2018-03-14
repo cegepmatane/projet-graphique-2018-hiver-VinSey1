@@ -60,6 +60,10 @@ public class ContactServeur {
 					
 					switch (doc.getDocumentElement().getNodeName()) {
 					
+					case "liste":
+						controleurVueVillageois.traiter(message);
+						break;
+						
 					
 					
 					}
