@@ -60,8 +60,18 @@ public class ContactServeur {
 					
 					switch (doc.getDocumentElement().getNodeName()) {
 					
+					default:
+						System.out.println("Message non traité : ContactServeur");
+					
 					case "liste":
 						controleurVueVillageois.traiter(message);
+						break;
+						
+					case "annonce":
+						controleurSalonDeJeu.traiter(message);
+						break;
+						
+					case "rafraichissement":
 						break;
 						
 					
