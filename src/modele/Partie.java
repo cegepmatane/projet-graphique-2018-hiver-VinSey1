@@ -24,7 +24,7 @@ public class Partie {
 	private int nbMaxVillageois;
 	private final String[] numeroRoles = {"Loups-Garous", "Villageois"};
 	private Serveur serveur;
-	private int[] tableauJoueurs;
+	private Joueur[] tableauJoueurs;
 	private boolean finPartie = false;
 	private boolean nuitEnCours = true;
 	private boolean jourEnCours = false;
@@ -44,7 +44,7 @@ public class Partie {
 	public void lancerPartie() {
 		
 		envoyerMessage("Il y a assez de joueurs ! La partie va commencer.\nLes cartes vont être distribuées");
-		tableauJoueurs = new int[serveur.getNB_JOUEURS_MAX()];
+		tableauJoueurs = new Joueur[serveur.getNB_JOUEURS_MAX()];
 		nbMaxLoupGarou = 1;
 		nbMaxVillageois = 2;
 		
@@ -98,21 +98,21 @@ public class Partie {
 			role = aleatoire.nextInt(2);
 			if (role == 0) {
 				if (nbLoupGarou+1 <= nbMaxLoupGarou) {
-					tableauJoueurs[iterateur] = 0;
+					tableauJoueurs[iterateur] = new Joueur("Paul", 1);
 					serveur.envoyerIndividuel("Tu es un Loup-Garou", iterateur);
 					nbLoupGarou+=1;
 				} else {
-					tableauJoueurs[iterateur] = 1;
+					tableauJoueurs[iterateur] = new Joueur("Paul", 0);
 					serveur.envoyerIndividuel("Tu es un Villageois", iterateur);
 					nbVillageois+=1;
 				}
 			} else {
 				if (nbVillageois+1 <= nbMaxVillageois) {
-					tableauJoueurs[iterateur] = 1;
+					tableauJoueurs[iterateur] = new Joueur("Paul", 0);
 					serveur.envoyerIndividuel("Tu es un Villageois", iterateur);
 					nbVillageois+=1;
 				} else {
-					tableauJoueurs[iterateur] = 0;
+					tableauJoueurs[iterateur] = new Joueur("Paul", 1);
 					serveur.envoyerIndividuel("Tu es un Loup-Garou", iterateur);
 					nbLoupGarou+=1;
 				}
@@ -125,7 +125,7 @@ public class Partie {
 		tourDeJeu = 1;
 		
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
-			if(tableauJoueurs[iterateur] == 0) {
+			if(tableauJoueurs[iterateur].getRole() == 1) {
 				serveur.envoyerIndividuel("C'est à ton tour de jouer. En tant que Loup-Garou, tu dois choisir une cible à manger cette nuit en cliquant sur \"voter\"", iterateur);
 				
 			}
@@ -186,12 +186,22 @@ public class Partie {
 		case 1:
 			
 			for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
-				if(tableauJoueurs[iterateur] == 0) {
-					serveur.envoyerIndividuel("C'est à ton tour de jouer. En tant que Loup-Garou, tu dois choisir une cible à manger cette nuit en cliquant sur \"voter\"", iterateur);
+				if(tableauJoueurs[iterateur].getRole() == 1) {
 					
+					String messageAEnvoyer = "<liste>";
+					
+					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length =; iterateurTableauJoueur++) {
+						
+						if ( tableauJoueurs[iterateurTableauJoueur].getRole() == 0 ) {
+							messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
+						}
+						
+					}
+					
+					messageAEnvoyer += "</liste>";				
+					serveur.envoyerIndividuel(messageAEnvoyer, iterateur);
 				}
-			}
-			
+			}		
 			
 			break;
 			
