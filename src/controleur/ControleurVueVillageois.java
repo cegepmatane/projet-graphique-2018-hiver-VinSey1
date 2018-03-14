@@ -30,15 +30,9 @@ public class ControleurVueVillageois {
 	
 	public void validerVote() {
 		
-		contactServeur.envoyerMessage("<message>"
-										+ "<joueurs>"
-											+ "<vote>"
-												+ "<joueur>"
-													+ vueVillageois.getChoixJoueur()
-												+ "</joueur>"
-											+ "</vote>"
-										+ "</joueurs>"
-									+ "</message>");
+		contactServeur.envoyerMessage("<vote>"
+											+ vueVillageois.getChoixJoueur()
+									+ "</vote>");
 	}
 		
 	public void traiter(String message) {
