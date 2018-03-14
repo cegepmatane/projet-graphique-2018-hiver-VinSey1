@@ -87,13 +87,11 @@ public class ControleurSalonDeJeu {
 
 	public void validerVote() {
 		contactServeur.envoyerMessage("<message>"
-										+ "<joueurs>"
 											+ "<vote>"
 												+ "<joueur>"
 													+"ValBreton"
 												+ "</joueur>"
 											+ "</vote>"
-										+ "</joueurs>"
 									+ "</message>");
 	}
 	
