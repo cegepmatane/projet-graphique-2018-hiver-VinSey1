@@ -42,7 +42,9 @@ public class ContactServeur {
 			String message = "";
 			try {
 				while ((message = lecture.readLine()) != null) {
-									
+							
+					
+					
 					if ( message.equals("test liste joueur")) {
 						
 						controleurVueVillageois.traiter("rcgr");
