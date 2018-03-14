@@ -67,7 +67,9 @@ public class ControleurSalonDeJeu {
 			Document doc = lecteurXML.parse(inputSource);
 			NodeList contenuMessage = doc.getElementsByTagName("message");		
 			
-		}catch(org.xml.sax.SAXException e){
+		}
+		
+		catch(org.xml.sax.SAXException e){
 			e.printStackTrace();
 			
 		}
@@ -80,6 +82,11 @@ public class ControleurSalonDeJeu {
 			
 		}
 		
+	}
+	
+	public void demandeVote() {
+		contactServeur.envoyerMessage("<demande>"
+										+"</demande>");
 	}
 
 		
@@ -101,11 +108,7 @@ public class ControleurSalonDeJeu {
 						vueVillageois.start(VueVillageois.instanceVueVillageois);
 						contactServeur.setControleurVueVillageois(controleurVueVillageois);
 						
-						contactServeur.envoyerMessage("<message>"
-								+ "<demandeListe>"
-								+ "villageois"
-								+ "</demandeListe>"
-								+ "</message>");
+						demandeVote();
 						
 						
 					} catch (Exception e) {

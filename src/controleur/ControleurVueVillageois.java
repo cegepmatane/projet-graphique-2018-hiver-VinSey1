@@ -34,6 +34,11 @@ public class ControleurVueVillageois {
 											+ vueVillageois.getChoixJoueur()
 									+ "</vote>");
 	}
+	
+	public void demandeVote() {
+		contactServeur.envoyerMessage("<demande>"
+										+"</demande>");
+	}
 		
 	public void traiter(String message) {
 				
