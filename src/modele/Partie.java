@@ -26,6 +26,15 @@ public class Partie {
 	private Serveur serveur;
 	private int[] tableauJoueurs;
 	private boolean finPartie = false;
+	private boolean nuitEnCours = true;
+	private boolean jourEnCours = false;
+	
+	/**
+	 * 0 -> aucun
+	 * 1 -> loup garou
+	 * 2 -> villageois
+	 */
+	private int tourDeJeu = 0;
 	
 	public Partie(Serveur serveur) {
 		this.serveur=serveur;
@@ -33,18 +42,28 @@ public class Partie {
 	}
 	
 	public void lancerPartie() {
-		serveur.envoyerATous("Il y a assez de joueurs ! La partie va commencer.\nLes cartes vont être distribuées");
+		
+		envoyerMessage("Il y a assez de joueurs ! La partie va commencer.\nLes cartes vont être distribuées");
 		tableauJoueurs = new int[serveur.getNB_JOUEURS_MAX()];
 		nbMaxLoupGarou = 1;
 		nbMaxVillageois = 2;
+		
+		try {
+			TimeUnit.SECONDS.sleep(4);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		distribuerCartes();
+		
+		try {
+			TimeUnit.SECONDS.sleep(4);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		while(!finDePartie()) {
 			deroulementNuit();
-			try {
-				TimeUnit.SECONDS.sleep(2);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			deroulementJour();
 		}
 		partieFinie();
@@ -57,17 +76,12 @@ public class Partie {
 			serveur.envoyerATous("Les villageois ont gagné !");
 		}
 	}
-	private boolean finDePartie() {
-		return (nbVillageois == 0 || nbLoupGarou == 0);
-	}
+
 	private void deroulementNuit() {
-		serveur.envoyerATous("La nuit tombe sur le village de thiercelieux, vous fermez les yeux en espérant passer la nuit");
-		//tourLoupGarou();
-		try {
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		
+		envoyerMessage("La nuit tombe sur le village de thiercelieux, vous fermez les yeux en espérant passer la nuit");
+		
+		tourLoupGarou();
 		
 		serveur.envoyerATous("Les loups-garous ont fait leur choix");
 	}
@@ -107,12 +121,23 @@ public class Partie {
 	}
 	
 	private void tourLoupGarou() {
+				
+		tourDeJeu = 1;
+		
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
 			if(tableauJoueurs[iterateur] == 0) {
-				serveur.envoyerIndividuel("C'est à ton tour de jouer. En tant que Loup-Garou, tu dois choisir une cible à manger cette nuit.", iterateur);
+				serveur.envoyerIndividuel("C'est à ton tour de jouer. En tant que Loup-Garou, tu dois choisir une cible à manger cette nuit en cliquant sur \"voter\"", iterateur);
 				
 			}
 		}
+				
+		try {
+			TimeUnit.SECONDS.sleep(10);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		tourDeJeu = 1;
 	}
 	
 	public void traiter(String message) {
@@ -134,11 +159,7 @@ public class Partie {
 			
 			
 			}
-			
-			
-			
-			
-			
+						
 		}catch(org.xml.sax.SAXException e){
 			e.printStackTrace();
 			
@@ -156,4 +177,46 @@ public class Partie {
 		}
 		*/
 	}
+	
+	public void envoyerListeJoueur(int joueur) {
+		
+			
+		switch( tourDeJeu ) {
+		
+		case 1:
+			
+			for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
+				if(tableauJoueurs[iterateur] == 0) {
+					serveur.envoyerIndividuel("C'est à ton tour de jouer. En tant que Loup-Garou, tu dois choisir une cible à manger cette nuit en cliquant sur \"voter\"", iterateur);
+					
+				}
+			}
+			
+			
+			break;
+			
+		case 2:
+			
+			break;
+		
+		default:
+			break;
+			
+		}
+		
+	}
+	
+	
+	public void envoyerMessage(String message) {
+		
+		
+		serveur.envoyerATous(message);
+	}
+	
+	
+	
+	private boolean finDePartie() {
+		return (nbVillageois == 0 || nbLoupGarou == 0);
+	}
+	
 }

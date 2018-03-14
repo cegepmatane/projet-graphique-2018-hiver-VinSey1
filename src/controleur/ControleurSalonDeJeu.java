@@ -109,8 +109,6 @@ public class ControleurSalonDeJeu {
 						contactServeur.setControleurVueVillageois(controleurVueVillageois);
 						
 						demandeVote();
-						
-						
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
