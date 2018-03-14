@@ -4,9 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+
 import controleur.*;
 
 
@@ -43,22 +51,20 @@ public class ContactServeur {
 			try {
 				while ((message = lecture.readLine()) != null) {
 							
+					DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+					
+					InputSource inputSource = new InputSource();
+					inputSource.setCharacterStream(new StringReader(message));
+					
+					Document doc = lecteurXML.parse(inputSource);
+					
+					switch (doc.getDocumentElement().getNodeName()) {
 					
 					
-					if ( message.equals("test liste joueur")) {
-						
-						controleurVueVillageois.traiter("rcgr");
+					
 					}
 					
-					if ( message.equals("vote villageois")) {
-						
-						controleurVueVillageois.traiter(message);
-					}
-					else {
-							
-						controleurSalonDeJeu.traiter(message);
-						
-					}
+					
 					
 				}
 			} catch(Exception e) {}
