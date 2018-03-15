@@ -1,6 +1,8 @@
 package modele;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import javax.xml.parsers.DocumentBuilder;
@@ -25,6 +27,7 @@ public class Partie {
 	private boolean finPartie = false;
 	private boolean nuitEnCours = true;
 	private boolean jourEnCours = false;
+	private List<Integer> joueurTueeDansLaNuit;
 	
 	/**
 	 * 0 -> aucun
@@ -35,6 +38,8 @@ public class Partie {
 	
 	public Partie(Serveur serveur) {
 		this.serveur=serveur;
+		
+		joueurTueeDansLaNuit = new ArrayList<>();
 		
 		tableauJoueurs = new Joueur[serveur.NB_JOUEURS_MAX];
 		
@@ -90,24 +95,21 @@ public class Partie {
 			if ( tableauJoueurs[iterateurTableauJoueur].getNombreVote() > nombreDeVoteMaximum ) {
 				joueurATuer = iterateurTableauJoueur;
 			}
-			
 		}
 		
 		if( joueurATuer != tableauJoueurs.length ) {
-			
+			joueurTueeDansLaNuit.add(joueurATuer);
 			tableauJoueurs[joueurATuer].setVivant(false);
 			
-		}
-		
-		serveur.envoyerATous("<message><annonce>Les loups-garous ont dévoré"+tableauJoueurs[joueurATuer].getNom()+"</annonce></message>");
-
-		
-		
+		}		
 	}
 	
 	private void deroulementJour() {
-		if(!finDePartie()) {
-			envoyerMessage("<message><annonce>Le jour se lève, les villageois peuvent voter pour désigner une</annonce></message>");
+		if(!finDePartie()){
+			
+			String joueursTuees;
+			
+			envoyerMessage("<message><annonce>Le jour se lève, "+joueurTueeDansLaNuit.get(0)+"les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
 			
 		}
 		else {		
@@ -119,6 +121,7 @@ public class Partie {
 			}
 		}
 	}
+	
 	private void distribuerCartes() {
 		int role;
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
@@ -161,6 +164,8 @@ public class Partie {
 				
 		tourDeJeu = 1;
 		
+		//activez le vote pour les loups-garou
+		
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
 			if(tableauJoueurs[iterateur].getRole() == 1) {
 				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer. "
@@ -176,7 +181,8 @@ public class Partie {
 			e.printStackTrace();
 		}
 		
-		tourDeJeu = 1;
+		//désactivez le vote pour les loups-garou
+		tourDeJeu = 0;
 	}
 	
 	public void traiter(String message) {
