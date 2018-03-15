@@ -130,4 +130,8 @@ public class ControleurSalonDeJeu {
 			}
 		});
 	}
+	
+	public VueSalonDeJeu getSalonDeJeu() {
+		return vueSalonDeJeu;
+	}
 }

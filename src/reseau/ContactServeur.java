@@ -13,6 +13,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import controleur.*;
@@ -68,10 +71,14 @@ public class ContactServeur {
 						break;
 						
 					case "annonce":
-						controleurSalonDeJeu.traiter(message);
+						NodeList contenuMessage = doc.getElementsByTagName("message");
+						Node nodeMessage = contenuMessage.item(0);
+						Element elementMessage = (Element) nodeMessage;
+						controleurSalonDeJeu.getSalonDeJeu().ajouterTexteAuChat(elementMessage.getTextContent());
 						break;
 						
 					case "rafraichissement":
+						controleurSalonDeJeu.traiter(message);
 						break;
 						
 					
