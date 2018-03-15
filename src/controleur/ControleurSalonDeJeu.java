@@ -8,6 +8,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
@@ -65,7 +67,31 @@ public class ControleurSalonDeJeu {
 			inputSource.setCharacterStream(new StringReader(message));
 			
 			Document doc = lecteurXML.parse(inputSource);
-			NodeList contenuMessage = doc.getElementsByTagName("message");		
+			NodeList contenuMessage = doc.getElementsByTagName("rafraichissement");
+			Node nodeMessage = contenuMessage.item(0);
+			
+			switch(nodeMessage.getNextSibling().getNodeName()) {
+			
+				case "descriptionRole":
+					break;
+				
+				case "listeVivant":
+					break;
+				
+				case "listeMort":
+					break;
+				
+				case "nombreJoueurs":
+					break;
+					
+				case "nombreLoupsGarousRestant":
+					break;
+				
+				case "nombreInnocentsRestant":
+					break;
+			
+			}
+			
 			
 		}
 		
