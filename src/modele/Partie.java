@@ -76,24 +76,46 @@ public class Partie {
 
 	private void deroulementNuit() {
 		
-		envoyerMessage("<annonce>La nuit tombe sur le village de thiercelieux, vous fermez les yeux en espérant passer la nuit</annonce>");
+		envoyerMessage("<message><annonce>La nuit tombe sur le village de thiercelieux, vous fermez les yeux en espérant passer la nuit</annonce></message>");
 		
 		tourLoupGarou();
 		
-		serveur.envoyerATous("<annonce>Les loups-garous ont fait leur choix</annonce>");
+		serveur.envoyerATous("<message><annonce>Les loups-garous ont fait leur choix</annonce></message>");
+		
+		int joueurATuer = tableauJoueurs.length;
+		int nombreDeVoteMaximum = 0;
+		
+		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
+			
+			if ( tableauJoueurs[iterateurTableauJoueur].getNombreVote() > nombreDeVoteMaximum ) {
+				joueurATuer = iterateurTableauJoueur;
+			}
+			
+		}
+		
+		if( joueurATuer != tableauJoueurs.length ) {
+			
+			tableauJoueurs[joueurATuer].setVivant(false);
+			
+		}
+		
+		serveur.envoyerATous("<message><annonce>Les loups-garous ont dévoré"+tableauJoueurs[joueurATuer].getNom()+"</annonce></message>");
+
+		
+		
 	}
 	
 	private void deroulementJour() {
 		if(!finDePartie()) {
-			envoyerMessage("<annonce>Le jour se lève, les villageois peuvent voter pour désigner une</annonce>");
+			envoyerMessage("<message><annonce>Le jour se lève, les villageois peuvent voter pour désigner une</annonce></message>");
 			
 		}
 		else {		
 			if ( nbVillageois == 0 ) {
-				envoyerMessage("<annonce>Les loups garous ont gagné, la partie est terminé</annonce>");
+				envoyerMessage("<message><annonce>Les loups garous ont gagné, la partie est terminé</annonce></message>");
 			}
 			else {
-				envoyerMessage("<annonce>Les villageois ont gagné, la partie est terminé</annonce>");
+				envoyerMessage("<message><annonce>Les villageois ont gagné, la partie est terminé</annonce></message>");
 			}
 		}
 	}
@@ -105,21 +127,21 @@ public class Partie {
 				
 				if (nbLoupGarou+1 <= nbMaxLoupGarou) {
 					tableauJoueurs[iterateur].setRole(1);
-					serveur.envoyerIndividuel("<annonce>Tu es un Loup-Garou</annonce>", iterateur);
+					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
 					nbLoupGarou+=1;
 				} else {
 					tableauJoueurs[iterateur].setRole(0);
-					serveur.envoyerIndividuel("<annonce>Tu es un Villageois</annonce>", iterateur);
+					serveur.envoyerIndividuel("<message><annonce>Tu es un Villageois</annonce></message>", iterateur);
 					nbVillageois+=1;
 				}
 			} else {
 				if (nbVillageois+1 <= nbMaxVillageois) {
 					tableauJoueurs[iterateur].setRole(0);
-					serveur.envoyerIndividuel("<annonce>Tu es un Villageois</annonce>", iterateur);
+					serveur.envoyerIndividuel("<message><annonce>Tu es un Villageois</annonce></message>", iterateur);
 					nbVillageois+=1;
 				} else {
 					tableauJoueurs[iterateur].setRole(1);
-					serveur.envoyerIndividuel("<annonce>Tu es un Loup-Garou</annonce>", iterateur);
+					serveur.envoyerIndividuel("</message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
 					nbLoupGarou+=1;
 				}
 			}
@@ -128,9 +150,9 @@ public class Partie {
 	
 	private void partieFinie() {
 		if (nbVillageois == 0) {
-			serveur.envoyerATous("Les loups-garous ont gagné !");
+			serveur.envoyerATous("<message><annonce>Les loups-garous ont gagné !</annonce></message>");
 		} else {
-			serveur.envoyerATous("Les villageois ont gagné !");
+			serveur.envoyerATous("<message><annonce>Les villageois ont gagné !</annonce></message>");
 		}
 	}
 
@@ -141,9 +163,9 @@ public class Partie {
 		
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
 			if(tableauJoueurs[iterateur].getRole() == 1) {
-				serveur.envoyerIndividuel("<annonce>C'est à ton tour de jouer. "
+				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer. "
 						+ "En tant que Loup-Garou, tu dois choisir une "
-						+ "cible à manger cette nuit en cliquant sur \"voter\"</annonce>", iterateur);
+						+ "cible à manger cette nuit en cliquant sur \"voter\"</annonce></message>", iterateur);
 				
 			}
 		}
