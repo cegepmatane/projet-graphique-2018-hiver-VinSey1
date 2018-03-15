@@ -70,15 +70,20 @@ public class ControleurSalonDeJeu {
 			NodeList contenuMessage = doc.getElementsByTagName("rafraichissement");
 			Node nodeMessage = contenuMessage.item(0);
 			
-			switch(nodeMessage.getNextSibling().getNodeName()) {
+			Element elementMessage = (Element) nodeMessage;
+			
+			switch(nodeMessage.getFirstChild().getNodeName()) {
+			
 			
 				case "descriptionRole":
 					break;
 				
 				case "listeVivant":
+					vueSalonDeJeu.modifierListeJoueurVivant(elementMessage.getTextContent());
 					break;
 				
 				case "listeMort":
+					vueSalonDeJeu.modifierListeJoueurMort(elementMessage.getTextContent());
 					break;
 				
 				case "nombreJoueurs":

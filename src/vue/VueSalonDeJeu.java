@@ -347,15 +347,15 @@ public class VueSalonDeJeu extends Application {
      * Modifier la liste des joueurs vivants
      * @param nouvelleListeJoueurVivant : la nouvelle liste à utiliser
      */
-    public void modifierListeJoueurVivant(List<String> nouvelleListeJoueurVivant) {
-    	
+    public void modifierListeJoueurVivant(String nouvelleListeJoueurVivant) {
+    	/**
     	String nouvelleListe = "";
     	
     	for ( int iterateurListe = 0 ; iterateurListe < nouvelleListeJoueurVivant.size(); iterateurListe++) {
     		nouvelleListe = nouvelleListe + nouvelleListeJoueurVivant.get(iterateurListe) + "\n";
     	}
-    	
-    	listeJoueursVivant.setText(nouvelleListe);
+    	*/
+    	listeJoueursVivant.setText(nouvelleListeJoueurVivant);
     }
     
     
@@ -363,15 +363,16 @@ public class VueSalonDeJeu extends Application {
      * Modifier la liste des joueurs morts
      * @param nouvelleListeJoueurMort : la nouvelle liste à utiliser
      */
-    public void modifierListeJoueurMort(List<String> nouvelleListeJoueurMort) {
+    public void modifierListeJoueurMort(String nouvelleListeJoueurMort) {
     
+    	/**
     	String nouvelleListe = "";
     
     	for ( int iterateurListe = 0 ; iterateurListe < nouvelleListeJoueurMort.size(); iterateurListe++) {
     		nouvelleListe = nouvelleListe + nouvelleListeJoueurMort.get(iterateurListe) + "\n";
     	}
-    	
-    	listeJoueursMort.setText(nouvelleListe);
+    	*/
+    	listeJoueursMort.setText(nouvelleListeJoueurMort);
     } 
     
     

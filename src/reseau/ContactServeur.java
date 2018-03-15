@@ -60,8 +60,11 @@ public class ContactServeur {
 					inputSource.setCharacterStream(new StringReader(message));
 					
 					Document doc = lecteurXML.parse(inputSource);
+					NodeList contenuMessage = doc.getElementsByTagName("message");
+					Node nodeMessage = contenuMessage.item(0);
+					Element elementMessage = (Element) nodeMessage;
 					
-					switch (doc.getDocumentElement().getNodeName()) {
+					switch (nodeMessage.getFirstChild().getNodeName()) {
 					
 					default:
 						System.out.println("Message non traité : ContactServeur");
@@ -71,9 +74,7 @@ public class ContactServeur {
 						break;
 						
 					case "annonce":
-						NodeList contenuMessage = doc.getElementsByTagName("message");
-						Node nodeMessage = contenuMessage.item(0);
-						Element elementMessage = (Element) nodeMessage;
+						
 						controleurSalonDeJeu.getSalonDeJeu().ajouterTexteAuChat(elementMessage.getTextContent());
 						break;
 						
