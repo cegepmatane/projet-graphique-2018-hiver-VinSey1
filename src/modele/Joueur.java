@@ -9,6 +9,8 @@ public class Joueur {
 	 */
 	private int role;
 	private boolean vivant = true;
+	private int nombreVote = 0;
+	
 	
 	public Joueur(String nom) {
 		this.nom = nom;
@@ -38,4 +40,13 @@ public class Joueur {
 	public void setRole(int role) {
 		this.role = role;
 	}
+	
+	public int getNombreVote() {
+		return nombreVote;
+	}
+
+	public void setNombreVote(int nombreVote) {
+		this.nombreVote = nombreVote;
+	}
+
 }

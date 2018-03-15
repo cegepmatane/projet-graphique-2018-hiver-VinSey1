@@ -172,7 +172,13 @@ public class Partie {
 				case "demande":
 					
 					break;
+				
+				case "vote":
 					
+					traiterVote(message);
+					
+					break;
+				
 				default:
 					
 					System.out.println("message non interprété: Partie.traiter");
@@ -244,7 +250,41 @@ public class Partie {
 		serveur.envoyerATous(message);
 	}
 	
-	
+	private void traiterVote(String message) {
+		
+		DocumentBuilder lecteurXML;
+		try {
+			
+			lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			InputSource inputSource = new InputSource();
+			inputSource.setCharacterStream(new StringReader(message));
+			
+			Document doc = lecteurXML.parse(inputSource);
+			
+			String nomDuJoueurVote = doc.getElementsByTagName("vote").item(0).getTextContent();
+			
+			for ( int iterateurTableauJoueur = 0 ; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
+				
+				if ( tableauJoueurs[iterateurTableauJoueur].getNom().equals(nomDuJoueurVote) ) {
+					tableauJoueurs[iterateurTableauJoueur].setNombreVote(tableauJoueurs[iterateurTableauJoueur].getNombreVote());
+				}
+				
+				
+			}
+		
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (org.xml.sax.SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+
+		
+		
+		
+	}
 	
 	private boolean finDePartie() {
 		return (nbVillageois == 0 || nbLoupGarou == 0);
