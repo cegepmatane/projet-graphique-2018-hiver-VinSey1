@@ -189,7 +189,6 @@ public class Partie {
 						
 		}catch(org.xml.sax.SAXException e){
 			e.printStackTrace();
-			
 		}
 		catch (ParserConfigurationException e) {
 			e.printStackTrace();
@@ -197,12 +196,6 @@ public class Partie {
 		catch(IOException e) {
 			e.printStackTrace();				
 		}
-		
-		/*
-		if(message.equals("requete liste joueur pour vote villageois")) {
-			serveur.envoyerIndividuel("test liste joueur", 2);
-		}
-		*/
 	}
 	
 	public void envoyerListeJoueur(int joueur) {
@@ -215,17 +208,15 @@ public class Partie {
 			for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
 				if(tableauJoueurs[iterateur].getRole() == 1) {
 					
-					String messageAEnvoyer = "<liste>";
+					String messageAEnvoyer = "<message><liste>";
 					
 					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {
 						
 						if ( tableauJoueurs[iterateurTableauJoueur].getRole() == 0 ) {
 							messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
-						}
-						
+						}						
 					}
-					
-					messageAEnvoyer += "</liste>";				
+					messageAEnvoyer += "</liste></message>";				
 					serveur.envoyerIndividuel(messageAEnvoyer, iterateur);
 				}
 			}		
@@ -244,8 +235,7 @@ public class Partie {
 	}
 	
 	
-	public void envoyerMessage(String message) {
-		
+	public void envoyerMessage(String message) {	
 		
 		serveur.envoyerATous(message);
 	}
@@ -264,11 +254,10 @@ public class Partie {
 			String nomDuJoueurVote = doc.getElementsByTagName("vote").item(0).getTextContent();
 			
 			for ( int iterateurTableauJoueur = 0 ; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
-				
+	
 				if ( tableauJoueurs[iterateurTableauJoueur].getNom().equals(nomDuJoueurVote) ) {
 					tableauJoueurs[iterateurTableauJoueur].setNombreVote(tableauJoueurs[iterateurTableauJoueur].getNombreVote());
 				}
-				
 				
 			}
 		
@@ -279,11 +268,7 @@ public class Partie {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-
-		
-		
-		
+			
 	}
 	
 	private boolean finDePartie() {
