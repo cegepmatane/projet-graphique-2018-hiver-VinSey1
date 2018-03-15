@@ -62,6 +62,7 @@ public class ControleurSalonDeJeu {
 			
 			
 				case "descriptionRole":
+					vueSalonDeJeu.setDescriptionRole(elementMessage.getTextContent());
 					break;
 				
 				case "listeVivant":

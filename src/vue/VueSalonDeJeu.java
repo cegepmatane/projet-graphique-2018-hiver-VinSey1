@@ -383,7 +383,9 @@ public class VueSalonDeJeu extends Application {
     	listeJoueursMort.setText(nouvelleListeJoueurMort);
     } 
     
-    
+    public void setDescriptionRole(String descriptionDuRole) {
+    	descriptionRole.setText(descriptionDuRole);
+    }
     
     
     
