@@ -74,7 +74,6 @@ public class ContactServeur {
 						break;
 						
 					case "annonce":
-						
 						controleurSalonDeJeu.getSalonDeJeu().ajouterTexteAuChat(elementMessage.getTextContent());
 						break;
 						

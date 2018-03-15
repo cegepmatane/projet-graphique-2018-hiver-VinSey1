@@ -60,6 +60,8 @@ public class ControleurSalonDeJeu {
 			
 			switch(nodeMessage.getFirstChild().getNodeName()) {
 			
+				default:
+					System.out.println("Message non traité : ControleurSalonDeJeu");
 			
 				case "descriptionRole":
 					vueSalonDeJeu.setDescriptionRole(elementMessage.getTextContent());
