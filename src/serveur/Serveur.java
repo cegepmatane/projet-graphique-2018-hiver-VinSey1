@@ -11,29 +11,12 @@ public class Serveur{
 	
 	private BufferedReader lecture = null;
 	private int nombreDeJoueurs = 0;
-	private final int NB_JOUEURS_MAX = 3;
+	public final int NB_JOUEURS_MAX = 3;
 	private ContactJoueur[] tableauContactJoueur = new ContactJoueur[NB_JOUEURS_MAX];
 	private Socket socket = null;
 	private ServerSocket serveur;
 	private volatile Partie partie;
 	private List<String> listeJoueurs = new ArrayList<String>();
-		
-	
-	public int getNB_JOUEURS_MAX() {
-		return NB_JOUEURS_MAX;
-	}
-	
-	public int getNombreDeJoueurs() {
-		return nombreDeJoueurs;
-	}
-	
-	public Partie getPartie() {
-		return partie;
-	}
-	
-	public String getListeJoueurs() {
-		return listeJoueurs.toString();
-	}
 
 
 	@SuppressWarnings("resource")
@@ -47,8 +30,8 @@ public class Serveur{
 				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueurs]);
 				nombreDeJoueurs++;
 				listeJoueurs.add("Joueur "+nombreDeJoueurs);
-				envoyerATous("Un Joueur vient de rejoindre la partie");
-				envoyerATous("Nombre de joueurs : "+nombreDeJoueurs+"/"+NB_JOUEURS_MAX);
+				envoyerATous("<annonce>Un Joueur vient de rejoindre la partie<annonce>");
+				envoyerATous("<annonce>Nombre de joueurs : "+nombreDeJoueurs+"/"+NB_JOUEURS_MAX+"</annonce>");
 				thread.start();
 				
 				if(nombreDeJoueurs == NB_JOUEURS_MAX) {
@@ -81,4 +64,23 @@ public class Serveur{
 	public void fermerServeur() throws IOException {
 		serveur.close();
 	}
+	
+	
+	public int getNB_JOUEURS_MAX() {
+		return NB_JOUEURS_MAX;
+	}
+	
+	public int getNombreDeJoueurs() {
+		return nombreDeJoueurs;
+	}
+	
+	public Partie getPartie() {
+		return partie;
+	}
+	
+	
+	public List<String> getListeJoueurs() {
+		return listeJoueurs;
+	}
+
 }

@@ -3,15 +3,12 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
 import jdk.internal.org.xml.sax.SAXException;
 import serveur.Serveur;
 
@@ -38,7 +35,14 @@ public class Partie {
 	
 	public Partie(Serveur serveur) {
 		this.serveur=serveur;
-
+		
+		tableauJoueurs = new Joueur[serveur.NB_JOUEURS_MAX];
+		
+		for ( int iterateurNomJoueurs = 0; iterateurNomJoueurs <  serveur.getListeJoueurs().size() ; iterateurNomJoueurs++) {
+			
+			tableauJoueurs[iterateurNomJoueurs] = new Joueur(serveur.getListeJoueurs().get(iterateurNomJoueurs));
+			
+		}
 	}
 	
 	public void lancerPartie() {
@@ -69,6 +73,64 @@ public class Partie {
 		partieFinie();
 	}
 	
+
+	private void deroulementNuit() {
+		
+		envoyerMessage("<annonce>La nuit tombe sur le village de thiercelieux, vous fermez les yeux en espérant passer la nuit</annonce>");
+		
+		tourLoupGarou();
+		
+		serveur.envoyerATous("<annonce>Les loups-garous ont fait leur choix</annonce>");
+	}
+	
+	private void deroulementJour() {
+		if(!finDePartie()) {
+			serveur.envoyerATous("C'est le jour");
+			
+		}
+		else {
+			
+			if ( nbVillageois == 0 ) {
+				envoyerMessage("<annonce>Les loups garous ont gagné</annonce>");
+
+			}
+			else {
+				envoyerMessage("<annonce>Les villageois ont gagné</annonce>");
+
+			}
+			
+
+		}
+	}
+	private void distribuerCartes() {
+		int role;
+		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
+			role = aleatoire.nextInt(2);
+			if (role == 0) {
+				
+				if (nbLoupGarou+1 <= nbMaxLoupGarou) {
+					tableauJoueurs[iterateur].setRole(1);
+					serveur.envoyerIndividuel("<annonce>Tu es un Loup-Garou</annonce>", iterateur);
+					nbLoupGarou+=1;
+				} else {
+					tableauJoueurs[iterateur].setRole(0);
+					serveur.envoyerIndividuel("<annonce>Tu es un Villageois</annonce>", iterateur);
+					nbVillageois+=1;
+				}
+			} else {
+				if (nbVillageois+1 <= nbMaxVillageois) {
+					tableauJoueurs[iterateur].setRole(0);
+					serveur.envoyerIndividuel("<annonce>Tu es un Villageois</annonce>", iterateur);
+					nbVillageois+=1;
+				} else {
+					tableauJoueurs[iterateur].setRole(1);
+					serveur.envoyerIndividuel("<annonce>Tu es un Loup-Garou</annonce>", iterateur);
+					nbLoupGarou+=1;
+				}
+			}
+		}
+	}
+	
 	private void partieFinie() {
 		if (nbVillageois == 0) {
 			serveur.envoyerATous("Les loups-garous ont gagné !");
@@ -77,50 +139,6 @@ public class Partie {
 		}
 	}
 
-	private void deroulementNuit() {
-		
-		envoyerMessage("<message>La nuit tombe sur le village de thiercelieux, vous fermez les yeux en espérant passer la nuit</message>");
-		
-		envoyerMessage("<rafraichissement></rafraichissement>");
-		
-		tourLoupGarou();
-		
-		serveur.envoyerATous("<message>Les loups-garous ont fait leur choix</message>");
-	}
-	
-	private void deroulementJour() {
-		if(!finDePartie()) {
-			serveur.envoyerATous("C'est le jour");
-			
-		}
-	}
-	private void distribuerCartes() {
-		int role;
-		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
-			role = aleatoire.nextInt(2);
-			if (role == 0) {
-				if (nbLoupGarou+1 <= nbMaxLoupGarou) {
-					tableauJoueurs[iterateur] = new Joueur("Paul", 1);
-					serveur.envoyerIndividuel("<message>Tu es un Loup-Garou</message>", iterateur);
-					nbLoupGarou+=1;
-				} else {
-					tableauJoueurs[iterateur] = new Joueur("Paul", 0);
-					serveur.envoyerIndividuel("<message>Tu es un Villageois</message>", iterateur);
-					nbVillageois+=1;
-				}
-			} else {
-				if (nbVillageois+1 <= nbMaxVillageois) {
-					tableauJoueurs[iterateur] = new Joueur("Paul", 0);
-					serveur.envoyerIndividuel("<message>Tu es un Villageois</message>", iterateur);
-					nbVillageois+=1;
-				} else {
-					tableauJoueurs[iterateur] = new Joueur("Paul", 1);
-					serveur.envoyerIndividuel("<message>Tu es un Loup-Garou</message>", iterateur);
-					nbLoupGarou+=1;
-				}
-			}
-		}
-	}
 	
 	private void tourLoupGarou() {
 				
@@ -128,7 +146,9 @@ public class Partie {
 		
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
 			if(tableauJoueurs[iterateur].getRole() == 1) {
-				serveur.envoyerIndividuel("C'est à ton tour de jouer. En tant que Loup-Garou, tu dois choisir une cible à manger cette nuit en cliquant sur \"voter\"", iterateur);
+				serveur.envoyerIndividuel("<annonce>C'est à ton tour de jouer. "
+						+ "En tant que Loup-Garou, tu dois choisir une "
+						+ "cible à manger cette nuit en cliquant sur \"voter\"</annonce>", iterateur);
 				
 			}
 		}

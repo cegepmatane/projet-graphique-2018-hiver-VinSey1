@@ -80,12 +80,8 @@ public class ContactServeur {
 					case "rafraichissement":
 						controleurSalonDeJeu.traiter(message);
 						break;
-						
-					
-					
-					}
-					
-					
+	
+					}					
 					
 				}
 			} catch(Exception e) {}

@@ -10,9 +10,12 @@ public class Joueur {
 	private int role;
 	private boolean vivant = true;
 	
-	public Joueur(String nom, int role) {
-		
+	public Joueur(String nom) {
 		this.nom = nom;
+	}
+	
+	public Joueur(String nom, int role) {
+		this(nom);
 		this.role = role;
 	}
 
