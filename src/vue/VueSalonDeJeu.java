@@ -323,7 +323,7 @@ public class VueSalonDeJeu extends Application {
      * Modifier l'indication du nombre de joueur dans la partie
      * @param nouveauNombre : le nombre de joueur a afficher
      */
-    public void modifierNombreDeJoueur(int nouveauNombreDeJoueur) {
+    public void modifierNombreDeJoueur(String nouveauNombreDeJoueur) {
     	
     	indicationNombreDeJoueurs.setText("Joueurs: "+nouveauNombreDeJoueur);
     	
@@ -333,14 +333,22 @@ public class VueSalonDeJeu extends Application {
      * Modifier l'indication du nombre de loup garou vivant dans la partie
      * @param nouveauNombreDeLoupGarou : le nombre de loups-garous à afficher
      */
-    public void modifierIndicationNombreDeLoupGarouVivant(int nouveauNombreDeLoupGarou) {
+    public void modifierIndicationNombreDeLoupGarouVivant(String nouveauNombreDeLoupGarou) {
     
-    	if ( nouveauNombreDeLoupGarou == 1) {
-        	indicationNombreDeLoupGarouVivant.setText(nouveauNombreDeLoupGarou+" loup-garou restant");
-    	}
-    	else {
+    	
         	indicationNombreDeLoupGarouVivant.setText(nouveauNombreDeLoupGarou+" loups-garous restants");
-    	}    	
+    	
+    }
+    
+    /**
+     * Modifier l'indication d'innocents vivants dans la partie
+     * @param nouveauNombreDeLoupGarou : le nombre d'innocents à afficher
+     */
+    public void modifierIndicationInnocentVivant(String nouveauNombreInnocent) {
+    
+    	
+        	indicationNombreDeLoupGarouVivant.setText(nouveauNombreInnocent+" loups-garous restants");
+    	
     }
     
     /**
@@ -374,6 +382,8 @@ public class VueSalonDeJeu extends Application {
     	*/
     	listeJoueursMort.setText(nouvelleListeJoueurMort);
     } 
+    
+    
     
     
     

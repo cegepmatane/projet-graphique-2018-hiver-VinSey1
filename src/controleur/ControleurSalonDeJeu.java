@@ -45,20 +45,6 @@ public class ControleurSalonDeJeu {
 			}
 		});
 		
-		if (message.equals("Demande vote du village")) {
-			vueSalonDeJeu.ajouterTexteAuChat("A vous de voter villageois");
-		}
-		
-		if (message.equals("Loup-garou tué")) {
-			vueSalonDeJeu.ajouterTexteAuChat("Un loup-garou a été tué");
-			vueSalonDeJeu.modifierIndicationNombreDeLoupGarouVivant(2);
-			vueSalonDeJeu.modifierNombreDeJoueur(4);
-		}
-		
-		if (message.equals("Villageois tué")) {
-			vueSalonDeJeu.ajouterTexteAuChat("Un villageois a été tué");
-			vueSalonDeJeu.modifierNombreDeJoueur(2);
-		}
 		
 		try {
 			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -87,12 +73,15 @@ public class ControleurSalonDeJeu {
 					break;
 				
 				case "nombreJoueurs":
+					vueSalonDeJeu.modifierNombreDeJoueur(elementMessage.getTextContent());
 					break;
 					
 				case "nombreLoupsGarousRestant":
+					vueSalonDeJeu.modifierIndicationNombreDeLoupGarouVivant(elementMessage.getTextContent());
 					break;
 				
 				case "nombreInnocentsRestant":
+					vueSalonDeJeu.modifierIndicationInnocentVivant(elementMessage.getTextContent());
 					break;
 			
 			}
