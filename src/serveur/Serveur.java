@@ -30,7 +30,7 @@ public class Serveur{
 				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueurs]);
 				nombreDeJoueurs++;
 				listeJoueurs.add("Joueur "+nombreDeJoueurs);
-				envoyerATous("<annonce>Un Joueur vient de rejoindre la partie<annonce>");
+				envoyerATous("<annonce>Un Joueur vient de rejoindre la partie</annonce>");
 				envoyerATous("<annonce>Nombre de joueurs : "+nombreDeJoueurs+"/"+NB_JOUEURS_MAX+"</annonce>");
 				thread.start();
 				

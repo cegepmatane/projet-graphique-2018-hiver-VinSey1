@@ -85,21 +85,16 @@ public class Partie {
 	
 	private void deroulementJour() {
 		if(!finDePartie()) {
-			serveur.envoyerATous("C'est le jour");
+			envoyerMessage("<annonce>Le jour se lève, les villageois peuvent voter pour désigner une</annonce>");
 			
 		}
-		else {
-			
+		else {		
 			if ( nbVillageois == 0 ) {
-				envoyerMessage("<annonce>Les loups garous ont gagné</annonce>");
-
+				envoyerMessage("<annonce>Les loups garous ont gagné, la partie est terminé</annonce>");
 			}
 			else {
-				envoyerMessage("<annonce>Les villageois ont gagné</annonce>");
-
+				envoyerMessage("<annonce>Les villageois ont gagné, la partie est terminé</annonce>");
 			}
-			
-
 		}
 	}
 	private void distribuerCartes() {
