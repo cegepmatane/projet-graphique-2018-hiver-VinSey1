@@ -75,6 +75,8 @@ public class VueVillageois extends Application{
 	
 	public void setChoixJoueur(List<String> listeJoueur) {
 		
+		listeJoueur.add("Ne rien voter");
+		
 		for ( int iterateurJoueur = 0 ; iterateurJoueur < listeJoueur.size(); iterateurJoueur++) {
 						
 			RadioButton joueur = new RadioButton(listeJoueur.get(iterateurJoueur));

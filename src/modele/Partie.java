@@ -143,7 +143,7 @@ public class Partie {
 					nbLoupGarou+=1;
 				} else {
 					tableauJoueurs[iterateur].setRole(0);
-					serveur.envoyerIndividuel("<message><rafraichissement><role>Tu es un Villageois</role></rafraichissement></message>", iterateur);
+					serveur.envoyerIndividuel("<message><annonce>Tu es un Villageois</annonce></message>", iterateur);
 					serveur.envoyerIndividuel("<message><rafraichissement><role>Villageois</role></rafraichissement></message>", iterateur);
 
 					nbVillageois+=1;
@@ -151,13 +151,13 @@ public class Partie {
 			} else {
 				if (nbVillageois+1 <= nbMaxVillageois) {
 					tableauJoueurs[iterateur].setRole(0);
-					serveur.envoyerIndividuel("<message><rafraichissement><role>Tu es un Villageois</role></rafraichissement></message>", iterateur);
+					serveur.envoyerIndividuel("<message><annonce>Tu es un Villageois</annonce></message>", iterateur);
 					serveur.envoyerIndividuel("<message><rafraichissement><role>Villageois</role></rafraichissement></message>", iterateur);
 
 					nbVillageois+=1;
 				} else {
 					tableauJoueurs[iterateur].setRole(1);
-					serveur.envoyerIndividuel("<message><rafraichissement><role>Tu es un Loup-Garou</role></rafraichissement></message>", iterateur);
+					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
 					serveur.envoyerIndividuel("<message><rafraichissement><role>Loup-Garou</role></rafraichissement></message>", iterateur);
 
 					nbLoupGarou+=1;
@@ -219,13 +219,15 @@ public class Partie {
 				
 				case "demande":
 					
+					System.out.println("demande");
+					
 					envoyerListeJoueur(); 
 
 					break;
 				
 				case "vote":
 					
-					System.out.println(message);
+					System.out.println("vote "+message);
 					
 					traiterVote(message);
 					

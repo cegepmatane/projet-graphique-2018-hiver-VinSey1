@@ -31,7 +31,9 @@ public class ControleurVueVillageois {
 	}
 	
 	public void validerVote() {
-		if (!vueVillageois.getChoixJoueur().equals("Pas de choix") ) {
+		if (!vueVillageois.getChoixJoueur().equals("Pas de choix") && !vueVillageois.getChoixJoueur().equals("Ne rien voter")) {
+			
+			System.out.println("COntroleurVuVillageois "+vueVillageois.getChoixJoueur());
 			
 			contactServeur.envoyerMessage("<vote>"
 					+ vueVillageois.getChoixJoueur()

@@ -62,11 +62,8 @@ public class ContactServeur {
 					Node nodeMessage = contenuMessage.item(0);
 					Element elementMessage = (Element) nodeMessage;
 					
-					switch (nodeMessage.getFirstChild().getNodeName()) {
-					
-					default:
-						System.out.println("Message non traité : ContactServeur");
-					
+					switch (nodeMessage.getFirstChild().getNodeName()) {					
+
 					case "liste":
 						
 						System.out.println(message);
@@ -81,7 +78,10 @@ public class ContactServeur {
 					case "rafraichissement":
 						controleurSalonDeJeu.traiter(message);
 						break;
-	
+						
+					default:
+						System.out.println("Message non traité : ContactServeur");
+						break;
 					}					
 					
 				}
