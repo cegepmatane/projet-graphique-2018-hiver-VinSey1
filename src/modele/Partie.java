@@ -208,6 +208,9 @@ public class Partie {
 	public void traiter(String message) {
 		
 		try {
+			
+			System.out.println("Partie: "+message);
+			
 			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			
 			InputSource inputSource = new InputSource();

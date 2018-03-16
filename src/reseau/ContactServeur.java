@@ -64,10 +64,7 @@ public class ContactServeur {
 					
 					switch (nodeMessage.getFirstChild().getNodeName()) {					
 
-					case "liste":
-						
-						System.out.println(message);
-						
+					case "liste":						
 						controleurVueVillageois.traiter(message);
 						break;
 						
@@ -104,6 +101,7 @@ public class ContactServeur {
 	}
 	
 	public boolean envoyerMessage(String message) {
+		System.out.println("ContactServeur: "+message);
 		sortie.println(message);
 		return true;
 	}

@@ -36,12 +36,15 @@ public class Serveur{
 			serveur = new ServerSocket(11);
 			while((socket = serveur.accept()) != null) {
 				
-				tableauContactJoueur[nombreDeJoueurs] = new ContactJoueur(socket, this);
-				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueurs]);
-				nombreDeJoueurs++;
+				if (nombreDeJoueurs != NB_JOUEURS_MAX ) {
+					
+					tableauContactJoueur[nombreDeJoueurs] = new ContactJoueur(socket, this);
+					Thread thread = new Thread(tableauContactJoueur[nombreDeJoueurs]);
+					nombreDeJoueurs++;
 
-				thread.start();
-
+					thread.start();
+					
+				}
 			}
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -62,6 +65,8 @@ public class Serveur{
 	public void traiter(String message) {
 		
 		try {
+			
+			System.out.println("Serveur: "+message);
 			
 			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			InputSource inputSource = new InputSource();
