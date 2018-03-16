@@ -54,10 +54,10 @@ public class Partie {
 	
 	public void lancerPartie() {
 				
-		for(int iterator = 0; iterator < serveur.getNB_JOUEURS_MAX(); iterator++) {
-			envoyerMessage("<message><rafraichissement><listeVivant>"+serveur.getListeJoueurs().get(iterator)+"</listeVivant></rafraichissement></message>");
+		for(int iterateur = 0; iterateur < tableauJoueurs.length; iterateur++) {
+			envoyerMessage("<message><rafraichissement><listeVivant>"+tableauJoueurs[iterateur].getNom()+"</listeVivant></rafraichissement></message>");
 		}
-		serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+serveur.getNombreDeJoueurs()+"</nombreJoueurs></rafraichissement></message>");
+		serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"</nombreJoueurs></rafraichissement></message>");
 		envoyerMessage("<message><annonce>Il y a assez de joueurs ! La partie va commencer</annonce></message>");
 		envoyerMessage("<message><annonce>Les cartes vont être distribués</annonce></message>");
 
@@ -122,8 +122,11 @@ public class Partie {
 
 			}
 			else {
-				envoyerMessage("<message><annonce>Le jour se lève, "+joueurTueeDansLaNuit.get(0)+" a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
-			}
+					envoyerMessage("<message><annonce>Le jour se lève, "+joueurTueeDansLaNuit.get(0)+" a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
+					retournerVivants();
+					retournerMorts();
+				}
+			
 		}
 		else {		
 			if ( nbVillageois == 0 ) {
@@ -131,6 +134,22 @@ public class Partie {
 			}
 			else {
 				envoyerMessage("<message><annonce>Les villageois ont gagné, la partie est terminé</annonce></message>");
+			}
+		}
+	}
+	
+	private void retournerVivants() {
+		for(int iterateur = 0; iterateur < tableauJoueurs.length; iterateur++) {
+			if(tableauJoueurs[iterateur].isVivant()) {
+				envoyerMessage("<message><rafraichissement><listeVivant>"+tableauJoueurs[iterateur].getNom()+"</listeVivant></rafraichissement></message>");
+			}
+		}
+	}
+	
+	private void retournerMorts() {
+		for(int iterateur = 0; iterateur < tableauJoueurs.length; iterateur++) {
+			if(!(tableauJoueurs[iterateur].isVivant())) {
+				envoyerMessage("<message><rafraichissement><listeMort>"+tableauJoueurs[iterateur].getNom()+"</listeMort></rafraichissement></message>");
 			}
 		}
 	}
