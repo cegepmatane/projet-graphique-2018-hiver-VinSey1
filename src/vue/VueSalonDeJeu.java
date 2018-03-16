@@ -174,7 +174,7 @@ public class VueSalonDeJeu extends Application {
      
         panelGauche.setAlignment(Pos.CENTER);
 
-        descriptionRole = new Text("");
+        descriptionRole = new Text("Description du rôle du joueur");
         descriptionRole.setFont(Font.font("Lucida Handwriting", 17));
         
         panelGauche.setConstraints(pseudo, 0, 0);
@@ -372,7 +372,7 @@ public class VueSalonDeJeu extends Application {
     	}
     	*/
 
-    	listeJoueursVivant.setText(pseudo+"\n");
+    	listeJoueursVivant.setText(listeJoueursVivant.getText()+pseudo+"\n");
     }
     
     
