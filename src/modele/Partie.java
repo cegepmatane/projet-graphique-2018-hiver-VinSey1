@@ -138,20 +138,28 @@ public class Partie {
 										
 					tableauJoueurs[iterateur].setRole(1);
 					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
+					serveur.envoyerIndividuel("<message><role>Loup-Garou</role></message>", iterateur);
+
 					nbLoupGarou+=1;
 				} else {
 					tableauJoueurs[iterateur].setRole(0);
-					serveur.envoyerIndividuel("<message><annonce>Tu es un Villageois</annonce></message>", iterateur);
+					serveur.envoyerIndividuel("<message><rafraichissement><role>Tu es un Villageois</role></rafraichissement></message>", iterateur);
+					serveur.envoyerIndividuel("<message><rafraichissement><role>Villageois</role></rafraichissement></message>", iterateur);
+
 					nbVillageois+=1;
 				}
 			} else {
 				if (nbVillageois+1 <= nbMaxVillageois) {
 					tableauJoueurs[iterateur].setRole(0);
-					serveur.envoyerIndividuel("<message><annonce>Tu es un Villageois</annonce></message>", iterateur);
+					serveur.envoyerIndividuel("<message><rafraichissement><role>Tu es un Villageois</role></rafraichissement></message>", iterateur);
+					serveur.envoyerIndividuel("<message><rafraichissement><role>Villageois</role></rafraichissement></message>", iterateur);
+
 					nbVillageois+=1;
 				} else {
 					tableauJoueurs[iterateur].setRole(1);
-					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
+					serveur.envoyerIndividuel("<message><rafraichissement><role>Tu es un Loup-Garou</role></rafraichissement></message>", iterateur);
+					serveur.envoyerIndividuel("<message><rafraichissement><role>Loup-Garou</role></rafraichissement></message>", iterateur);
+
 					nbLoupGarou+=1;
 				}
 			}

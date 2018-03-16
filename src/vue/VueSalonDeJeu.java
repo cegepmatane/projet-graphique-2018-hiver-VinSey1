@@ -51,6 +51,7 @@ public class VueSalonDeJeu extends Application {
 	 */
 	private Text nomRole;
 	
+
 	/**
 	 * Image de la carte du joueur
 	 */
@@ -155,7 +156,7 @@ public class VueSalonDeJeu extends Application {
         imageCarte.setId("image-loup-garoup");
         
         // Nom du rôle du joueur      
-        nomRole = new Text("Loup-Garou");
+        nomRole = new Text("");
         nomRole.setFont(Font.font("Lucida Handwriting", 30));
         
         
@@ -382,6 +383,10 @@ public class VueSalonDeJeu extends Application {
     	*/
     	listeJoueursMort.setText(nouvelleListeJoueurMort);
     } 
+    
+	public void setNomRole(String nomRole) {
+		this.nomRole.setText(nomRole);
+	}
     
     public void setDescriptionRole(String descriptionDuRole) {
     	descriptionRole.setText(descriptionDuRole);

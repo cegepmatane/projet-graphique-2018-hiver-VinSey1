@@ -75,6 +75,10 @@ public class ControleurSalonDeJeu {
 				case "nombreInnocentsRestant":
 					vueSalonDeJeu.modifierIndicationInnocentVivant(elementMessage.getTextContent());
 					break;
+					
+				case "role":
+					modifierRole(elementMessage.getTextContent());
+					break;
 			
 			}
 			
@@ -150,13 +154,22 @@ public class ControleurSalonDeJeu {
 			@Override
 			public void run() {
 				
-				vueSalonDeJeu.ajouterTexteAuChat(message);
-				
+				vueSalonDeJeu.ajouterTexteAuChat(message);			
 			}
-		});
-		
-		
+		});		
 	}
+	
+	public void modifierRole(String role) {
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				vueSalonDeJeu.setNomRole(role);
+			}
+		});		
+	}
+	
 	
 	public VueSalonDeJeu getSalonDeJeu() {
 		return vueSalonDeJeu;
