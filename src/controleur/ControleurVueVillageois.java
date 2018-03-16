@@ -48,6 +48,7 @@ public class ControleurVueVillageois {
 													+"</message>");
 					
 					contactServeur.getControleur().desactiverVote();
+					vueVillageois.fermer();
 				}
 			}
 		});

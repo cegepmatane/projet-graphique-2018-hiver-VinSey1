@@ -53,9 +53,9 @@ public class Partie {
 	}
 	
 	public void lancerPartie() {
-				
+		String messageListe = "<message><rafraichissement><listeVivant>";
 		for(int iterateur = 0; iterateur < tableauJoueurs.length; iterateur++) {
-			envoyerMessage("<message><rafraichissement><listeVivant>"+tableauJoueurs[iterateur].getNom()+"</listeVivant></rafraichissement></message>");
+			messageListe+= "<joueur>"+tableauJoueurs[iterateur].getNom()+"<joueur>");
 		}
 		serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"</nombreJoueurs></rafraichissement></message>");
 		envoyerMessage("<message><annonce>Il y a assez de joueurs ! La partie va commencer</annonce></message>");
@@ -114,7 +114,6 @@ public class Partie {
 	
 	private void deroulementJour() {
 		if(!finDePartie()){
-			String joueursTuees;
 			
 			if ( joueurTueeDansLaNuit.size() ==0 ) {
 				
@@ -122,9 +121,10 @@ public class Partie {
 
 			}
 			else {
-					envoyerMessage("<message><annonce>Le jour se lève, "+joueurTueeDansLaNuit.get(0)+" a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
+					envoyerMessage("<message><annonce>Le jour se lève, "+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
 					retournerVivants();
 					retournerMorts();
+					joueurTueeDansLaNuit.clear();
 				}
 			
 		}

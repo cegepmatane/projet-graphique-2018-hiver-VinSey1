@@ -372,7 +372,7 @@ public class VueSalonDeJeu extends Application {
     	}
     	*/
 
-    	listeJoueursVivant.setText(listeJoueursVivant.getText()+pseudo+"\n");
+    	listeJoueursVivant.setText(pseudo+"\n");
     }
     
     

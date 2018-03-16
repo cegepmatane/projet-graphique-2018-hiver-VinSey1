@@ -34,6 +34,10 @@ public class VueVillageois extends Application{
 	
 	private Text indication;
 	
+	public void fermer() {
+		instanceVueVillageois.close();
+	}
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
