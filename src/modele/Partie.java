@@ -54,6 +54,9 @@ public class Partie {
 	
 	public void lancerPartie() {
 				
+		for(int iterator = 0; iterator < serveur.getNB_JOUEURS_MAX(); iterator++) {
+			serveur.envoyerATous("<message><rafraichissement><listeVivant>"+serveur.getListeJoueurs().get(iterator)+"</listeVivant></rafraichissement></message>");
+		}
 		envoyerMessage("<message><annonce>Il y a assez de joueurs ! La partie va commencer</annonce></message>");
 		envoyerMessage("<message><annonce>Les cartes vont être distribués</annonce></message>");
 

@@ -80,12 +80,12 @@ public class VueSalonDeJeu extends Application {
 	/**
 	 * Liste des joueurs vivants
 	 */
-	Label listeJoueursVivant;
+	Text listeJoueursVivant;
 	
 	/**
 	 * Liste des joueurs morts
 	 */
-	Label listeJoueursMort;
+	Text listeJoueursMort;
 	
 	/**
 	 * Chat du jeu
@@ -252,14 +252,14 @@ public class VueSalonDeJeu extends Application {
         Text nomListeJoueursVivant = new Text("Vivants");
         nomListeJoueursVivant.setFont(Font.font("Lucida Handwriting", 30));
         
-        listeJoueursVivant = new Label("patate2f\nEliott");
-        listeJoueursVivant.setStyle(" -fx-font-family:\"Lucida Handwriting\";");
+        listeJoueursVivant = new Text("");
+        listeJoueursVivant.setFont(Font.font("Lucida Handwriting", 30));
         
         Text nomListeJoueursMort = new Text("Morts");
         nomListeJoueursMort.setFont(Font.font("Lucida Handwriting", 30));
         
-        listeJoueursMort = new Label("Patate2f\nDamien\nThéo");       
-        listeJoueursMort.setStyle(" -fx-font-family:\"Lucida Handwriting\";");
+        listeJoueursMort = new Text("");       
+        listeJoueursMort.setFont(Font.font("Lucida Handwriting", 30));
         
         panelDroite.setConstraints(indicationNombreDeJoueurs, 0,1);
         panelDroite.setConstraints(indicationNombreDeLoupGarouVivant, 0,2);
@@ -363,7 +363,7 @@ public class VueSalonDeJeu extends Application {
      * Modifier la liste des joueurs vivants
      * @param nouvelleListeJoueurVivant : la nouvelle liste à utiliser
      */
-    public void modifierListeJoueurVivant(String nouvelleListeJoueurVivant) {
+    public void modifierListeJoueurVivant(String pseudo) {
     	/**
     	String nouvelleListe = "";
     	
@@ -371,7 +371,8 @@ public class VueSalonDeJeu extends Application {
     		nouvelleListe = nouvelleListe + nouvelleListeJoueurVivant.get(iterateurListe) + "\n";
     	}
     	*/
-    	listeJoueursVivant.setText(nouvelleListeJoueurVivant);
+
+    	listeJoueursVivant.setText(listeJoueursVivant.getText()+pseudo+"\n");
     }
     
     
