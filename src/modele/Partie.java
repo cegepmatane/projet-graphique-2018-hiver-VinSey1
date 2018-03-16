@@ -44,7 +44,7 @@ public class Partie {
 		tableauJoueurs = new Joueur[serveur.NB_JOUEURS_MAX];
 		
 		for ( int iterateurNomJoueurs = 0; iterateurNomJoueurs <  serveur.getListeJoueurs().size() ; iterateurNomJoueurs++) {
-			
+				
 			tableauJoueurs[iterateurNomJoueurs] = new Joueur(serveur.getListeJoueurs().get(iterateurNomJoueurs));
 			
 		}
@@ -52,11 +52,9 @@ public class Partie {
 	
 	public void lancerPartie() {
 				
-		envoyerMessage("<message><annonce>Il y a assez de joueurs ! La partie va commencer.\nLes cartes vont être distribuées</annonce></message>");
-		
-		System.out.println("a envoyé le mesage de début partie");
-		
-		tableauJoueurs = new Joueur[serveur.getNB_JOUEURS_MAX()];
+		envoyerMessage("<message><annonce>Il y a assez de joueurs ! La partie va commencer</annonce></message>");
+		envoyerMessage("<message><annonce>Les cartes vont être distribués</annonce></message>");
+
 		nbMaxLoupGarou = 1;
 		nbMaxVillageois = 2;
 		
@@ -109,7 +107,14 @@ public class Partie {
 	private void deroulementJour() {
 		if(!finDePartie()){
 			String joueursTuees;
-			envoyerMessage("<message><annonce>Le jour se lève, "+joueurTueeDansLaNuit.get(0)+"les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
+			
+			if ( joueurTueeDansLaNuit.size() ==0 ) {
+				
+				envoyerMessage("<message><annonce>Le jour se lève, personne n'a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
+
+			}
+			
+			envoyerMessage("<message><annonce>Le jour se lève, "+joueurTueeDansLaNuit.get(0)+" a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
 			
 		}
 		else {		
@@ -126,9 +131,11 @@ public class Partie {
 		int role;
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
 			role = aleatoire.nextInt(2);
+						
 			if (role == 0) {
 				
 				if (nbLoupGarou+1 <= nbMaxLoupGarou) {
+										
 					tableauJoueurs[iterateur].setRole(1);
 					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
 					nbLoupGarou+=1;

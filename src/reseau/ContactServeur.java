@@ -51,9 +51,7 @@ public class ContactServeur {
 			String message = "";
 			try {
 				while ((message = lecture.readLine()) != null) {
-							
-					System.out.println(message);
-					
+												
 					DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 					
 					InputSource inputSource = new InputSource();
@@ -74,7 +72,7 @@ public class ContactServeur {
 						break;
 						
 					case "annonce":
-						controleurSalonDeJeu.getSalonDeJeu().ajouterTexteAuChat(elementMessage.getTextContent());
+						controleurSalonDeJeu.ajouterTexteAuChat(elementMessage.getTextContent());
 						break;
 						
 					case "rafraichissement":

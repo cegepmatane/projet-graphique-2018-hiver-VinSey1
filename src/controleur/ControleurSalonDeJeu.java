@@ -35,17 +35,6 @@ public class ControleurSalonDeJeu {
 	
 	public void traiter(String message) {
 		
-		Platform.runLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				
-				vueSalonDeJeu.ajouterTexteAuChat(message);
-				
-			}
-		});
-		
-		
 		try {
 			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			
@@ -152,6 +141,21 @@ public class ControleurSalonDeJeu {
 						
 			}
 		});
+	}
+	
+	public void ajouterTexteAuChat(String message) {
+		
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				vueSalonDeJeu.ajouterTexteAuChat(message);
+				
+			}
+		});
+		
+		
 	}
 	
 	public VueSalonDeJeu getSalonDeJeu() {
