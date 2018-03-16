@@ -81,7 +81,7 @@ public class Serveur{
 					break;
 				default:
 					
-					System.out.println("message non interprété Serveur.traiter");
+					partie.traiter(message);
 					
 					break;
 					

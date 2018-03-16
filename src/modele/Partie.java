@@ -138,7 +138,7 @@ public class Partie {
 										
 					tableauJoueurs[iterateur].setRole(1);
 					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
-					serveur.envoyerIndividuel("<message><role>Loup-Garou</role></message>", iterateur);
+					serveur.envoyerIndividuel("<message><rafraichissement><role>Loup-Garou</role></rafraichissement></message>", iterateur);
 
 					nbLoupGarou+=1;
 				} else {
@@ -183,19 +183,24 @@ public class Partie {
 		
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
 			if(tableauJoueurs[iterateur].getRole() == 1) {
-				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer. "
-						+ "En tant que Loup-Garou, tu dois choisir une "
-						+ "cible à manger cette nuit en cliquant sur \"voter\"</annonce></message>", iterateur);
-				
+				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer. En tant que Loup-Garou, </annonce></message>", iterateur);
+				serveur.envoyerIndividuel("<message><annonce>tu dois choisir une cible à manger cette nuit en cliquant sur \"voter\"</annonce></message>", iterateur);
+				serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", iterateur);
+
 			}
 		}
 				
 		try {
-			TimeUnit.SECONDS.sleep(10);
+			TimeUnit.SECONDS.sleep(30);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
+			if(tableauJoueurs[iterateur].getRole() == 1) {
+				serveur.envoyerIndividuel("<message><rafraichissement><desactiverVote></desactiverVote></rafraichissement></message>", iterateur);
+			}
+		}
+
 		//désactivez le vote pour les loups-garou
 		tourDeJeu = 0;
 	}
@@ -214,6 +219,8 @@ public class Partie {
 				
 				case "demande":
 					
+					envoyerListeJoueur(); 
+
 					break;
 				
 				case "vote":
@@ -241,7 +248,8 @@ public class Partie {
 		}
 	}
 	
-	public void envoyerListeJoueur(int joueur) {
+	
+	public void envoyerListeJoueur() {
 		
 			
 		switch( tourDeJeu ) {

@@ -79,6 +79,14 @@ public class ControleurSalonDeJeu {
 				case "role":
 					modifierRole(elementMessage.getTextContent());
 					break;
+					
+				case "activerVote":
+					activerVote();
+					break;
+
+				case "desactiverVote":
+					desactiverVote();
+					break;
 			
 			}
 			
@@ -101,8 +109,7 @@ public class ControleurSalonDeJeu {
 	}
 	
 	public void demandeVote() {
-		contactServeur.envoyerMessage("<demande>"
-										+"</demande>");
+		contactServeur.envoyerMessage("<demande></demande>");
 	}
 
 		
@@ -170,8 +177,32 @@ public class ControleurSalonDeJeu {
 		});		
 	}
 	
+	public void activerVote() {		
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				vueSalonDeJeu.getBoutonVoter().setDisable(false);
+			}
+		});	
+	}
+	
+	public void desactiverVote() {		
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				vueSalonDeJeu.getBoutonVoter().setDisable(true);
+			}
+		});	
+	}
 	
 	public VueSalonDeJeu getSalonDeJeu() {
 		return vueSalonDeJeu;
 	}
+	
+	
+	
 }

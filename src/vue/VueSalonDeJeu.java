@@ -97,8 +97,10 @@ public class VueSalonDeJeu extends Application {
 	 */
 	String contenuChatDeJeu = "";
 	
+	Button boutonVoter;
     
-    @Override
+
+	@Override
     public void start(Stage primaryStage) {
     	
     	instanceVueSalonDeJeu = primaryStage;   	
@@ -140,7 +142,8 @@ public class VueSalonDeJeu extends Application {
             }
         });   
         // Bouton voter
-        Button boutonVoter = new Button();
+        boutonVoter = new Button();
+        boutonVoter.setDisable(true);
         boutonVoter.setText("Voter");
         boutonVoter.setStyle("-fx-background-color:#00cc00; -fx-font-size:20px; -fx-padding: 10 50 10 50;-fx-font-family:\"Lucida Handwriting\"");
         boutonVoter.setOnAction(new EventHandler<ActionEvent>() {
@@ -405,4 +408,8 @@ public class VueSalonDeJeu extends Application {
     public void show() {
     	instanceVueSalonDeJeu.show();
     }
+    
+    public Button getBoutonVoter() {
+		return boutonVoter;
+	}
 }
