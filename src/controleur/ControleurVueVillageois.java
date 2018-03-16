@@ -41,9 +41,11 @@ public class ControleurVueVillageois {
 					
 					System.out.println("COntroleurVuVillageois "+vueVillageois.getChoixJoueur());
 					
-					contactServeur.envoyerMessage("<vote>"
-							+ vueVillageois.getChoixJoueur()
-					+ "</vote>");
+					contactServeur.envoyerMessage("<message>"
+														+ "<vote>"
+															+ vueVillageois.getChoixJoueur()
+														+ "</vote>"
+													+"</message>");
 					
 					contactServeur.getControleur().desactiverVote();
 				}
