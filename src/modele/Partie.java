@@ -55,8 +55,10 @@ public class Partie {
 	public void lancerPartie() {
 		String messageListe = "<message><rafraichissement><listeVivant>";
 		for(int iterateur = 0; iterateur < tableauJoueurs.length; iterateur++) {
-			messageListe+= "<joueur>"+tableauJoueurs[iterateur].getNom()+"<joueur>");
+			messageListe+= "<joueur>"+tableauJoueurs[iterateur].getNom()+"<joueur>";
 		}
+		messageListe += "</listeVivant></rafraichissement></message>";
+		serveur.envoyerATous(messageListe);
 		serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"</nombreJoueurs></rafraichissement></message>");
 		envoyerMessage("<message><annonce>Il y a assez de joueurs ! La partie va commencer</annonce></message>");
 		envoyerMessage("<message><annonce>Les cartes vont être distribués</annonce></message>");
