@@ -240,7 +240,7 @@ public class VueSalonDeJeu extends Application {
         panelDroite.setPadding(new Insets(20,20,20,20));
         panelDroite.setAlignment(Pos.CENTER);
 
-        indicationNombreDeJoueurs = new Text("Joueurs : 10");
+        indicationNombreDeJoueurs = new Text("Joueurs : ");
         indicationNombreDeJoueurs.setFont(Font.font("Lucida Handwriting", 20));
         
         indicationNombreDeLoupGarouVivant = new Text("2 loup(s)-garoup(s) restant(s)");
@@ -333,7 +333,7 @@ public class VueSalonDeJeu extends Application {
      */
     public void modifierNombreDeJoueur(String nouveauNombreDeJoueur) {
     	
-    	indicationNombreDeJoueurs.setText("Joueurs: "+nouveauNombreDeJoueur);
+    	indicationNombreDeJoueurs.setText("Joueurs : "+nouveauNombreDeJoueur);
     	
     }
     
