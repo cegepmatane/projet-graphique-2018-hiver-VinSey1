@@ -363,7 +363,7 @@ public class VueSalonDeJeu extends Application {
      * Modifier la liste des joueurs vivants
      * @param nouvelleListeJoueurVivant : la nouvelle liste à utiliser
      */
-    public void modifierListeJoueurVivant(String pseudo) {
+    public void modifierListeJoueurVivant(String listeJoueurs) {
     	/**
     	String nouvelleListe = "";
     	
@@ -372,7 +372,7 @@ public class VueSalonDeJeu extends Application {
     	}
     	*/
 
-    	listeJoueursVivant.setText(listeJoueursVivant.getText()+pseudo+"\n");
+    	listeJoueursVivant.setText(listeJoueurs);
     }
     
     

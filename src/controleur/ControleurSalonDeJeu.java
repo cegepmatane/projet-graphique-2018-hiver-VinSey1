@@ -57,7 +57,9 @@ public class ControleurSalonDeJeu {
 					break;
 				
 				case "listeVivant":
-					vueSalonDeJeu.modifierListeJoueurVivant(elementMessage.getTextContent());
+					
+					modifierListeJoueurVivant(message);
+					//vueSalonDeJeu.modifierListeJoueurVivant(convertisseurListe(doc.getElementsByTagName("listeVivant")));
 					break;
 				
 				case "listeMort":
@@ -115,7 +117,22 @@ public class ControleurSalonDeJeu {
 		contactServeur.envoyerMessage("<message><demande></demande></message>");
 	}
 
+	private String convertisseurListe(NodeList contenuMessage) {
+		String message = "";
+		for (int iterateur=0; contenuMessage.getLength()!=0;iterateur++) {
+			System.out.println("QSOMIFGNDKL?SDGML?");
+			Node nodeMessage = contenuMessage.item(iterateur);
+			
+			Element elementMessage = (Element) nodeMessage;
+						
+			message += elementMessage.getTextContent()+"\n";
 		
+		}
+
+		String message2 = "Val \n Eliott \n";
+		
+		return message2;
+	}
 	
 	public void afficherVoteVillageois() {
 		
@@ -142,6 +159,70 @@ public class ControleurSalonDeJeu {
 			}
 		});
 	}
+	
+	public void test() {
+	Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				vueSalonDeJeu.modifierListeJoueurVivant("Test");
+			}
+		});		
+	}
+	
+	public void modifierListeJoueurVivant(String message) {
+		Platform.runLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					
+					try {
+						System.out.println("ControleurSalonDeJeu.modifierListeJoueurVivant message: "+message);
+						
+						String listeJoueurVivant = "";
+						DocumentBuilder lecteurXML;
+						lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
+						
+						InputSource inputSource = new InputSource();
+						inputSource.setCharacterStream(new StringReader(message));
+						
+						Document doc = lecteurXML.parse(inputSource);
+						
+						NodeList contenuMessage = doc.getElementsByTagName("joueur");
+												
+						for (int iterateur=0; iterateur < contenuMessage.getLength();iterateur++) {
+							
+							System.out.println(iterateur);
+							
+							Node nodeMessage = contenuMessage.item(iterateur);
+							
+							Element elementMessage = (Element) nodeMessage;
+							
+							listeJoueurVivant+= elementMessage.getTextContent()+"\n";
+						
+						}
+						vueSalonDeJeu.modifierListeJoueurVivant(listeJoueurVivant);
+						
+					}				
+					catch(org.xml.sax.SAXException e){
+						e.printStackTrace();
+						
+					}
+					catch (ParserConfigurationException e) {
+						e.printStackTrace();
+					}
+					catch(IOException e) {
+						e.printStackTrace();
+						
+						
+					}
+					
+				}
+			});	
+	}
+	
 	
 	public void afficherRegles() {
 		

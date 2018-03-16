@@ -55,7 +55,7 @@ public class Partie {
 	public void lancerPartie() {
 		String messageListe = "<message><rafraichissement><listeVivant>";
 		for(int iterateur = 0; iterateur < tableauJoueurs.length; iterateur++) {
-			messageListe+= "<joueur>"+tableauJoueurs[iterateur].getNom()+"<joueur>";
+			messageListe+= "<joueur>"+tableauJoueurs[iterateur].getNom()+"</joueur>";
 		}
 		messageListe += "</listeVivant></rafraichissement></message>";
 		serveur.envoyerATous(messageListe);
