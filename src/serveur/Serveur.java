@@ -35,16 +35,11 @@ public class Serveur{
 			String message = "";
 			serveur = new ServerSocket(11);
 			while((socket = serveur.accept()) != null) {
-				
-				if (nombreDeJoueurs != NB_JOUEURS_MAX ) {
-					
+									
 					tableauContactJoueur[nombreDeJoueurs] = new ContactJoueur(socket, this);
 					Thread thread = new Thread(tableauContactJoueur[nombreDeJoueurs]);
 					nombreDeJoueurs++;
-
 					thread.start();
-					
-				}
 			}
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -106,20 +101,19 @@ public class Serveur{
 		if ( listeJoueurs.size() < NB_JOUEURS_MAX ) {
 			listeJoueurs.add(nomJoueur);
 			envoyerATous("<message><annonce>"+nomJoueur+" vient de rejoindre la partie</annonce></message>");
-			envoyerIndividuel("<message><rafraichissement><nomJoueur>"+nomJoueur+"</nomJoueur></rafraichissement></message>", tableauContactJoueur.length-1);
+			envoyerIndividuel("<message><rafraichissement><nomJoueur>"+nomJoueur+"</nomJoueur></rafraichissement></message>", listeJoueurs.size()-1);
 			
 			if(listeJoueurs.size() == NB_JOUEURS_MAX) {			
 				this.partie = new Partie(this);
 				partie.lancerPartie();
 			}
+			
+			
 		}
 		else {
 			envoyerIndividuel( "<message><annonce>La partie est déjà complète</message></annonce>"  , tableauContactJoueur.length-1);
 		}
 	}
-		
-		
-
 	
 	public void envoyerIndividuel(String message, int numJoueur) {
 		tableauContactJoueur[numJoueur].envoiMessage(message);

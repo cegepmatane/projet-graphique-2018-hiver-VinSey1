@@ -177,9 +177,10 @@ public class VueSalonDeJeu extends Application {
         descriptionRole = new Text("Description du rôle du joueur");
         descriptionRole.setFont(Font.font("Lucida Handwriting", 17));
         
-        panelGauche.setConstraints(descriptionRole, 0, 0);
-        panelGauche.setConstraints(boutonVoter, 0, 1);
-        panelGauche.setConstraints(quitter, 0, 2);
+        panelGauche.setConstraints(pseudo, 0, 0);
+        panelGauche.setConstraints(descriptionRole, 0, 1);
+        panelGauche.setConstraints(boutonVoter, 0, 2);
+        panelGauche.setConstraints(quitter, 0, 3);
         
         panelGauche.getChildren().add(pseudo);
         panelGauche.getChildren().add(descriptionRole);  

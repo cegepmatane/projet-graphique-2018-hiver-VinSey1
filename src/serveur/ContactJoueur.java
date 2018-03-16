@@ -36,7 +36,8 @@ public class ContactJoueur implements Runnable  {
 		String message;
 		try {			
 			while((message = lecteur.readLine()) != null)
-			{				
+			{			
+					System.out.println("ContactJoueur reçoit: "+message);
 					serveur.traiter(message);
 			}
 		} catch (IOException e) {
@@ -46,6 +47,7 @@ public class ContactJoueur implements Runnable  {
 		
 	public boolean envoiMessage(String message)
 	{
+		System.out.println("ContactJoueur envoie: "+message);
 		imprimante.println(message);
 		return true;
 	}		

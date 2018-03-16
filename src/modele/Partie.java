@@ -115,9 +115,9 @@ public class Partie {
 				envoyerMessage("<message><annonce>Le jour se lève, personne n'a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
 
 			}
-			
-			envoyerMessage("<message><annonce>Le jour se lève, "+joueurTueeDansLaNuit.get(0)+" a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
-			
+			else {
+				envoyerMessage("<message><annonce>Le jour se lève, "+joueurTueeDansLaNuit.get(0)+" a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
+			}
 		}
 		else {		
 			if ( nbVillageois == 0 ) {

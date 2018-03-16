@@ -33,7 +33,7 @@ public class App {
 				contactServeur.setControleurSalonDeJeu(controleurSalonDeJeu);
 				vueSalonDeJeu.setControleurSalonDeJeu(controleurSalonDeJeu);
 				vueSalonDeJeu.start(VueSalonDeJeu.instanceVueSalonDeJeu);
-				contactServeur.connection();
+
 				vueSalonDeJeu.hide();
 				
 				ControleurRegles controleRegles = new ControleurRegles(vueRegles, vueAccueil,vueSalonDeJeu);
@@ -41,8 +41,7 @@ public class App {
 				vueRegles.hide();
 				
 				ControleurAccueil controle = new ControleurAccueil(vueAccueil, contactServeur, vueRegles, vueSalonDeJeu);
-				vueAccueil.setControleurAccueil(controle);
-								
+				vueAccueil.setControleurAccueil(controle);							
 			}
 		});
 	}
