@@ -47,11 +47,9 @@ public class ControleurAccueil {
 					}
 					else {
 						contactServeur.envoyerMessage("<message>"
-														+ "<authentification>"
-															+ "<joueur>"
+														+ "<connexion>"
 																+vueAccueil.recupererPseudo()
-															+"</joueur>"
-														+ "</authentification>"
+														+ "</connexion>"
 													+ "</message>");
 						vueAccueil.close();
 						vueSalonDeJeu.show();

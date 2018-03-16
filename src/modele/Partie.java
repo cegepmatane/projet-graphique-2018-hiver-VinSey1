@@ -58,7 +58,7 @@ public class Partie {
 		nbMaxVillageois = 2;
 		
 		try {
-			TimeUnit.SECONDS.sleep(4);
+			TimeUnit.SECONDS.sleep(3);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -100,15 +100,12 @@ public class Partie {
 		if( joueurATuer != tableauJoueurs.length ) {
 			joueurTueeDansLaNuit.add(joueurATuer);
 			tableauJoueurs[joueurATuer].setVivant(false);
-			
 		}		
 	}
 	
 	private void deroulementJour() {
 		if(!finDePartie()){
-			
 			String joueursTuees;
-			
 			envoyerMessage("<message><annonce>Le jour se lève, "+joueurTueeDansLaNuit.get(0)+"les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
 			
 		}
@@ -258,13 +255,11 @@ public class Partie {
 		default:
 			break;
 			
-		}
-		
+		}	
 	}
 	
 	
 	public void envoyerMessage(String message) {	
-		
 		serveur.envoyerATous(message);
 	}
 	
@@ -295,8 +290,7 @@ public class Partie {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-			
+		}	
 	}
 	
 	private boolean finDePartie() {
