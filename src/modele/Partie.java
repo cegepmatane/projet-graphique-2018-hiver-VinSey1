@@ -219,7 +219,7 @@ public class Partie {
 				
 				case "demande":
 					
-					System.out.println("demande");
+					System.out.println("Partie: demande, "+message);
 					
 					envoyerListeJoueur(); 
 
@@ -227,7 +227,7 @@ public class Partie {
 				
 				case "vote":
 					
-					System.out.println("vote "+message);
+					System.out.println("Partie: vote,  "+message);
 					
 					traiterVote(message);
 					

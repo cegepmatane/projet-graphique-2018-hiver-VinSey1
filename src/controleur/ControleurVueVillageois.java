@@ -43,7 +43,6 @@ public class ControleurVueVillageois {
 		}
 	}
 	
-	
 		
 	public void traiter(String message) {
 				

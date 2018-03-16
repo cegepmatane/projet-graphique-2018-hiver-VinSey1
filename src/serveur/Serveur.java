@@ -98,14 +98,15 @@ public class Serveur{
 		
 	private void ajoutJoueur(String nomJoueur) {
 		
-		listeJoueurs.add(nomJoueur);
-		envoyerATous("<message><annonce>"+nomJoueur+" vient de rejoindre la partie</annonce></message>");
-		
-		if(listeJoueurs.size() == NB_JOUEURS_MAX) {			
-			this.partie = new Partie(this);
-			partie.lancerPartie();
+		if ( listeJoueurs.size() < NB_JOUEURS_MAX ) {
+			listeJoueurs.add(nomJoueur);
+			envoyerATous("<message><annonce>"+nomJoueur+" vient de rejoindre la partie</annonce></message>");
+			
+			if(listeJoueurs.size() == NB_JOUEURS_MAX) {			
+				this.partie = new Partie(this);
+				partie.lancerPartie();
+			}
 		}
-		
 	}
 		
 		
