@@ -68,6 +68,9 @@ public class ContactServeur {
 						System.out.println("Message non traité : ContactServeur");
 					
 					case "liste":
+						
+						System.out.println(message);
+						
 						controleurVueVillageois.traiter(message);
 						break;
 						

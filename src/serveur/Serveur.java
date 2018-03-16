@@ -81,6 +81,8 @@ public class Serveur{
 					break;
 				default:
 					
+					System.out.println(message);
+					
 					partie.traiter(message);
 					
 					break;

@@ -41,12 +41,7 @@ public class ControleurVueVillageois {
 		
 	public void traiter(String message) {
 				
-		List<String> listeJoueurs = new ArrayList<String>();
-		
-		listeJoueurs.add("Eliott");
-		listeJoueurs.add("Vincente");
-		listeJoueurs.add("Valentin");
-
+		List<String> listeJoueurs = new ArrayList<String>();	
 		
 		Platform.runLater(new Runnable() {
 			
