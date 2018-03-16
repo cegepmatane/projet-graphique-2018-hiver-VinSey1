@@ -31,10 +31,14 @@ public class ControleurVueVillageois {
 	}
 	
 	public void validerVote() {
-		
-		contactServeur.envoyerMessage("<vote>"
-											+ vueVillageois.getChoixJoueur()
-									+ "</vote>");
+		if (!vueVillageois.getChoixJoueur().equals("Pas de choix") ) {
+			
+			contactServeur.envoyerMessage("<vote>"
+					+ vueVillageois.getChoixJoueur()
+			+ "</vote>");
+			
+			contactServeur.getControleur().desactiverVote();
+		}
 	}
 	
 	

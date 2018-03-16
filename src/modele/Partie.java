@@ -225,6 +225,8 @@ public class Partie {
 				
 				case "vote":
 					
+					System.out.println(message);
+					
 					traiterVote(message);
 					
 					break;
