@@ -52,6 +52,8 @@ public class ContactServeur {
 			try {
 				while ((message = lecture.readLine()) != null) {
 							
+					System.out.println(message);
+					
 					DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 					
 					InputSource inputSource = new InputSource();

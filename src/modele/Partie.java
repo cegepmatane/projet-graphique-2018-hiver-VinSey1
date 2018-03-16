@@ -51,8 +51,11 @@ public class Partie {
 	}
 	
 	public void lancerPartie() {
+				
+		envoyerMessage("<message><annonce>Il y a assez de joueurs ! La partie va commencer.\nLes cartes vont être distribuées</annonce></message>");
 		
-		envoyerMessage("Il y a assez de joueurs ! La partie va commencer.\nLes cartes vont être distribuées");
+		System.out.println("a envoyé le mesage de début partie");
+		
 		tableauJoueurs = new Joueur[serveur.getNB_JOUEURS_MAX()];
 		nbMaxLoupGarou = 1;
 		nbMaxVillageois = 2;

@@ -39,15 +39,8 @@ public class Serveur{
 				tableauContactJoueur[nombreDeJoueurs] = new ContactJoueur(socket, this);
 				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueurs]);
 				nombreDeJoueurs++;
-				envoyerATous("<annonce>Un Joueur vient de rejoindre la partie</annonce>");
-				envoyerATous("<annonce>Nombre de joueurs : "+nombreDeJoueurs+"/"+NB_JOUEURS_MAX+"</annonce>");
+
 				thread.start();
-				
-				if(listeJoueurs.size() == NB_JOUEURS_MAX) {
-					
-					this.partie = new Partie(this);
-					partie.lancerPartie();
-				}
 
 			}
 		} catch(IOException e) {
@@ -78,15 +71,13 @@ public class Serveur{
 			NodeList contenuMessage = doc.getElementsByTagName("message");
 			Node nodeMessage = contenuMessage.item(0);
 			Element elementMessage = (Element) nodeMessage;
-			
-			System.out.println(nodeMessage.getFirstChild().getNodeName());
-			
+						
 			switch(nodeMessage.getFirstChild().getNodeName()) {
 			
-				case "connexion" :
+				case "connexion":
 					
-					listeJoueurs.add(elementMessage.getTextContent());
-			
+					ajoutJoueur(elementMessage.getTextContent());
+					
 					break;
 				default:
 					
@@ -105,7 +96,17 @@ public class Serveur{
 		}	
 	}
 		
+	private void ajoutJoueur(String nomJoueur) {
 		
+		listeJoueurs.add(nomJoueur);
+		envoyerATous("<message><annonce>"+nomJoueur+" vient de rejoindre la partie</annonce></message>");
+		
+		if(listeJoueurs.size() == NB_JOUEURS_MAX) {			
+			this.partie = new Partie(this);
+			partie.lancerPartie();
+		}
+		
+	}
 		
 		
 
