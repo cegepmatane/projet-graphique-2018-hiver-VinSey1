@@ -101,6 +101,7 @@ public class ContactServeur {
 	}
 	
 	public boolean envoyerMessage(String message) {
+		System.out.println("envoie: "+message);
 		sortie.println(message);
 		return true;
 	}

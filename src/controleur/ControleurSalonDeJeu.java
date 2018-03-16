@@ -87,6 +87,9 @@ public class ControleurSalonDeJeu {
 				case "desactiverVote":
 					desactiverVote();
 					break;
+				case "nomJoueur":
+					modifierNomJoueur(elementMessage.getTextContent());
+					break;
 			
 			}
 			
@@ -196,6 +199,16 @@ public class ControleurSalonDeJeu {
 			public void run() {
 				
 				vueSalonDeJeu.getBoutonVoter().setDisable(true);
+			}
+		});	
+	}
+	
+	public void modifierNomJoueur(String nomJoueur) {
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {	
+				vueSalonDeJeu.setPseudo(nomJoueur);
 			}
 		});	
 	}

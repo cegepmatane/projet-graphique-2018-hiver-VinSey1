@@ -99,6 +99,8 @@ public class VueSalonDeJeu extends Application {
 	
 	Button boutonVoter;
     
+	Text pseudo = new Text("Pseudo");
+
 
 	@Override
     public void start(Stage primaryStage) {
@@ -179,6 +181,7 @@ public class VueSalonDeJeu extends Application {
         panelGauche.setConstraints(boutonVoter, 0, 1);
         panelGauche.setConstraints(quitter, 0, 2);
         
+        panelGauche.getChildren().add(pseudo);
         panelGauche.getChildren().add(descriptionRole);  
         panelGauche.getChildren().add(boutonVoter);
         panelGauche.getChildren().add(quitter);
@@ -411,5 +414,9 @@ public class VueSalonDeJeu extends Application {
     
     public Button getBoutonVoter() {
 		return boutonVoter;
+	}
+    
+	public void setPseudo(String pseudo) {
+		this.pseudo.setText(pseudo);
 	}
 }

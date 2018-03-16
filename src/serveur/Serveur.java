@@ -106,6 +106,7 @@ public class Serveur{
 		if ( listeJoueurs.size() < NB_JOUEURS_MAX ) {
 			listeJoueurs.add(nomJoueur);
 			envoyerATous("<message><annonce>"+nomJoueur+" vient de rejoindre la partie</annonce></message>");
+			envoyerIndividuel("<message><rafraichissement><nomJoueur>"+nomJoueur+"</nomJoueur></rafraichissement></message>", tableauContactJoueur.length-1);
 			
 			if(listeJoueurs.size() == NB_JOUEURS_MAX) {			
 				this.partie = new Partie(this);
