@@ -53,40 +53,51 @@ public class Partie {
 	}
 	
 	public void lancerPartie() {
-		String messageListe = "<message><rafraichissement><listeVivant>";
-		for(int iterateur = 0; iterateur < tableauJoueurs.length; iterateur++) {
-			messageListe+= "<joueur>"+tableauJoueurs[iterateur].getNom()+"</joueur>";
-		}
-		messageListe += "</listeVivant></rafraichissement></message>";
-		serveur.envoyerATous(messageListe);
-		serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"</nombreJoueurs></rafraichissement></message>");
-		envoyerMessage("<message><annonce>Il y a assez de joueurs ! La partie va commencer</annonce></message>");
-		envoyerMessage("<message><annonce>Les cartes vont être distribués</annonce></message>");
+		
+		Thread threadPartie = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				envoyerMessage("<message><annonce>Il y a assez de joueurs ! La partie va commencer</annonce></message>");
+				envoyerMessage("<message><annonce>Les cartes vont être distribués</annonce></message>");
 
-		nbMaxLoupGarou = 1;
-		nbMaxVillageois = 2;
+				nbMaxLoupGarou = 1;
+				nbMaxVillageois = 2;
+				
+				String messageListe = "<message><rafraichissement><listeVivant>";
+				for(int iterateur = 0; iterateur < tableauJoueurs.length; iterateur++) {
+					messageListe+= "<joueur>"+tableauJoueurs[iterateur].getNom()+"</joueur>";
+				}
+				messageListe += "</listeVivant></rafraichissement></message>";
+				serveur.envoyerATous(messageListe);
+				serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"</nombreJoueurs></rafraichissement></message>");
+
+				try {
+					TimeUnit.SECONDS.sleep(3);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				distribuerCartes();
+				
+				try {
+					TimeUnit.SECONDS.sleep(4);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				while(!finDePartie()) {
+					deroulementNuit();
+					deroulementJour();
+				}
+				partieFinie();
+				
+			}
+		});	
 		envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbMaxLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
 		envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbMaxLoupGarou+"</nombreInnocentsRestant></rafraichissement></message>");
 
-		try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		distribuerCartes();
-		
-		try {
-			TimeUnit.SECONDS.sleep(4);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		while(!finDePartie()) {
-			deroulementNuit();
-			deroulementJour();
-		}
-		partieFinie();
+		threadPartie.start();
 	}
 	
 

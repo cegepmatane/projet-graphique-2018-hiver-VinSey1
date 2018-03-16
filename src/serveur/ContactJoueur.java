@@ -30,8 +30,7 @@ public class ContactJoueur implements Runnable  {
 		}
 	}
 	
-	public void run() {		
-		
+	public void run() {
 		if(lecteur == null) return;
 		String message;
 		try {			
