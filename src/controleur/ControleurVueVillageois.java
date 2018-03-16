@@ -31,16 +31,24 @@ public class ControleurVueVillageois {
 	}
 	
 	public void validerVote() {
-		if (!vueVillageois.getChoixJoueur().equals("Pas de choix") && !vueVillageois.getChoixJoueur().equals("Ne rien voter")) {
+		
+		Platform.runLater(new Runnable() {			
 			
-			System.out.println("COntroleurVuVillageois "+vueVillageois.getChoixJoueur());
-			
-			contactServeur.envoyerMessage("<vote>"
-					+ vueVillageois.getChoixJoueur()
-			+ "</vote>");
-			
-			contactServeur.getControleur().desactiverVote();
-		}
+			@Override
+				public void run() {
+													
+				if (!vueVillageois.getChoixJoueur().equals("Pas de choix") && !vueVillageois.getChoixJoueur().equals("Ne rien voter")) {
+					
+					System.out.println("COntroleurVuVillageois "+vueVillageois.getChoixJoueur());
+					
+					contactServeur.envoyerMessage("<vote>"
+							+ vueVillageois.getChoixJoueur()
+					+ "</vote>");
+					
+					contactServeur.getControleur().desactiverVote();
+				}
+			}
+		});
 	}
 	
 		

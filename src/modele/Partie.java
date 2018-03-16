@@ -218,17 +218,14 @@ public class Partie {
 			switch( doc.getDocumentElement().getNodeName() ) {
 				
 				case "demande":
-					
-					System.out.println("Partie: demande, "+message);
-					
+										
 					envoyerListeJoueur(); 
 
 					break;
 				
 				case "vote":
-					
-					System.out.println("Partie: vote,  "+message);
-					
+										
+					System.out.println("Partie: "+message);
 					traiterVote(message);
 					
 					break;

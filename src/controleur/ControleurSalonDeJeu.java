@@ -129,6 +129,7 @@ public class ControleurSalonDeJeu {
 					
 					try {
 						vueVillageois.start(VueVillageois.instanceVueVillageois);
+						vueVillageois.setControleur(controleurVueVillageois);
 						contactServeur.setControleurVueVillageois(controleurVueVillageois);
 						
 						demandeVote();

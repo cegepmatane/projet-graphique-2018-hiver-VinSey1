@@ -22,7 +22,8 @@ public class VueVillageois extends Application{
 	public static Stage instanceVueVillageois= new Stage();
 	
 	private ControleurVueVillageois controleur;
-	
+
+
 	private Button valider = new Button("Valider");
 	
 	private List<RadioButton> choixJoueur = new ArrayList<RadioButton>();
@@ -99,4 +100,10 @@ public class VueVillageois extends Application{
 		return "Pas de choix";
 		
 	}
+	
+	
+	public void setControleur(ControleurVueVillageois controleur) {
+		this.controleur = controleur;
+	}
 }
+

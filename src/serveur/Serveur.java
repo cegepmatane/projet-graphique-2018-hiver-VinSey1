@@ -107,6 +107,9 @@ public class Serveur{
 				partie.lancerPartie();
 			}
 		}
+		else {
+			envoyerIndividuel( "<message><annonce>La partie est déjà complète</message></annonce>"  , tableauContactJoueur.length-1);
+		}
 	}
 		
 		
