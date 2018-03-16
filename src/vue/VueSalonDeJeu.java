@@ -174,7 +174,7 @@ public class VueSalonDeJeu extends Application {
      
         panelGauche.setAlignment(Pos.CENTER);
 
-        descriptionRole = new Text("Description du rôle du joueur");
+        descriptionRole = new Text("");
         descriptionRole.setFont(Font.font("Lucida Handwriting", 17));
         
         panelGauche.setConstraints(pseudo, 0, 0);
@@ -243,10 +243,10 @@ public class VueSalonDeJeu extends Application {
         indicationNombreDeJoueurs = new Text("Joueurs : ");
         indicationNombreDeJoueurs.setFont(Font.font("Lucida Handwriting", 20));
         
-        indicationNombreDeLoupGarouVivant = new Text("2 loup(s)-garoup(s) restant(s)");
+        indicationNombreDeLoupGarouVivant = new Text("Loups-garous restants : ");
         indicationNombreDeLoupGarouVivant.setFont(Font.font("Lucida Handwriting", 20));
         
-        indicationNombreDInnocentVivant = new Text("3 innocent(s) restant(s)");
+        indicationNombreDInnocentVivant = new Text("Innocents restants : ");
         indicationNombreDInnocentVivant.setFont(Font.font("Lucida Handwriting", 20));
         
         Text nomListeJoueursVivant = new Text("Vivants");
@@ -344,7 +344,7 @@ public class VueSalonDeJeu extends Application {
     public void modifierIndicationNombreDeLoupGarouVivant(String nouveauNombreDeLoupGarou) {
     
     	
-        	indicationNombreDeLoupGarouVivant.setText(nouveauNombreDeLoupGarou+" loups-garous restants");
+        indicationNombreDeLoupGarouVivant.setText("Loups-garous restants : "+nouveauNombreDeLoupGarou);
     	
     }
     
@@ -355,7 +355,7 @@ public class VueSalonDeJeu extends Application {
     public void modifierIndicationInnocentVivant(String nouveauNombreInnocent) {
     
     	
-        	indicationNombreDeLoupGarouVivant.setText(nouveauNombreInnocent+" loups-garous restants");
+    	indicationNombreDInnocentVivant.setText("Innocents restants : "+nouveauNombreInnocent);
     	
     }
     

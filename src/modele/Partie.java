@@ -55,7 +55,7 @@ public class Partie {
 	public void lancerPartie() {
 				
 		for(int iterator = 0; iterator < serveur.getNB_JOUEURS_MAX(); iterator++) {
-			serveur.envoyerATous("<message><rafraichissement><listeVivant>"+serveur.getListeJoueurs().get(iterator)+"</listeVivant></rafraichissement></message>");
+			envoyerMessage("<message><rafraichissement><listeVivant>"+serveur.getListeJoueurs().get(iterator)+"</listeVivant></rafraichissement></message>");
 		}
 		serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+serveur.getNombreDeJoueurs()+"</nombreJoueurs></rafraichissement></message>");
 		envoyerMessage("<message><annonce>Il y a assez de joueurs ! La partie va commencer</annonce></message>");
@@ -63,7 +63,9 @@ public class Partie {
 
 		nbMaxLoupGarou = 1;
 		nbMaxVillageois = 2;
-		
+		envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbMaxLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
+		envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbMaxLoupGarou+"</nombreInnocentsRestant></rafraichissement></message>");
+
 		try {
 			TimeUnit.SECONDS.sleep(3);
 		} catch (InterruptedException e) {
@@ -92,7 +94,7 @@ public class Partie {
 		
 		tourLoupGarou();
 		
-		serveur.envoyerATous("<message><annonce>Les loups-garous ont fait leur choix</annonce></message>");
+		envoyerMessage("<message><annonce>Les loups-garous ont fait leur choix</annonce></message>");
 		
 		int joueurATuer = tableauJoueurs.length;
 		int nombreDeVoteMaximum = 0;
@@ -145,13 +147,13 @@ public class Partie {
 					tableauJoueurs[iterateur].setRole(1);
 					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
 					serveur.envoyerIndividuel("<message><rafraichissement><role>Loup-Garou</role></rafraichissement></message>", iterateur);
-
+					serveur.envoyerIndividuel("<message><rafraichissement><descriptionRole>Ton rôle est de manger les innocents la nuit</descriptionRole></rafraichissement></message>", iterateur);
 					nbLoupGarou+=1;
 				} else {
 					tableauJoueurs[iterateur].setRole(0);
 					serveur.envoyerIndividuel("<message><annonce>Tu es un Villageois</annonce></message>", iterateur);
 					serveur.envoyerIndividuel("<message><rafraichissement><role>Villageois</role></rafraichissement></message>", iterateur);
-
+					serveur.envoyerIndividuel("<message><rafraichissement><descriptionRole>Ton rôle est de tuer les loups-garous le jour</descriptionRole></rafraichissement></message>", iterateur);
 					nbVillageois+=1;
 				}
 			} else {
@@ -159,12 +161,14 @@ public class Partie {
 					tableauJoueurs[iterateur].setRole(0);
 					serveur.envoyerIndividuel("<message><annonce>Tu es un Villageois</annonce></message>", iterateur);
 					serveur.envoyerIndividuel("<message><rafraichissement><role>Villageois</role></rafraichissement></message>", iterateur);
+					serveur.envoyerIndividuel("<message><rafraichissement><descriptionRole>Ton rôle est de tuer les loups-garous le jour</descriptionRole></rafraichissement></message>", iterateur);
 
 					nbVillageois+=1;
 				} else {
 					tableauJoueurs[iterateur].setRole(1);
 					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
 					serveur.envoyerIndividuel("<message><rafraichissement><role>Loup-Garou</role></rafraichissement></message>", iterateur);
+					serveur.envoyerIndividuel("<message><rafraichissement><descriptionRole>Ton rôle est de manger les innocents la nuit</descriptionRole></rafraichissement></message>", iterateur);
 
 					nbLoupGarou+=1;
 				}
@@ -317,7 +321,7 @@ public class Partie {
 			for ( int iterateurTableauJoueur = 0 ; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
 	
 				if ( tableauJoueurs[iterateurTableauJoueur].getNom().equals(nomDuJoueurVote) ) {
-					tableauJoueurs[iterateurTableauJoueur].setNombreVote(tableauJoueurs[iterateurTableauJoueur].getNombreVote());
+					tableauJoueurs[iterateurTableauJoueur].setNombreVote(tableauJoueurs[iterateurTableauJoueur].getNombreVote()+1);
 				}
 				
 			}
