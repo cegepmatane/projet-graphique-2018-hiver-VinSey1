@@ -79,6 +79,8 @@ public class Serveur{
 			Node nodeMessage = contenuMessage.item(0);
 			Element elementMessage = (Element) nodeMessage;
 			
+			System.out.println(nodeMessage.getFirstChild().getNodeName());
+			
 			switch(nodeMessage.getFirstChild().getNodeName()) {
 			
 				case "connexion" :
