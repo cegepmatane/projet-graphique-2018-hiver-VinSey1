@@ -9,6 +9,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import jdk.internal.org.xml.sax.SAXException;
@@ -212,13 +214,15 @@ public class Partie {
 			System.out.println("Partie: "+message);
 			
 			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			
 			InputSource inputSource = new InputSource();
 			inputSource.setCharacterStream(new StringReader(message));
 			
 			Document doc = lecteurXML.parse(inputSource);
-			
-			switch( doc.getDocumentElement().getNodeName() ) {
+			NodeList contenuMessage = doc.getElementsByTagName("message");
+			Node nodeMessage = contenuMessage.item(0);
+			Element elementMessage = (Element) nodeMessage;
+						
+			switch(nodeMessage.getFirstChild().getNodeName()) {
 				
 				case "demande":
 										

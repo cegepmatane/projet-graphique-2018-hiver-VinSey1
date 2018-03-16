@@ -109,7 +109,7 @@ public class ControleurSalonDeJeu {
 	}
 	
 	public void demandeVote() {
-		contactServeur.envoyerMessage("<demande></demande>");
+		contactServeur.envoyerMessage("<message><demande></demande></message>");
 	}
 
 		

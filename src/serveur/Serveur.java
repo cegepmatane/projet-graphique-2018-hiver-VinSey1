@@ -86,7 +86,7 @@ public class Serveur{
 					break;
 				default:
 					
-					partie.traiter(message);
+					if ( partie != null ) partie.traiter(message);
 					
 					break;
 					
