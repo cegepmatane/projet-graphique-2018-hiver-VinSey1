@@ -296,5 +296,5 @@ public class Partie {
 	private boolean finDePartie() {
 		return (nbVillageois == 0 || nbLoupGarou == 0);
 	}
-	
+		
 }

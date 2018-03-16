@@ -3,6 +3,16 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import modele.Partie;
 
@@ -29,12 +39,11 @@ public class Serveur{
 				tableauContactJoueur[nombreDeJoueurs] = new ContactJoueur(socket, this);
 				Thread thread = new Thread(tableauContactJoueur[nombreDeJoueurs]);
 				nombreDeJoueurs++;
-				listeJoueurs.add("Joueur "+nombreDeJoueurs);
 				envoyerATous("<annonce>Un Joueur vient de rejoindre la partie</annonce>");
 				envoyerATous("<annonce>Nombre de joueurs : "+nombreDeJoueurs+"/"+NB_JOUEURS_MAX+"</annonce>");
 				thread.start();
 				
-				if(nombreDeJoueurs == NB_JOUEURS_MAX) {
+				if(listeJoueurs.size() == NB_JOUEURS_MAX) {
 					
 					this.partie = new Partie(this);
 					partie.lancerPartie();
@@ -56,6 +65,48 @@ public class Serveur{
 		}
 		
 	}
+	
+	public void traiter(String message) {
+		
+		try {
+			
+			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			InputSource inputSource = new InputSource();
+			inputSource.setCharacterStream(new StringReader(message));
+			
+			Document doc = lecteurXML.parse(inputSource);
+			NodeList contenuMessage = doc.getElementsByTagName("message");
+			Node nodeMessage = contenuMessage.item(0);
+			Element elementMessage = (Element) nodeMessage;
+			
+			switch(nodeMessage.getFirstChild().getNodeName()) {
+			
+				case "connexion" :
+					
+					listeJoueurs.add(elementMessage.getTextContent());
+			
+					break;
+				default:
+					
+					System.out.println("message non interprété Serveur.traiter");
+					
+					break;
+					
+			}
+		}
+		 catch (org.xml.sax.SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		}	
+	}
+		
+		
+		
+		
+
 	
 	public void envoyerIndividuel(String message, int numJoueur) {
 		tableauContactJoueur[numJoueur].envoiMessage(message);
