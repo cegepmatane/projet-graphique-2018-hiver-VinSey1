@@ -151,7 +151,7 @@ public class Partie {
 					nbVillageois+=1;
 				} else {
 					tableauJoueurs[iterateur].setRole(1);
-					serveur.envoyerIndividuel("</message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
+					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
 					nbLoupGarou+=1;
 				}
 			}
