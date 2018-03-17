@@ -271,7 +271,7 @@ public class ControleurSalonDeJeu {
 		String message = vueSalonDeJeu.getZoneDeSaisieMessage().getText();
 		vueSalonDeJeu.getZoneDeSaisieMessage().setText("");
 		
-		String messageXML = "<message><chat>"+message+"</chat></message>";
+		String messageXML = "<message><chat><texte>"+message+"</texte><joueur>"+vueSalonDeJeu.getPseudo()+"</chat></joueur></message>";
 		
 		contactServeur.envoyerMessage(messageXML);
 		

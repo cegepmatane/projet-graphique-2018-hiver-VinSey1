@@ -317,11 +317,7 @@ public class Partie {
 					
 				case "chat":
 					
-					contenuMessage = doc.getElementsByTagName("chat");
-					nodeMessage = contenuMessage.item(0);
-					elementMessage = (Element) nodeMessage;
-					
-					gererChat(elementMessage.getTextContent());
+					gererChat(message);
 					
 					break;
 				
@@ -487,14 +483,41 @@ public class Partie {
 	}
 	
 	private void gererChat(String message) {
-		
-		
-		
-		for ( int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
+				
+		try {
+			DocumentBuilder lecteurXML;
+
+			lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			InputSource inputSource = new InputSource();
+			inputSource.setCharacterStream(new StringReader(message));
 			
-			if ( tableauJoueurs[iterateurJoueur].isVivant() ) serveur.envoyerIndividuel("<message><chat>"+message+"</chat></message>", iterateurJoueur);
+			Document doc = lecteurXML.parse(inputSource);
+			NodeList contenuMessage = doc.getElementsByTagName("texte");
+			Node nodeMessage = contenuMessage.item(0);
+			Element elementMessage = (Element) nodeMessage;
 			
+			NodeList emmetteur = doc.getElementsByTagName("joueur");
+			Node nodeEmmetteur = emmetteur.item(0);
+			Element elementEmmetteur = (Element) nodeEmmetteur;
+			
+			String messageAEnvoyer = elementEmmetteur+": "+elementMessage;
+			
+			
+			for ( int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
+				
+				if ( tableauJoueurs[iterateurJoueur].isVivant() ) serveur.envoyerIndividuel("<message><chat>"+messageAEnvoyer+"</chat></message>", iterateurJoueur);
+				
+			}
+			
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (org.xml.sax.SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+
+		
 		
 	}
 }

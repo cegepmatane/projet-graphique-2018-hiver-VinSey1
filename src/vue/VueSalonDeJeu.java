@@ -103,6 +103,7 @@ public class VueSalonDeJeu extends Application {
     
 	Text pseudo = new Text("Pseudo");
 
+
 	TextField zoneDeSaisieMessage;
 	
 
@@ -421,6 +422,10 @@ public class VueSalonDeJeu extends Application {
     
 	public void setPseudo(String pseudo) {
 		this.pseudo.setText(pseudo);
+	}
+
+	public Text getPseudo() {
+		return pseudo;
 	}
 	
 	public TextField getZoneDeSaisieMessage() {
