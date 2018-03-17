@@ -47,7 +47,7 @@ public class ControleurSalonDeJeu {
 			
 			Element elementMessage = (Element) nodeMessage;
 
-			System.out.println("ControleurSalonDeJeu reçoit:"+message);
+			//System.out.println("ControleurSalonDeJeu reçoit:"+message);
 			
 			switch(nodeMessage.getFirstChild().getNodeName()) {
 			

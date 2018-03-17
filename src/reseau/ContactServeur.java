@@ -52,7 +52,7 @@ public class ContactServeur {
 			try {
 				while ((message = lecture.readLine()) != null) {
 											
-					System.out.println("ContactServeur reçoit: "+message);
+					//System.out.println("ContactServeur reçoit: "+message);
 					
 					DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 					
@@ -103,7 +103,7 @@ public class ContactServeur {
 	}
 	
 	public boolean envoyerMessage(String message) {
-		System.out.println("ContactServeur envoie: "+message);
+		//System.out.println("ContactServeur envoie: "+message);
 		sortie.println(message);
 		return true;
 	}

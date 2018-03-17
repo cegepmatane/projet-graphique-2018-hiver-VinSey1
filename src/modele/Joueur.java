@@ -48,5 +48,9 @@ public class Joueur {
 	public void setNombreVote(int nombreVote) {
 		this.nombreVote = nombreVote;
 	}
+	
+	public void reinitialiserNombreDeVote() {
+		this.nombreVote = 0;
+	}
 
 }

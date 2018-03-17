@@ -62,7 +62,7 @@ public class Partie {
 				envoyerMessage("<message><annonce>Les cartes vont être distribués</annonce></message>");
 
 				nbMaxLoupGarou = 1;
-				nbMaxVillageois = 2;
+				nbMaxVillageois = 3;
 
 				serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"/"+serveur.NB_JOUEURS_MAX+"</nombreJoueurs></rafraichissement></message>");
 
@@ -129,11 +129,15 @@ public class Partie {
 					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
 					retournerMorts();
 					retournerVivants();
-					joueurTueeDansLaNuit.clear();			
+					joueurTueeDansLaNuit.clear();		
+					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
+						tableauJoueurs[iterateurTableauJoueur].reinitialiserNombreDeVote();
+					}
+
 			}
 			
 			envoyerMessage("<message><annonce>Les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
-			
+						
 			tourDeJeu = 2;
 			envoyerMessage("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>");
 			try {
@@ -145,6 +149,7 @@ public class Partie {
 			
 			envoyerMessage("<message><annonce>Les villageois ont fait leur choix</annonce></message>");
 			finDeVote();
+
 			if ( joueurTueeDansLaNuit.size() !=0 ) {
 				
 				envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
@@ -156,6 +161,9 @@ public class Partie {
 					nbVillageois -=1;
 				}
 				joueurTueeDansLaNuit.clear();
+				for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
+					tableauJoueurs[iterateurTableauJoueur].reinitialiserNombreDeVote();
+				}
 				envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
 				envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
 				retournerMorts();
@@ -167,14 +175,6 @@ public class Partie {
 			}
 			
 		}
-		joueurTueeDansLaNuit.clear();
-		try {
-			TimeUnit.SECONDS.sleep(4);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		
 	}
 	
 	private void retournerVivants() {
@@ -286,7 +286,7 @@ public class Partie {
 		
 		try {
 			
-			System.out.println("Partie: "+message);
+			//System.out.println("Partie: "+message);
 			
 			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			InputSource inputSource = new InputSource();
@@ -356,18 +356,17 @@ public class Partie {
 			break;
 			
 		case 2:
-			
-			for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {				
-					String messageAEnvoyer = "<message><liste>";
+						
+				String messageAEnvoyer = "<message><liste>";
+				
+				for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
+					if ( tableauJoueurs[iterateurTableauJoueur].isVivant() ) {
+						messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
+					}						
+				}
+				messageAEnvoyer += "</liste></message>";
+				envoyerMessage(messageAEnvoyer);
 					
-					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
-						if ( tableauJoueurs[iterateurTableauJoueur].isVivant() ) {
-							messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
-						}						
-					}
-					messageAEnvoyer += "</liste></message>";
-					envoyerMessage(messageAEnvoyer);
-			}		
 			
 			
 			break;
