@@ -181,7 +181,7 @@ public class VueSalonDeJeu extends Application {
         
         panelGauche.getChildren().add(pseudo);
         panelGauche.getChildren().add(descriptionRole);  
-        //panelGauche.getChildren().add(boutonVoter);
+        panelGauche.getChildren().add(boutonVoter);
         panelGauche.getChildren().add(quitter);
         
           

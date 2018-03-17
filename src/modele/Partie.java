@@ -63,7 +63,7 @@ public class Partie {
 				envoyerMessage("<message><annonce>Les cartes vont être distribués</annonce></message>");
 
 				nbMaxLoupGarou = 1;
-				nbMaxVillageois = 1;
+				nbMaxVillageois = 2;
 
 				serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"/"+serveur.NB_JOUEURS_MAX+"</nombreJoueurs></rafraichissement></message>");
 
@@ -118,13 +118,12 @@ public class Partie {
 			
 			if ( joueurTueeDansLaNuit.size() ==0  ) {
 				envoyerMessage("<message><annonce>Le jour se lève, personne n'a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
-
 			}
 			else {
 					envoyerMessage("<message><annonce>Le jour se lève, "+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
 					envoyerMessage("<message><annonce>Il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
 					retournerVivants();
-					retournerMorts();		
+					retournerMorts();	
 					nbVillageois-=1;
 					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
 					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
@@ -148,34 +147,34 @@ public class Partie {
 			finDeVote();
 			desactiverVoteVillageois();
 
-			if ( joueurTueeDansLaNuit.size() !=0 && egalite == false) {
+			if ( !finDePartie() ) {
 				
-				envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
-				envoyerMessage("<message><annonce>Il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
+				if ( joueurTueeDansLaNuit.size() !=0 && egalite == false) {
+					
+					envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
+					envoyerMessage("<message><annonce>Il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
 
-				
-				if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
-					nbLoupGarou -= 1;
+					if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
+						nbLoupGarou -= 1;
+					}
+					else {
+						nbVillageois -=1;
+					}
+					reinitialiserVote();
+					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
+					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
+					retournerMorts();
+					retournerVivants();
 				}
-				else {
-					nbVillageois -=1;
-				}
-				reinitialiserVote();
-				envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
-				envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
-				retournerMorts();
-				retournerVivants();
-			}
-			else if (egalite == true ) {
-				
-				envoyerMessage("<message><annonce>Il y a eu une égalité lors des votes, personne de sera lynché</annonce></message>");
-				reinitialiserVote();
-			}		
-			else {
-				
-				envoyerMessage("<message><annonce>Personne n'a été lynché par la population</annonce></message>");
-			}
-			
+				else if (egalite == true ) {
+					
+					envoyerMessage("<message><annonce>Il y a eu une égalité lors des votes, personne de sera lynché</annonce></message>");
+					reinitialiserVote();
+				}		
+				else {			
+					envoyerMessage("<message><annonce>Personne n'a été lynché par la population</annonce></message>");
+				}	
+			}			
 		}
 	}
 	
@@ -232,14 +231,12 @@ public class Partie {
 					serveur.envoyerIndividuel("<message><annonce>Tu es un Villageois</annonce></message>", iterateur);
 					serveur.envoyerIndividuel("<message><rafraichissement><role>Villageois</role></rafraichissement></message>", iterateur);
 					serveur.envoyerIndividuel("<message><rafraichissement><descriptionRole>Ton rôle est de tuer les loups-garous le jour</descriptionRole></rafraichissement></message>", iterateur);
-
 					nbVillageois+=1;
 				} else {
 					tableauJoueurs[iterateur].setRole(1);
 					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
 					serveur.envoyerIndividuel("<message><rafraichissement><role>Loup-Garou</role></rafraichissement></message>", iterateur);
 					serveur.envoyerIndividuel("<message><rafraichissement><descriptionRole>Ton rôle est de manger les innocents la nuit</descriptionRole></rafraichissement></message>", iterateur);
-
 					nbLoupGarou+=1;
 				}
 			}
@@ -290,7 +287,7 @@ public class Partie {
 		
 		try {
 			
-			System.out.println("Partie reçoit: "+message);
+			//System.out.println("Partie reçoit: "+message);
 			
 			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			InputSource inputSource = new InputSource();
@@ -427,9 +424,7 @@ public class Partie {
 		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
 			
 			if ( tableauJoueurs[iterateurTableauJoueur].getNombreVote() == nombreDeVoteMaximum && nombreDeVoteMaximum != 0) egalite = true;
-			
-			System.out.println("égalite: "+egalite);
-			
+						
 			if ( tableauJoueurs[iterateurTableauJoueur].getNombreVote() > nombreDeVoteMaximum ) {
 				joueurATuer = iterateurTableauJoueur;
 				nombreDeVoteMaximum = tableauJoueurs[iterateurTableauJoueur].getNombreVote();
@@ -486,7 +481,7 @@ public class Partie {
 				
 		try {
 			
-			System.out.println("gererChat reçoit: "+message);
+			//System.out.println("gererChat reçoit: "+message);
 			
 			DocumentBuilder lecteurXML;
 
@@ -506,6 +501,8 @@ public class Partie {
 			String messageAEnvoyer = elementEmmetteur.getTextContent()+": "+elementMessage.getTextContent();
 			
 			for ( int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
+				
+				System.out.println(iterateurJoueur);
 				
 				if ( tableauJoueurs[iterateurJoueur].isVivant() && tableauJoueurs[iterateurJoueur].getNom().equals(elementEmmetteur.getTextContent() )){
 					envoyerMessage("<message><chat>"+messageAEnvoyer+"</chat></message>");
