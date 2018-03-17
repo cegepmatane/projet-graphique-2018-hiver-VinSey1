@@ -29,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 /**
  * Vue du salon de jeu 
@@ -90,7 +91,7 @@ public class VueSalonDeJeu extends Application {
 	/**
 	 * Chat du jeu
 	 */
-	Label chatDeJeu;
+	TextArea chatDeJeu;
 	
 	/**
 	 * Contenu du chat de jeu
@@ -209,18 +210,14 @@ public class VueSalonDeJeu extends Application {
         hboxHaut.getChildren().add(nomDeLaPage);
         hboxHaut.getChildren().add(blanc2);
         hboxHaut.getChildren().add(reglesDuJeu);
-
-        
-        
         
         //VBox milieu
-        
         VBox panelMilieu = new VBox();
-        chatDeJeu = new Label("chat de jeu");
+        chatDeJeu = new TextArea();
+        chatDeJeu.setMaxWidth(700);
+        chatDeJeu.setMaxHeight(700);
         Region blanc3 = new Region();
-        
-        chatDeJeu.setMinHeight(400);
-        
+                
         TextField zoneDeSaisieMessage = new TextField();
         
         panelMilieu.setPadding(new Insets(20,20,100,20));
@@ -325,6 +322,8 @@ public class VueSalonDeJeu extends Application {
     	
     	contenuChatDeJeu += texte+"\n";
     	chatDeJeu.setText(contenuChatDeJeu);
+    	chatDeJeu.appendText("");
+    	chatDeJeu.setScrollTop(50);
     }
     
     /**

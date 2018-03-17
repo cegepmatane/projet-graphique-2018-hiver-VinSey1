@@ -23,7 +23,7 @@ public class Partie {
 	private int nbMaxLoupGarou;
 	private int nbVillageois;
 	private int nbMaxVillageois;
-	private final String[] numeroRoles = {"Loups-Garous", "Villageois"};
+	private final String[] numeroRoles = {"Villageois", "Loups-Garous"};
 	private Serveur serveur;
 	private Joueur[] tableauJoueurs;
 	private boolean finPartie = false;
@@ -122,6 +122,7 @@ public class Partie {
 			}
 			else {
 					envoyerMessage("<message><annonce>Le jour se lève, "+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
+					envoyerMessage("<message><annonce>Il était"+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
 					retournerVivants();
 					retournerMorts();		
 					nbVillageois-=1;
@@ -129,17 +130,13 @@ public class Partie {
 					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
 					retournerMorts();
 					retournerVivants();
-					joueurTueeDansLaNuit.clear();		
-					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
-						tableauJoueurs[iterateurTableauJoueur].reinitialiserNombreDeVote();
-					}
-
+					reinitialiserVote();
 			}
 			
 			envoyerMessage("<message><annonce>Les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
 						
 			tourDeJeu = 2;
-			envoyerMessage("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>");
+			activerVoteVillageois();
 			try {
 				TimeUnit.SECONDS.sleep(20);
 			} catch (InterruptedException e) {
@@ -149,26 +146,25 @@ public class Partie {
 			
 			envoyerMessage("<message><annonce>Les villageois ont fait leur choix</annonce></message>");
 			finDeVote();
+			desactiverVoteVillageois();
 
 			if ( joueurTueeDansLaNuit.size() !=0 ) {
 				
 				envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
+				envoyerMessage("<message><annonce>Il était"+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
 
+				
 				if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
 					nbLoupGarou -= 1;
 				}
 				else {
 					nbVillageois -=1;
 				}
-				joueurTueeDansLaNuit.clear();
-				for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
-					tableauJoueurs[iterateurTableauJoueur].reinitialiserNombreDeVote();
-				}
+				reinitialiserVote();
 				envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
 				envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
 				retournerMorts();
 				retournerVivants();
-				
 			}else {
 				
 				envoyerMessage("<message><annonce>Personne n'a été lynché par la population</annonce></message>");
@@ -201,7 +197,6 @@ public class Partie {
 		}		
 		listeJoueurMort += "</listeMort></rafraichissement></message>";
 		envoyerMessage(listeJoueurMort);
-
 	}
 	
 	private void distribuerCartes() {
@@ -243,6 +238,9 @@ public class Partie {
 				}
 			}
 		}
+		
+
+		
 	}
 	
 	private void partieFinie() {
@@ -366,9 +364,6 @@ public class Partie {
 				}
 				messageAEnvoyer += "</liste></message>";
 				envoyerMessage(messageAEnvoyer);
-					
-			
-			
 			break;
 		
 		default:
@@ -427,7 +422,6 @@ public class Partie {
 		if( joueurATuer != tableauJoueurs.length ) {
 			joueurTueeDansLaNuit.add(joueurATuer);
 			tableauJoueurs[joueurATuer].setVivant(false);
-			nbVillageois-=1;
 		}	
 		
 	}
@@ -449,4 +443,28 @@ public class Partie {
 		return false;
 	}
 		
+
+	private void reinitialiserVote() {
+		joueurTueeDansLaNuit.clear();		
+		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
+			tableauJoueurs[iterateurTableauJoueur].reinitialiserNombreDeVote();
+		}
+	}
+	
+	private void activerVoteVillageois() {
+			
+		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
+			if ( tableauJoueurs[iterateurTableauJoueur].isVivant() ) envoyerMessage("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>");
+		}
+		
+		
+	}
+	
+	private void desactiverVoteVillageois() {
+		
+		envoyerMessage("<message><rafraichissement><desactiverVote></desactiverVote></rafraichissement></message>");
+		
+	}
+	
+	
 }
