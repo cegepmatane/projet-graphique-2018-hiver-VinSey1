@@ -485,6 +485,9 @@ public class Partie {
 	private void gererChat(String message) {
 				
 		try {
+			
+			System.out.println("gererChat reçoit: "+message);
+			
 			DocumentBuilder lecteurXML;
 
 			lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -500,14 +503,17 @@ public class Partie {
 			Node nodeEmmetteur = emmetteur.item(0);
 			Element elementEmmetteur = (Element) nodeEmmetteur;
 			
-			String messageAEnvoyer = elementEmmetteur+": "+elementMessage;
-			
+			String messageAEnvoyer = elementEmmetteur.getTextContent()+": "+elementMessage.getTextContent();
 			
 			for ( int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
 				
-				if ( tableauJoueurs[iterateurJoueur].isVivant() ) serveur.envoyerIndividuel("<message><chat>"+messageAEnvoyer+"</chat></message>", iterateurJoueur);
-				
+				if ( tableauJoueurs[iterateurJoueur].isVivant() && tableauJoueurs[iterateurJoueur].getNom().equals(elementEmmetteur.getTextContent() )){
+					envoyerMessage("<message><chat>"+messageAEnvoyer+"</chat></message>");
+				}
 			}
+			
+				
+		
 			
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
