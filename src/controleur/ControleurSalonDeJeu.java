@@ -203,6 +203,53 @@ public class ControleurSalonDeJeu {
 			});	
 	}
 	
+	public void modifierListeJoueurMort(String message) {
+		Platform.runLater(new Runnable() {
+				
+				@Override
+				public void run() {
+					
+					try {
+												
+						String listeJoueurMort = "";
+						DocumentBuilder lecteurXML;
+						lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
+						
+						InputSource inputSource = new InputSource();
+						inputSource.setCharacterStream(new StringReader(message));
+						
+						Document doc = lecteurXML.parse(inputSource);
+						
+						NodeList contenuMessage = doc.getElementsByTagName("joueur");
+												
+						for (int iterateur=0; iterateur < contenuMessage.getLength();iterateur++) {
+														
+							Node nodeMessage = contenuMessage.item(iterateur);
+							
+							Element elementMessage = (Element) nodeMessage;
+							
+							listeJoueurMort+= elementMessage.getTextContent()+"\n";						
+						}
+						vueSalonDeJeu.modifierListeJoueurMort(listeJoueurMort);
+						
+					}				
+					catch(org.xml.sax.SAXException e){
+						e.printStackTrace();
+						
+					}
+					catch (ParserConfigurationException e) {
+						e.printStackTrace();
+					}
+					catch(IOException e) {
+						e.printStackTrace();
+						
+						
+					}
+					
+				}
+			});	
+	}
 	
 	public void afficherRegles() {
 		

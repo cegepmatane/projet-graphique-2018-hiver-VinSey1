@@ -123,7 +123,10 @@ public class Partie {
 			else {
 					envoyerMessage("<message><annonce>Le jour se lève, "+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
 					retournerVivants();
-					retournerMorts();
+					retournerMorts();				
+					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
+					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
+					
 					joueurTueeDansLaNuit.clear();
 				}
 			
@@ -136,11 +139,7 @@ public class Partie {
 				envoyerMessage("<message><annonce>Les villageois ont gagné, la partie est terminé</annonce></message>");
 			}
 		}
-		
-		retournerMorts();
-		retournerVivants();
-		envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
-		envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
+
 		
 				
 		try {
