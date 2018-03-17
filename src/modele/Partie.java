@@ -63,7 +63,7 @@ public class Partie {
 				envoyerMessage("<message><annonce>Les cartes vont être distribués</annonce></message>");
 
 				nbMaxLoupGarou = 1;
-				nbMaxVillageois = 3;
+				nbMaxVillageois = 1;
 
 				serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"/"+serveur.NB_JOUEURS_MAX+"</nombreJoueurs></rafraichissement></message>");
 
@@ -290,7 +290,7 @@ public class Partie {
 		
 		try {
 			
-			//System.out.println("Partie: "+message);
+			System.out.println("Partie: "+message);
 			
 			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			InputSource inputSource = new InputSource();
@@ -312,6 +312,16 @@ public class Partie {
 				case "vote":
 										
 					traiterVote(message);
+					
+					break;
+					
+				case "chat":
+					
+					contenuMessage = doc.getElementsByTagName("chat");
+					nodeMessage = contenuMessage.item(0);
+					elementMessage = (Element) nodeMessage;
+					
+					gererChat(elementMessage.getTextContent());
 					
 					break;
 				
@@ -418,11 +428,7 @@ public class Partie {
 		int joueurATuer = tableauJoueurs.length;
 		int nombreDeVoteMaximum = 0;
 		
-		
 		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
-			
-			System.out.println("joueur: "+tableauJoueurs[iterateurTableauJoueur].getNom());
-			System.out.println("joueur: "+tableauJoueurs[iterateurTableauJoueur].getNombreVote());
 			
 			if ( tableauJoueurs[iterateurTableauJoueur].getNombreVote() == nombreDeVoteMaximum && nombreDeVoteMaximum != 0) egalite = true;
 			
@@ -480,5 +486,15 @@ public class Partie {
 		
 	}
 	
-	
+	private void gererChat(String message) {
+		
+		
+		
+		for ( int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
+			
+			if ( tableauJoueurs[iterateurJoueur].isVivant() ) serveur.envoyerIndividuel("<message><chat>"+message+"</chat></message>", iterateurJoueur);
+			
+		}
+		
+	}
 }

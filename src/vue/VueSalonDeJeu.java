@@ -50,8 +50,7 @@ public class VueSalonDeJeu extends Application {
 	/**
 	 * Nom du role du joueur
 	 */
-	private Text nomRole;
-	
+	private Text nomRole;	
 
 	/**
 	 * Image de la carte du joueur
@@ -76,7 +75,7 @@ public class VueSalonDeJeu extends Application {
 	/**
 	 * Indication du nombre d'innocents vivants
 	 */
-	Text indicationNombreDInnocentVivant;
+	Text indicationNombreDInnocentVivant;	
 	
 	/**
 	 * Liste des joueurs vivants
@@ -101,6 +100,9 @@ public class VueSalonDeJeu extends Application {
 	Button boutonVoter;
     
 	Text pseudo = new Text("Pseudo");
+
+	TextField zoneDeSaisieMessage;
+	
 
 
 	@Override
@@ -141,7 +143,7 @@ public class VueSalonDeJeu extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	
+            	controleur.envoyerMessage();
             }
         });   
         // Bouton voter
@@ -220,7 +222,7 @@ public class VueSalonDeJeu extends Application {
         chatDeJeu.setStyle("-fx-font-size:12px ; -fx-font-weight: bold; -fx-font-family:\"Lucida Handwriting\";");
         Region blanc3 = new Region();
                 
-        TextField zoneDeSaisieMessage = new TextField();
+        zoneDeSaisieMessage = new TextField();
         
         panelMilieu.setPadding(new Insets(20,20,100,20));
 
@@ -399,9 +401,7 @@ public class VueSalonDeJeu extends Application {
     
     public void setDescriptionRole(String descriptionDuRole) {
     	descriptionRole.setText(descriptionDuRole);
-    }
-    
-    
+    } 
     
     public void setControleurSalonDeJeu(ControleurSalonDeJeu controleurSalonDeJeu) {
     	this.controleur = controleurSalonDeJeu;
@@ -421,5 +421,13 @@ public class VueSalonDeJeu extends Application {
     
 	public void setPseudo(String pseudo) {
 		this.pseudo.setText(pseudo);
+	}
+	
+	public TextField getZoneDeSaisieMessage() {
+		return zoneDeSaisieMessage;
+	}
+
+	public void setZoneDeSaisieMessage(TextField zoneDeSaisieMessage) {
+		this.zoneDeSaisieMessage = zoneDeSaisieMessage;
 	}
 }

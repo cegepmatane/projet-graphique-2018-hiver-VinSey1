@@ -46,7 +46,7 @@ public class ContactJoueur implements Runnable  {
 		
 	public boolean envoiMessage(String message)
 	{
-		//System.out.println("ContactJoueur envoie: "+message);
+		System.out.println("ContactJoueur envoie: "+message);
 		imprimante.println(message);
 		return true;
 	}		

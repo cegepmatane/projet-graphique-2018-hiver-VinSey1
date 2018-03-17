@@ -267,6 +267,19 @@ public class ControleurSalonDeJeu {
 		});		
 	}
 	
+	public void envoyerMessage() {
+		
+		System.out.println("envoyerMessage");
+		
+		String message = vueSalonDeJeu.getZoneDeSaisieMessage().getText();
+		vueSalonDeJeu.getZoneDeSaisieMessage().setText("");
+		
+		String messageXML = "<message><chat>"+message+"</chat></message>";
+		
+		contactServeur.envoyerMessage(messageXML);
+		
+	}
+	
 	public void modifierRole(String role) {
 		Platform.runLater(new Runnable() {
 			
