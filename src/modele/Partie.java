@@ -13,6 +13,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+
+import com.sun.corba.se.spi.ior.Identifiable;
+
 import jdk.internal.org.xml.sax.SAXException;
 import serveur.Serveur;
 
@@ -90,9 +93,7 @@ public class Partie {
 				while(!finDePartie()) {
 					deroulementNuit();
 					deroulementJour();
-				}
-				partieFinie();
-				
+				}				
 			}
 		});	
 
@@ -245,14 +246,6 @@ public class Partie {
 
 		
 	}
-	
-	private void partieFinie() {
-		if (nbVillageois == 0) {
-			serveur.envoyerATous("<message><annonce>Les loups-garous ont gagné !</annonce></message>");
-		} else {
-			serveur.envoyerATous("<message><annonce>Les villageois ont gagné !</annonce></message>");
-		}
-	}
 
 	
 	private void tourLoupGarou() {
@@ -302,7 +295,10 @@ public class Partie {
 				
 				case "demande":
 										
-					envoyerListeJoueur(); 
+					NodeList joueur = doc.getElementsByTagName("joueur");
+					nodeMessage = contenuMessage.item(0);
+					elementMessage = (Element) nodeMessage;
+					envoyerListeJoueur(elementMessage.getTextContent()); 
 
 					break;
 				
@@ -338,8 +334,9 @@ public class Partie {
 	}
 	
 	
-	public void envoyerListeJoueur() {
+	public void envoyerListeJoueur(String joueur) {
 		
+		System.out.println("serveur.envoyerListeJoueur reçoit: "+joueur);
 			
 		switch( tourDeJeu ) {
 		
@@ -364,15 +361,24 @@ public class Partie {
 			
 		case 2:
 						
-				String messageAEnvoyer = "<message><liste>";
+			int indexJoueur = -1;
+			for (int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
 				
-				for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
-					if ( tableauJoueurs[iterateurTableauJoueur].isVivant() ) {
-						messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
-					}						
+				if ( tableauJoueurs[iterateurJoueur].getNom().equals(joueur) ) {
+					
+					indexJoueur = iterateurJoueur;
+					
 				}
-				messageAEnvoyer += "</liste></message>";
-				envoyerMessage(messageAEnvoyer);
+			}
+			String messageAEnvoyer = "<message><liste>";
+			
+			for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
+				if ( tableauJoueurs[iterateurTableauJoueur].isVivant() ) {
+					messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
+				}						
+			}
+			messageAEnvoyer += "</liste></message>";
+			serveur.envoyerIndividuel(messageAEnvoyer, indexJoueur);
 			break;
 		
 		default:

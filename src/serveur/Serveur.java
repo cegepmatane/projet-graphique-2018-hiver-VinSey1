@@ -21,7 +21,7 @@ public class Serveur{
 	
 	private BufferedReader lecture = null;
 	private int nombreDeJoueurs = 0;
-	public final int NB_JOUEURS_MAX = 5;
+	public final int NB_JOUEURS_MAX = 3;
 	private ContactJoueur[] tableauContactJoueur = new ContactJoueur[NB_JOUEURS_MAX];
 	private Socket socket = null;
 	private ServerSocket serveur;
@@ -77,7 +77,8 @@ public class Serveur{
 				case "connexion":
 					
 					ajoutJoueur(elementMessage.getTextContent());
-					
+					envoyerATous("<message><rafraichissement><nombreJoueurs>"+listeJoueurs.size()+"/"+NB_JOUEURS_MAX+"</nombreJoueurs></rafraichissement></message>");
+
 					break;
 
 				default:

@@ -114,9 +114,8 @@ public class ControleurSalonDeJeu {
 	}
 	
 	public void demandeVote() {
-		contactServeur.envoyerMessage("<message><demande></demande></message>");
+		contactServeur.envoyerMessage("<message><demande><joueur>"+vueSalonDeJeu.getPseudo().getText()+"</joueur></demande></message>");
 	}
-
 	
 	public void afficherVoteVillageois() {
 		
