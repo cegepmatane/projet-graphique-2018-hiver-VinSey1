@@ -154,25 +154,26 @@ public class Partie {
 	
 	private void retournerVivants() {
 		
-		String listeJoueurVivant = "";
+		String listeJoueurVivant = "<message><rafraichissement><listeVivants>";
 		
 		for(int iterateur = 0; iterateur < tableauJoueurs.length; iterateur++) {
 			if(tableauJoueurs[iterateur].isVivant()) {
-				listeJoueurVivant += "<message><rafraichissement><listeVivant><joueur>"+tableauJoueurs[iterateur].getNom()+"</joueur></listeVivant></rafraichissement></message>";
+				listeJoueurVivant += "<joueur>"+tableauJoueurs[iterateur].getNom()+"</joueur>";
 			}
-		}
-		
+		}	
+		listeJoueurVivant += "</listeVivants></rafraichissement></message>";
 		envoyerMessage(listeJoueurVivant);
 	}
 	
 	private void retournerMorts() {
 		
 		String listeJoueurMort = "<message><rafraichissement><listeMort>";
+		
 		for(int iterateur = 0; iterateur < tableauJoueurs.length; iterateur++) {
 			if(!(tableauJoueurs[iterateur].isVivant())) {
-				listeJoueurMort += "<joueur>"+tableauJoueurs[iterateur].getNom()+"</joueur><";
+				listeJoueurMort += "<joueur>"+tableauJoueurs[iterateur].getNom()+"</joueur>";
 			}
-		}
+		}		
 		listeJoueurMort += "</listeMort></rafraichissement></message>";
 		envoyerMessage(listeJoueurMort);
 

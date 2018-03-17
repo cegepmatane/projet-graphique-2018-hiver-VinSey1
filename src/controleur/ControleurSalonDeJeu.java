@@ -55,7 +55,7 @@ public class ControleurSalonDeJeu {
 					vueSalonDeJeu.setDescriptionRole(elementMessage.getTextContent());
 					break;
 				
-				case "listeVivant":
+				case "listeVivants":
 					
 					modifierListeJoueurVivant(message);
 					break;
@@ -162,7 +162,7 @@ public class ControleurSalonDeJeu {
 				public void run() {
 					
 					try {
-						
+												
 						String listeJoueurVivant = "";
 						DocumentBuilder lecteurXML;
 						lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -183,7 +183,7 @@ public class ControleurSalonDeJeu {
 							
 							listeJoueurVivant+= elementMessage.getTextContent()+"\n";						
 						}
-						vueSalonDeJeu.modifierListeJoueurVivant("Test");
+						vueSalonDeJeu.modifierListeJoueurVivant(listeJoueurVivant);
 						
 					}				
 					catch(org.xml.sax.SAXException e){

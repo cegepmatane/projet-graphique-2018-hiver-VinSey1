@@ -371,6 +371,8 @@ public class VueSalonDeJeu extends Application {
     		nouvelleListe = nouvelleListe + nouvelleListeJoueurVivant.get(iterateurListe) + "\n";
     	}
     	*/
+    	
+		System.out.println("VueSalonDeJeu.modifierListeJoueurVivant reçoit:" +listeJoueurs);
 
     	listeJoueursVivant.setText(listeJoueurs);
     }
