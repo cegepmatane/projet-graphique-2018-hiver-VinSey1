@@ -39,7 +39,7 @@ public class ControleurVueVillageois {
 													
 				if (!vueVillageois.getChoixJoueur().equals("Pas de choix") && !vueVillageois.getChoixJoueur().equals("Ne rien voter")) {
 										
-					//contactServeur.envoyerMessage("<message><vote>"+vueVillageois.getChoixJoueur()+"</vote></message>");
+					contactServeur.envoyerMessage("<message><vote>"+vueVillageois.getChoixJoueur()+"</vote></message>");
 					
 					contactServeur.getControleur().desactiverVote();
 					vueVillageois.fermer();
@@ -50,53 +50,55 @@ public class ControleurVueVillageois {
 	
 		
 	public void traiter(String message) {
-				
-		List<String> listeJoueurs = new ArrayList<String>();	
+	
 		
 		Platform.runLater(new Runnable() {
 			
 			@Override
 			public void run() {
 				
+				
+				List<String> listeJoueurs = new ArrayList<String>();
+				
+				try {
+					DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+					
+					InputSource inputSource = new InputSource();
+					inputSource.setCharacterStream(new StringReader(message));
+					
+					Document doc = lecteurXML.parse(inputSource);
+					
+					NodeList contenuMessage = doc.getElementsByTagName("joueur");
+					
+					
+					for (int iterateur=0; iterateur < contenuMessage.getLength();iterateur++) {
+						
+						Node nodeMessage = contenuMessage.item(iterateur);
+						
+						Element elementMessage = (Element) nodeMessage;
+						
+						listeJoueurs.add(elementMessage.getTextContent());
+								
+					}		
+				}
+				
+				catch(org.xml.sax.SAXException e){
+					e.printStackTrace();
+					
+				}
+				catch (ParserConfigurationException e) {
+					e.printStackTrace();
+				}
+				catch(IOException e) {
+					e.printStackTrace();
+				}
+				
 				vueVillageois.setChoixJoueur(listeJoueurs);
 				
 			}
 		});	
 		
-		try {
-			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			
-			InputSource inputSource = new InputSource();
-			inputSource.setCharacterStream(new StringReader(message));
-			
-			Document doc = lecteurXML.parse(inputSource);
-			
-			NodeList contenuMessage = doc.getElementsByTagName("joueur");
-			
-			
-			for (int iterateur=0; contenuMessage.getLength()!=0;iterateur++) {
-				
-				Node nodeMessage = contenuMessage.item(iterateur);
-				
-				Element elementMessage = (Element) nodeMessage;
-				
-				listeJoueurs.add(elementMessage.getTextContent());
-						
-			}		
-		}
 		
-		catch(org.xml.sax.SAXException e){
-			e.printStackTrace();
-			
-		}
-		catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-			
-			
-		}
 		
 	}
 	

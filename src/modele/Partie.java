@@ -242,7 +242,7 @@ public class Partie {
 			}
 		}
 		try {
-			TimeUnit.SECONDS.sleep(30);
+			TimeUnit.SECONDS.sleep(10);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -317,8 +317,7 @@ public class Partie {
 					
 					String messageAEnvoyer = "<message><liste>";
 					
-					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {
-						
+					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
 						if ( tableauJoueurs[iterateurTableauJoueur].getRole() == 0 ) {
 							messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
 						}						
