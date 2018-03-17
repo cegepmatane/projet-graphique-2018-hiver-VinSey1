@@ -41,12 +41,13 @@ public class ControleurAccueil {
 		
 			@Override
 				public void run() {
-					contactServeur.connection();
 					pseudo=vueAccueil.recupererPseudo();
 					if (pseudo.equals("")) {
 						vueAccueil.setErreur();
 					}
 					else {
+						
+						contactServeur.connection();
 						contactServeur.envoyerMessage("<message>"
 														+ "<connexion>"
 																+vueAccueil.recupererPseudo()

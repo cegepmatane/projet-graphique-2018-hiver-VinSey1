@@ -26,6 +26,8 @@ import javafx.scene.text.Text;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
@@ -104,7 +106,6 @@ public class VueSalonDeJeu extends Application {
 	TextField zoneDeSaisieMessage;
 	
 
-
 	@Override
     public void start(Stage primaryStage) {
     	
@@ -136,16 +137,8 @@ public class VueSalonDeJeu extends Application {
             	
             }
         });
-     
-        Button envoyer = new Button();
-        envoyer.setText("Envoyer");
-        envoyer.setOnAction(new EventHandler<ActionEvent>() {
- 
-            @Override
-            public void handle(ActionEvent event) {
-            	controleur.envoyerMessage();
-            }
-        });   
+        
+        
         // Bouton voter
         boutonVoter = new Button();
         boutonVoter.setDisable(true);
@@ -187,7 +180,7 @@ public class VueSalonDeJeu extends Application {
         
         panelGauche.getChildren().add(pseudo);
         panelGauche.getChildren().add(descriptionRole);  
-        panelGauche.getChildren().add(boutonVoter);
+        //panelGauche.getChildren().add(boutonVoter);
         panelGauche.getChildren().add(quitter);
         
           
@@ -229,7 +222,6 @@ public class VueSalonDeJeu extends Application {
         
         panelMilieu.getChildren().add(blanc3);
         panelMilieu.getChildren().add(chatDeJeu);
-        panelMilieu.getChildren().add(envoyer);
         panelMilieu.getChildren().add(zoneDeSaisieMessage);
 
         panelMilieu.setVgrow(blanc3, Priority.ALWAYS);
@@ -277,8 +269,6 @@ public class VueSalonDeJeu extends Application {
         panelDroite.getChildren().add(listeJoueursVivant);
         panelDroite.getChildren().add(nomListeJoueursMort);
         panelDroite.getChildren().add(listeJoueursMort);
-
-       
         // Fenetre Generale
         AnchorPane fenetreGenerale = new AnchorPane();
         
@@ -312,6 +302,16 @@ public class VueSalonDeJeu extends Application {
         Scene scene = new Scene(fenetreGenerale, 1700,900);        
         scene.getStylesheets().add(VueSalonDeJeu.class.getResource("decoration/lg.css").toExternalForm());
                 
+        
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent ke) {
+            	if (ke.getCode() == KeyCode.ENTER)  {
+            		controleur.envoyerMessage();
+                }          	
+            }
+        });
+        
+        
         primaryStage.setScene(scene);
         primaryStage.show();
         

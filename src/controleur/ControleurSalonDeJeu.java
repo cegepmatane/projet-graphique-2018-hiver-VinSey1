@@ -267,10 +267,7 @@ public class ControleurSalonDeJeu {
 		});		
 	}
 	
-	public void envoyerMessage() {
-		
-		System.out.println("envoyerMessage");
-		
+	public void envoyerMessage() {		
 		String message = vueSalonDeJeu.getZoneDeSaisieMessage().getText();
 		vueSalonDeJeu.getZoneDeSaisieMessage().setText("");
 		

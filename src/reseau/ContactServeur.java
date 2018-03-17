@@ -77,7 +77,9 @@ public class ContactServeur {
 					case "rafraichissement":
 						controleurSalonDeJeu.traiter(message);
 						break;
-						
+					case "chat":
+						controleurSalonDeJeu.ajouterTexteAuChat(elementMessage.getTextContent());
+						break;
 					default:
 						System.out.println("Message non traité : ContactServeur");
 						break;

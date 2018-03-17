@@ -290,7 +290,7 @@ public class Partie {
 		
 		try {
 			
-			System.out.println("Partie: "+message);
+			System.out.println("Partie reçoit: "+message);
 			
 			DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			InputSource inputSource = new InputSource();
