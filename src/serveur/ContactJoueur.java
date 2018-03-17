@@ -51,8 +51,4 @@ public class ContactJoueur implements Runnable  {
 		return true;
 	}		
 	
-	public PrintWriter getImprimante() {
-		return imprimante;
-	}
-	
 }

@@ -38,14 +38,8 @@ public class ControleurVueVillageois {
 				public void run() {
 													
 				if (!vueVillageois.getChoixJoueur().equals("Pas de choix") && !vueVillageois.getChoixJoueur().equals("Ne rien voter")) {
-					
-					System.out.println("COntroleurVuVillageois "+vueVillageois.getChoixJoueur());
-					
-					contactServeur.envoyerMessage("<message>"
-														+ "<vote>"
-															+ vueVillageois.getChoixJoueur()
-														+ "</vote>"
-													+"</message>");
+										
+					//contactServeur.envoyerMessage("<message><vote>"+vueVillageois.getChoixJoueur()+"</vote></message>");
 					
 					contactServeur.getControleur().desactiverVote();
 					vueVillageois.fermer();
