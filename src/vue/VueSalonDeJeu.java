@@ -214,8 +214,9 @@ public class VueSalonDeJeu extends Application {
         //VBox milieu
         VBox panelMilieu = new VBox();
         chatDeJeu = new TextArea();
-        chatDeJeu.setMaxWidth(700);
-        chatDeJeu.setMaxHeight(700);
+        chatDeJeu.setMinHeight(500);
+        chatDeJeu.setMaxHeight(500);
+        chatDeJeu.setStyle("-fx-font-size:12px ; -fx-font-weight: bold; -fx-font-family:\"Lucida Handwriting\";");
         Region blanc3 = new Region();
                 
         TextField zoneDeSaisieMessage = new TextField();

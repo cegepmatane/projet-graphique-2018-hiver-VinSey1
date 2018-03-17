@@ -23,7 +23,7 @@ public class Partie {
 	private int nbMaxLoupGarou;
 	private int nbVillageois;
 	private int nbMaxVillageois;
-	private final String[] numeroRoles = {"Villageois", "Loups-Garous"};
+	private final String[] numeroRoles = {"Villageois", "Loup-Garou"};
 	private Serveur serveur;
 	private Joueur[] tableauJoueurs;
 	private boolean finPartie = false;
@@ -116,13 +116,12 @@ public class Partie {
 		if(!finDePartie()){
 			
 			if ( joueurTueeDansLaNuit.size() ==0  ) {
-				
 				envoyerMessage("<message><annonce>Le jour se lève, personne n'a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
 
 			}
 			else {
 					envoyerMessage("<message><annonce>Le jour se lève, "+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
-					envoyerMessage("<message><annonce>Il était"+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
+					envoyerMessage("<message><annonce>Il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
 					retournerVivants();
 					retournerMorts();		
 					nbVillageois-=1;
@@ -151,7 +150,7 @@ public class Partie {
 			if ( joueurTueeDansLaNuit.size() !=0 ) {
 				
 				envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
-				envoyerMessage("<message><annonce>Il était"+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
+				envoyerMessage("<message><annonce>Il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
 
 				
 				if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
@@ -266,7 +265,7 @@ public class Partie {
 			}
 		}
 		try {
-			TimeUnit.SECONDS.sleep(10);
+			TimeUnit.SECONDS.sleep(30);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -416,6 +415,7 @@ public class Partie {
 			
 			if ( tableauJoueurs[iterateurTableauJoueur].getNombreVote() > nombreDeVoteMaximum ) {
 				joueurATuer = iterateurTableauJoueur;
+				nombreDeVoteMaximum = tableauJoueurs[iterateurTableauJoueur].getNombreVote();
 			}
 		}
 		
@@ -454,10 +454,8 @@ public class Partie {
 	private void activerVoteVillageois() {
 			
 		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
-			if ( tableauJoueurs[iterateurTableauJoueur].isVivant() ) envoyerMessage("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>");
+			if ( tableauJoueurs[iterateurTableauJoueur].isVivant() ) serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", iterateurTableauJoueur);
 		}
-		
-		
 	}
 	
 	private void desactiverVoteVillageois() {
