@@ -166,7 +166,7 @@ public class Partie {
 				retournerMorts();
 				retournerVivants();
 			}
-			else if ( joueurTueeDansLaNuit.size() !=0 && egalite == true ) {
+			else if (egalite == true ) {
 				
 				envoyerMessage("<message><annonce>Il y a eu une égalité lors des votes, personne de sera lynché</annonce></message>");
 				reinitialiserVote();
@@ -421,7 +421,12 @@ public class Partie {
 		
 		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
 			
+			System.out.println("joueur: "+tableauJoueurs[iterateurTableauJoueur].getNom());
+			System.out.println("joueur: "+tableauJoueurs[iterateurTableauJoueur].getNombreVote());
+			
 			if ( tableauJoueurs[iterateurTableauJoueur].getNombreVote() == nombreDeVoteMaximum && nombreDeVoteMaximum != 0) egalite = true;
+			
+			System.out.println("égalite: "+egalite);
 			
 			if ( tableauJoueurs[iterateurTableauJoueur].getNombreVote() > nombreDeVoteMaximum ) {
 				joueurATuer = iterateurTableauJoueur;
