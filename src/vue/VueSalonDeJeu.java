@@ -216,6 +216,7 @@ public class VueSalonDeJeu extends Application {
         chatDeJeu = new TextArea();
         chatDeJeu.setMinHeight(500);
         chatDeJeu.setMaxHeight(500);
+        chatDeJeu.setMinWidth(900);
         chatDeJeu.setStyle("-fx-font-size:12px ; -fx-font-weight: bold; -fx-font-family:\"Lucida Handwriting\";");
         Region blanc3 = new Region();
                 
@@ -306,7 +307,7 @@ public class VueSalonDeJeu extends Application {
         
         fenetreGenerale.getChildren().addAll(hboxHaut, panelMilieu, panelDroite, nomRole, imageCarte, panelGauche);
         
-        Scene scene = new Scene(fenetreGenerale, 1500,700);        
+        Scene scene = new Scene(fenetreGenerale, 1700,900);        
         scene.getStylesheets().add(VueSalonDeJeu.class.getResource("decoration/lg.css").toExternalForm());
                 
         primaryStage.setScene(scene);

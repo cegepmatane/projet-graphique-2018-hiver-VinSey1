@@ -30,6 +30,7 @@ public class Partie {
 	private boolean nuitEnCours = true;
 	private boolean jourEnCours = false;
 	private List<Integer> joueurTueeDansLaNuit;
+	private boolean egalite = false;
 	
 	/**
 	 * 0 -> aucun
@@ -147,7 +148,7 @@ public class Partie {
 			finDeVote();
 			desactiverVoteVillageois();
 
-			if ( joueurTueeDansLaNuit.size() !=0 ) {
+			if ( joueurTueeDansLaNuit.size() !=0 && egalite == false) {
 				
 				envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
 				envoyerMessage("<message><annonce>Il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
@@ -164,7 +165,13 @@ public class Partie {
 				envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
 				retournerMorts();
 				retournerVivants();
-			}else {
+			}
+			else if ( joueurTueeDansLaNuit.size() !=0 && egalite == true ) {
+				
+				envoyerMessage("<message><annonce>Il y a eu une égalité lors des votes, personne de sera lynché</annonce></message>");
+				reinitialiserVote();
+			}		
+			else {
 				
 				envoyerMessage("<message><annonce>Personne n'a été lynché par la population</annonce></message>");
 			}
@@ -411,7 +418,10 @@ public class Partie {
 		int joueurATuer = tableauJoueurs.length;
 		int nombreDeVoteMaximum = 0;
 		
+		
 		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
+			
+			if ( tableauJoueurs[iterateurTableauJoueur].getNombreVote() == nombreDeVoteMaximum && nombreDeVoteMaximum != 0) egalite = true;
 			
 			if ( tableauJoueurs[iterateurTableauJoueur].getNombreVote() > nombreDeVoteMaximum ) {
 				joueurATuer = iterateurTableauJoueur;
@@ -419,7 +429,7 @@ public class Partie {
 			}
 		}
 		
-		if( joueurATuer != tableauJoueurs.length ) {
+		if( joueurATuer != tableauJoueurs.length && egalite == false ) {
 			joueurTueeDansLaNuit.add(joueurATuer);
 			tableauJoueurs[joueurATuer].setVivant(false);
 		}	
@@ -449,6 +459,7 @@ public class Partie {
 		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
 			tableauJoueurs[iterateurTableauJoueur].reinitialiserNombreDeVote();
 		}
+		egalite = false;
 	}
 	
 	private void activerVoteVillageois() {
