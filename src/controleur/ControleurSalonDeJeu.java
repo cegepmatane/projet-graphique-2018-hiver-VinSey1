@@ -46,11 +46,10 @@ public class ControleurSalonDeJeu {
 			Node nodeMessage = contenuMessage.item(0);
 			
 			Element elementMessage = (Element) nodeMessage;
+
+			System.out.println("ControleurSalonDeJeu reçoit:"+message);
 			
 			switch(nodeMessage.getFirstChild().getNodeName()) {
-			
-				default:
-					System.out.println("Message non traité : ControleurSalonDeJeu");
 			
 				case "descriptionRole":
 					vueSalonDeJeu.setDescriptionRole(elementMessage.getTextContent());
@@ -59,7 +58,6 @@ public class ControleurSalonDeJeu {
 				case "listeVivant":
 					
 					modifierListeJoueurVivant(message);
-					//vueSalonDeJeu.modifierListeJoueurVivant(convertisseurListe(doc.getElementsByTagName("listeVivant")));
 					break;
 				
 				case "listeMort":
@@ -92,7 +90,9 @@ public class ControleurSalonDeJeu {
 				case "nomJoueur":
 					modifierNomJoueur(elementMessage.getTextContent());
 					break;
-			
+					
+				default:
+					System.out.println("Message non traité : ControleurSalonDeJeu");
 			}
 			
 			
@@ -117,22 +117,6 @@ public class ControleurSalonDeJeu {
 		contactServeur.envoyerMessage("<message><demande></demande></message>");
 	}
 
-	private String convertisseurListe(NodeList contenuMessage) {
-		String message = "";
-		for (int iterateur=0; contenuMessage.getLength()!=0;iterateur++) {
-			System.out.println("QSOMIFGNDKL?SDGML?");
-			Node nodeMessage = contenuMessage.item(iterateur);
-			
-			Element elementMessage = (Element) nodeMessage;
-						
-			message += elementMessage.getTextContent()+"\n";
-		
-		}
-
-		String message2 = "Val \n Eliott \n";
-		
-		return message2;
-	}
 	
 	public void afficherVoteVillageois() {
 		
@@ -178,7 +162,6 @@ public class ControleurSalonDeJeu {
 				public void run() {
 					
 					try {
-						System.out.println("ControleurSalonDeJeu.modifierListeJoueurVivant message: "+message);
 						
 						String listeJoueurVivant = "";
 						DocumentBuilder lecteurXML;
@@ -193,17 +176,14 @@ public class ControleurSalonDeJeu {
 						NodeList contenuMessage = doc.getElementsByTagName("joueur");
 												
 						for (int iterateur=0; iterateur < contenuMessage.getLength();iterateur++) {
-							
-							System.out.println(iterateur);
-							
+														
 							Node nodeMessage = contenuMessage.item(iterateur);
 							
 							Element elementMessage = (Element) nodeMessage;
 							
-							listeJoueurVivant+= elementMessage.getTextContent()+"\n";
-						
+							listeJoueurVivant+= elementMessage.getTextContent()+"\n";						
 						}
-						vueSalonDeJeu.modifierListeJoueurVivant(listeJoueurVivant);
+						vueSalonDeJeu.modifierListeJoueurVivant("Test");
 						
 					}				
 					catch(org.xml.sax.SAXException e){

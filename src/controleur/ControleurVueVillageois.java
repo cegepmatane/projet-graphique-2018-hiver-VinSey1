@@ -87,11 +87,8 @@ public class ControleurVueVillageois {
 				Element elementMessage = (Element) nodeMessage;
 				
 				listeJoueurs.add(elementMessage.getTextContent());
-				
-			
-			}
-			
-			
+						
+			}		
 		}
 		
 		catch(org.xml.sax.SAXException e){
