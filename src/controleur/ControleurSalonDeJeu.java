@@ -144,17 +144,6 @@ public class ControleurSalonDeJeu {
 		});
 	}
 	
-	public void test() {
-	Platform.runLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				
-				vueSalonDeJeu.modifierListeJoueurVivant("Test");
-			}
-		});		
-	}
-	
 	public void modifierListeJoueurVivant(String message) {
 		Platform.runLater(new Runnable() {
 				

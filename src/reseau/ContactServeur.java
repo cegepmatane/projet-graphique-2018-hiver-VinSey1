@@ -67,7 +67,7 @@ public class ContactServeur {
 					switch (nodeMessage.getFirstChild().getNodeName()) {					
 
 					case "liste":						
-						controleurVueVillageois.traiter(message);
+						if ( controleurVueVillageois != null ) controleurVueVillageois.traiter(message);
 						break;
 						
 					case "annonce":

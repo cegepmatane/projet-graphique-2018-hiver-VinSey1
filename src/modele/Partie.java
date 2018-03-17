@@ -119,29 +119,38 @@ public class Partie {
 				
 				envoyerMessage("<message><annonce>Le jour se lève, personne n'a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
 
+				envoyerMessage("<message><annonce>Les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
+				
+				tourDeJeu = 2;
+				envoyerMessage("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>");
+				try {
+					TimeUnit.SECONDS.sleep(20);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				tourDeJeu = 0;
 			}
 			else {
-					envoyerMessage("<message><annonce>Le jour se lève, "+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
+					envoyerMessage("<message><annonce>Le jour se lève, "+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
 					retournerVivants();
 					retournerMorts();				
 					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
-					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
-					
+					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");				
 					joueurTueeDansLaNuit.clear();
+					
+					envoyerMessage("<message><annonce>Les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
+					
+					tourDeJeu = 2;
+					envoyerMessage("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>");
+					try {
+						TimeUnit.SECONDS.sleep(20);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					tourDeJeu = 0;
 				}
 			
-		}
-		else {		
-			if ( nbVillageois == 0 ) {
-				envoyerMessage("<message><annonce>Les loups garous ont gagné, la partie est terminé</annonce></message>");
-			}
-			else {
-				envoyerMessage("<message><annonce>Les villageois ont gagné, la partie est terminé</annonce></message>");
-			}
-		}
-
-		
-				
+		}				
 		try {
 			TimeUnit.SECONDS.sleep(4);
 		} catch (InterruptedException e) {
@@ -318,7 +327,7 @@ public class Partie {
 					String messageAEnvoyer = "<message><liste>";
 					
 					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
-						if ( tableauJoueurs[iterateurTableauJoueur].getRole() == 0 ) {
+						if ( tableauJoueurs[iterateurTableauJoueur].getRole() == 0 && tableauJoueurs[iterateurTableauJoueur].isVivant()) {
 							messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
 						}						
 					}
@@ -330,6 +339,19 @@ public class Partie {
 			break;
 			
 		case 2:
+			
+			for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {				
+					String messageAEnvoyer = "<message><liste>";
+					
+					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
+						if ( tableauJoueurs[iterateurTableauJoueur].isVivant() ) {
+							messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
+						}						
+					}
+					messageAEnvoyer += "</liste></message>";
+					envoyerMessage(messageAEnvoyer);
+			}		
+			
 			
 			break;
 		
@@ -397,7 +419,18 @@ public class Partie {
 	
 	
 	private boolean finDePartie() {
-		return (nbVillageois == 0 || nbLoupGarou == 0);
+		
+		if ( (nbVillageois == 0 || nbLoupGarou == 0) ) {
+			if ( nbVillageois == 0 ) {
+				envoyerMessage("<message><annonce>Les loups garous ont gagné, la partie est terminé</annonce></message>");
+			}
+			else {
+				envoyerMessage("<message><annonce>Les villageois ont gagné, la partie est terminé</annonce></message>");
+			}
+			return true;
+		}
+		
+		return false;
 	}
 		
 }
