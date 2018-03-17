@@ -114,7 +114,6 @@ public class Partie {
 	}
 	
 	private void deroulementJour() {
-		if(!finDePartie()){
 			
 			if ( joueurTueeDansLaNuit.size() ==0  ) {
 				envoyerMessage("<message><annonce>Le jour se lève, personne n'a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
@@ -131,51 +130,52 @@ public class Partie {
 					retournerVivants();
 					reinitialiserVote();
 			}
-			
-			envoyerMessage("<message><annonce>Les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
-						
-			tourDeJeu = 2;
-			activerVoteVillageois();
-			try {
-				TimeUnit.SECONDS.sleep(20);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			tourDeJeu = 0;
-			
-			envoyerMessage("<message><annonce>Les villageois ont fait leur choix</annonce></message>");
-			finDeVote();
-			desactiverVoteVillageois();
-
 			if ( !finDePartie() ) {
 				
-				if ( joueurTueeDansLaNuit.size() !=0 && egalite == false) {
-					
-					envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
-					envoyerMessage("<message><annonce>Il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
-
-					if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
-						nbLoupGarou -= 1;
-					}
-					else {
-						nbVillageois -=1;
-					}
-					reinitialiserVote();
-					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
-					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
-					retournerMorts();
-					retournerVivants();
+				envoyerMessage("<message><annonce>Les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
+				
+				tourDeJeu = 2;
+				activerVoteVillageois();
+				try {
+					TimeUnit.SECONDS.sleep(20);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-				else if (egalite == true ) {
+				tourDeJeu = 0;
+				
+				envoyerMessage("<message><annonce>Les villageois ont fait leur choix</annonce></message>");
+				finDeVote();
+				desactiverVoteVillageois();
+
+				if ( !finDePartie() ) {
 					
-					envoyerMessage("<message><annonce>Il y a eu une égalité lors des votes, personne de sera lynché</annonce></message>");
-					reinitialiserVote();
-				}		
-				else {			
-					envoyerMessage("<message><annonce>Personne n'a été lynché par la population</annonce></message>");
-				}	
-			}			
-		}
+					if ( joueurTueeDansLaNuit.size() !=0 && egalite == false) {
+						
+						envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
+						envoyerMessage("<message><annonce>Il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
+
+						if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
+							nbLoupGarou -= 1;
+						}
+						else {
+							nbVillageois -=1;
+						}
+						reinitialiserVote();
+						envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
+						envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
+						retournerMorts();
+						retournerVivants();
+					}
+					else if (egalite == true ) {
+						
+						envoyerMessage("<message><annonce>Il y a eu une égalité lors des votes, personne de sera lynché</annonce></message>");
+						reinitialiserVote();
+					}		
+					else {			
+						envoyerMessage("<message><annonce>Personne n'a été lynché par la population</annonce></message>");
+					}	
+				}			
+			}					
 	}
 	
 	private void retournerVivants() {
