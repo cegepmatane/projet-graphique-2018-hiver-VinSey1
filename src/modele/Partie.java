@@ -63,14 +63,12 @@ public class Partie {
 
 				nbMaxLoupGarou = 1;
 				nbMaxVillageois = 2;
-				
+
 				serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"/"+serveur.NB_JOUEURS_MAX+"</nombreJoueurs></rafraichissement></message>");
 
 				retournerMorts();
 				retournerVivants();
-				envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
-				envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
-				
+
 				
 				try {
 					TimeUnit.SECONDS.sleep(3);
@@ -79,6 +77,8 @@ public class Partie {
 				}
 				
 				distribuerCartes();
+				envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
+				envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
 				
 				try {
 					TimeUnit.SECONDS.sleep(4);
@@ -115,42 +115,59 @@ public class Partie {
 	private void deroulementJour() {
 		if(!finDePartie()){
 			
-			if ( joueurTueeDansLaNuit.size() ==0 ) {
+			if ( joueurTueeDansLaNuit.size() ==0  ) {
 				
 				envoyerMessage("<message><annonce>Le jour se lève, personne n'a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
 
-				envoyerMessage("<message><annonce>Les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
-				
-				tourDeJeu = 2;
-				envoyerMessage("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>");
-				try {
-					TimeUnit.SECONDS.sleep(20);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				tourDeJeu = 0;
 			}
 			else {
 					envoyerMessage("<message><annonce>Le jour se lève, "+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
 					retournerVivants();
-					retournerMorts();				
+					retournerMorts();		
+					nbVillageois-=1;
 					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
-					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");				
-					joueurTueeDansLaNuit.clear();
-					
-					envoyerMessage("<message><annonce>Les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
-					
-					tourDeJeu = 2;
-					envoyerMessage("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>");
-					try {
-						TimeUnit.SECONDS.sleep(20);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					tourDeJeu = 0;
-				}
+					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
+					retournerMorts();
+					retournerVivants();
+					joueurTueeDansLaNuit.clear();			
+			}
 			
-		}				
+			envoyerMessage("<message><annonce>Les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
+			
+			tourDeJeu = 2;
+			envoyerMessage("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>");
+			try {
+				TimeUnit.SECONDS.sleep(20);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			tourDeJeu = 0;
+			
+			envoyerMessage("<message><annonce>Les villageois ont fait leur choix</annonce></message>");
+			finDeVote();
+			if ( joueurTueeDansLaNuit.size() !=0 ) {
+				
+				envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
+
+				if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
+					nbLoupGarou -= 1;
+				}
+				else {
+					nbVillageois -=1;
+				}
+				joueurTueeDansLaNuit.clear();
+				envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
+				envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
+				retournerMorts();
+				retournerVivants();
+				
+			}else {
+				
+				envoyerMessage("<message><annonce>Personne n'a été lynché par la population</annonce></message>");
+			}
+			
+		}
+		joueurTueeDansLaNuit.clear();
 		try {
 			TimeUnit.SECONDS.sleep(4);
 		} catch (InterruptedException e) {
