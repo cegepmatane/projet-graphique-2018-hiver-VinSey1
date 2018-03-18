@@ -32,7 +32,7 @@ public class Partie {
 	 *  1 : loup garou
 	 */
 	private int[] nbJoueurVivantParCamp = new int[2];
-	private final String[] numeroRoles = {"Villageois", "Loup-Garou", "Chasseur", "Sorcière"};
+	private final String[] numeroRoles = {"Villageois", "Loup-Garou", "Chasseur", "Sorcière", "Cupidon"};
 	private Serveur serveur;
 	private Joueur[] tableauJoueurs;
 	private boolean finPartie = false;
@@ -44,6 +44,7 @@ public class Partie {
 	private List<Integer> joueurEmpoisonne = new ArrayList<Integer>();
 	private boolean sorciereASauve = false;
 	private boolean sorciereAEmmpoisonne = false;
+	private boolean tourCupidonPasse = false;
 	
 	/**
 	 * 0 -> aucun
@@ -51,6 +52,7 @@ public class Partie {
 	 * 2 -> villageois
 	 * 3 -> chasseur
 	 * 4 -> sorcière
+	 * 5 -> cupidon
 	 */
 	private int tourDeJeu = 0;
 	
@@ -93,6 +95,7 @@ public class Partie {
 				
 				cartes.add(2);		
 				cartes.add(3);
+				cartes.add(4);
 				
 				
 				serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"/"+serveur.NB_JOUEURS_MAX+"</nombreJoueurs></rafraichissement></message>");
@@ -133,6 +136,8 @@ public class Partie {
 		
 		envoyerMessage("<message><annonce>La nuit tombe sur le village de thiercelieux, vous fermez les yeux en espérant passer la nuit</annonce></message>");
 		
+		if ( !tourCupidonPasse ) tourCupidon();
+		
 		tourLoupGarou();
 		
 		if ( sorciereAEmmpoisonne != true && sorciereASauve != true) tourSorciere();
@@ -151,7 +156,6 @@ public class Partie {
 						envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" a été tué, il était"+numeroRoles[tableauJoueurs[joueurTueeParVote.get(0)].getRole()]+"</annonce></message>");
 						nbJoueurVivantParCamp[0]-=1;
 
-						
 						int indexJoueurMort = joueurTueeParVote.get(0);
 						reinitialiserVote();
 						if (tableauJoueurs[indexJoueurMort].getRole() == 2 ) {										
@@ -363,11 +367,38 @@ public class Partie {
 			envoyerListeSorciere(joueur);
 			
 			break;
-		
+		case 5:
+			envoyerListeCupidon(joueur);
+			break;
+			
 		default:
 			break;
 			
 		}	
+	}
+	
+	private void envoyerListeCupidon(String joueur) {
+		
+		int indexJoueur = -1;
+		
+		for (int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
+			
+			if ( tableauJoueurs[iterateurJoueur].getNom().equals(joueur) ) {
+				
+				indexJoueur = iterateurJoueur;
+				
+			}
+		}
+		
+		String messageAEnvoyer = "<message><listeCupidon>";
+		
+		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
+			messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";					
+		}
+		
+		messageAEnvoyer += "</listeCupidon></message>";
+		serveur.envoyerIndividuel(messageAEnvoyer, indexJoueur);
+		
 	}
 	
 	private void envoyerListeJoueurTourLoupGarou(String joueur) {
@@ -717,6 +748,24 @@ public class Partie {
 		
 		envoyerMessage("<message><annonce>La sorcière se rendort</annonce></message>");
 
+		tourDeJeu = 0;
+	}
+	
+	private void tourCupidon() {
+		tourDeJeu = 5;
+		envoyerMessage("<message><annonce>Cupidon se réveille...</annonce></message>");
+
+		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
+			
+			if(tableauJoueurs[iterateur].getRole() == 4) {
+				
+				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer, choisit deux joueurs pour les liers jusque dans la mort</annonce></message>", iterateur);
+				serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", iterateur);
+			}
+		}	
+		
+		
+		
 		tourDeJeu = 0;
 	}
 }
