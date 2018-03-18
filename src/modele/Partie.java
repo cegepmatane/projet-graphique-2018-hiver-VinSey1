@@ -373,7 +373,7 @@ public class Partie {
 			String messageAEnvoyer = "<message><liste>";
 			
 			for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
-				if ( tableauJoueurs[iterateurTableauJoueur].isVivant() ) {
+				if ( tableauJoueurs[iterateurTableauJoueur].isVivant() && !tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueur)) {
 					messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
 				}						
 			}
