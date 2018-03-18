@@ -12,6 +12,8 @@ import javax.imageio.ImageIO;
 
 import controleur.ControleurSalonDeJeu;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -210,10 +212,21 @@ public class VueSalonDeJeu extends Application {
         //VBox milieu
         VBox panelMilieu = new VBox();
         chatDeJeu = new TextArea();
-        chatDeJeu.setMinHeight(500);
-        chatDeJeu.setMaxHeight(500);
+        chatDeJeu.setMinHeight(700);
+        chatDeJeu.setMaxHeight(700);
         chatDeJeu.setMinWidth(900);
         chatDeJeu.setStyle("-fx-font-size:14px ; -fx-font-weight: bold; -fx-font-family:\"Lucida Handwriting\";");
+        
+        chatDeJeu.textProperty().addListener(new ChangeListener<Object>() {
+
+			@Override
+			public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+				chatDeJeu.setScrollTop(Double.MAX_VALUE);
+			}
+		});
+        
+        
+        
         Region blanc3 = new Region();
                 
         zoneDeSaisieMessage = new TextField();
