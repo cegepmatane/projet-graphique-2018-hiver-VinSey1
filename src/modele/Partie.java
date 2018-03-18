@@ -38,10 +38,10 @@ public class Partie {
 	private boolean finPartie = false;
 	private boolean nuitEnCours = true;
 	private boolean jourEnCours = false;
-	private List<Integer> joueurTueeDansLaNuit;
+	private List<Integer> joueurTueeParVote;
 	private boolean egalite = false;
 	private List<Integer> cartes = new ArrayList<Integer>();
-	
+	private List<Integer> joueurEmpoisonne = new ArrayList<Integer>();
 	/**
 	 * 0 -> aucun
 	 * 1 -> loup garou
@@ -54,7 +54,7 @@ public class Partie {
 	public Partie(Serveur serveur) {
 		this.serveur=serveur;
 		
-		joueurTueeDansLaNuit = new ArrayList<>();
+		joueurTueeParVote = new ArrayList<>();
 		
 		tableauJoueurs = new Joueur[serveur.NB_JOUEURS_MAX];
 		
@@ -139,25 +139,49 @@ public class Partie {
 	
 	private void deroulementJour() {
 			
-			if ( joueurTueeDansLaNuit.size() ==0  ) {
+			if ( joueurTueeParVote.size() == 0  && joueurEmpoisonne.size() == 0) {
 				envoyerMessage("<message><annonce>Le jour se lève, personne n'a été tué, les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
 			}
-			else {
-					envoyerMessage("<message><annonce>Le jour se lève, "+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué, il était"+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
-					retournerVivants();
-					retournerMorts();
-					nbJoueurVivantParCamp[0]-=1;
+			else{
+					envoyerMessage("<message><annonce>Le jour se lève</annonce></message>");
+					if ( joueurTueeParVote.size() == 1 ) {
+						
+						envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" a été tué, il était"+numeroRoles[tableauJoueurs[joueurTueeParVote.get(0)].getRole()]+"</annonce></message>");
+						nbJoueurVivantParCamp[0]-=1;
+
+						
+						int indexJoueurMort = joueurTueeParVote.get(0);
+						reinitialiserVote();
+						if (tableauJoueurs[indexJoueurMort].getRole() == 2 ) {										
+							tourChasseur();						
+						}
+						if ( finDePartie() ) return;
+						
+					}
+					if ( joueurEmpoisonne.size() == 1) {
+						
+						envoyerMessage("<message><annonce>"+tableauJoueurs[joueurEmpoisonne.get(0)].getNom()+" a été tué, il était"+numeroRoles[tableauJoueurs[joueurEmpoisonne.get(0)].getRole()]+"</annonce></message>");
+
+						if ( tableauJoueurs[joueurEmpoisonne.get(0)].getRole() == 1 ) {
+							nbJoueurVivantParCamp[1] -= 1;
+						}
+						else {
+							nbJoueurVivantParCamp[0] -=1;
+						}
+
+						int indexJoueurMort = joueurEmpoisonne.get(0);
+						reinitialiserEmpoissonnement();
+						if (tableauJoueurs[indexJoueurMort].getRole() == 2 ) {										
+							tourChasseur();						
+						}
+						if ( finDePartie() ) return;
+						
+					}		
+					
 					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbJoueurVivantParCamp[1]+"</nombreLoupsGarousRestant></rafraichissement></message>");
 					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbJoueurVivantParCamp[0]+"</nombreInnocentsRestant></rafraichissement></message>");
 					retournerMorts();
 					retournerVivants();
-					
-					int indexJoueurMort = joueurTueeDansLaNuit.get(0);
-					reinitialiserVote();
-					if (tableauJoueurs[indexJoueurMort].getRole() == 2 ) {										
-						tourChasseur();						
-					}			
-					if ( finDePartie() ) return;
 			}
 				
 			envoyerMessage("<message><annonce>Les villageois peuvent voter pour désigner une personne à éliminer</annonce></message>");
@@ -175,11 +199,11 @@ public class Partie {
 			finDeVote();
 			desactiverVoteVillageois();
 				
-			if ( joueurTueeDansLaNuit.size() !=0 && egalite == false) {
+			if ( joueurTueeParVote.size() !=0 && egalite == false) {
 				
-				envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué, il était"+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()] +"</annonce></message>");
+				envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" a été tué, il était"+numeroRoles[tableauJoueurs[joueurTueeParVote.get(0)].getRole()] +"</annonce></message>");
 
-				if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
+				if ( tableauJoueurs[joueurTueeParVote.get(0)].getRole() == 1 ) {
 					nbJoueurVivantParCamp[1] -= 1;
 				}
 				else {
@@ -190,7 +214,7 @@ public class Partie {
 				retournerMorts();
 				retournerVivants();
 				
-				int indexJoueurMort = joueurTueeDansLaNuit.get(0);
+				int indexJoueurMort = joueurTueeParVote.get(0);
 				reinitialiserVote();
 				if (tableauJoueurs[indexJoueurMort].getRole() == 2 ) {										
 					tourChasseur();						
@@ -406,9 +430,9 @@ public class Partie {
 		
 		String messageAEnvoyer = "<message><listeSorciere>";
 		
-		if ( joueurTueeDansLaNuit.size() != 0 ) {
+		if ( joueurTueeParVote.size() != 0 ) {
 		
-			messageAEnvoyer += "<joueurDevore>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+"</joueurDevore>";
+			messageAEnvoyer += "<joueurDevore>"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+"</joueurDevore>";
 			
 		}	
 		
@@ -424,8 +448,9 @@ public class Partie {
 	}
 	
 	private void sauverJoueur() {
-		
-		System.out.println("sorcière sauve joueur");
+
+		tableauJoueurs[joueurTueeParVote.get(0)].setVivant(true);
+		joueurTueeParVote.remove(0);
 	}
 	
 	public void envoyerMessage(String message) {	
@@ -445,13 +470,24 @@ public class Partie {
 			
 			String nomDuJoueurVote = doc.getElementsByTagName("vote").item(0).getTextContent();
 			
-			for ( int iterateurTableauJoueur = 0 ; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
-	
-				if ( tableauJoueurs[iterateurTableauJoueur].getNom().equals(nomDuJoueurVote) ) {
-					tableauJoueurs[iterateurTableauJoueur].setNombreVote(tableauJoueurs[iterateurTableauJoueur].getNombreVote()+1);
-				}
+			switch (tourDeJeu) {
+			
+				case 3:
 				
+					empoissonnerJoueur(nomDuJoueurVote);
+					
+					break;
+						
+				default:
+										
+					ajouterVoteAuJoueur(nomDuJoueurVote);
+					
+					break;
+					
+					
+			
 			}
+
 		
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
@@ -460,6 +496,28 @@ public class Partie {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	private  void ajouterVoteAuJoueur(String joueur) {
+		
+		for ( int iterateurTableauJoueur = 0 ; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
+			
+			if ( tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueurTueeParVote) ) {
+				tableauJoueurs[iterateurTableauJoueur].setNombreVote(tableauJoueurs[iterateurTableauJoueur].getNombreVote()+1);
+			}
+			
+		}	
+	}
+	
+	private void empoissonnerJoueur(String joueur) {
+		
+		for ( int iterateurTableauJoueur = 0 ; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
+			
+			if ( tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueur) ) {
+				joueurEmpoisonne.add(iterateurTableauJoueur);
+				tableauJoueurs[iterateurTableauJoueur].setVivant(false);
+			}
+		}
 	}
 	
 	private void finDeVote() {
@@ -478,7 +536,7 @@ public class Partie {
 		}
 		
 		if( joueurATuer != tableauJoueurs.length && egalite == false ) {
-			joueurTueeDansLaNuit.add(joueurATuer);
+			joueurTueeParVote.add(joueurATuer);
 			tableauJoueurs[joueurATuer].setVivant(false);
 		}	
 		
@@ -503,11 +561,16 @@ public class Partie {
 		
 
 	private void reinitialiserVote() {
-		joueurTueeDansLaNuit.clear();		
+		joueurTueeParVote.clear();		
 		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
 			tableauJoueurs[iterateurTableauJoueur].reinitialiserNombreDeVote();
 		}
 		egalite = false;
+	}
+	
+	private void reinitialiserEmpoissonnement() {
+		
+		joueurEmpoisonne.remove(0);
 	}
 	
 	private void activerVoteVillageois() {
@@ -582,8 +645,8 @@ public class Partie {
 
 		finDeVote();
 		
-		envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué par le chasseur, il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
-		if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
+		envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" a été tué par le chasseur, il était "+numeroRoles[tableauJoueurs[joueurTueeParVote.get(0)].getRole()]+"</annonce></message>");
+		if ( tableauJoueurs[joueurTueeParVote.get(0)].getRole() == 1 ) {
 			nbJoueurVivantParCamp[1] -= 1;
 		}
 		else {
@@ -611,7 +674,7 @@ public class Partie {
 			}
 		}
 		try {
-			TimeUnit.SECONDS.sleep(30);
+			TimeUnit.SECONDS.sleep(10);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -634,9 +697,11 @@ public class Partie {
 		envoyerMessage("<message><annonce>La sorcière se réveille...</annonce></message>");
 
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
+			System.out.println(tableauJoueurs[iterateur].getRole());
+			
 			if(tableauJoueurs[iterateur].getRole() == 3) {
 				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer, en tant que sorcière tu peux décider</annonce></message>", iterateur);
-				serveur.envoyerIndividuel("<message><annonce>de sauver"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" qui sera dévoré par les loups </annonce></message>", iterateur);
+				serveur.envoyerIndividuel("<message><annonce>de sauver"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" qui sera dévoré par les loups </annonce></message>", iterateur);
 				serveur.envoyerIndividuel("<message><annonce>Tu peux également choisir d'empoisonner quelqu'un</annonce></message>", iterateur);
 				serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", iterateur);
 			}
