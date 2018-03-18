@@ -22,11 +22,16 @@ import serveur.Serveur;
 public class Partie {
 
 	private Random aleatoire = new Random();
-	private int nbLoupGarou;
 	private int nbMaxLoupGarou;
-	private int nbVillageois;
 	private int nbMaxVillageois;
-	private final String[] numeroRoles = {"Villageois", "Loup-Garou"};
+	private int nbMaxChasseur;
+	
+	/**
+	 *  0 : innocents 
+	 *  1 : loup garou
+	 */
+	private int[] nbJoueurVivantParCamp = new int[2];
+	private final String[] numeroRoles = {"Villageois", "Loup-Garou", "Chasseur"};
 	private Serveur serveur;
 	private Joueur[] tableauJoueurs;
 	private boolean finPartie = false;
@@ -34,6 +39,7 @@ public class Partie {
 	private boolean jourEnCours = false;
 	private List<Integer> joueurTueeDansLaNuit;
 	private boolean egalite = false;
+	private List<Integer> cartes = new ArrayList<Integer>();
 	
 	/**
 	 * 0 -> aucun
@@ -67,7 +73,24 @@ public class Partie {
 
 				nbMaxLoupGarou = 1;
 				nbMaxVillageois = 2;
-
+				nbMaxChasseur = 0;
+				
+				nbJoueurVivantParCamp[0] = 2;
+				nbJoueurVivantParCamp[1] = 1;
+				
+				for ( int iterateurCarte = 0; iterateurCarte < nbMaxLoupGarou ; iterateurCarte++ ) {
+					cartes.add(1);
+				}
+				
+				for ( int iterateurCarte = 0; iterateurCarte < nbMaxVillageois ; iterateurCarte++ ) {
+					cartes.add(0);
+				}
+				
+				for ( int iterateurCarte = 0; iterateurCarte < nbMaxChasseur ; iterateurCarte++ ) {
+					cartes.add(2);
+				}
+				
+				
 				serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"/"+serveur.NB_JOUEURS_MAX+"</nombreJoueurs></rafraichissement></message>");
 
 				retournerMorts();
@@ -81,8 +104,8 @@ public class Partie {
 				}
 				
 				distribuerCartes();
-				envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
-				envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
+				envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbJoueurVivantParCamp[1]+"</nombreLoupsGarousRestant></rafraichissement></message>");
+				envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbJoueurVivantParCamp[0]+"</nombreInnocentsRestant></rafraichissement></message>");
 				
 				try {
 					TimeUnit.SECONDS.sleep(4);
@@ -108,9 +131,7 @@ public class Partie {
 		
 		tourLoupGarou();
 		
-		envoyerMessage("<message><annonce>Les loups-garous ont fait leur choix</annonce></message>");
-		
-		finDeVote();
+
 		
 	}
 	
@@ -124,9 +145,9 @@ public class Partie {
 					envoyerMessage("<message><annonce>Il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
 					retournerVivants();
 					retournerMorts();	
-					nbVillageois-=1;
-					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
-					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
+					nbJoueurVivantParCamp[0]-=1;
+					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbJoueurVivantParCamp[1]+"</nombreLoupsGarousRestant></rafraichissement></message>");
+					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbJoueurVivantParCamp[0]+"</nombreInnocentsRestant></rafraichissement></message>");
 					retournerMorts();
 					retournerVivants();
 					reinitialiserVote();
@@ -156,14 +177,14 @@ public class Partie {
 						envoyerMessage("<message><annonce>Il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
 
 						if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
-							nbLoupGarou -= 1;
+							nbJoueurVivantParCamp[1] -= 1;
 						}
 						else {
-							nbVillageois -=1;
+							nbJoueurVivantParCamp[0] -=1;
 						}
 						reinitialiserVote();
-						envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbLoupGarou+"</nombreLoupsGarousRestant></rafraichissement></message>");
-						envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbVillageois+"</nombreInnocentsRestant></rafraichissement></message>");
+						envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbJoueurVivantParCamp[1]+"</nombreLoupsGarousRestant></rafraichissement></message>");
+						envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbJoueurVivantParCamp[0]+"</nombreInnocentsRestant></rafraichissement></message>");
 						retournerMorts();
 						retournerVivants();
 					}
@@ -208,50 +229,20 @@ public class Partie {
 	private void distribuerCartes() {
 		int role;
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
-			role = aleatoire.nextInt(2);
-						
-			if (role == 0) {
-				
-				if (nbLoupGarou+1 <= nbMaxLoupGarou) {
-										
-					tableauJoueurs[iterateur].setRole(1);
-					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
-					serveur.envoyerIndividuel("<message><rafraichissement><role>Loup-Garou</role></rafraichissement></message>", iterateur);
-					serveur.envoyerIndividuel("<message><rafraichissement><descriptionRole>Ton rôle est de manger les innocents la nuit</descriptionRole></rafraichissement></message>", iterateur);
-					nbLoupGarou+=1;
-				} else {
-					tableauJoueurs[iterateur].setRole(0);
-					serveur.envoyerIndividuel("<message><annonce>Tu es un Villageois</annonce></message>", iterateur);
-					serveur.envoyerIndividuel("<message><rafraichissement><role>Villageois</role></rafraichissement></message>", iterateur);
-					serveur.envoyerIndividuel("<message><rafraichissement><descriptionRole>Ton rôle est de tuer les loups-garous le jour</descriptionRole></rafraichissement></message>", iterateur);
-					nbVillageois+=1;
-				}
-			} else {
-				if (nbVillageois+1 <= nbMaxVillageois) {
-					tableauJoueurs[iterateur].setRole(0);
-					serveur.envoyerIndividuel("<message><annonce>Tu es un Villageois</annonce></message>", iterateur);
-					serveur.envoyerIndividuel("<message><rafraichissement><role>Villageois</role></rafraichissement></message>", iterateur);
-					serveur.envoyerIndividuel("<message><rafraichissement><descriptionRole>Ton rôle est de tuer les loups-garous le jour</descriptionRole></rafraichissement></message>", iterateur);
-					nbVillageois+=1;
-				} else {
-					tableauJoueurs[iterateur].setRole(1);
-					serveur.envoyerIndividuel("<message><annonce>Tu es un Loup-Garou</annonce></message>", iterateur);
-					serveur.envoyerIndividuel("<message><rafraichissement><role>Loup-Garou</role></rafraichissement></message>", iterateur);
-					serveur.envoyerIndividuel("<message><rafraichissement><descriptionRole>Ton rôle est de manger les innocents la nuit</descriptionRole></rafraichissement></message>", iterateur);
-					nbLoupGarou+=1;
-				}
-			}
+			role = aleatoire.nextInt(cartes.size());						
+			tableauJoueurs[iterateur].setRole(cartes.get(role));
+			cartes.remove(role);
+			serveur.envoyerIndividuel("<message><annonce>Tu es"+numeroRoles[tableauJoueurs[iterateur].getRole()]+" </annonce></message>", iterateur);
+			serveur.envoyerIndividuel("<message><rafraichissement><role>"+numeroRoles[tableauJoueurs[iterateur].getRole()]+"</role></rafraichissement></message>", iterateur);			
 		}
-		
-
-		
 	}
+		
 
 	
 	private void tourLoupGarou() {
 				
 		tourDeJeu = 1;
-		
+		envoyerMessage("<message><annonce>Les loups-garous choisissent quelqun à dévorer</annonce></message>");
 		//activez le vote pour les loups-garou
 		
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
@@ -271,9 +262,11 @@ public class Partie {
 				serveur.envoyerIndividuel("<message><rafraichissement><desactiverVote></desactiverVote></rafraichissement></message>", iterateur);
 			}
 		}
-
+		envoyerMessage("<message><annonce>Les loups-garous ont fait leur choix</annonce></message>");
 		//désactivez le vote pour les loups-garou
 		tourDeJeu = 0;
+		
+		finDeVote();
 	}
 	
 	public void traiter(String message) {
@@ -335,51 +328,24 @@ public class Partie {
 	
 	
 	public void envoyerListeJoueur(String joueur) {
-		
-		System.out.println("serveur.envoyerListeJoueur reçoit: "+joueur);
-			
+					
 		switch( tourDeJeu ) {
 		
 		case 1:
 			
-			for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
-				if(tableauJoueurs[iterateur].getRole() == 1) {
-					
-					String messageAEnvoyer = "<message><liste>";
-					
-					for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
-						if ( tableauJoueurs[iterateurTableauJoueur].getRole() == 0 && tableauJoueurs[iterateurTableauJoueur].isVivant()) {
-							messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
-						}						
-					}
-					messageAEnvoyer += "</liste></message>";				
-					serveur.envoyerIndividuel(messageAEnvoyer, iterateur);
-				}
-			}		
+			envoyerListeJoueurTourLoupGarou(joueur);
 			
 			break;
 			
 		case 2:
-						
-			int indexJoueur = -1;
-			for (int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
-				
-				if ( tableauJoueurs[iterateurJoueur].getNom().equals(joueur) ) {
-					
-					indexJoueur = iterateurJoueur;
-					
-				}
-			}
-			String messageAEnvoyer = "<message><liste>";
 			
-			for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
-				if ( tableauJoueurs[iterateurTableauJoueur].isVivant() && !tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueur)) {
-					messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
-				}						
-			}
-			messageAEnvoyer += "</liste></message>";
-			serveur.envoyerIndividuel(messageAEnvoyer, indexJoueur);
+			envoyerListeVillageois(joueur);
+							
 			break;
+			
+		case 3:
+			
+			envoyerListeVillageois(joueur);
 		
 		default:
 			break;
@@ -387,6 +353,53 @@ public class Partie {
 		}	
 	}
 	
+	private void envoyerListeJoueurTourLoupGarou(String joueur) {
+		
+		int indexJoueur = -1;
+		for (int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
+			
+			if ( tableauJoueurs[iterateurJoueur].getNom().equals(joueur) ) {
+				
+				indexJoueur = iterateurJoueur;
+				
+			}
+		}
+		
+		String messageAEnvoyer = "<message><liste>";
+		
+		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
+			if ( tableauJoueurs[iterateurTableauJoueur].getRole() == 0 && tableauJoueurs[iterateurTableauJoueur].isVivant()) {
+				messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
+			}						
+		}
+		messageAEnvoyer += "</liste></message>";				
+		serveur.envoyerIndividuel(messageAEnvoyer, indexJoueur);
+		
+	}
+	
+	
+	private void envoyerListeVillageois(String joueur) {
+		
+		int indexJoueur = -1;
+		for (int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
+			
+			if ( tableauJoueurs[iterateurJoueur].getNom().equals(joueur) ) {
+				
+				indexJoueur = iterateurJoueur;
+				
+			}
+		}
+		String messageAEnvoyer = "<message><liste>";
+		
+		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
+			if ( tableauJoueurs[iterateurTableauJoueur].isVivant() && !tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueur)) {
+				messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
+			}						
+		}
+		messageAEnvoyer += "</liste></message>";
+		serveur.envoyerIndividuel(messageAEnvoyer, indexJoueur);
+			
+	}
 	
 	public void envoyerMessage(String message) {	
 		serveur.envoyerATous(message);
@@ -448,8 +461,8 @@ public class Partie {
 	
 	private boolean finDePartie() {
 		
-		if ( (nbVillageois == 0 || nbLoupGarou == 0) ) {
-			if ( nbVillageois == 0 ) {
+		if ( (nbJoueurVivantParCamp[0] == 0 || nbJoueurVivantParCamp[1] == 0) ) {
+			if ( nbJoueurVivantParCamp[0] == 0 ) {
 				envoyerMessage("<message><annonce>Les loups garous ont gagné, la partie est terminé</annonce></message>");
 			}
 			else {
@@ -486,9 +499,7 @@ public class Partie {
 	private void gererChat(String message) {
 				
 		try {
-			
-			//System.out.println("gererChat reçoit: "+message);
-			
+					
 			DocumentBuilder lecteurXML;
 
 			lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -507,26 +518,28 @@ public class Partie {
 			String messageAEnvoyer = elementEmmetteur.getTextContent()+": "+elementMessage.getTextContent();
 			
 			for ( int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
-				
-				System.out.println(iterateurJoueur);
-				
+					
 				if ( tableauJoueurs[iterateurJoueur].isVivant() && tableauJoueurs[iterateurJoueur].getNom().equals(elementEmmetteur.getTextContent() )){
 					envoyerMessage("<message><chat>"+messageAEnvoyer+"</chat></message>");
 				}
 			}
-			
-				
-		
-			
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (org.xml.sax.SAXException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-
+		}		
+	}
+	
+	
+	public void tourChasseur() {
+		
+		
 		
 		
 	}
+	
+	
+	
 }
