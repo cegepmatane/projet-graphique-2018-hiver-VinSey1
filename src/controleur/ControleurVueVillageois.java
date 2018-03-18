@@ -59,7 +59,8 @@ public class ControleurVueVillageois {
 					else {
 						
 						contactServeur.envoyerMessage("<message><vote><joueur>"+couple.get(0) +"</joueur><joueur>"+couple.get(1) +"</joueur></vote></message>");
-						
+						contactServeur.getControleur().desactiverVote();
+						vueVillageois.fermer();
 					}
 					
 				}

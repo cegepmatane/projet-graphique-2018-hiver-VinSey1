@@ -568,11 +568,20 @@ public class Partie {
 				if ( tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueur2) ) {
 					indexJoueur2 = iterateurTableauJoueur;
 				}
-				
 			}	 
 			
 			tableauJoueurs[indexJoueur1].setConjoint(indexJoueur2);
 			tableauJoueurs[indexJoueur2].setConjoint(indexJoueur1);
+			
+			serveur.envoyerIndividuel("<message><annonce>Vous et "+tableauJoueurs[indexJoueur2].getNom()+" avez été lié</annonce></message>", indexJoueur1);
+			serveur.envoyerIndividuel("<message><annonce>Si l'un de vous deux meurt, l'autre meurt également</annonce></message>", indexJoueur1);
+			serveur.envoyerIndividuel("<message><rafraichissement><conjoint>"+tableauJoueurs[indexJoueur2].getNom()+"</conjoint></rafraichissement></message>", indexJoueur1);
+
+			
+			serveur.envoyerIndividuel("<message><annonce>Vous et "+tableauJoueurs[indexJoueur1].getNom()+" avez été lié</annonce></message>", indexJoueur2);
+			serveur.envoyerIndividuel("<message><annonce>Si l'un de vous deux meurt, l'autre meurt également</annonce></message>", indexJoueur2);
+			serveur.envoyerIndividuel("<message><rafraichissement><conjoint>"+tableauJoueurs[indexJoueur2].getNom()+"</conjoint></rafraichissement></message>", indexJoueur2);
+
 			
 		} catch (ParserConfigurationException | org.xml.sax.SAXException | IOException e) {
 			e.printStackTrace();
