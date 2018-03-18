@@ -154,7 +154,7 @@ public class Partie {
 					envoyerMessage("<message><annonce>Le jour se lève</annonce></message>");
 					if ( joueurTueeParVote.size() == 1 ) {
 						
-						envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" a été tué, il était"+numeroRoles[tableauJoueurs[joueurTueeParVote.get(0)].getRole()]+"</annonce></message>");
+						envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" a été tué, il était "+numeroRoles[tableauJoueurs[joueurTueeParVote.get(0)].getRole()]+"</annonce></message>");
 						nbJoueurVivantParCamp[0]-=1;
 
 						int indexJoueurMort = joueurTueeParVote.get(0);
@@ -163,17 +163,18 @@ public class Partie {
 						if (tableauJoueurs[indexJoueurMort].getRole() == 2 ) {										
 							tourChasseur();						
 						}
+						if ( finDePartie() ) return;
 						if (tableauJoueurs[indexJoueurMort].getConjoint() != -1 ) {										
 							faireMourirConjoint(indexJoueurMort);						
 						}
+						if ( finDePartie() ) return;
 						if (tableauJoueurs[indexJoueurMort].getRole() == 3 ) {										
 							sorciereVivante = false;					
 						}
-						
 					}
 					if ( joueurEmpoisonne.size() == 1) {
 						
-						envoyerMessage("<message><annonce>"+tableauJoueurs[joueurEmpoisonne.get(0)].getNom()+" a été tué, il était"+numeroRoles[tableauJoueurs[joueurEmpoisonne.get(0)].getRole()]+"</annonce></message>");
+						envoyerMessage("<message><annonce>"+tableauJoueurs[joueurEmpoisonne.get(0)].getNom()+" a été tué, il était "+numeroRoles[tableauJoueurs[joueurEmpoisonne.get(0)].getRole()]+"</annonce></message>");
 
 						if ( tableauJoueurs[joueurEmpoisonne.get(0)].getRole() == 1 ) {
 							nbJoueurVivantParCamp[1] -= 1;
@@ -188,9 +189,11 @@ public class Partie {
 						if (tableauJoueurs[indexJoueurMort].getRole() == 2 ) {										
 							tourChasseur();						
 						}
+						if ( finDePartie() ) return;
 						if (tableauJoueurs[indexJoueurMort].getConjoint() != -1 ) {										
 							faireMourirConjoint(indexJoueurMort);						
 						}
+						if ( finDePartie() ) return;
 						if ( tableauJoueurs[indexJoueurMort].getRole() == 1 ) {
 							nbJoueurVivantParCamp[1] -= 1;
 						}
@@ -209,6 +212,7 @@ public class Partie {
 			
 			tourDeJeu = 2;
 			activerVoteVillageois();
+			reinitialiserVote();
 			try {
 				TimeUnit.SECONDS.sleep(20);
 			} catch (InterruptedException e) {
@@ -508,6 +512,11 @@ public class Partie {
 		else {
 			nbJoueurVivantParCamp[0] -=1;
 		}
+		
+		envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbJoueurVivantParCamp[1]+"</nombreLoupsGarousRestant></rafraichissement></message>");
+		envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbJoueurVivantParCamp[0]+"</nombreInnocentsRestant></rafraichissement></message>");
+		retournerMorts();
+		retournerVivants();
 	}
 	
 	private void sauverJoueur() {
@@ -525,7 +534,7 @@ public class Partie {
 		DocumentBuilder lecteurXML;
 		try {
 					
-			System.out.println("Partie.traiter reçoit "+message);
+			System.out.println("Partie.traiterVote reçoit "+message);
 			
 			lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			InputSource inputSource = new InputSource();
@@ -556,8 +565,6 @@ public class Partie {
 					
 					break;		
 			}
-
-		
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (org.xml.sax.SAXException e) {
@@ -581,7 +588,7 @@ public class Partie {
 
 			int indexJoueur1 = -1;
 			int indexJoueur2 = -1;
-			
+
 			for ( int iterateurTableauJoueur = 0 ; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
 				
 				if ( tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueur1) ) {
@@ -592,18 +599,19 @@ public class Partie {
 				}
 			}	 
 			
+			System.out.println(indexJoueur1);
+			System.out.println(indexJoueur2);
+			
 			tableauJoueurs[indexJoueur1].setConjoint(indexJoueur2);
 			tableauJoueurs[indexJoueur2].setConjoint(indexJoueur1);
 			
 			serveur.envoyerIndividuel("<message><annonce>Vous et "+tableauJoueurs[indexJoueur2].getNom()+" avez été lié</annonce></message>", indexJoueur1);
 			serveur.envoyerIndividuel("<message><annonce>Si l'un de vous deux meurt, l'autre meurt également</annonce></message>", indexJoueur1);
 			serveur.envoyerIndividuel("<message><rafraichissement><conjoint>"+tableauJoueurs[indexJoueur2].getNom()+"</conjoint></rafraichissement></message>", indexJoueur1);
-
 			
 			serveur.envoyerIndividuel("<message><annonce>Vous et "+tableauJoueurs[indexJoueur1].getNom()+" avez été lié</annonce></message>", indexJoueur2);
 			serveur.envoyerIndividuel("<message><annonce>Si l'un de vous deux meurt, l'autre meurt également</annonce></message>", indexJoueur2);
 			serveur.envoyerIndividuel("<message><rafraichissement><conjoint>"+tableauJoueurs[indexJoueur1].getNom()+"</conjoint></rafraichissement></message>", indexJoueur2);
-
 			
 		} catch (ParserConfigurationException | org.xml.sax.SAXException | IOException e) {
 			e.printStackTrace();
@@ -650,10 +658,7 @@ public class Partie {
 		if( joueurATuer != tableauJoueurs.length && egalite == false ) {
 			joueurTueeParVote.add(joueurATuer);
 			tableauJoueurs[joueurATuer].setVivant(false);
-			
-			if (tableauJoueurs[joueurATuer].getConjoint() != -1 ) {										
-				faireMourirConjoint(joueurATuer);						
-			}	
+				
 		}	
 	}
 	
@@ -787,7 +792,7 @@ public class Partie {
 			}
 		}
 		try {
-			TimeUnit.SECONDS.sleep(10);
+			TimeUnit.SECONDS.sleep(30);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -829,7 +834,7 @@ public class Partie {
 				serveur.envoyerIndividuel("<message><rafraichissement><desactiverVote></desactiverVote></rafraichissement></message>", iterateur);
 			}
 		}
-		
+		envoyerMessage("<message><annonce>La sorcière se rendort</annonce></message>");
 
 		tourDeJeu = 0;
 	}
@@ -838,19 +843,22 @@ public class Partie {
 		tourDeJeu = 5;
 		envoyerMessage("<message><annonce>Cupidon se réveille...</annonce></message>");
 
-		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
-			
+		int indexCupidon = -1;
+		
+		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {		
 			if(tableauJoueurs[iterateur].getRole() == 4) {
-				
-				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer, choisit deux joueurs pour les liers jusque dans la mort</annonce></message>", iterateur);
-				serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", iterateur);
+				indexCupidon = iterateur;
 			}
-		}		
+		}
+		serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer, choisit deux joueurs pour les liers jusque dans la mort</annonce></message>", indexCupidon);
+		serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", indexCupidon);
 		try {
 			TimeUnit.SECONDS.sleep(15);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		serveur.envoyerIndividuel("<message><rafraichissement><desactiverVote></desactiverVote></rafraichissement></message>", indexCupidon);
 		envoyerMessage("<message><annonce>Cupidon a lié (ou pas) deux personnnes</annonce></message>");
 		tourDeJeu = 0;
 		tourCupidonPasse = true;
