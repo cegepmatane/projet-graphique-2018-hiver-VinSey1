@@ -48,6 +48,11 @@ public class ControleurVueVillageois {
 		});
 	}
 	
+	public void sauver() {
+				
+		contactServeur.envoyerMessage("<message><sauve></sauve></message>");
+		
+	}
 		
 	public void traiter(String message) {
 	
@@ -109,9 +114,10 @@ Platform.runLater(new Runnable() {
 			
 			@Override
 			public void run() {
-				
-				
+								
 				List<String> listeJoueurs = new ArrayList<String>();
+				
+				vueVillageois.getSauverJoueur().setVisible(true);
 				
 				try {
 					DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -120,16 +126,33 @@ Platform.runLater(new Runnable() {
 					inputSource.setCharacterStream(new StringReader(message));				
 					Document doc = lecteurXML.parse(inputSource);
 					
-					NodeList contenuMessage = doc.getElementsByTagName("listeSorciere");
+					NodeList contenuMessage = doc.getElementsByTagName("joueur");
 					
 					NodeList joueurDevore = doc.getElementsByTagName("joueurDevore");
 					
+					if( joueurDevore.getLength() != 0 ) {
 						
+						Node nodeMessage = joueurDevore.item(0);
+						
+						Element elementMessage = (Element) nodeMessage;
+						
+						vueVillageois.getSauverJoueur().setText("Sauver "+elementMessage.getTextContent());
+					}
+					
+					for (int iterateur=0; iterateur < contenuMessage.getLength();iterateur++) {
+						
+						Node nodeMessage = contenuMessage.item(iterateur);
+						
+						Element elementMessage = (Element) nodeMessage;
+						
+						listeJoueurs.add(elementMessage.getTextContent());
+								
+					}		
+					
 				}
 				
 				catch(org.xml.sax.SAXException e){
-					e.printStackTrace();
-					
+					e.printStackTrace();					
 				}
 				catch (ParserConfigurationException e) {
 					e.printStackTrace();
@@ -141,13 +164,6 @@ Platform.runLater(new Runnable() {
 				vueVillageois.setChoixJoueur(listeJoueurs);
 				
 			}
-		});	
-		
-		
-		
-		
-		
-		
-		
+		});			
 	}
 }

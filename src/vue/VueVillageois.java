@@ -23,17 +23,18 @@ public class VueVillageois extends Application{
 	
 	private ControleurVueVillageois controleur;
 
-
 	private Button valider = new Button("Valider");
 	
 	private List<RadioButton> choixJoueur = new ArrayList<RadioButton>();
+	
+	private Button sauverJoueur = new Button(); 
 
 	private ToggleGroup joueurs = new ToggleGroup();
 	
 	private VBox fenetreChoixVote;
 	
-	private Text indication;
-	
+	private Text indication;	
+
 	public void fermer() {
 		instanceVueVillageois.close();
 	}
@@ -54,12 +55,22 @@ public class VueVillageois extends Application{
 		fenetreChoixVote.setPadding(new Insets(10));
 		fenetreChoixVote.setSpacing(8);
 		
+		sauverJoueur.setVisible(false);
+		sauverJoueur.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				controleur.sauver();
+			}
+		});
 		
 		fenetrePrincipale.setTop(indication);
 		
 		fenetrePrincipale.setBottom(valider);
 
 		fenetrePrincipale.setCenter(fenetreChoixVote);
+		
+		fenetrePrincipale.setRight(sauverJoueur);
 		
 		
 		Scene scene = new Scene(fenetrePrincipale, 1000,500);
@@ -109,5 +120,11 @@ public class VueVillageois extends Application{
 	public void setControleur(ControleurVueVillageois controleur) {
 		this.controleur = controleur;
 	}
+	
+	public Button getSauverJoueur() {
+		return sauverJoueur;
+	}
+
+
 }
 

@@ -25,6 +25,7 @@ public class Partie {
 	private int nbMaxLoupGarou;
 	private int nbMaxVillageois;
 	private int nbMaxChasseur;
+	private int nbMaxSorcière;
 	
 	/**
 	 *  0 : innocents 
@@ -75,22 +76,20 @@ public class Partie {
 
 				nbMaxLoupGarou = 1;
 				nbMaxVillageois = 1;
-				nbMaxChasseur = 1;
 				
-				nbJoueurVivantParCamp[0] = 2;
-				nbJoueurVivantParCamp[1] = 1;
-				
-				for ( int iterateurCarte = 0; iterateurCarte < nbMaxLoupGarou ; iterateurCarte++ ) {
-					cartes.add(1);
-				}
+				nbJoueurVivantParCamp[0] = serveur.NB_JOUEURS_MAX - nbMaxLoupGarou;
+				nbJoueurVivantParCamp[1] = nbMaxLoupGarou;
 				
 				for ( int iterateurCarte = 0; iterateurCarte < nbMaxVillageois ; iterateurCarte++ ) {
 					cartes.add(0);
 				}
 				
-				for ( int iterateurCarte = 0; iterateurCarte < nbMaxChasseur ; iterateurCarte++ ) {
-					cartes.add(2);
+				for ( int iterateurCarte = 0; iterateurCarte < nbMaxLoupGarou ; iterateurCarte++ ) {
+					cartes.add(1);
 				}
+				
+				cartes.add(2);		
+				cartes.add(3);
 				
 				
 				serveur.envoyerATous("<message><rafraichissement><nombreJoueurs>"+tableauJoueurs.length+"/"+serveur.NB_JOUEURS_MAX+"</nombreJoueurs></rafraichissement></message>");
@@ -133,6 +132,7 @@ public class Partie {
 		
 		tourLoupGarou();
 		
+		tourSorciere();
 
 		
 	}
@@ -286,6 +286,11 @@ public class Partie {
 					
 					break;
 				
+				case "sauve":
+					
+					sauverJoueur();
+					
+					break;
 				default:
 					
 					System.out.println("message non interprété: Partie.traiter");
@@ -403,7 +408,7 @@ public class Partie {
 		
 		if ( joueurTueeDansLaNuit.size() != 0 ) {
 		
-			messageAEnvoyer += "<joueurDevore>"+"<joueurDevore>";
+			messageAEnvoyer += "<joueurDevore>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+"</joueurDevore>";
 			
 		}	
 		
@@ -416,6 +421,11 @@ public class Partie {
 		serveur.envoyerIndividuel(messageAEnvoyer, indexJoueur);
 
 		
+	}
+	
+	private void sauverJoueur() {
+		
+		System.out.println("sorcière sauve joueur");
 	}
 	
 	public void envoyerMessage(String message) {	
