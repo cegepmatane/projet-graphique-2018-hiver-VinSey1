@@ -31,7 +31,7 @@ public class Partie {
 	 *  1 : loup garou
 	 */
 	private int[] nbJoueurVivantParCamp = new int[2];
-	private final String[] numeroRoles = {"Villageois", "Loup-Garou", "Chasseur"};
+	private final String[] numeroRoles = {"Villageois", "Loup-Garou", "Chasseur", "Sorcière"};
 	private Serveur serveur;
 	private Joueur[] tableauJoueurs;
 	private boolean finPartie = false;
@@ -46,6 +46,7 @@ public class Partie {
 	 * 1 -> loup garou
 	 * 2 -> villageois
 	 * 3 -> chasseur
+	 * 4 -> sorcière
 	 */
 	private int tourDeJeu = 0;
 	
@@ -324,6 +325,13 @@ public class Partie {
 		case 3:
 			
 			envoyerListeVillageois(joueur);
+			break;
+			
+		case 4:
+			
+			envoyerListeSorciere(joueur);
+			
+			break;
 		
 		default:
 			break;
@@ -377,6 +385,37 @@ public class Partie {
 		messageAEnvoyer += "</liste></message>";
 		serveur.envoyerIndividuel(messageAEnvoyer, indexJoueur);
 			
+	}
+	
+	private void envoyerListeSorciere(String joueur) {
+		
+		int indexJoueur = -1;
+		for (int iterateurJoueur = 0; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
+			
+			if ( tableauJoueurs[iterateurJoueur].getNom().equals(joueur) ) {
+				
+				indexJoueur = iterateurJoueur;
+				
+			}
+		}
+		
+		String messageAEnvoyer = "<message><listeSorciere>";
+		
+		if ( joueurTueeDansLaNuit.size() != 0 ) {
+		
+			messageAEnvoyer += "<joueurDevore>"+"<joueurDevore>";
+			
+		}	
+		
+		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
+			if ( tableauJoueurs[iterateurTableauJoueur].isVivant() && !tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueur)) {
+				messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
+			}						
+		}	
+		messageAEnvoyer += "</listeSorciere></message>";
+		serveur.envoyerIndividuel(messageAEnvoyer, indexJoueur);
+
+		
 	}
 	
 	public void envoyerMessage(String message) {	
@@ -552,7 +591,7 @@ public class Partie {
 	private void tourLoupGarou() {
 		
 		tourDeJeu = 1;
-		envoyerMessage("<message><annonce>Les loups-garous choisissent quelqun à dévorer</annonce></message>");
+		envoyerMessage("<message><annonce>Les loups-garous se réveillent et choisissent quelqun à dévorer</annonce></message>");
 		//activez le vote pour les loups-garou
 		
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
@@ -571,7 +610,7 @@ public class Partie {
 				serveur.envoyerIndividuel("<message><rafraichissement><desactiverVote></desactiverVote></rafraichissement></message>", iterateur);
 			}
 		}
-		envoyerMessage("<message><annonce>Les loups-garous ont fait leur choix</annonce></message>");
+		envoyerMessage("<message><annonce>Les loups-garous ont fait leur choix et se rendorment</annonce></message>");
 		//désactivez le vote pour les loups-garou
 		tourDeJeu = 0;
 		
@@ -580,8 +619,31 @@ public class Partie {
 	
 	
 	private void tourSorciere() {
+		tourDeJeu = 4;
 		
+		envoyerMessage("<message><annonce>La sorcière se réveille...</annonce></message>");
+
+		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
+			if(tableauJoueurs[iterateur].getRole() == 3) {
+				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer, en tant que sorcière tu peux décider</annonce></message>", iterateur);
+				serveur.envoyerIndividuel("<message><annonce>de sauver"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" qui sera dévoré par les loups </annonce></message>", iterateur);
+				serveur.envoyerIndividuel("<message><annonce>Tu peux également choisir d'empoisonner quelqu'un</annonce></message>", iterateur);
+				serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", iterateur);
+			}
+		}
+		try {
+			TimeUnit.SECONDS.sleep(30);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
+			if(tableauJoueurs[iterateur].getRole() == 3) {
+				serveur.envoyerIndividuel("<message><rafraichissement><desactiverVote></desactiverVote></rafraichissement></message>", iterateur);
+			}
+		}
 		
-		
+		envoyerMessage("<message><annonce>La sorcière se rendort</annonce></message>");
+
+		tourDeJeu = 0;
 	}
 }

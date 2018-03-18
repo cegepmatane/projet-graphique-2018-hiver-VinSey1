@@ -64,8 +64,7 @@ public class ControleurVueVillageois {
 					DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 					
 					InputSource inputSource = new InputSource();
-					inputSource.setCharacterStream(new StringReader(message));
-					
+					inputSource.setCharacterStream(new StringReader(message));				
 					Document doc = lecteurXML.parse(inputSource);
 					
 					NodeList contenuMessage = doc.getElementsByTagName("joueur");
@@ -102,4 +101,53 @@ public class ControleurVueVillageois {
 		
 	}
 	
+	
+	public void afficherVoteSorciere(String message) {
+		
+		
+Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				
+				List<String> listeJoueurs = new ArrayList<String>();
+				
+				try {
+					DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+					
+					InputSource inputSource = new InputSource();
+					inputSource.setCharacterStream(new StringReader(message));				
+					Document doc = lecteurXML.parse(inputSource);
+					
+					NodeList contenuMessage = doc.getElementsByTagName("listeSorciere");
+					
+					NodeList joueurDevore = doc.getElementsByTagName("joueurDevore");
+					
+						
+				}
+				
+				catch(org.xml.sax.SAXException e){
+					e.printStackTrace();
+					
+				}
+				catch (ParserConfigurationException e) {
+					e.printStackTrace();
+				}
+				catch(IOException e) {
+					e.printStackTrace();
+				}
+				
+				vueVillageois.setChoixJoueur(listeJoueurs);
+				
+			}
+		});	
+		
+		
+		
+		
+		
+		
+		
+	}
 }

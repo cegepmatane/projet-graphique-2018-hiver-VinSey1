@@ -70,6 +70,12 @@ public class ContactServeur {
 						if ( controleurVueVillageois != null ) controleurVueVillageois.traiter(message);
 						break;
 						
+					case "listeSorciere":
+						
+						if ( controleurVueVillageois != null ) controleurVueVillageois.afficherVoteSorciere(message);
+						
+						break;
+						
 					case "annonce":
 						controleurSalonDeJeu.ajouterTexteAuChat(elementMessage.getTextContent());
 						break;
