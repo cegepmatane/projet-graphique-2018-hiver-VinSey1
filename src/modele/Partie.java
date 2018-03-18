@@ -94,7 +94,7 @@ public class Partie {
 				}
 				
 				cartes.add(2);		
-				cartes.add(3);
+				//cartes.add(3);
 				cartes.add(4);
 				
 				
@@ -279,10 +279,6 @@ public class Partie {
 		}
 	}
 		
-
-	
-	
-	
 	public void traiter(String message) {
 		
 		try {
@@ -559,7 +555,7 @@ public class Partie {
 			Document doc = lecteurXML.parse(inputSource);
 			
 			String joueur1 = doc.getElementsByTagName("joueur").item(0).getTextContent();
-			String joueur2 = doc.getElementsByTagName("joueur").item(2).getTextContent();
+			String joueur2 = doc.getElementsByTagName("joueur").item(1).getTextContent();
 
 			int indexJoueur1 = -1;
 			int indexJoueur2 = -1;
@@ -726,7 +722,7 @@ public class Partie {
 		envoyerMessage("<message><annonce>Le chasseur peut désigner quelqu'un a tuer</annonce></message>");
 		serveur.envoyerIndividuel("<message><annonce>Votre role de chasseur vous donne le droit de tuer quelqu'un</annonce></message>", indexChasseur);
 		serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", indexChasseur);
-		tourDeJeu = 2;
+		tourDeJeu = 3;
 		try {
 			TimeUnit.SECONDS.sleep(20);
 		} catch (InterruptedException e) {

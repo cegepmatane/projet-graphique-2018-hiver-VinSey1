@@ -200,7 +200,7 @@ public class ControleurVueVillageois {
 	
 	public void afficherVoteCupidon(String message) {
 		
-Platform.runLater(new Runnable() {
+		Platform.runLater(new Runnable() {
 			
 			@Override
 			public void run() {

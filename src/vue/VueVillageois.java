@@ -36,8 +36,6 @@ public class VueVillageois extends Application{
 	
 	private Text indication;	
 
-
-
 	private List<CheckBox> listeCupidon = new ArrayList<CheckBox>();
 	
 	private boolean fenetreCupidon = false;
@@ -140,7 +138,7 @@ public class VueVillageois extends Application{
 			
 			listeCupidon.add(joueur);
 			
-			fenetreChoixVote.getChildren().add(listeCupidon.get(choixJoueur.size()-1));
+			fenetreChoixVote.getChildren().add(listeCupidon.get(listeCupidon.size()-1));
 			
 		}
 	}	
