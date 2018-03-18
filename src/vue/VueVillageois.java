@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -34,6 +35,12 @@ public class VueVillageois extends Application{
 	private VBox fenetreChoixVote;
 	
 	private Text indication;	
+
+
+
+	private List<CheckBox> listeCupidon = new ArrayList<CheckBox>();
+	
+	private boolean fenetreCupidon = false;
 
 	public void fermer() {
 		instanceVueVillageois.close();
@@ -79,7 +86,7 @@ public class VueVillageois extends Application{
 			
 			@Override
 			public void handle(ActionEvent event) {
-				VueVillageois.this.controleur.validerVote();
+				controleur.validerVote();
 				
 			}
 		});
@@ -125,6 +132,33 @@ public class VueVillageois extends Application{
 		return sauverJoueur;
 	}
 
+	public void setChoixCupidon(List<String> joueurs) {
+	
+		for ( int iterateurJoueur = 0 ; iterateurJoueur < joueurs.size(); iterateurJoueur++) {
+			
+			CheckBox joueur = new CheckBox(joueurs.get(iterateurJoueur));
+			
+			listeCupidon.add(joueur);
+			
+			fenetreChoixVote.getChildren().add(listeCupidon.get(choixJoueur.size()-1));
+			
+		}
+	}	
+	
+	public List<CheckBox> getListeCupidon() {
+		return listeCupidon;
+	}
 
+	public boolean isFenetreCupidon() {
+		return fenetreCupidon;
+	}
+
+	public void setFenetreCupidon(boolean choixCupidon) {
+		this.fenetreCupidon = choixCupidon;
+	}
+	
+	public Text getIndication() {
+		return indication;
+	}
 }
 

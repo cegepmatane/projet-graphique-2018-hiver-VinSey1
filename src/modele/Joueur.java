@@ -10,8 +10,8 @@ public class Joueur {
 	private int role;
 	private boolean vivant = true;
 	private int nombreVote = 0;
-	
-	
+	private int conjoint = 1;
+
 	public Joueur(String nom) {
 		this.nom = nom;
 	}
@@ -52,5 +52,12 @@ public class Joueur {
 	public void reinitialiserNombreDeVote() {
 		this.nombreVote = 0;
 	}
+	
+	public int getConjoint() {
+		return conjoint;
+	}
 
+	public void setConjoint(int conjoint) {
+		this.conjoint = conjoint;
+	}	
 }

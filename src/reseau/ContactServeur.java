@@ -72,8 +72,11 @@ public class ContactServeur {
 						
 					case "listeSorciere":
 						
-						if ( controleurVueVillageois != null ) controleurVueVillageois.afficherVoteSorciere(message);
+						if ( controleurVueVillageois != null ) controleurVueVillageois.afficherVoteSorciere(message);					
+						break;
 						
+					case "listeCupidon":
+						if ( controleurVueVillageois != null ) controleurVueVillageois.afficherVoteCupidon(message);					
 						break;
 						
 					case "annonce":
