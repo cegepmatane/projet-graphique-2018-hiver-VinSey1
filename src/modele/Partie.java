@@ -191,8 +191,11 @@ public class Partie {
 						if (tableauJoueurs[indexJoueurMort].getConjoint() != -1 ) {										
 							faireMourirConjoint(indexJoueurMort);						
 						}
-						if (tableauJoueurs[indexJoueurMort].getRole() == 3 ) {										
-							sorciereVivante = false;					
+						if ( tableauJoueurs[indexJoueurMort].getRole() == 1 ) {
+							nbJoueurVivantParCamp[1] -= 1;
+						}
+						else {
+							nbJoueurVivantParCamp[0] -=1;
 						}
 					}		
 					
@@ -497,6 +500,13 @@ public class Partie {
 		}
 		if (tableauJoueurs[indexJoueur].getRole() == 3 ) {										
 			sorciereVivante = false;					
+		}
+		
+		if ( tableauJoueurs[indexJoueur].getRole() == 1 ) {
+			nbJoueurVivantParCamp[1] -= 1;
+		}
+		else {
+			nbJoueurVivantParCamp[0] -=1;
 		}
 	}
 	
