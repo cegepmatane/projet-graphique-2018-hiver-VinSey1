@@ -48,9 +48,9 @@ public class ControleurVueVillageois {
 		});
 	}
 	
-	public void sauver() {
-				
+	public void sauver() {			
 		contactServeur.envoyerMessage("<message><sauve></sauve></message>");
+		vueVillageois.getSauverJoueur().setVisible(false);
 		
 	}
 		

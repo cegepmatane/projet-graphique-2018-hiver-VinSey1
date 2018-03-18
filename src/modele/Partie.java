@@ -461,7 +461,7 @@ public class Partie {
 		
 		DocumentBuilder lecteurXML;
 		try {
-			
+					
 			lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			InputSource inputSource = new InputSource();
 			inputSource.setCharacterStream(new StringReader(message));
@@ -472,9 +472,9 @@ public class Partie {
 			
 			switch (tourDeJeu) {
 			
-				case 3:
+				case 4:
 				
-					empoissonnerJoueur(nomDuJoueurVote);
+					empoisonnerJoueur(nomDuJoueurVote);
 					
 					break;
 						
@@ -482,10 +482,7 @@ public class Partie {
 										
 					ajouterVoteAuJoueur(nomDuJoueurVote);
 					
-					break;
-					
-					
-			
+					break;		
 			}
 
 		
@@ -499,18 +496,18 @@ public class Partie {
 	}
 	
 	private  void ajouterVoteAuJoueur(String joueur) {
-		
+				
 		for ( int iterateurTableauJoueur = 0 ; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
 			
-			if ( tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueurTueeParVote) ) {
+			if ( tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueur) ) {
 				tableauJoueurs[iterateurTableauJoueur].setNombreVote(tableauJoueurs[iterateurTableauJoueur].getNombreVote()+1);
 			}
 			
 		}	
 	}
 	
-	private void empoissonnerJoueur(String joueur) {
-		
+	private void empoisonnerJoueur(String joueur) {
+				
 		for ( int iterateurTableauJoueur = 0 ; iterateurTableauJoueur < tableauJoueurs.length ; iterateurTableauJoueur++) {
 			
 			if ( tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueur) ) {
@@ -636,7 +633,7 @@ public class Partie {
 		serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", indexChasseur);
 		tourDeJeu = 2;
 		try {
-			TimeUnit.SECONDS.sleep(30);
+			TimeUnit.SECONDS.sleep(20);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -697,12 +694,11 @@ public class Partie {
 		envoyerMessage("<message><annonce>La sorcière se réveille...</annonce></message>");
 
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
-			System.out.println(tableauJoueurs[iterateur].getRole());
 			
 			if(tableauJoueurs[iterateur].getRole() == 3) {
-				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer, en tant que sorcière tu peux décider</annonce></message>", iterateur);
-				serveur.envoyerIndividuel("<message><annonce>de sauver"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" qui sera dévoré par les loups </annonce></message>", iterateur);
-				serveur.envoyerIndividuel("<message><annonce>Tu peux également choisir d'empoisonner quelqu'un</annonce></message>", iterateur);
+				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer</annonce></message>", iterateur);
+				if ( joueurTueeParVote.size() != 0 ) serveur.envoyerIndividuel("<message><annonce>Tu peux décider de sauver"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" qui sera dévoré par les loups </annonce></message>", iterateur);
+				serveur.envoyerIndividuel("<message><annonce>Tu peux choisir d'empoisonner quelqu'un</annonce></message>", iterateur);
 				serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", iterateur);
 			}
 		}
