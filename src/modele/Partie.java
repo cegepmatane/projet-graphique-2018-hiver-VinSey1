@@ -184,7 +184,6 @@ public class Partie {
 				else {
 					nbJoueurVivantParCamp[0] -=1;
 				}
-				reinitialiserVote();
 				envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbJoueurVivantParCamp[1]+"</nombreLoupsGarousRestant></rafraichissement></message>");
 				envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbJoueurVivantParCamp[0]+"</nombreInnocentsRestant></rafraichissement></message>");
 				retournerMorts();
@@ -246,34 +245,7 @@ public class Partie {
 		
 
 	
-	private void tourLoupGarou() {
-				
-		tourDeJeu = 1;
-		envoyerMessage("<message><annonce>Les loups-garous choisissent quelqun à dévorer</annonce></message>");
-		//activez le vote pour les loups-garou
-		
-		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
-			if(tableauJoueurs[iterateur].getRole() == 1) {
-				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer. En tant que Loup-Garou, tu dois choisir une cible à manger cette nuit en cliquant sur \"voter\"</annonce></message>", iterateur);
-				serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", iterateur);
-			}
-		}
-		try {
-			TimeUnit.SECONDS.sleep(30);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
-			if(tableauJoueurs[iterateur].getRole() == 1) {
-				serveur.envoyerIndividuel("<message><rafraichissement><desactiverVote></desactiverVote></rafraichissement></message>", iterateur);
-			}
-		}
-		envoyerMessage("<message><annonce>Les loups-garous ont fait leur choix</annonce></message>");
-		//désactivez le vote pour les loups-garou
-		tourDeJeu = 0;
-		
-		finDeVote();
-	}
+	
 	
 	public void traiter(String message) {
 		
@@ -547,7 +519,7 @@ public class Partie {
 			
 			if ( tableauJoueurs[iterateurJoueur].getRole() == 2 ) indexChasseur = iterateurJoueur;
 		}
-		
+		envoyerMessage("<message><annonce>Le chasseur peut désigner quelqu'un a tuer</annonce></message>");
 		serveur.envoyerIndividuel("<message><annonce>Votre role de chasseur vous donne le droit de tuer quelqu'un</annonce></message>", indexChasseur);
 		serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", indexChasseur);
 		tourDeJeu = 2;
@@ -561,7 +533,7 @@ public class Partie {
 
 		finDeVote();
 		
-		envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué, il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
+		envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué par le chasseur, il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
 		if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
 			nbJoueurVivantParCamp[1] -= 1;
 		}
@@ -577,6 +549,39 @@ public class Partie {
 		
 	}
 	
+	private void tourLoupGarou() {
+		
+		tourDeJeu = 1;
+		envoyerMessage("<message><annonce>Les loups-garous choisissent quelqun à dévorer</annonce></message>");
+		//activez le vote pour les loups-garou
+		
+		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
+			if(tableauJoueurs[iterateur].getRole() == 1) {
+				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer. En tant que Loup-Garou, tu dois choisir une cible à manger cette nuit en cliquant sur \"voter\"</annonce></message>", iterateur);
+				serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", iterateur);
+			}
+		}
+		try {
+			TimeUnit.SECONDS.sleep(30);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
+			if(tableauJoueurs[iterateur].getRole() == 1) {
+				serveur.envoyerIndividuel("<message><rafraichissement><desactiverVote></desactiverVote></rafraichissement></message>", iterateur);
+			}
+		}
+		envoyerMessage("<message><annonce>Les loups-garous ont fait leur choix</annonce></message>");
+		//désactivez le vote pour les loups-garou
+		tourDeJeu = 0;
+		
+		finDeVote();
+	}
 	
 	
+	private void tourSorciere() {
+		
+		
+		
+	}
 }

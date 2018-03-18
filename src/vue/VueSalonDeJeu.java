@@ -213,7 +213,7 @@ public class VueSalonDeJeu extends Application {
         chatDeJeu.setMinHeight(500);
         chatDeJeu.setMaxHeight(500);
         chatDeJeu.setMinWidth(900);
-        chatDeJeu.setStyle("-fx-font-size:12px ; -fx-font-weight: bold; -fx-font-family:\"Lucida Handwriting\";");
+        chatDeJeu.setStyle("-fx-font-size:14px ; -fx-font-weight: bold; -fx-font-family:\"Lucida Handwriting\";");
         Region blanc3 = new Region();
                 
         zoneDeSaisieMessage = new TextField();
@@ -291,7 +291,7 @@ public class VueSalonDeJeu extends Application {
         
         fenetreGenerale.setTopAnchor(imageCarte, 0.0);
         fenetreGenerale.setLeftAnchor(imageCarte, 0.0);
-        fenetreGenerale.setRightAnchor(imageCarte, 1100.0);
+        fenetreGenerale.setRightAnchor(imageCarte, 1500.0);
         fenetreGenerale.setBottomAnchor(imageCarte, 140.0);
         
 

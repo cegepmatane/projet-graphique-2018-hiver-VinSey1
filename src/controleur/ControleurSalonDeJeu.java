@@ -61,7 +61,7 @@ public class ControleurSalonDeJeu {
 					break;
 				
 				case "listeMort":
-					vueSalonDeJeu.modifierListeJoueurMort(elementMessage.getTextContent());
+					modifierListeJoueurMort(message);
 					break;
 				
 				case "nombreJoueurs":
