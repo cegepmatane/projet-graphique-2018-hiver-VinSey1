@@ -72,8 +72,8 @@ public class Partie {
 				envoyerMessage("<message><annonce>Les cartes vont être distribués</annonce></message>");
 
 				nbMaxLoupGarou = 1;
-				nbMaxVillageois = 2;
-				nbMaxChasseur = 0;
+				nbMaxVillageois = 1;
+				nbMaxChasseur = 1;
 				
 				nbJoueurVivantParCamp[0] = 2;
 				nbJoueurVivantParCamp[1] = 1;
@@ -144,13 +144,15 @@ public class Partie {
 					envoyerMessage("<message><annonce>Le jour se lève, "+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué</annonce></message>");
 					envoyerMessage("<message><annonce>Il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
 					retournerVivants();
-					retournerMorts();	
+					retournerMorts();
 					nbJoueurVivantParCamp[0]-=1;
 					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbJoueurVivantParCamp[1]+"</nombreLoupsGarousRestant></rafraichissement></message>");
 					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbJoueurVivantParCamp[0]+"</nombreInnocentsRestant></rafraichissement></message>");
 					retournerMorts();
 					retournerVivants();
+					if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 2 ) tourChasseur();					
 					reinitialiserVote();
+					if ( finDePartie() ) return;
 			}
 			if ( !finDePartie() ) {
 				
@@ -535,8 +537,14 @@ public class Partie {
 	
 	public void tourChasseur() {
 		
+		int indexChasseur;
 		
+		for ( int iterateurJoueur = 0 ; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
+			
+			if ( tableauJoueurs[iterateurJoueur].getRole() == 2 ) indexChasseur = iterateurJoueur;
+		}
 		
+		serveur.envoyerIndividuel("<message><annonce>Votre role de chasseur vous donne le droit de tuer quelqu'un</annonce></message>", indexChasseur);
 		
 	}
 	
