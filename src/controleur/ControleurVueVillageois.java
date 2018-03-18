@@ -110,14 +110,13 @@ public class ControleurVueVillageois {
 	public void afficherVoteSorciere(String message) {
 		
 		
-Platform.runLater(new Runnable() {
+		Platform.runLater(new Runnable() {
 			
 			@Override
 			public void run() {
 								
 				List<String> listeJoueurs = new ArrayList<String>();
 				
-				vueVillageois.getSauverJoueur().setVisible(true);
 				
 				try {
 					DocumentBuilder lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -137,6 +136,9 @@ Platform.runLater(new Runnable() {
 						Element elementMessage = (Element) nodeMessage;
 						
 						vueVillageois.getSauverJoueur().setText("Sauver "+elementMessage.getTextContent());
+						
+						vueVillageois.getSauverJoueur().setVisible(true);
+
 					}
 					
 					for (int iterateur=0; iterateur < contenuMessage.getLength();iterateur++) {

@@ -42,6 +42,9 @@ public class Partie {
 	private boolean egalite = false;
 	private List<Integer> cartes = new ArrayList<Integer>();
 	private List<Integer> joueurEmpoisonne = new ArrayList<Integer>();
+	private boolean sorciereASauve = false;
+	private boolean sorciereAEmmpoisonne = false;
+	
 	/**
 	 * 0 -> aucun
 	 * 1 -> loup garou
@@ -132,8 +135,7 @@ public class Partie {
 		
 		tourLoupGarou();
 		
-		tourSorciere();
-
+		if ( sorciereAEmmpoisonne != true && sorciereASauve != true) tourSorciere();
 		
 	}
 	
@@ -430,14 +432,14 @@ public class Partie {
 		
 		String messageAEnvoyer = "<message><listeSorciere>";
 		
-		if ( joueurTueeParVote.size() != 0 ) {
+		if ( joueurTueeParVote.size() != 0 && sorciereASauve == false) {
 		
 			messageAEnvoyer += "<joueurDevore>"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+"</joueurDevore>";
 			
 		}	
 		
 		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
-			if ( tableauJoueurs[iterateurTableauJoueur].isVivant() && !tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueur)) {
+			if ( tableauJoueurs[iterateurTableauJoueur].isVivant() && !tableauJoueurs[iterateurTableauJoueur].getNom().equals(joueur) && sorciereAEmmpoisonne == false) {
 				messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
 			}						
 		}	
@@ -536,7 +538,6 @@ public class Partie {
 			joueurTueeParVote.add(joueurATuer);
 			tableauJoueurs[joueurATuer].setVivant(false);
 		}	
-		
 	}
 	
 	
@@ -691,14 +692,15 @@ public class Partie {
 	private void tourSorciere() {
 		tourDeJeu = 4;
 		
+		
 		envoyerMessage("<message><annonce>La sorcière se réveille...</annonce></message>");
 
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
 			
 			if(tableauJoueurs[iterateur].getRole() == 3) {
 				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer</annonce></message>", iterateur);
-				if ( joueurTueeParVote.size() != 0 ) serveur.envoyerIndividuel("<message><annonce>Tu peux décider de sauver"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" qui sera dévoré par les loups </annonce></message>", iterateur);
-				serveur.envoyerIndividuel("<message><annonce>Tu peux choisir d'empoisonner quelqu'un</annonce></message>", iterateur);
+				if ( joueurTueeParVote.size() != 0 && sorciereASauve == false) serveur.envoyerIndividuel("<message><annonce>Tu peux décider de sauver"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" qui sera dévoré par les loups </annonce></message>", iterateur);
+				if ( sorciereAEmmpoisonne == false ) serveur.envoyerIndividuel("<message><annonce>Tu peux choisir d'empoisonner quelqu'un</annonce></message>", iterateur);
 				serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", iterateur);
 			}
 		}
