@@ -45,6 +45,7 @@ public class Partie {
 	private boolean sorciereASauve = false;
 	private boolean sorciereAEmmpoisonne = false;
 	private boolean tourCupidonPasse = false;
+	private boolean sorciereVivante = true;
 	
 	/**
 	 * 0 -> aucun
@@ -94,7 +95,7 @@ public class Partie {
 				}
 				
 				cartes.add(2);		
-				//cartes.add(3);
+				cartes.add(3);
 				cartes.add(4);
 				
 				
@@ -140,7 +141,7 @@ public class Partie {
 		
 		tourLoupGarou();
 		
-		if ( sorciereAEmmpoisonne != true && sorciereASauve != true) tourSorciere();
+		if ( sorciereAEmmpoisonne != true && sorciereASauve != true && sorciereVivante) tourSorciere();
 		
 	}
 	
@@ -165,6 +166,9 @@ public class Partie {
 						if (tableauJoueurs[indexJoueurMort].getConjoint() != -1 ) {										
 							faireMourirConjoint(indexJoueurMort);						
 						}
+						if (tableauJoueurs[indexJoueurMort].getRole() == 3 ) {										
+							sorciereVivante = false;					
+						}
 						
 					}
 					if ( joueurEmpoisonne.size() == 1) {
@@ -186,7 +190,10 @@ public class Partie {
 						}
 						if (tableauJoueurs[indexJoueurMort].getConjoint() != -1 ) {										
 							faireMourirConjoint(indexJoueurMort);						
-						}					
+						}
+						if (tableauJoueurs[indexJoueurMort].getRole() == 3 ) {										
+							sorciereVivante = false;					
+						}
 					}		
 					
 					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbJoueurVivantParCamp[1]+"</nombreLoupsGarousRestant></rafraichissement></message>");
@@ -481,13 +488,16 @@ public class Partie {
 	
 	private void faireMourirConjoint(int indexJoueur) {
 		
-		envoyerMessage(tableauJoueurs[tableauJoueurs[indexJoueur].getConjoint()].getNom()+" était son conjoint, il le suit donc dans la tombe et meurt");
+		envoyerMessage("<message><annonce>"+tableauJoueurs[tableauJoueurs[indexJoueur].getConjoint()].getNom()+" était son conjoint, il le suit donc dans la tombe et meurt</annonce></message>");
 		
 		tableauJoueurs[tableauJoueurs[indexJoueur].getConjoint()].setVivant(false);
 		
 		if (tableauJoueurs[tableauJoueurs[indexJoueur].getConjoint()].getRole() == 2 ) {										
 			tourChasseur();						
-		}	
+		}
+		if (tableauJoueurs[indexJoueur].getRole() == 3 ) {										
+			sorciereVivante = false;					
+		}
 	}
 	
 	private void sauverJoueur() {
@@ -505,6 +515,8 @@ public class Partie {
 		DocumentBuilder lecteurXML;
 		try {
 					
+			System.out.println("Partie.traiter reçoit "+message);
+			
 			lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			InputSource inputSource = new InputSource();
 			inputSource.setCharacterStream(new StringReader(message));
@@ -580,18 +592,12 @@ public class Partie {
 			
 			serveur.envoyerIndividuel("<message><annonce>Vous et "+tableauJoueurs[indexJoueur1].getNom()+" avez été lié</annonce></message>", indexJoueur2);
 			serveur.envoyerIndividuel("<message><annonce>Si l'un de vous deux meurt, l'autre meurt également</annonce></message>", indexJoueur2);
-			serveur.envoyerIndividuel("<message><rafraichissement><conjoint>"+tableauJoueurs[indexJoueur2].getNom()+"</conjoint></rafraichissement></message>", indexJoueur2);
+			serveur.envoyerIndividuel("<message><rafraichissement><conjoint>"+tableauJoueurs[indexJoueur1].getNom()+"</conjoint></rafraichissement></message>", indexJoueur2);
 
 			
 		} catch (ParserConfigurationException | org.xml.sax.SAXException | IOException e) {
 			e.printStackTrace();
-		}
-
-		
-		
-		
-		
-		
+		}		
 	}
 	
 	private  void ajouterVoteAuJoueur(String joueur) {
@@ -835,7 +841,7 @@ public class Partie {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		envoyerMessage("<message><annonce>Cupidon a lié deux personnnes</annonce></message>");
+		envoyerMessage("<message><annonce>Cupidon a lié (ou pas) deux personnnes</annonce></message>");
 		tourDeJeu = 0;
 		tourCupidonPasse = true;
 	}

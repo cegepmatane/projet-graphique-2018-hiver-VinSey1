@@ -91,6 +91,10 @@ public class ControleurSalonDeJeu {
 					modifierNomJoueur(elementMessage.getTextContent());
 					break;
 					
+				case "conjoint":
+						ajouterConjoint(message);
+					break;				
+					
 				default:
 					System.out.println("Message non traité : ControleurSalonDeJeu");
 			}
@@ -115,6 +119,56 @@ public class ControleurSalonDeJeu {
 	
 	public void demandeVote() {
 		contactServeur.envoyerMessage("<message><demande><joueur>"+vueSalonDeJeu.getPseudo().getText()+"</joueur></demande></message>");
+	}
+	
+	public void ajouterConjoint(String message) {
+		
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				try {
+					
+											
+					String listeJoueurVivant = "";
+					DocumentBuilder lecteurXML;
+					lecteurXML = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
+					
+					InputSource inputSource = new InputSource();
+					inputSource.setCharacterStream(new StringReader(message));
+					
+					Document doc = lecteurXML.parse(inputSource);
+					
+					NodeList contenuMessage = doc.getElementsByTagName("conjoint");
+							
+					Node nodeMessage = contenuMessage.item(0);
+					
+					Element elementMessage = (Element) nodeMessage;
+					
+					System.out.println(elementMessage.getTextContent());
+
+
+					vueSalonDeJeu.setConjoint("Conjoint: "+elementMessage.getTextContent());
+					
+				}				
+				catch(org.xml.sax.SAXException e){
+					e.printStackTrace();
+					
+				}
+				catch (ParserConfigurationException e) {
+					e.printStackTrace();
+				}
+				catch(IOException e) {
+					e.printStackTrace();
+					
+					
+				}
+				
+			}
+		});	
+		
 	}
 	
 	public void afficherVoteVillageois() {

@@ -105,6 +105,7 @@ public class VueSalonDeJeu extends Application {
     
 	Text pseudo = new Text("Pseudo");
 
+	Text conjoint = new Text("");
 
 	TextField zoneDeSaisieMessage;
 	
@@ -268,6 +269,8 @@ public class VueSalonDeJeu extends Application {
         listeJoueursMort = new Text("");       
         listeJoueursMort.setFont(Font.font("Lucida Handwriting", 30));
         
+        conjoint.setFont(Font.font("Lucida Handwriting", 20));
+        
         panelDroite.setConstraints(indicationNombreDeJoueurs, 0,1);
         panelDroite.setConstraints(indicationNombreDeLoupGarouVivant, 0,2);
         panelDroite.setConstraints(indicationNombreDInnocentVivant, 0,3);
@@ -275,6 +278,8 @@ public class VueSalonDeJeu extends Application {
         panelDroite.setConstraints(listeJoueursVivant, 0,5);
         panelDroite.setConstraints(nomListeJoueursMort, 0,6);
         panelDroite.setConstraints(listeJoueursMort, 0,7);
+        panelDroite.setConstraints(conjoint, 0,7);
+
        
         panelDroite.getChildren().add(indicationNombreDeJoueurs);
         panelDroite.getChildren().add(indicationNombreDeLoupGarouVivant);
@@ -283,6 +288,8 @@ public class VueSalonDeJeu extends Application {
         panelDroite.getChildren().add(listeJoueursVivant);
         panelDroite.getChildren().add(nomListeJoueursMort);
         panelDroite.getChildren().add(listeJoueursMort);
+        panelDroite.getChildren().add(conjoint);
+
         // Fenetre Generale
         AnchorPane fenetreGenerale = new AnchorPane();
         
@@ -447,5 +454,9 @@ public class VueSalonDeJeu extends Application {
 
 	public void setZoneDeSaisieMessage(TextField zoneDeSaisieMessage) {
 		this.zoneDeSaisieMessage = zoneDeSaisieMessage;
+	}
+	
+	public void setConjoint(String conjoint) {
+		this.conjoint.setText(conjoint);
 	}
 }

@@ -21,7 +21,7 @@ public class Serveur{
 	
 	private BufferedReader lecture = null;
 	private int nombreDeJoueurs = 0;
-	public final int NB_JOUEURS_MAX = 4;
+	public final int NB_JOUEURS_MAX = 5;
 	private ContactJoueur[] tableauContactJoueur = new ContactJoueur[NB_JOUEURS_MAX];
 	private Socket socket = null;
 	private ServerSocket serveur;
