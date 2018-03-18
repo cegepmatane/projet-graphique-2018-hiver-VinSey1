@@ -45,6 +45,7 @@ public class Partie {
 	 * 0 -> aucun
 	 * 1 -> loup garou
 	 * 2 -> villageois
+	 * 3 -> chasseur
 	 */
 	private int tourDeJeu = 0;
 	
@@ -150,8 +151,17 @@ public class Partie {
 					envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbJoueurVivantParCamp[0]+"</nombreInnocentsRestant></rafraichissement></message>");
 					retournerMorts();
 					retournerVivants();
-					if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 2 ) tourChasseur();					
+					
+					int indexJoueurMort = joueurTueeDansLaNuit.get(0);
 					reinitialiserVote();
+					if (tableauJoueurs[indexJoueurMort].getRole() == 2 ) {
+											
+						tourChasseur();						
+
+					}
+
+					
+					
 					if ( finDePartie() ) return;
 			}
 			if ( !finDePartie() ) {
@@ -249,8 +259,7 @@ public class Partie {
 		
 		for (int iterateur = 0; iterateur<tableauJoueurs.length; iterateur++) {
 			if(tableauJoueurs[iterateur].getRole() == 1) {
-				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer. En tant que Loup-Garou, </annonce></message>", iterateur);
-				serveur.envoyerIndividuel("<message><annonce>tu dois choisir une cible à manger cette nuit en cliquant sur \"voter\"</annonce></message>", iterateur);
+				serveur.envoyerIndividuel("<message><annonce>C'est à ton tour de jouer. En tant que Loup-Garou, tu dois choisir une cible à manger cette nuit en cliquant sur \"voter\"</annonce></message>", iterateur);
 				serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", iterateur);
 			}
 		}
@@ -370,7 +379,7 @@ public class Partie {
 		String messageAEnvoyer = "<message><liste>";
 		
 		for ( int iterateurTableauJoueur = 0; iterateurTableauJoueur< tableauJoueurs.length ; iterateurTableauJoueur++) {						
-			if ( tableauJoueurs[iterateurTableauJoueur].getRole() == 0 && tableauJoueurs[iterateurTableauJoueur].isVivant()) {
+			if ( tableauJoueurs[iterateurTableauJoueur].getRole() != 1 && tableauJoueurs[iterateurTableauJoueur].isVivant()) {
 				messageAEnvoyer +="<joueur>"+tableauJoueurs[iterateurTableauJoueur].getNom()+"</joueur>";
 			}						
 		}
@@ -537,7 +546,7 @@ public class Partie {
 	
 	public void tourChasseur() {
 		
-		int indexChasseur;
+		int indexChasseur= -1;
 		
 		for ( int iterateurJoueur = 0 ; iterateurJoueur < tableauJoueurs.length ; iterateurJoueur++) {
 			
@@ -545,6 +554,31 @@ public class Partie {
 		}
 		
 		serveur.envoyerIndividuel("<message><annonce>Votre role de chasseur vous donne le droit de tuer quelqu'un</annonce></message>", indexChasseur);
+		serveur.envoyerIndividuel("<message><rafraichissement><activerVote></activerVote></rafraichissement></message>", indexChasseur);
+		tourDeJeu = 2;
+		try {
+			TimeUnit.SECONDS.sleep(30);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		tourDeJeu = 0;
+		serveur.envoyerIndividuel("<message><rafraichissement><desactiverVote></desactiverVote></rafraichissement></message>", indexChasseur);
+
+		finDeVote();
+		
+		envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeDansLaNuit.get(0)].getNom()+" a été tué, il était "+numeroRoles[tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole()]+"</annonce></message>");
+		if ( tableauJoueurs[joueurTueeDansLaNuit.get(0)].getRole() == 1 ) {
+			nbJoueurVivantParCamp[1] -= 1;
+		}
+		else {
+			nbJoueurVivantParCamp[0] -=1;
+		}
+		retournerVivants();
+		retournerMorts();
+		
+		envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbJoueurVivantParCamp[1]+"</nombreLoupsGarousRestant></rafraichissement></message>");
+		envoyerMessage("<message><rafraichissement><nombreInnocentsRestant>"+nbJoueurVivantParCamp[0]+"</nombreInnocentsRestant></rafraichissement></message>");
+		
 		
 	}
 	
