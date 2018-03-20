@@ -124,7 +124,8 @@ public class Partie {
 				while(!finDePartie()) {
 					deroulementNuit();
 					deroulementJour();
-				}				
+				}	
+				messageDeFin();
 			}
 		});	
 
@@ -665,18 +666,24 @@ public class Partie {
 	private boolean finDePartie() {
 		
 		if ( (nbJoueurVivantParCamp[0] == 0 || nbJoueurVivantParCamp[1] == 0) ) {
-			if ( nbJoueurVivantParCamp[0] == 0 ) {
-				envoyerMessage("<message><annonce>Les loups garous ont gagné, la partie est terminé</annonce></message>");
-			}
-			else {
-				envoyerMessage("<message><annonce>Les villageois ont gagné, la partie est terminé</annonce></message>");
-			}
+
 			return true;
 		}
 		
 		return false;
 	}
 		
+	private void messageDeFin() {
+		
+		if ( (nbJoueurVivantParCamp[0] == 0 || nbJoueurVivantParCamp[1] == 0) ) {
+			if ( nbJoueurVivantParCamp[0] == 0 ) {
+				envoyerMessage("<message><annonce>Les loups garous ont gagné, la partie est terminé</annonce></message>");
+			}
+			else {
+				envoyerMessage("<message><annonce>Les villageois ont gagné, la partie est terminé</annonce></message>");
+			}
+		}		
+	}
 
 	private void reinitialiserVote() {
 		joueurTueeParVote.clear();		
