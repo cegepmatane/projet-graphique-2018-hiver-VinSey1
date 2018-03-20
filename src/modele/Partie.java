@@ -172,6 +172,8 @@ public class Partie {
 						if (tableauJoueurs[indexJoueurMort].getRole() == 3 ) {										
 							sorciereVivante = false;					
 						}
+						if ( finDePartie() ) return;
+
 					}
 					if ( joueurEmpoisonne.size() == 1) {
 						
@@ -201,6 +203,11 @@ public class Partie {
 						else {
 							nbJoueurVivantParCamp[0] -=1;
 						}
+						if (tableauJoueurs[indexJoueurMort].getRole() == 3 ) {										
+							sorciereVivante = false;					
+						}
+						if ( finDePartie() ) return;
+
 					}		
 					
 					envoyerMessage("<message><rafraichissement><nombreLoupsGarousRestant>"+nbJoueurVivantParCamp[1]+"</nombreLoupsGarousRestant></rafraichissement></message>");
@@ -244,7 +251,16 @@ public class Partie {
 				reinitialiserVote();
 				if (tableauJoueurs[indexJoueurMort].getRole() == 2 ) {										
 					tourChasseur();						
-				}			
+				}
+				if ( finDePartie() ) return;
+				if (tableauJoueurs[indexJoueurMort].getRole() == 3 ) {										
+					sorciereVivante = false;					
+				}
+				if ( finDePartie() ) return;
+				if (tableauJoueurs[indexJoueurMort].getConjoint() != -1 ) {										
+					faireMourirConjoint(indexJoueurMort);						
+				}
+				if ( finDePartie() ) return;
 			}
 			else if (egalite == true ) {
 				

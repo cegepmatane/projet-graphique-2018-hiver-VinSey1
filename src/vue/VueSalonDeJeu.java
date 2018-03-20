@@ -7,9 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
 import javax.imageio.ImageIO;
-
 import controleur.ControleurSalonDeJeu;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -278,7 +276,7 @@ public class VueSalonDeJeu extends Application {
         panelDroite.setConstraints(listeJoueursVivant, 0,5);
         panelDroite.setConstraints(nomListeJoueursMort, 0,6);
         panelDroite.setConstraints(listeJoueursMort, 0,7);
-        panelDroite.setConstraints(conjoint, 0,7);
+        panelDroite.setConstraints(conjoint, 0,8);
 
        
         panelDroite.getChildren().add(indicationNombreDeJoueurs);
