@@ -138,7 +138,7 @@ public class VueSalonDeJeu extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            	
+            	instanceVueSalonDeJeu.close();
             }
         });
         
