@@ -222,7 +222,7 @@ public class Partie {
 			activerVoteVillageois();
 			reinitialiserVote();
 			try {
-				TimeUnit.SECONDS.sleep(20);
+				TimeUnit.SECONDS.sleep(60);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -234,7 +234,7 @@ public class Partie {
 				
 			if ( joueurTueeParVote.size() !=0 && egalite == false) {
 				
-				envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" a été tué, il était"+numeroRoles[tableauJoueurs[joueurTueeParVote.get(0)].getRole()] +"</annonce></message>");
+				envoyerMessage("<message><annonce>"+tableauJoueurs[joueurTueeParVote.get(0)].getNom()+" a été tué, il était "+numeroRoles[tableauJoueurs[joueurTueeParVote.get(0)].getRole()] +"</annonce></message>");
 
 				if ( tableauJoueurs[joueurTueeParVote.get(0)].getRole() == 1 ) {
 					nbJoueurVivantParCamp[1] -= 1;
