@@ -33,7 +33,7 @@ public class ContactServeur {
 	@SuppressWarnings("resource")
 	public void connection() {
 		try {
-			connexion = new Socket(InetAddress.getLocalHost(), 11);
+			connexion = new Socket("10.1.50.16", 11);
 			sortie = new PrintWriter(connexion.getOutputStream(), true);
 			lecture = new BufferedReader(new InputStreamReader(connexion.getInputStream()));
 			attendreMessage();

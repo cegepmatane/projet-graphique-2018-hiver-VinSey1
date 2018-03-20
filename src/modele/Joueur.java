@@ -10,7 +10,7 @@ public class Joueur {
 	private int role;
 	private boolean vivant = true;
 	private int nombreVote = 0;
-	private int conjoint = 1;
+	private int conjoint = -1;
 
 	public Joueur(String nom) {
 		this.nom = nom;
