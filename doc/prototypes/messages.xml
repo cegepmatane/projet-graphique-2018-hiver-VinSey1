@@ -1,127 +1,95 @@
 Message : authentification
 
 <message>
-	<authentification>
+	<connexion>
 		<joueur> ace578 </joueur>
-		<code> lgaha </code>
-	</authentification>
+	</connexion>
 </message>
 
 Message : Liste des joueurs
 <message>
-	<joueurs>
+	<liste>
 		<joueur>ace578</joueur>
 		<joueur>VincentAlsacien</joueur>
 		<joueur>ValBreton</joueur>
-	</joueurs>
+	</liste>
+</message>
+
+Message : Liste des joueurs à la sorcière
+<message>
+	<listeSorciere>
+		<jouerDevore>
+			<joueur>
+				Valentin
+			</joueur>
+		<joueurDevore>
+		<joueur>ace578</joueur>
+		<joueur>VincentAlsacien</joueur>
+		<joueur>ValBreton</joueur>
+	</listeSorciere>
+</message>
+
+Message : Liste des joueurs à Cupidon
+<message>
+	<listeCupidon>
+		<joueur>ace578</joueur>
+		<joueur>VincentAlsacien</joueur>
+		<joueur>ValBreton</joueur>
+	</listeCupidon>
+</message>
+
+Message: conversation chat:
+<message>
+	<chat>
+		Bonjour chers camarades
+	</char>
 </message>
 
 
-Message : Attribution des rôles
-
+Message : Envoie des rôles
 <message>
 	<joueurs>
-		<membreDuVillage>
-			<joueur>ace578</joueur>
-			<rôle> loup-garou </rôle>
-			<etat> vivant</vivant>
-		</membreDuVillage>
-		<membreDuVillage>
-			<joueur>VincentAlsacien</joueur>
-			<rôle> Villageois </rôle>
-			<etat>vivant</etat>
-		</membreDuVillage>
-		<membreDuVillage>
-			<joueur>ValBreton</joueur>
-			<rôle> Villageois </rôle>
-			<etat>vivant</etat>
-		</membreDuVillage>
+
 	</joueurs>
 </message>
 
 Message : Nuit
-
 <message>
-	<joueurs>
-		<action>
-			passage nuit
-		</action>
-	</joueurs>
+	<rafraichissement>
+		<role>
+			Chasseur
+		</role>
+	</rafraichissement>
 </message>
 
 
-Message : Demande vote loup-garou
+Message : Demande de liste joueur
 <message>
-	<loup-garou>
-		<action>
-			demande de vote
-		</action>
-	</loup-garou>
+	<demande>
+	</demande>
 </message>
 
 
-Message : Vote loup-garou
 
+Message : Annonces diverses
 <message>
-	<loup-garou>
-		<vote>
-			<joueur>VincentAlsacien</joueur>
-		</vote>
-	</loup-garou>
+	<annonce>
+		Le jour se lève
+	</annonce>
 </message>
 
-Message : Jour
-
+Message : Vote contre un joueur
 <message>
-	<joueurs>
-		<action>
-			passage jour
-		</action>
-	</joueurs>
+	<vote>
+		<joueur>Eliott</joueur>
+	</vote>
 </message>
 
-
-Message : Demande vote village
-
+Message: la sorcière sauve un joueur
 <message>
-	<village>
-		<action>
-			demande de vote
-		</action>
-	</village>
+	<sauve>
+	</sauve>
 </message>
-
-Message : Vote village
-
-<message>
-	<joueurs>
-		<vote>
-			<joueur>ValBreton</joueur>
-		</vote>
-	</joueurs>
-</message>
-
-Message : résultat vote village
-
-<message>
-	<joueurs>
-		<résultat>
-			joueur tué
-		</résultat>
-	</joueurs>
-</message>
-
-
-Message : fin de partie
-
-<message>
-	<finPartie>
-		<cause>
-			tous les villageois sont morts
-		</cause>
-	</finPartie>
-</message>
-
 
 
 
